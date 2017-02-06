@@ -9,6 +9,6 @@ import dagger.Provides
 class ApiModule {
   @Provides
   fun provideBeersApi(api: BeersRetrofitApi) : BeersApi {
-    return api;
+    return api
   }
 }

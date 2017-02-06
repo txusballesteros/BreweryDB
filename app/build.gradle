@@ -61,6 +61,8 @@ dependencies {
   compile dependencies.KotlinStd
   compile dependencies.AnkoCommon
   compile dependencies.Retrofit
+  compile dependencies.Gson
+  compile dependencies.GsonConverter
   compile dependencies.Picasso
   compile dependencies.Dagger
   kapt dependencies.DaggerCompiler

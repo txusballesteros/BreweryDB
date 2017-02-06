@@ -2,7 +2,6 @@ package com.txusballesteros.brewerydb
 
 import android.app.Application
 import com.txusballesteros.brewerydb.di.ApplicationComponent
-import com.txusballesteros.brewerydb.di.ApplicationModule
 import com.txusballesteros.brewerydb.di.DaggerApplicationComponent
 
 class Application : Application() {
@@ -15,7 +14,6 @@ class Application : Application() {
 
   fun initializeDependencyInjections() {
     this.applicationComponent = DaggerApplicationComponent.builder()
-                                        .applicationModule(ApplicationModule(this))
                                         .build()
   }
 }
