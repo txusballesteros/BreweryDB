@@ -1,0 +1,65 @@
+/*
+ * Copyright Txus Ballesteros 2017 (@txusballesteros)
+ *
+ * This file is part of some open source application.
+ *
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+ */
+allprojects {
+  repositories {
+    jcenter()
+  }
+}
+
+ext {
+  //Kotlin
+  kotlinVersion = "1.0.6"
+  ankoVersion = "0.9"
+
+  //Android
+  androidApplicationId = "com.txusballesteros.brewerydb"
+  androidBuildToolsVersion = "25.0.2"
+  androidMinSdkVersion = 16
+  androidTargetSdkVersion = 25
+  androidCompileSdkVersion = 25
+  androidVersionCode = 1
+  androidVersionName = "1.0.0"
+
+  //Libraries Versions
+  daggerVersion = "2.9"
+  picassoVersion = "2.5.2"
+  retrofitVersion = "2.1.0"
+  androidSupportVersion = "25.1.1"
+  junitVersion = "4.12"
+  mockitoVersion = "2.7.0"
+
+  mobileDependencies = [
+    AppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
+    RecyclerView: "com.android.support:recyclerview-v7:${androidSupportVersion}",
+    KotlinStd: "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+    AnkoCommon: "org.jetbrains.anko:anko-common:${ankoVersion}",
+    JUnit: "junit:junit:${junitVersion}",
+    Mockito: "org.mockito:mockito-core:${mockitoVersion}",
+    Dagger: "com.google.dagger:dagger:${daggerVersion}",
+    DaggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
+    Retrofit: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+    Picasso: "com.squareup.picasso:picasso:${picassoVersion}",
+  ]
+}
