@@ -24,8 +24,15 @@
  */
 package com.txusballesteros.brewerydb.ui
 
-class MainActivity : AbsActivity() {
-  override fun onRequestFragment(): AbsFragment {
-    return MainFragment()
+import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.ui.behaviour.ToolbarBehaviour
+
+class MainFragment : AbsFragment() {
+  override fun onRequestLayoutResourceId(): Int {
+    return R.layout.fragment_main
+  }
+
+  override fun onRequestViewComposition() {
+    ToolbarBehaviour().inject(activity as AbsActivity)
   }
 }

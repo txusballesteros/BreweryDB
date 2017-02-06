@@ -53,6 +53,8 @@ ext {
   mobileDependencies = [
     AppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
     RecyclerView: "com.android.support:recyclerview-v7:${androidSupportVersion}",
+    CardView: "com.android.support:cardview-v7:${androidSupportVersion}",
+    Design: "com.android.support:design:${androidSupportVersion}",
     KotlinStd: "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
     AnkoCommon: "org.jetbrains.anko:anko-common:${ankoVersion}",
     JUnit: "junit:junit:${junitVersion}",
