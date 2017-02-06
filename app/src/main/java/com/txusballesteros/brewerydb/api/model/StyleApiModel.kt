@@ -22,10 +22,6 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.beers
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.api.model.BeerApiModel
-
-interface BeersApi {
-  fun getBeers() : List<BeerApiModel>
-}
+data class StyleApiModel(val id: Int, val name: String, val shortName: String, val description: String)
