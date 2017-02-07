@@ -30,6 +30,7 @@ import com.txusballesteros.brewerydb.di.DaggerApplicationComponent
 
 class Application : Application() {
   lateinit var applicationComponent : ApplicationComponent
+              private set
 
   override fun onCreate() {
     super.onCreate()
