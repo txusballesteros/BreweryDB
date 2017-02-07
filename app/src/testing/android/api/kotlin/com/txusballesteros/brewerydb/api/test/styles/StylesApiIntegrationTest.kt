@@ -27,12 +27,12 @@ package com.txusballesteros.brewerydb.api.test.styles
 import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
-import com.txusballesteros.brewerydb.api.test.ApiIntegrationTestGeneric
+import com.txusballesteros.brewerydb.api.test.ApiIntegrationTest
 import org.junit.Assert
 import org.junit.Test
 import retrofit2.Retrofit
 
-class StylesApiIntegrationTest : ApiIntegrationTestGeneric() {
+class StylesApiIntegrationTest : ApiIntegrationTest() {
   lateinit var api : StylesApi
 
   override fun onPrepareTest(retrofit: Retrofit) {

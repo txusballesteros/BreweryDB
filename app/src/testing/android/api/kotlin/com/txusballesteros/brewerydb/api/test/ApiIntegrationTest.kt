@@ -1,14 +1,14 @@
 package com.txusballesteros.brewerydb.api.test
 
+import com.txusballesteros.brewerydb.api.di.RestModule
 import com.txusballesteros.brewerydb.api.instrumentation.OkHttpRequestInterceptor
 import okhttp3.OkHttpClient
 import org.junit.Before
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-abstract class ApiIntegrationTestGeneric {
+abstract class ApiIntegrationTest {
   companion object {
-    var BASE_URL : String = "http://api.brewerydb.com"
     val STATUS_SUCCESS : String = "success"
   }
 
@@ -18,7 +18,7 @@ abstract class ApiIntegrationTestGeneric {
     val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
     val converter = GsonConverterFactory.create()
     val retrofit = Retrofit.Builder()
-                        .baseUrl(BASE_URL)
+                        .baseUrl(RestModule.BASE_URL)
                         .addConverterFactory(converter)
                         .client(client)
                         .build()
