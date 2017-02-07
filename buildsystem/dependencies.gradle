@@ -49,6 +49,8 @@ ext {
   androidSupportVersion = "25.1.1"
   junitVersion = "4.12"
   mockitoVersion = "2.7.0"
+  gsonVersion = "2.8.0"
+  gsonConverterVersion = "2.1.0"
 
   mobileDependencies = [
     AppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
@@ -63,5 +65,7 @@ ext {
     DaggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
     Retrofit: "com.squareup.retrofit2:retrofit:${retrofitVersion}",
     Picasso: "com.squareup.picasso:picasso:${picassoVersion}",
+    Gson: "com.google.code.gson:gson:${gsonVersion}",
+    GsonConverter: "com.squareup.retrofit2:converter-gson:${gsonConverterVersion}",
   ]
 }

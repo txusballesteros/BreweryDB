@@ -23,7 +23,6 @@
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
@@ -64,9 +63,11 @@ dependencies {
   compile dependencies.KotlinStd
   compile dependencies.AnkoCommon
   compile dependencies.Retrofit
+  compile dependencies.Gson
+  compile dependencies.GsonConverter
   compile dependencies.Picasso
   compile dependencies.Dagger
-  apt dependencies.DaggerCompiler
+  kapt dependencies.DaggerCompiler
 
   testCompile dependencies.JUnit
   testCompile dependencies.Mockito

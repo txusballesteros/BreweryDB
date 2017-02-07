@@ -22,25 +22,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-apply from: 'buildsystem/dependencies.gradle'
+package com.txusballesteros.brewerydb.api.beers
 
-buildscript {
-  repositories {
-    jcenter()
+import com.txusballesteros.brewerydb.api.model.BeerApiModel
+import javax.inject.Inject
+
+class BeersRetrofitApi : BeersApi {
+  var service : BeersRetrofitService
+
+  @Inject
+  constructor(service: BeersRetrofitService) {
+    this.service = service
   }
 
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.3'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.6"
+  override fun getBeers(): List<BeerApiModel> {
+    return this.service.getBeers()
   }
-}
-
-allprojects {
-  repositories {
-    jcenter()
-  }
-}
-
-task clean(type: Delete) {
-  delete rootProject.buildDir
 }

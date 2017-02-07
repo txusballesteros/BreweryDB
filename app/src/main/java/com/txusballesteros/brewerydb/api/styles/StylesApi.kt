@@ -22,25 +22,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-apply from: 'buildsystem/dependencies.gradle'
+package com.txusballesteros.brewerydb.api.styles
 
-buildscript {
-  repositories {
-    jcenter()
-  }
-
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.3'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.6"
-  }
-}
-
-allprojects {
-  repositories {
-    jcenter()
-  }
-}
-
-task clean(type: Delete) {
-  delete rootProject.buildDir
+interface StylesApi {
 }

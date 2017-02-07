@@ -22,25 +22,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-apply from: 'buildsystem/dependencies.gradle'
+package com.txusballesteros.brewerydb.di
 
-buildscript {
-  repositories {
-    jcenter()
-  }
+import com.txusballesteros.brewerydb.Application
+import com.txusballesteros.brewerydb.api.di.ApiModule
+import com.txusballesteros.brewerydb.api.di.RetrofitModule
+import dagger.Component
+import javax.inject.Singleton
 
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.3'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.6"
-  }
-}
-
-allprojects {
-  repositories {
-    jcenter()
-  }
-}
-
-task clean(type: Delete) {
-  delete rootProject.buildDir
+@Singleton
+@Component(modules = arrayOf(ApiModule::class,
+                             RetrofitModule::class))
+interface ApplicationComponent {
+  fun inject(application: Application)
 }
