@@ -24,6 +24,7 @@
  */
 package com.txusballesteros.brewerydb.api.di
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.txusballesteros.brewerydb.api.instrumentation.OkHttpRequestInterceptor
 import dagger.Module
 import dagger.Provides
@@ -58,6 +59,7 @@ class RestModule {
   fun provideHttpClient(interceptor: Interceptor) : OkHttpClient {
     return OkHttpClient.Builder()
               .addInterceptor(interceptor)
+              .addInterceptor(StethoInterceptor())
               .build()
   }
 

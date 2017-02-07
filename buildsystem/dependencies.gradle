@@ -51,7 +51,8 @@ ext {
   mockitoVersion = "2.7.0"
   gsonVersion = "2.8.0"
   gsonConverterVersion = "2.1.0"
-  testSupportServion = "0.5"
+  testSupportVervion = "0.5"
+  stethoVervion = "1.4.2"
 
   mobileDependencies = [
     AppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
@@ -69,7 +70,9 @@ ext {
     Gson: "com.google.code.gson:gson:${gsonVersion}",
     GsonConverter: "com.squareup.retrofit2:converter-gson:${gsonConverterVersion}",
     SupportAnnotation: "com.android.support:support-annotations:${androidSupportVersion}",
-    TestRunner: "com.android.support.test:runner:${testSupportServion}",
-    TestRules: "com.android.support.test:rules:${testSupportServion}",
+    TestRunner: "com.android.support.test:runner:${testSupportVervion}",
+    TestRules: "com.android.support.test:rules:${testSupportVervion}",
+    Stetho: "com.facebook.stetho:stetho:${stethoVervion}",
+    StethoOkHttp: "com.facebook.stetho:stetho-okhttp3:${stethoVervion}",
   ]
 }

@@ -25,6 +25,7 @@
 package com.txusballesteros.brewerydb
 
 import android.app.Application
+import com.facebook.stetho.Stetho
 import com.txusballesteros.brewerydb.di.ApplicationComponent
 import com.txusballesteros.brewerydb.di.DaggerApplicationComponent
 
@@ -35,10 +36,15 @@ class Application : Application() {
   override fun onCreate() {
     super.onCreate()
     initializeDependencyInjections()
+    initializeStetho()
   }
 
   fun initializeDependencyInjections() {
     this.applicationComponent = DaggerApplicationComponent.builder()
                                         .build()
+  }
+
+  fun initializeStetho() {
+    Stetho.initializeWithDefaults(this)
   }
 }

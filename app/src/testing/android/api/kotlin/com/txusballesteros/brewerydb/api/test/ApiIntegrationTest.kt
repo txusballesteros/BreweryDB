@@ -24,6 +24,7 @@
  */
 package com.txusballesteros.brewerydb.api.test
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.txusballesteros.brewerydb.api.di.RestModule
 import com.txusballesteros.brewerydb.api.instrumentation.OkHttpRequestInterceptor
 import okhttp3.OkHttpClient
@@ -39,7 +40,10 @@ abstract class ApiIntegrationTest {
   @Before
   fun onBefore() {
     val interceptor = OkHttpRequestInterceptor()
-    val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
+    val client = OkHttpClient.Builder()
+        .addInterceptor(interceptor)
+        .addInterceptor(StethoInterceptor())
+        .build()
     val converter = GsonConverterFactory.create()
     val retrofit = Retrofit.Builder()
                         .baseUrl(RestModule.BASE_URL)
