@@ -37,7 +37,12 @@ android {
     targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
     versionCode globalConfiguration.getAt("androidVersionCode")
     versionName globalConfiguration.getAt("androidVersionName")
+
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+
+  sourceSets {
+    androidTest.java.srcDirs += "src/testing/android/api/kotlin"
   }
 
   compileOptions {
@@ -70,6 +75,17 @@ dependencies {
 
   testCompile dependencies.JUnit
   testCompile dependencies.Mockito
+
+  androidTestCompile dependencies.JUnit
+  androidTestCompile dependencies.Mockito
+  androidTestCompile dependencies.SupportAnnotation
+  androidTestCompile dependencies.TestRunner
+  androidTestCompile dependencies.TestRules
+  androidTestCompile dependencies.Retrofit
+  androidTestCompile dependencies.Gson
+  androidTestCompile dependencies.GsonConverter
+  androidTestCompile dependencies.Dagger
+  kaptAndroidTest dependencies.DaggerCompiler
 }
 
 kapt {

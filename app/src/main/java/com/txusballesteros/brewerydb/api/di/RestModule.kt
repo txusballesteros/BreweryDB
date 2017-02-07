@@ -36,7 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class RestModule {
   companion object {
-    private var BASE_URL : String = "http://api.brewerydb.com/v2/"
+    var BASE_URL : String = "http://api.brewerydb.com"
   }
 
   @Provides
@@ -56,9 +56,9 @@ class RestModule {
 
   @Provides
   fun provideHttpClient(interceptor: Interceptor) : OkHttpClient {
-    val client = OkHttpClient()
-    client.interceptors().add(interceptor)
-    return client
+    return OkHttpClient.Builder()
+              .addInterceptor(interceptor)
+              .build()
   }
 
   @Provides

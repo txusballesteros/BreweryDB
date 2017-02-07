@@ -24,11 +24,13 @@
  */
 package com.txusballesteros.brewerydb.api.styles
 
-import com.txusballesteros.brewerydb.api.model.StyleApiModel
+import com.txusballesteros.brewerydb.api.model.StyleApiResponse
 import javax.inject.Inject
 
 class StylesRetrofitApi @Inject constructor(val service: StylesRetrofitService) : StylesApi {
-  override fun getStyles(): List<StyleApiModel> {
-    return service.getStyles()
+  override fun getStyles() : StyleApiResponse {
+    val call = service.getStyles()
+    val response = call.execute()
+    return response.body()
   }
 }

@@ -22,10 +22,29 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.beers
+package com.txusballesteros.brewerydb.api.test.styles
 
-import com.txusballesteros.brewerydb.api.model.BeerApiModel
+import com.txusballesteros.brewerydb.api.styles.StylesApi
+import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
+import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
+import com.txusballesteros.brewerydb.api.test.ApiIntegrationTest
+import org.junit.Assert
+import org.junit.Test
+import retrofit2.Retrofit
 
-interface BeersApi {
-  fun getBeers() : List<BeerApiModel>
+class StylesApiIntegrationTest : ApiIntegrationTest() {
+  lateinit var api : StylesApi
+
+  override fun onPrepareTest(retrofit: Retrofit) {
+    val service = retrofit.create(StylesRetrofitService::class.java)
+    this.api = StylesRetrofitApi(service)
+  }
+
+  @Test
+  fun shouldGetStyles() {
+    val response = api.getStyles()
+
+    Assert.assertEquals(STATUS_SUCCESS, response.status)
+    Assert.assertFalse(response.styles.isEmpty())
+  }
 }

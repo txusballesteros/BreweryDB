@@ -26,6 +26,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.txusballesteros.brewerydb">
 
+  <uses-permission android:name="android.permission.INTERNET" />
+
   <application
       android:icon="@mipmap/ic_launcher"
       android:allowBackup="true"
