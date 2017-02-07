@@ -27,5 +27,5 @@ package com.txusballesteros.brewerydb.api.styles
 import com.txusballesteros.brewerydb.api.model.StyleApiResponse
 
 interface StylesApi {
-  fun getStyles() : List<StyleApiResponse.StyleApiModel>
+  fun getStyles() : StyleApiResponse
 }

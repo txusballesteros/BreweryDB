@@ -41,6 +41,10 @@ android {
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
+  sourceSets {
+    androidTest.java.srcDirs += "src/testing/android/api/kotlin"
+  }
+
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_7
     targetCompatibility JavaVersion.VERSION_1_7
@@ -77,6 +81,9 @@ dependencies {
   androidTestCompile dependencies.SupportAnnotation
   androidTestCompile dependencies.TestRunner
   androidTestCompile dependencies.TestRules
+  androidTestCompile dependencies.Retrofit
+  androidTestCompile dependencies.Gson
+  androidTestCompile dependencies.GsonConverter
   androidTestCompile dependencies.Dagger
   kaptAndroidTest dependencies.DaggerCompiler
 }

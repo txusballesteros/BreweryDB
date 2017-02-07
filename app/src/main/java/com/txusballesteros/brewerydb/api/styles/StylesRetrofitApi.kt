@@ -28,10 +28,9 @@ import com.txusballesteros.brewerydb.api.model.StyleApiResponse
 import javax.inject.Inject
 
 class StylesRetrofitApi @Inject constructor(val service: StylesRetrofitService) : StylesApi {
-  override fun getStyles(): List<StyleApiResponse.StyleApiModel> {
+  override fun getStyles() : StyleApiResponse {
     val call = service.getStyles()
     val response = call.execute()
-    val body = response.body()
-    return body.styles
+    return response.body()
   }
 }
