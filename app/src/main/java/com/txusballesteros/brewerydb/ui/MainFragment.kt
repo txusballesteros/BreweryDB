@@ -28,6 +28,12 @@ import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.ui.behaviour.ToolbarBehaviour
 
 class MainFragment : AbsFragment() {
+  companion object {
+    fun newInstance() : MainFragment {
+      return MainFragment()
+    }
+  }
+
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_main
   }

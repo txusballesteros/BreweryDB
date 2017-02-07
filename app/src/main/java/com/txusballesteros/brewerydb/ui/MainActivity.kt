@@ -26,6 +26,6 @@ package com.txusballesteros.brewerydb.ui
 
 class MainActivity : AbsActivity() {
   override fun onRequestFragment(): AbsFragment {
-    return MainFragment()
+    return MainFragment.newInstance()
   }
 }
