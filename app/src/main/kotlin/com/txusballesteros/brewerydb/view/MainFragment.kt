@@ -26,6 +26,8 @@ package com.txusballesteros.brewerydb.view
 
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
+import com.txusballesteros.brewerydb.view.di.ViewComponent
+import javax.inject.Inject
 
 class MainFragment : AbsFragment() {
   companion object {
@@ -34,11 +36,17 @@ class MainFragment : AbsFragment() {
     }
   }
 
+  @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
+
+  override fun onRequestInjection(viewComponent: ViewComponent) {
+    viewComponent.inject(this)
+  }
+
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_main
   }
 
   override fun onRequestViewComposition() {
-    ToolbarBehaviour().inject(activity as AbsActivity)
+    toolbarBehaviour.inject(activity as AbsActivity)
   }
 }

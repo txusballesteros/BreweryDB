@@ -22,37 +22,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.behaviour
+package com.txusballesteros.brewerydb.di.scopes
 
-import android.app.Activity
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import android.view.View
-import com.txusballesteros.brewerydb.R
-import javax.inject.Inject
+import javax.inject.Qualifier
+import javax.inject.Scope
 
-class ToolbarBehaviour @Inject constructor() : Behaviour() {
-  lateinit var activity : AppCompatActivity
-
-  override fun inject(activity: Activity) {
-    if (activity is AppCompatActivity) {
-      this.activity = activity
-    }
-    super.inject(activity)
-  }
-
-  override fun onRequestPlaceHolderId(): Int {
-    return R.id.toolbar_place_holder
-  }
-
-  override fun onRequestLayoutResourceId(): Int {
-    return R.layout.toolbar_simple
-  }
-
-  override fun onBehaviorReady(view: View) {
-    val toolbar = view.findViewById(R.id.toolbar) as Toolbar
-    toolbar.title = "Kotlin"
-    toolbar.subtitle = "Is really easy..."
-    activity.setSupportActionBar(toolbar)
-  }
-}
+@Qualifier @Scope
+annotation class PerView

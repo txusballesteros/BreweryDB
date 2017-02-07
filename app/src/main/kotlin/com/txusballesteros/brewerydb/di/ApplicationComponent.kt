@@ -28,6 +28,7 @@ import com.txusballesteros.brewerydb.Application
 import com.txusballesteros.brewerydb.api.di.ApiModule
 import com.txusballesteros.brewerydb.api.di.RestModule
 import com.txusballesteros.brewerydb.api.di.RetrofitModule
+import com.txusballesteros.brewerydb.api.styles.StylesApi
 import dagger.Component
 import javax.inject.Singleton
 
@@ -37,4 +38,6 @@ import javax.inject.Singleton
                              RestModule::class))
 interface ApplicationComponent {
   fun inject(application: Application)
+
+  fun getStyleApi() : StylesApi
 }
