@@ -22,13 +22,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.beers
+package com.txusballesteros.brewerydb.api.styles
 
-import com.txusballesteros.brewerydb.api.model.BeerApiModel
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.api.model.StyleApiModel
+import retrofit2.http.GET
 
-class BeersRetrofitApi @Inject constructor(val service: BeersRetrofitService) : BeersApi {
-  override fun getBeers(): List<BeerApiModel> {
-    return this.service.getBeers()
-  }
+interface StylesRetrofitService {
+  @GET("/styles")
+  fun getStyles() : List<StyleApiModel>
 }

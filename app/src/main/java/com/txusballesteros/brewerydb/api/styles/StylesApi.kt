@@ -24,5 +24,8 @@
  */
 package com.txusballesteros.brewerydb.api.styles
 
+import com.txusballesteros.brewerydb.api.model.StyleApiModel
+
 interface StylesApi {
+  fun getStyles() : List<StyleApiModel>
 }
