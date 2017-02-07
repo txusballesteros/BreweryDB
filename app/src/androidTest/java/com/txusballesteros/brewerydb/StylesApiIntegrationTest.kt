@@ -43,6 +43,6 @@ class StylesApiIntegrationTest : ApiIntegrationTest() {
   fun shouldGetStyles() {
     val response = api.getStyles()
 
-    Assert.assertTrue(response.size > 0)
+    Assert.assertFalse(response.isEmpty())
   }
 }

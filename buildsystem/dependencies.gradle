@@ -30,7 +30,7 @@ allprojects {
 
 ext {
   //Kotlin
-  kotlinVersion = "1.0.6"
+  kotlinVersion = "1.0.5"
   ankoVersion = "0.9"
 
   //Android
@@ -51,6 +51,7 @@ ext {
   mockitoVersion = "2.7.0"
   gsonVersion = "2.8.0"
   gsonConverterVersion = "2.1.0"
+  testSupportServion = "0.5"
 
   mobileDependencies = [
     AppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
@@ -67,5 +68,8 @@ ext {
     Picasso: "com.squareup.picasso:picasso:${picassoVersion}",
     Gson: "com.google.code.gson:gson:${gsonVersion}",
     GsonConverter: "com.squareup.retrofit2:converter-gson:${gsonConverterVersion}",
+    SupportAnnotation: "com.android.support:support-annotations:${androidSupportVersion}",
+    TestRunner: "com.android.support.test:runner:${testSupportServion}",
+    TestRules: "com.android.support.test:rules:${testSupportServion}",
   ]
 }
