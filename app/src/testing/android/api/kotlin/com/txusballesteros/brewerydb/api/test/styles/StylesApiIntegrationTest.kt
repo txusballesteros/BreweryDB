@@ -22,17 +22,18 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb
+package com.txusballesteros.brewerydb.api.test.styles
 
 import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
+import com.txusballesteros.brewerydb.api.test.ApiIntegrationTestGeneric
 import org.junit.Assert
 import org.junit.Test
 import retrofit2.Retrofit
 
-class StylesApiIntegrationTest : ApiIntegrationTest() {
-  private lateinit var api : StylesApi
+class StylesApiIntegrationTest : ApiIntegrationTestGeneric() {
+  lateinit var api : StylesApi
 
   override fun onPrepareTest(retrofit: Retrofit) {
     val service = retrofit.create(StylesRetrofitService::class.java)
@@ -43,6 +44,7 @@ class StylesApiIntegrationTest : ApiIntegrationTest() {
   fun shouldGetStyles() {
     val response = api.getStyles()
 
-    Assert.assertFalse(response.isEmpty())
+    Assert.assertEquals(STATUS_SUCCESS, response.status)
+    Assert.assertFalse(response.styles.isEmpty())
   }
 }
