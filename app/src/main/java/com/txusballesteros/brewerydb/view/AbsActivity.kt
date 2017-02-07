@@ -22,23 +22,27 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.ui
+package com.txusballesteros.brewerydb.view
 
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.ui.behaviour.ToolbarBehaviour
 
-class MainFragment : AbsFragment() {
-  companion object {
-    fun newInstance() : MainFragment {
-      return MainFragment()
+abstract class AbsActivity : AppCompatActivity() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_base_layout)
+    if (savedInstanceState == null) {
+      addFragment()
     }
   }
 
-  override fun onRequestLayoutResourceId(): Int {
-    return R.layout.fragment_main
+  fun addFragment() {
+    val fragment = onRequestFragment()
+    supportFragmentManager.beginTransaction()
+        .add(R.id.content_place_holder, fragment)
+        .commit()
   }
 
-  override fun onRequestViewComposition() {
-    ToolbarBehaviour().inject(activity as AbsActivity)
-  }
+  abstract fun onRequestFragment() : AbsFragment
 }

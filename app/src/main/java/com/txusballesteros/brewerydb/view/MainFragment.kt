@@ -22,36 +22,23 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.ui.behaviour
+package com.txusballesteros.brewerydb.view
 
-import android.app.Activity
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import android.view.View
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 
-class ToolbarBehaviour : Behaviour() {
-  lateinit var activity : AppCompatActivity
-
-  override fun inject(activity: Activity) {
-    if (activity is AppCompatActivity) {
-      this.activity = activity
+class MainFragment : AbsFragment() {
+  companion object {
+    fun newInstance() : MainFragment {
+      return MainFragment()
     }
-    super.inject(activity)
-  }
-
-  override fun onRequestPlaceHolderId(): Int {
-    return R.id.toolbar_place_holder
   }
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.toolbar_simple
+    return R.layout.fragment_main
   }
 
-  override fun onBehaviorReady(view: View) {
-    val toolbar = view.findViewById(R.id.toolbar) as Toolbar
-    toolbar.title = "Kotlin"
-    toolbar.subtitle = "Is really easy..."
-    activity.setSupportActionBar(toolbar)
+  override fun onRequestViewComposition() {
+    ToolbarBehaviour().inject(activity as AbsActivity)
   }
 }

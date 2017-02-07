@@ -22,27 +22,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.ui
+package com.txusballesteros.brewerydb.view
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.txusballesteros.brewerydb.R
-
-abstract class AbsActivity : AppCompatActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_base_layout)
-    if (savedInstanceState == null) {
-      addFragment()
-    }
+class MainActivity : AbsActivity() {
+  override fun onRequestFragment(): AbsFragment {
+    return MainFragment.newInstance()
   }
-
-  fun addFragment() {
-    val fragment = onRequestFragment()
-    supportFragmentManager.beginTransaction()
-        .add(R.id.content_place_holder, fragment)
-        .commit()
-  }
-
-  abstract fun onRequestFragment() : AbsFragment
 }

@@ -22,7 +22,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.ui
+package com.txusballesteros.brewerydb.view
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
