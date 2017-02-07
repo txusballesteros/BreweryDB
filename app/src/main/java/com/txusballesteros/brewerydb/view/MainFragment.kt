@@ -1,8 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
- * This file is part of some open source androidApplication.
+ * This file is part of some open source application.
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,22 +21,24 @@
  * under the License.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
--->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.txusballesteros.brewerydb">
+ */
+package com.txusballesteros.brewerydb.view
 
-  <application
-      android:icon="@mipmap/ic_launcher"
-      android:allowBackup="true"
-      android:label="@string/app_name"
-      android:name=".Application"
-      android:theme="@style/AppTheme">
+import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 
-    <activity android:name=".view.MainActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-  </application>
-</manifest>
+class MainFragment : AbsFragment() {
+  companion object {
+    fun newInstance() : MainFragment {
+      return MainFragment()
+    }
+  }
+
+  override fun onRequestLayoutResourceId(): Int {
+    return R.layout.fragment_main
+  }
+
+  override fun onRequestViewComposition() {
+    ToolbarBehaviour().inject(activity as AbsActivity)
+  }
+}

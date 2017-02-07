@@ -22,17 +22,24 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.ui
+package com.txusballesteros.brewerydb.view
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.txusballesteros.brewerydb.R
-import kotlinx.android.synthetic.main.activity_main.*
+import android.support.v4.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 
-class MainActivity : AppCompatActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    content.text = "Hello Kotlin!!!"
+abstract class AbsFragment : Fragment() {
+  override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    return inflater?.inflate(onRequestLayoutResourceId(), container, false)
   }
+
+  abstract fun onRequestLayoutResourceId() : Int
+
+  override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    onRequestViewComposition()
+  }
+
+  open fun onRequestViewComposition() { }
 }

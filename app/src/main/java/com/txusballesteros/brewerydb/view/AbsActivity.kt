@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+/*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
- * This file is part of some open source androidApplication.
+ * This file is part of some open source application.
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -21,18 +21,28 @@
  * under the License.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
--->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin">
+ */
+package com.txusballesteros.brewerydb.view
 
-  <TextView
-      android:id="@+id/content"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content" />
+import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.txusballesteros.brewerydb.R
 
-</LinearLayout>
+abstract class AbsActivity : AppCompatActivity() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_base_layout)
+    if (savedInstanceState == null) {
+      addFragment()
+    }
+  }
+
+  fun addFragment() {
+    val fragment = onRequestFragment()
+    supportFragmentManager.beginTransaction()
+        .add(R.id.content_place_holder, fragment)
+        .commit()
+  }
+
+  abstract fun onRequestFragment() : AbsFragment
+}

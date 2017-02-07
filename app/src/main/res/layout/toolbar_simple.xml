@@ -23,21 +23,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.txusballesteros.brewerydb">
-
-  <application
-      android:icon="@mipmap/ic_launcher"
-      android:allowBackup="true"
-      android:label="@string/app_name"
-      android:name=".Application"
-      android:theme="@style/AppTheme">
-
-    <activity android:name=".view.MainActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-  </application>
-</manifest>
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    android:layout_height="?attr/actionBarSize"
+    android:layout_width="match_parent"
+    android:minHeight="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:elevation="4dp"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:layout_scrollFlags="scroll|enterAlways" />
