@@ -31,7 +31,7 @@ import dagger.Provides
 import retrofit2.Retrofit
 
 @Module
-class RetrofitModule {
+open class RetrofitModule {
   @Provides
   fun provideBeersRetrofitService(retrofit: Retrofit) : BeersRetrofitService {
     return retrofit.create(BeersRetrofitService::class.java)

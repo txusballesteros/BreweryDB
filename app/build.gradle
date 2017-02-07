@@ -70,6 +70,10 @@ dependencies {
 
   testCompile dependencies.JUnit
   testCompile dependencies.Mockito
+
+  androidTestCompile dependencies.JUnit
+  androidTestCompile dependencies.Mockito
+  kaptAndroidTest dependencies.DaggerCompiler
 }
 
 kapt {

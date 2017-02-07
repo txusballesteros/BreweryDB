@@ -32,7 +32,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class ApiModule {
+open class ApiModule {
   @Provides
   fun provideBeersApi(api: BeersRetrofitApi) : BeersApi {
     return api

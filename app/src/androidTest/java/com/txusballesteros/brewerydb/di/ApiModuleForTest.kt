@@ -22,27 +22,9 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-apply from: 'buildsystem/dependencies.gradle'
+package com.txusballesteros.brewerydb.api.di
 
-buildscript {
-  repositories {
-    jcenter()
-  }
+import dagger.Module
 
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.2.3'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.0.6"
-  }
-}
-
-apply plugin: "kotlin"
-
-allprojects {
-  repositories {
-    jcenter()
-  }
-}
-
-task clean(type: Delete) {
-  delete rootProject.buildDir
-}
+@Module
+class ApiModuleForTest { }

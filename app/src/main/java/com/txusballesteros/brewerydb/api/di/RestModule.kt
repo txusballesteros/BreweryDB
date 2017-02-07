@@ -34,7 +34,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-class RestModule {
+open class RestModule {
   companion object {
     private var BASE_URL : String = "http://api.brewerydb.com/v2/"
   }
