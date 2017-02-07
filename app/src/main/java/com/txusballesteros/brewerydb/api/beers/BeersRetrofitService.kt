@@ -28,6 +28,6 @@ import com.txusballesteros.brewerydb.api.model.BeerApiModel
 import retrofit2.http.GET
 
 interface BeersRetrofitService {
-  @GET("/beers")
+  @GET("/v2/beers")
   fun getBeers() : List<BeerApiModel>
 }

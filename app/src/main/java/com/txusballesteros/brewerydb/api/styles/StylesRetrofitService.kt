@@ -24,10 +24,11 @@
  */
 package com.txusballesteros.brewerydb.api.styles
 
-import com.txusballesteros.brewerydb.api.model.StyleApiModel
+import com.txusballesteros.brewerydb.api.model.StyleApiResponse
+import retrofit2.Call
 import retrofit2.http.GET
 
 interface StylesRetrofitService {
-  @GET("/styles")
-  fun getStyles() : List<StyleApiModel>
+  @GET("/v2/styles")
+  fun getStyles() : Call<StyleApiResponse>
 }

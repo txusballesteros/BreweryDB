@@ -22,6 +22,27 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb
 
-data class StyleApiModel(val id: Int, val name: String, val shortName: String, val description: String)
+import com.txusballesteros.brewerydb.api.styles.StylesApi
+import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
+import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
+import org.junit.Assert
+import org.junit.Test
+import retrofit2.Retrofit
+
+class StylesApiIntegrationTest : ApiIntegrationTest() {
+  private lateinit var api : StylesApi
+
+  override fun onPrepareTest(retrofit: Retrofit) {
+    val service = retrofit.create(StylesRetrofitService::class.java)
+    this.api = StylesRetrofitApi(service)
+  }
+
+  @Test
+  fun shouldGetStyles() {
+    val response = api.getStyles()
+
+    Assert.assertTrue(response.size > 0)
+  }
+}

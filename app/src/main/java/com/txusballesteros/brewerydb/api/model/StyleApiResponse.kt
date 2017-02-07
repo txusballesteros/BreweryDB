@@ -22,9 +22,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.di
+package com.txusballesteros.brewerydb.api.model
 
-import dagger.Module
+import com.google.gson.annotations.SerializedName
 
-@Module
-class RetrofitModuleForTest { }
+data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
+                            val message: String,
+                            val status: String) {
+
+  inner class StyleApiModel(val id: Int,
+                            val categoryId: Int,
+                            val name: String,
+                            val shortName: String,
+                            val description: String)
+}
