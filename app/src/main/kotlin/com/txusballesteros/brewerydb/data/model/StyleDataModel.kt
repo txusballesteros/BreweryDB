@@ -18,26 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.di
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.Application
-import com.txusballesteros.brewerydb.api.di.ApiModule
-import com.txusballesteros.brewerydb.api.di.RestModule
-import com.txusballesteros.brewerydb.api.di.RetrofitModule
-import com.txusballesteros.brewerydb.api.styles.StylesApi
-import com.txusballesteros.brewerydb.data.di.DataSourceModule
-import dagger.Component
-import javax.inject.Singleton
-
-@Singleton
-@Component(modules = arrayOf(
-        DataSourceModule::class,
-        ApiModule::class,
-        RetrofitModule::class,
-        RestModule::class
-))
-interface ApplicationComponent {
-  fun inject(application: Application)
-
-  fun getStyleApi() : StylesApi
-}
+data class StyleDataModel(val id: Int,
+                          val categoryId: Int,
+                          val name: String,
+                          val shortName: String,
+                          val description: String)
