@@ -23,7 +23,38 @@ package com.txusballesteros.brewerydb.domain.usecase
 import com.txusballesteros.brewerydb.threading.PostExecutionThread
 import com.txusballesteros.brewerydb.threading.ThreadExecutor
 
-abstract class UseCase (protected val executor: ThreadExecutor, protected val postExecutorThread: PostExecutionThread) {
+abstract class UseCase<T> (protected val executor: ThreadExecutor, protected val postExecutorThread: PostExecutionThread) {
+  private lateinit var callback: UseCaseCallback<T>
+
+  open protected fun execute(callback: UseCaseCallback<T>) {
+    try {
+      this.callback = callback
+      runExecution()
+    } catch (error: Exception) {
+      notifyOnError()
+    }
+  }
+
+  private fun runExecution() {
+    executor.execute {
+      onExecute()
+    }
+  }
+
+  abstract fun onExecute()
+
+  fun notifyOnResult(result: T) {
+    postExecutorThread.execute(Runnable {
+      callback.onResult(result)
+    })
+  }
+
+  fun notifyOnError() {
+    postExecutorThread.execute(Runnable {
+      callback.onError()
+    })
+  }
+
   interface UseCaseCallback<T> {
     fun onResult(result: T)
     fun onError()

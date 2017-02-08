@@ -30,33 +30,17 @@ import javax.inject.Inject
 
 class GetStylesUseCase @Inject constructor(executor: ThreadExecutor,
                                            postExecutorThread: PostExecutionThread,
-                                           private val repository: StylesRepository) : UseCase(executor, postExecutorThread) {
-  private lateinit var postCallback: UseCaseCallback<List<Style>>
-
-  fun execute(postCallback: UseCaseCallback<List<Style>>) {
-    try {
-      this.postCallback = postCallback
-      executor.execute ({
-        repository.getStyles(callback = object : Repository.RepositoryCallback<List<Style>> {
-          override fun onResult(result: List<Style>) {
-            notifyOnResult(result)
-          }
-        })
-      })
-    } catch (error: Exception) {
-      notifyOnError()
-    }
+                                           private val repository: StylesRepository)
+                        : UseCase<List<Style>>(executor, postExecutorThread) {
+  override fun execute(callback: UseCaseCallback<List<Style>>) {
+    super.execute(callback)
   }
 
-  private fun notifyOnResult(result: List<Style>) {
-    postExecutorThread.execute(Runnable {
-      postCallback.onResult(result)
-    })
-  }
-
-  private fun notifyOnError() {
-    postExecutorThread.execute(Runnable {
-      postCallback.onError()
+  override fun onExecute() {
+    repository.getStyles(callback = object : Repository.RepositoryCallback<List<Style>> {
+      override fun onResult(result: List<Style>) {
+        notifyOnResult(result)
+      }
     })
   }
 }
