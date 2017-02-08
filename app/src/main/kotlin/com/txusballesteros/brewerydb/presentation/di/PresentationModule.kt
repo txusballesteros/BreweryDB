@@ -18,19 +18,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.di
+package com.txusballesteros.brewerydb.presentation.di
 
-import com.txusballesteros.brewerydb.di.ApplicationComponent
-import com.txusballesteros.brewerydb.di.scopes.PerView
-import com.txusballesteros.brewerydb.presentation.di.PresentationModule
-import com.txusballesteros.brewerydb.view.MainFragment
-import dagger.Component
+import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
+import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenterImpl
+import dagger.Module
+import dagger.Provides
 
-@PerView
-@Component(dependencies = arrayOf(
-               ApplicationComponent::class),
-           modules = arrayOf(
-               PresentationModule::class))
-interface ViewComponent {
-  fun inject(view: MainFragment)
+@Module
+class PresentationModule {
+  @Provides
+  fun provideStylesListPresenter(presenter: StylesListPresenterImpl) : StylesListPresenter {
+    return presenter
+  }
 }

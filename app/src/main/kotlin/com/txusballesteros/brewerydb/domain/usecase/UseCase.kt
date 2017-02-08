@@ -41,7 +41,7 @@ abstract class UseCase<T> (protected val executor: ThreadExecutor, protected val
     }
   }
 
-  abstract fun onExecute()
+  protected abstract fun onExecute()
 
   fun notifyOnResult(result: T) {
     postExecutorThread.execute(Runnable {

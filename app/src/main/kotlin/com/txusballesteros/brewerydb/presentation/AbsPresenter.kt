@@ -18,19 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.di
+package com.txusballesteros.brewerydb.presentation
 
-import com.txusballesteros.brewerydb.di.ApplicationComponent
-import com.txusballesteros.brewerydb.di.scopes.PerView
-import com.txusballesteros.brewerydb.presentation.di.PresentationModule
-import com.txusballesteros.brewerydb.view.MainFragment
-import dagger.Component
+open class AbsPresenter<T : Presenter.View> : Presenter<T> {
+  private var view: T? = null
 
-@PerView
-@Component(dependencies = arrayOf(
-               ApplicationComponent::class),
-           modules = arrayOf(
-               PresentationModule::class))
-interface ViewComponent {
-  fun inject(view: MainFragment)
+  override fun getView(): T? {
+    return view
+  }
+
+  override fun onAttachView(view: T) {
+    this.view = view
+  }
+
+  override fun onDetachView() {
+    this.view = null
+  }
 }

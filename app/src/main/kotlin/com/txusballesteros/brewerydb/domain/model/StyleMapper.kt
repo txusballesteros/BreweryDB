@@ -18,19 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.di
+package com.txusballesteros.brewerydb.domain.model
 
-import com.txusballesteros.brewerydb.di.ApplicationComponent
-import com.txusballesteros.brewerydb.di.scopes.PerView
-import com.txusballesteros.brewerydb.presentation.di.PresentationModule
-import com.txusballesteros.brewerydb.view.MainFragment
-import dagger.Component
+import com.txusballesteros.brewerydb.domain.model.Style
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 
-@PerView
-@Component(dependencies = arrayOf(
-               ApplicationComponent::class),
-           modules = arrayOf(
-               PresentationModule::class))
-interface ViewComponent {
-  fun inject(view: MainFragment)
-}
+fun Style.map(source: Style)
+    = StyleViewModel(source.id, source.categoryId, source.name, source.shortName, source.description)

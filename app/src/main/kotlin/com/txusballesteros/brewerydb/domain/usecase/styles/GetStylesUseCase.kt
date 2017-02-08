@@ -32,7 +32,7 @@ class GetStylesUseCase @Inject constructor(executor: ThreadExecutor,
                                            postExecutorThread: PostExecutionThread,
                                            private val repository: StylesRepository)
                         : UseCase<List<Style>>(executor, postExecutorThread) {
-  override fun execute(callback: UseCaseCallback<List<Style>>) {
+  public override fun execute(callback: UseCaseCallback<List<Style>>) {
     super.execute(callback)
   }
 
