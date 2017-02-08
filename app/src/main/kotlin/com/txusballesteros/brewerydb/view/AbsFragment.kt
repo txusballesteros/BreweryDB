@@ -40,8 +40,18 @@ abstract class AbsFragment : Fragment() {
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     onRequestInjection()
     onRequestViewComposition()
+    onPresenterShouldBeAttached()
     onViewReady(savedInstanceState)
   }
+
+  abstract fun onPresenterShouldBeAttached()
+
+  override fun onDestroyView() {
+    super.onDestroyView()
+    onPresenterShouldBeDetached()
+  }
+
+  abstract fun onPresenterShouldBeDetached()
 
   private fun onRequestInjection() {
     val applicationComponent = getApplicationComponent()

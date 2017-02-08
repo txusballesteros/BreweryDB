@@ -29,6 +29,6 @@ class StylesCloudDataSourceImpl @Inject constructor(private val api: StylesApi) 
   override fun getStyles(): List<StyleDataModel> {
     val response = api.getStyles()
     val result = response.styles.map { styleApiModel -> styleApiModel.map(styleApiModel) }
-    return result;
+    return result
   }
 }

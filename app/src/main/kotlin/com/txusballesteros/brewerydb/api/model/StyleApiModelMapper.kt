@@ -20,7 +20,10 @@
  */
 package com.txusballesteros.brewerydb.api.model
 
+import android.util.Log
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
 
-fun StyleApiResponse.StyleApiModel.map(source: StyleApiResponse.StyleApiModel)
-    = StyleDataModel(source.id, source.categoryId, source.name, source.shortName, source.description)
+fun StyleApiResponse.StyleApiModel.map(source: StyleApiResponse.StyleApiModel) : StyleDataModel {
+  Log.d("Brewery", "ID: " + source.id)
+  return StyleDataModel(source.id, source.categoryId, source.name, source.shortName, source.description ?: "")
+}
