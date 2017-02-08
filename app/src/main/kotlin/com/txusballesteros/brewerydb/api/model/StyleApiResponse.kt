@@ -26,9 +26,9 @@ data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiMod
                             val message: String,
                             val status: String) {
 
-  inner class StyleApiModel(val id: Int,
-                            val categoryId: Int,
-                            val name: String,
-                            val shortName: String,
-                            val description: String)
+  class StyleApiModel(val id: Int,
+                      val categoryId: Int,
+                      val name: String,
+                      val shortName: String,
+                      val description: String)
 }
