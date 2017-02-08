@@ -18,10 +18,14 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository
+package com.txusballesteros.brewerydb.domain.usecase
 
-interface Repository {
-  interface RepositoryCallback<T> {
-    fun onResult(result: T) { }
+import com.txusballesteros.brewerydb.threading.PostExecutionThread
+import com.txusballesteros.brewerydb.threading.ThreadExecutor
+
+abstract class UseCase (protected val executor: ThreadExecutor, protected val postExecutorThread: PostExecutionThread) {
+  interface UseCaseCallback<T> {
+    fun onResult(result: T)
+    fun onError()
   }
 }
