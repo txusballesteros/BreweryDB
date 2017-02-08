@@ -18,17 +18,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.data.styles.datasource
 
-import com.google.gson.annotations.SerializedName
+import com.txusballesteros.brewerydb.api.model.map
+import com.txusballesteros.brewerydb.api.styles.StylesApi
+import com.txusballesteros.brewerydb.data.model.StyleDataModel
+import javax.inject.Inject
 
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
-
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
+class StylesCloudDataSourceImpl @Inject constructor(private val api: StylesApi) : StylesCloudDataSource {
+  override fun getStyles(): List<StyleDataModel> {
+    val response = api.getStyles()
+    val result = response.styles.map { styleApiModel -> styleApiModel.map(styleApiModel) }
+    return result
+  }
 }

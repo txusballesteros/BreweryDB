@@ -18,17 +18,25 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.threading.di
 
-import com.google.gson.annotations.SerializedName
+import com.txusballesteros.brewerydb.threading.MainPostExecutionThread
+import com.txusballesteros.brewerydb.threading.PostExecutionThread
+import com.txusballesteros.brewerydb.threading.ThreadExecutorPool
+import com.txusballesteros.brewerydb.threading.ThreadExecutor
+import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
 
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
+@Module
+class ThreadingModule {
+  @Singleton @Provides
+  fun provideThreadExecutor(executorPool: ThreadExecutorPool) : ThreadExecutor {
+    return executorPool
+  }
 
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
+  @Singleton @Provides
+  fun providePostExecutionThread(postExecutionThread: MainPostExecutionThread) : PostExecutionThread {
+    return postExecutionThread
+  }
 }

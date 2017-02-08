@@ -18,17 +18,18 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.domain.repository.di
 
-import com.google.gson.annotations.SerializedName
+import com.txusballesteros.brewerydb.data.styles.repository.StylesRepositoryImpl
+import com.txusballesteros.brewerydb.domain.repository.StylesRepository
+import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
 
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
-
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
+@Module
+class RepositoriesModule {
+  @Singleton @Provides
+  fun provideStylesRepository(repository: StylesRepositoryImpl) : StylesRepository {
+    return repository
+  }
 }

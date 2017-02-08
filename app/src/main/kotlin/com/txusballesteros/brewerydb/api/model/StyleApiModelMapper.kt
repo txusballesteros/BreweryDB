@@ -20,15 +20,10 @@
  */
 package com.txusballesteros.brewerydb.api.model
 
-import com.google.gson.annotations.SerializedName
+import android.util.Log
+import com.txusballesteros.brewerydb.data.model.StyleDataModel
 
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
-
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
+fun StyleApiResponse.StyleApiModel.map(source: StyleApiResponse.StyleApiModel) : StyleDataModel {
+  Log.d("Brewery", "ID: " + source.id)
+  return StyleDataModel(source.id, source.categoryId, source.name, source.shortName, source.description ?: "")
 }

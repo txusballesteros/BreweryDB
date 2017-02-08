@@ -25,15 +25,23 @@ import com.txusballesteros.brewerydb.api.di.ApiModule
 import com.txusballesteros.brewerydb.api.di.RestModule
 import com.txusballesteros.brewerydb.api.di.RetrofitModule
 import com.txusballesteros.brewerydb.api.styles.StylesApi
+import com.txusballesteros.brewerydb.data.di.DataSourceModule
+import com.txusballesteros.brewerydb.domain.repository.di.RepositoriesModule
+import com.txusballesteros.brewerydb.domain.repository.di.RepositoriesProvider
+import com.txusballesteros.brewerydb.threading.di.ThreadingProvider
+import com.txusballesteros.brewerydb.threading.di.ThreadingModule
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(ApiModule::class,
-                             RetrofitModule::class,
-                             RestModule::class))
-interface ApplicationComponent {
+@Component(modules = arrayOf(
+        ThreadingModule::class,
+        RepositoriesModule::class,
+        DataSourceModule::class,
+        ApiModule::class,
+        RetrofitModule::class,
+        RestModule::class
+))
+interface ApplicationComponent : RepositoriesProvider, ThreadingProvider {
   fun inject(application: Application)
-
-  fun getStyleApi() : StylesApi
 }

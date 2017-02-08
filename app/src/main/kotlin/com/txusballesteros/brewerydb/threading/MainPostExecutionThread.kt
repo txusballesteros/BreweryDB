@@ -18,17 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.threading
 
-import com.google.gson.annotations.SerializedName
+import android.os.Handler
+import android.os.Looper
+import javax.inject.Inject
 
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
+class MainPostExecutionThread @Inject constructor() : PostExecutionThread {
+  private val handler: Handler
 
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
+  init {
+    this.handler = Handler(Looper.getMainLooper())
+  }
+
+  override fun execute(runnable: Runnable) {
+    handler.post(runnable)
+  }
 }

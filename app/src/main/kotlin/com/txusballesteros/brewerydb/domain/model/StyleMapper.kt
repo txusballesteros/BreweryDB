@@ -18,17 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.domain.model
 
-import com.google.gson.annotations.SerializedName
+import com.txusballesteros.brewerydb.domain.model.Style
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
-
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
-}
+fun Style.map(source: Style)
+    = StyleViewModel(source.id, source.categoryId, source.name, source.shortName, source.description)

@@ -18,17 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.presentation
 
-import com.google.gson.annotations.SerializedName
+open class AbsPresenter<T : Presenter.View> : Presenter<T> {
+  private var view: T? = null
 
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
+  override fun getView(): T? {
+    return view
+  }
 
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
+  override fun onAttachView(view: T) {
+    this.view = view
+  }
+
+  override fun onDetachView() {
+    this.view = null
+  }
 }

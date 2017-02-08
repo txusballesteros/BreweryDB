@@ -18,17 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.data.model
 
-import com.google.gson.annotations.SerializedName
-
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
-
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
-}
+data class StyleDataModel(val id: Int,
+                          val categoryId: Int,
+                          val name: String,
+                          val shortName: String,
+                          val description: String)

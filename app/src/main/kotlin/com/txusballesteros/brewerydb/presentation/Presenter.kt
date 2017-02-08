@@ -18,17 +18,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.presentation
 
-import com.google.gson.annotations.SerializedName
+interface Presenter<T : Presenter.View> {
+  fun onAttachView(view: T)
+  fun onDetachView()
+  fun getView() : T?
 
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
-
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
+  interface View
 }

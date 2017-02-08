@@ -18,17 +18,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.data.di
 
-import com.google.gson.annotations.SerializedName
+import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
+import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSourceImpl
+import dagger.Module
+import dagger.Provides
 
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
-
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
+@Module
+class DataSourceModule {
+  @Provides
+  fun provideStylesCloudDataSource(dataSource: StylesCloudDataSourceImpl) : StylesCloudDataSource {
+    return dataSource
+  }
 }

@@ -22,11 +22,15 @@ package com.txusballesteros.brewerydb.view.di
 
 import com.txusballesteros.brewerydb.di.ApplicationComponent
 import com.txusballesteros.brewerydb.di.scopes.PerView
+import com.txusballesteros.brewerydb.presentation.di.PresentationModule
 import com.txusballesteros.brewerydb.view.MainFragment
 import dagger.Component
 
 @PerView
-@Component(dependencies = arrayOf(ApplicationComponent::class))
+@Component(dependencies = arrayOf(
+               ApplicationComponent::class),
+           modules = arrayOf(
+               PresentationModule::class))
 interface ViewComponent {
   fun inject(view: MainFragment)
 }

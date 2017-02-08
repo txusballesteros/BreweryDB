@@ -20,29 +20,54 @@
  */
 package com.txusballesteros.brewerydb.view
 
+import android.os.Bundle
+import android.widget.Toast
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
+import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import javax.inject.Inject
 
-class MainFragment : AbsFragment() {
+class MainFragment : AbsFragment(), StylesListPresenter.View {
   companion object {
     fun newInstance() : MainFragment {
       return MainFragment()
     }
   }
-
+  @Inject lateinit var presenter : StylesListPresenter
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
-
-  override fun onRequestInjection(viewComponent: ViewComponent) {
-    viewComponent.inject(this)
-  }
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_main
   }
 
+  override fun onRequestInjection(viewComponent: ViewComponent) {
+    viewComponent.inject(this)
+  }
+
   override fun onRequestViewComposition() {
     toolbarBehaviour.inject(activity as AbsActivity)
+  }
+
+  override fun onPresenterShouldBeAttached() {
+    presenter.onAttachView(this)
+  }
+
+  override fun onPresenterShouldBeDetached() {
+    presenter.onDetachView()
+  }
+
+  override fun onViewReady(savedInstanceState: Bundle?) {
+    presenter.onRequestStyles()
+  }
+
+  override fun renderError() {
+    Toast.makeText(activity, "Upps!! Fucking shit...", Toast.LENGTH_SHORT).show()
+  }
+
+  override fun renderStyles(styles: List<StyleViewModel>) {
+    val name = styles.first().name
+    Toast.makeText(activity, name, Toast.LENGTH_SHORT).show()
   }
 }

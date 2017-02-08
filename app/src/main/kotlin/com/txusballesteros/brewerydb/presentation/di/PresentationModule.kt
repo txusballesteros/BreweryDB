@@ -18,17 +18,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.presentation.di
 
-import com.google.gson.annotations.SerializedName
+import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
+import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenterImpl
+import dagger.Module
+import dagger.Provides
 
-data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiModel>,
-                            val message: String,
-                            val status: String) {
-
-  class StyleApiModel(val id: Int,
-                      val categoryId: Int,
-                      val name: String,
-                      val shortName: String,
-                      val description: String?)
+@Module
+class PresentationModule {
+  @Provides
+  fun provideStylesListPresenter(presenter: StylesListPresenterImpl) : StylesListPresenter {
+    return presenter
+  }
 }
