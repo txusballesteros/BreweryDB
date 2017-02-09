@@ -30,7 +30,7 @@ class GetStylesStrategy constructor(val localDataSource: StylesLocalDataSource,
                                     val cloudDataSource: StylesCloudDataSource):
                                                       LocalOrCloudStrategy<Void, List<StyleDataModel>>() {
   override fun onRequestCallToLocal(params: Void?): List<StyleDataModel>? {
-    return localDataSource.get()
+    return localDataSource.getStyles()
   }
 
   override fun onRequestCallToCloud(params: Void?): List<StyleDataModel>? {

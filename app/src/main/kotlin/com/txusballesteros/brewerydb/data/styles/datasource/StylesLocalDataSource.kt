@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.data.styles.datasource
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
 
 interface StylesLocalDataSource {
-  fun get() : List<StyleDataModel>?
+  fun getStyles() : List<StyleDataModel>
   fun getByCategoryId(categoryId: Int) : List<StyleDataModel>
   fun store(styles: List<StyleDataModel>)
 }
