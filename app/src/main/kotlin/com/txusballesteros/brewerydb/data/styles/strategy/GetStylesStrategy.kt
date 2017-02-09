@@ -29,6 +29,7 @@ import javax.inject.Inject
 class GetStylesStrategy constructor(val localDataSource: StylesLocalDataSource,
                                     val cloudDataSource: StylesCloudDataSource):
                                                       LocalOrCloudStrategy<Void, List<StyleDataModel>>() {
+
   override fun onRequestCallToLocal(params: Void?): List<StyleDataModel>? {
     return localDataSource.getStyles()
   }
@@ -37,6 +38,10 @@ class GetStylesStrategy constructor(val localDataSource: StylesLocalDataSource,
     val response = cloudDataSource.getStyles()
     localDataSource.store(response)
     return response
+  }
+
+  override fun isValid(result: List<StyleDataModel>?): Boolean {
+    return result != null && !result.isEmpty()
   }
 
   class Builder @Inject constructor(val localDataSource: StylesLocalDataSource,

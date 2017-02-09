@@ -33,6 +33,7 @@ import javax.inject.Inject
 class StylesRepositoryImpl @Inject constructor(private val getStylesStrategy: GetStylesStrategy.Builder,
                                                private val getStylesBuCategoryId: GetStylesByCategoryIdStrategy.Builder):
                                    StylesRepository {
+
   override fun getStylesByCategoryId(categoryId: Int, callback: Repository.RepositoryCallback<List<Style>>) {
     getStylesBuCategoryId.build().execute(categoryId, object: Strategy.Callback<List<StyleDataModel>>() {
       override fun onResult(result: List<StyleDataModel>?) {
