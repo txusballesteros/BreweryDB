@@ -18,28 +18,33 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view
+package com.txusballesteros.brewerydb.view.styles
 
 import android.os.Bundle
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.Toast
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
+import com.txusballesteros.brewerydb.view.AbsActivity
+import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
+import kotlinx.android.synthetic.main.fragment_styles_list.*
 import javax.inject.Inject
 
-class MainFragment : AbsFragment(), StylesListPresenter.View {
+class StylesListFragment : AbsFragment(), StylesListPresenter.View {
   companion object {
-    fun newInstance() : MainFragment {
-      return MainFragment()
+    fun newInstance() : StylesListFragment {
+      return StylesListFragment()
     }
   }
-  @Inject lateinit var presenter : StylesListPresenter
+  @Inject lateinit var presenter: StylesListPresenter
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
+  val adapter: StyleListAdapter = StyleListAdapter()
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.fragment_main
+    return R.layout.fragment_styles_list
   }
 
   override fun onRequestInjection(viewComponent: ViewComponent) {
@@ -59,15 +64,25 @@ class MainFragment : AbsFragment(), StylesListPresenter.View {
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
-    presenter.onRequestStyles()
+    initializeList()
+    if (savedInstanceState == null) {
+      presenter.onRequestStyles()
+    }
+  }
+
+  private fun initializeList() {
+    list.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    list.adapter = adapter
+    list.setHasFixedSize(true)
+  }
+  override fun renderStyles(styles: List<StyleViewModel>) {
+    adapter.clear()
+    adapter.addAll(styles)
+    adapter.notifyDataSetChanged()
+    Toast.makeText(activity, styles.first().name, Toast.LENGTH_SHORT).show()
   }
 
   override fun renderError() {
-    Toast.makeText(activity, "Upps!! Fucking shit...", Toast.LENGTH_SHORT).show()
-  }
-
-  override fun renderStyles(styles: List<StyleViewModel>) {
-    val name = styles.first().name
-    Toast.makeText(activity, name, Toast.LENGTH_SHORT).show()
+    Toast.makeText(activity, "Upps!!", Toast.LENGTH_SHORT).show()
   }
 }

@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.view.di
 import com.txusballesteros.brewerydb.di.ApplicationComponent
 import com.txusballesteros.brewerydb.di.scopes.PerView
 import com.txusballesteros.brewerydb.presentation.di.PresentationModule
-import com.txusballesteros.brewerydb.view.MainFragment
+import com.txusballesteros.brewerydb.view.styles.StylesListFragment
 import dagger.Component
 
 @PerView
@@ -32,5 +32,5 @@ import dagger.Component
            modules = arrayOf(
                PresentationModule::class))
 interface ViewComponent {
-  fun inject(view: MainFragment)
+  fun inject(view: StylesListFragment)
 }
