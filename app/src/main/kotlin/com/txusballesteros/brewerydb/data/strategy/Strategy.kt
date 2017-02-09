@@ -39,8 +39,8 @@ abstract class Strategy<INPUT, OUTPUT> {
   }
 
   open class Callback<OUTPUT> {
-    fun onResult(value: OUTPUT?) {}
+    open fun onResult(value: OUTPUT?) { }
 
-    fun onError(error: Exception? = null) {}
+    open fun onError(error: Exception? = null) { }
   }
 }
