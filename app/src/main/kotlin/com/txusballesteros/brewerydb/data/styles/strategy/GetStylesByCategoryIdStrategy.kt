@@ -26,23 +26,28 @@ import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSourc
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
 import javax.inject.Inject
 
-class GetStylesStrategy constructor(val localDataSource: StylesLocalDataSource,
-                                    val cloudDataSource: StylesCloudDataSource):
-                                                      LocalOrCloudStrategy<Void, List<StyleDataModel>>() {
-  override fun onRequestCallToLocal(params: Void?): List<StyleDataModel>? {
-    return localDataSource.get()
+class GetStylesByCategoryIdStrategy constructor(val localDataSource: StylesLocalDataSource,
+                                                val cloudDataSource: StylesCloudDataSource):
+                                    LocalOrCloudStrategy<Int, List<StyleDataModel>>() {
+
+  override fun onRequestCallToLocal(params: Int?): List<StyleDataModel>? {
+    return localDataSource.getByCategoryId(params!!)
   }
 
-  override fun onRequestCallToCloud(params: Void?): List<StyleDataModel>? {
-    val response = cloudDataSource.getStyles()
+  override fun onRequestCallToCloud(params: Int?): List<StyleDataModel>? {
+    var response = cloudDataSource.getStyles()
     localDataSource.store(response)
-    return response
+    return localDataSource.getByCategoryId(params!!)
+  }
+
+  override fun isValid(result: List<StyleDataModel>?): Boolean {
+    return result != null && !result.isEmpty()
   }
 
   class Builder @Inject constructor(val localDataSource: StylesLocalDataSource,
                                     val cloudDataSource: StylesCloudDataSource) {
-    fun build() : GetStylesStrategy {
-      return GetStylesStrategy(localDataSource, cloudDataSource)
+    fun build() : GetStylesByCategoryIdStrategy {
+      return GetStylesByCategoryIdStrategy(localDataSource, cloudDataSource)
     }
   }
 }

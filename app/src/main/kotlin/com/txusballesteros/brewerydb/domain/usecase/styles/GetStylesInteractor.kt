@@ -30,15 +30,17 @@ import javax.inject.Inject
 
 class GetStylesInteractor @Inject constructor(executor: ThreadExecutor,
                                               postExecutorThread: PostExecutionThread,
-                                              private val repository: StylesRepository):
+                                              private val stylesRepository: StylesRepository):
                        UseCase<List<Style>>(executor, postExecutorThread), GetStylesUseCase {
-  @Override
-  override fun execute(callback: UseCaseCallback<List<Style>>) {
+  var categoryId: Int = 0
+
+  override fun execute(categoryId: Int, callback: UseCaseCallback<List<Style>>) {
+    this.categoryId = categoryId
     super.execute(callback)
   }
 
   override fun onExecute() {
-    repository.getStyles(object : Repository.RepositoryCallback<List<Style>> {
+    stylesRepository.getStylesByCategoryId(categoryId, object : Repository.RepositoryCallback<List<Style>> {
       override fun onResult(result: List<Style>) {
         notifyOnResult(result)
       }

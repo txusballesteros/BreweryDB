@@ -27,7 +27,7 @@ import com.txusballesteros.brewerydb.threading.ThreadExecutor
 abstract class UseCase<T> (protected val executor: ThreadExecutor, protected val postExecutorThread: PostExecutionThread) {
   private lateinit var callback: UseCaseCallback<T>
 
-  open protected fun execute(callback: UseCaseCallback<T>) {
+  protected fun execute(callback: UseCaseCallback<T>) {
     this.callback = callback
     runExecution()
   }
