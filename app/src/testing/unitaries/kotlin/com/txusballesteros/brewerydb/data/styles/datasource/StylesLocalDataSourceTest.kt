@@ -50,7 +50,7 @@ class StylesLocalDataSourceTest : UnitTest() {
   fun shouldGetStyles() {
     dataSource.store(stylesList)
 
-    val result = dataSource.getByCategoryId(CATEGORY_A)
+    val result = dataSource.getStylesByCategoryId(CATEGORY_A)
 
     Assert.assertFalse(result.isEmpty())
     Assert.assertEquals(CATEGORY_A, result.first().categoryId)

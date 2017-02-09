@@ -31,13 +31,13 @@ class GetStylesByCategoryIdStrategy constructor(val localDataSource: StylesLocal
                                     LocalOrCloudStrategy<Int, List<StyleDataModel>>() {
 
   override fun onRequestCallToLocal(params: Int?): List<StyleDataModel>? {
-    return localDataSource.getByCategoryId(params!!)
+    return localDataSource.getStylesByCategoryId(params!!)
   }
 
   override fun onRequestCallToCloud(params: Int?): List<StyleDataModel>? {
     val response = cloudDataSource.getStyles()
     localDataSource.store(response)
-    return localDataSource.getByCategoryId(params!!)
+    return localDataSource.getStylesByCategoryId(params!!)
   }
 
   override fun isValid(result: List<StyleDataModel>?): Boolean {

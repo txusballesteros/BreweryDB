@@ -27,13 +27,15 @@ import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSourc
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
 import org.junit.Assert
 import org.junit.Test
+import org.mockito.ArgumentMatchers.anyInt
 import org.mockito.Mockito
-import org.mockito.Mockito.*
+import org.mockito.Mockito.never
+import org.mockito.Mockito.verify
 import java.util.*
 
-class GetStylesStrategyTest : UnitTest() {
+class GetStylesByCategoryIdStrategyTest : UnitTest() {
   companion object {
-    private val CATEGORY_ID: Int = 1
+    private val CATEGORY_A: Int = 1
     private val STYLE_ID : Int = 1
     private val STYLE_NAME : String = "Classic English-Style Pale Ale"
     private val STYLE_SHORT_NAME : String = "English Pale"
@@ -43,41 +45,42 @@ class GetStylesStrategyTest : UnitTest() {
   lateinit var localDataSource: StylesLocalDataSource
   lateinit var cloudDataSource: StylesCloudDataSource
   lateinit var stylesList: ArrayList<StyleDataModel>
-  lateinit var strategy: GetStylesStrategy
+  lateinit var strategy: GetStylesByCategoryIdStrategy
 
   override fun onPrepareTest() {
     stylesList = ArrayList<StyleDataModel>()
-    stylesList.add(StyleDataModel(STYLE_ID, CATEGORY_ID, STYLE_NAME, STYLE_SHORT_NAME, STYLE_DESCRIPTION))
+    stylesList.add(StyleDataModel(STYLE_ID, CATEGORY_A, STYLE_NAME, STYLE_SHORT_NAME, STYLE_DESCRIPTION))
     localDataSource = Mockito.mock(StylesLocalDataSource::class.java)
     cloudDataSource = Mockito.mock(StylesCloudDataSource::class.java)
-    strategy = GetStylesStrategy.Builder(localDataSource, cloudDataSource).build()
+    strategy = GetStylesByCategoryIdStrategy.Builder(localDataSource, cloudDataSource).build()
   }
 
   @Test
-  fun shouldGetStylesFromCloud() {
-    doReturn(null).`when`(localDataSource).getStyles()
-    doReturn(stylesList).`when`(cloudDataSource).getStyles()
+  fun shouldGetStylesByCategoryIdFromCloud() {
+    Mockito.`when`(localDataSource.getStylesByCategoryId(anyInt()))
+        .thenReturn(null)
+        .thenReturn(stylesList)
 
-    strategy.execute(callback = object: Strategy.Callback<List<StyleDataModel>>() {
+    strategy.execute(CATEGORY_A, object: Strategy.Callback<List<StyleDataModel>>() {
       override fun onResult(result: List<StyleDataModel>?) {
         Assert.assertNotNull(result)
         Assert.assertEquals(stylesList.size, result?.size)
-        Assert.assertEquals(STYLE_ID, result?.first()?.id)
+        Assert.assertEquals(CATEGORY_A, result?.first()?.categoryId)
         verify(cloudDataSource).getStyles()
       }
     })
   }
 
   @Test
-  fun shouldGetStylesFromLocal() {
-    doReturn(stylesList).`when`(localDataSource).getStyles()
-    doReturn(null).`when`(cloudDataSource).getStyles()
+  fun shouldGetStylesByCategoryIdFromLocal() {
+    Mockito.`when`(localDataSource.getStylesByCategoryId(anyInt()))
+        .thenReturn(stylesList)
 
-    strategy.execute(callback = object: Strategy.Callback<List<StyleDataModel>>() {
+    strategy.execute(CATEGORY_A, object: Strategy.Callback<List<StyleDataModel>>() {
       override fun onResult(result: List<StyleDataModel>?) {
         Assert.assertNotNull(result)
         Assert.assertEquals(stylesList.size, result?.size)
-        Assert.assertEquals(STYLE_ID, result?.first()?.id)
+        Assert.assertEquals(CATEGORY_A, result?.first()?.categoryId)
         verify(cloudDataSource, never()).getStyles()
       }
     })
