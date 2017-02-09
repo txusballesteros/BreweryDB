@@ -79,7 +79,6 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
     adapter.clear()
     adapter.addAll(styles)
     adapter.notifyDataSetChanged()
-    Toast.makeText(activity, styles.first().name, Toast.LENGTH_SHORT).show()
   }
 
   override fun renderError() {
