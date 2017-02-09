@@ -18,24 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.di
+package com.txusballesteros.brewerydb.data.styles.datasource
 
-import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
-import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSourceImpl
-import com.txusballesteros.brewerydb.data.styles.datasource.StylesInMemoryLocalDataSource
-import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
-import dagger.Module
-import dagger.Provides
+import com.txusballesteros.brewerydb.data.model.StyleDataModel
 
-@Module
-class DataSourceModule {
-  @Provides
-  fun provideStylesLocalDataSource(dataSource: StylesInMemoryLocalDataSource) : StylesLocalDataSource {
-      return dataSource
-  }
-
-  @Provides
-  fun provideStylesCloudDataSource(dataSource: StylesCloudDataSourceImpl) : StylesCloudDataSource {
-    return dataSource
-  }
+interface StylesLocalDataSource {
+  fun get() : List<StyleDataModel>?
+  fun store(styles: List<StyleDataModel>)
 }

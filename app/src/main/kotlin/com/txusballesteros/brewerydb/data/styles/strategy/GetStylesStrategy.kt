@@ -23,21 +23,26 @@ package com.txusballesteros.brewerydb.data.styles.strategy
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
 import com.txusballesteros.brewerydb.data.strategy.LocalOrCloudStrategy
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
+import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
 import javax.inject.Inject
 
-class GetStylesStrategy constructor(private val cloudDataSource: StylesCloudDataSource):
+class GetStylesStrategy constructor(val localDataSource: StylesLocalDataSource,
+                                    val cloudDataSource: StylesCloudDataSource):
                                                       LocalOrCloudStrategy<Void, List<StyleDataModel>>() {
   override fun onRequestCallToLocal(): List<StyleDataModel>? {
-    return null
+    return localDataSource.get()
   }
 
   override fun onRequestCallToCloud(): List<StyleDataModel>? {
-    return cloudDataSource.getStyles()
+    val response = cloudDataSource.getStyles()
+    localDataSource.store(response)
+    return response
   }
 
-  class Builder @Inject constructor(private val cloudDataSource: StylesCloudDataSource) {
+  class Builder @Inject constructor(val localDataSource: StylesLocalDataSource,
+                                    val cloudDataSource: StylesCloudDataSource) {
     fun build() : GetStylesStrategy {
-      return GetStylesStrategy(cloudDataSource)
+      return GetStylesStrategy(localDataSource, cloudDataSource)
     }
   }
 }
