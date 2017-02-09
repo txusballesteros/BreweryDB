@@ -39,9 +39,7 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
 
     fun newInstance(categoryId: Int) : StylesListFragment {
       val arguments: Bundle = Bundle()
-      with(arguments) {
-        putInt(EXTRA_CATEGORY_ID, categoryId)
-      }
+      arguments.putInt(EXTRA_CATEGORY_ID, categoryId)
       val result = StylesListFragment()
       result.arguments = arguments
       return result
@@ -50,7 +48,7 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
 
   @Inject lateinit var presenter: StylesListPresenter
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
-  val adapter: StyleListAdapter = StyleListAdapter()
+  lateinit var adapter: StyleListAdapter
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_styles_list
@@ -84,6 +82,11 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
   }
 
   private fun initializeList() {
+    adapter = StyleListAdapter(object: StyleListAdapter.OnStyleClickListener {
+      override fun onStyleClick(style: StyleViewModel) {
+        Toast.makeText(activity, style.name, Toast.LENGTH_SHORT).show()
+      }
+    })
     list.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
     list.adapter = adapter
     list.setHasFixedSize(true)

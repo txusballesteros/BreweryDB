@@ -29,7 +29,7 @@ import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import java.util.*
 
-class StyleListAdapter : RecyclerView.Adapter<StyleListAdapter.ViewHolder>() {
+class StyleListAdapter(private val listener: OnStyleClickListener) : RecyclerView.Adapter<StyleListAdapter.ViewHolder>() {
   private val cache: MutableList<StyleViewModel> = ArrayList()
 
   fun clear() {
@@ -41,7 +41,7 @@ class StyleListAdapter : RecyclerView.Adapter<StyleListAdapter.ViewHolder>() {
   }
   override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
     val style = cache.get(position)
-    holder?.render(style)
+    holder?.render(style, listener)
   }
 
   override fun getItemCount(): Int {
@@ -54,14 +54,19 @@ class StyleListAdapter : RecyclerView.Adapter<StyleListAdapter.ViewHolder>() {
   }
 
   class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val shortNameView: AppCompatTextView = view.findViewById(R.id.shortName) as AppCompatTextView
-    private val nameView: AppCompatTextView = view.findViewById(R.id.name) as AppCompatTextView
-    private val descriptionView: AppCompatTextView = view.findViewById(R.id.description) as AppCompatTextView
+    private val shortNameView = view.findViewById(R.id.shortName) as AppCompatTextView
+    private val nameView = view.findViewById(R.id.name) as AppCompatTextView
+    private val descriptionView = view.findViewById(R.id.description) as AppCompatTextView
 
-    fun render(style: StyleViewModel) {
+    fun render(style: StyleViewModel, listener: OnStyleClickListener) {
       shortNameView.text = style.shortName
       nameView.text = style.name
       descriptionView.text = style.description
+      itemView.setOnClickListener { listener?.onStyleClick(style) }
     }
+  }
+
+  interface OnStyleClickListener {
+    fun onStyleClick(style: StyleViewModel)
   }
 }
