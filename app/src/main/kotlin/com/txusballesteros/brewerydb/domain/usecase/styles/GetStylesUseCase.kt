@@ -24,5 +24,5 @@ import com.txusballesteros.brewerydb.domain.model.Style
 import com.txusballesteros.brewerydb.domain.usecase.UseCase
 
 interface GetStylesUseCase {
-  fun execute(callback: UseCase.UseCaseCallback<List<Style>>)
+  fun execute(categoryId: Int, callback: UseCase.UseCaseCallback<List<Style>>)
 }

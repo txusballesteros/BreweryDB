@@ -24,4 +24,5 @@ import com.txusballesteros.brewerydb.domain.model.Style
 
 interface StylesRepository : Repository {
   fun getStyles(callback: Repository.RepositoryCallback<List<Style>>)
+  fun getStylesByCategoryId(categoryId: Int, callback: Repository.RepositoryCallback<List<Style>>)
 }

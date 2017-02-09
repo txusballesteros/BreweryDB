@@ -30,9 +30,10 @@ import javax.inject.Inject
 
 class StylesListPresenterImpl @Inject constructor(private val getStylesUseCase: GetStylesUseCase)
                                             : AbsPresenter<StylesListPresenter.View>(), StylesListPresenter {
+  val categoryId: Int = 1
 
   override fun onRequestStyles() {
-    getStylesUseCase.execute(object : UseCase.UseCaseCallback<List<Style>> {
+    getStylesUseCase.execute(categoryId, object : UseCase.UseCaseCallback<List<Style>> {
       override fun onResult(styles: List<Style>) {
         val result = styles.map { style -> style.map(style) }
         getView()?.renderStyles(result)

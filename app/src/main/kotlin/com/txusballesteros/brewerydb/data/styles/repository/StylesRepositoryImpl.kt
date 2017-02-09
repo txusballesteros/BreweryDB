@@ -23,13 +23,25 @@ package com.txusballesteros.brewerydb.data.styles.repository
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
 import com.txusballesteros.brewerydb.data.model.map
 import com.txusballesteros.brewerydb.data.strategy.Strategy
+import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesByCategoryIdStrategy
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesStrategy
 import com.txusballesteros.brewerydb.domain.model.Style
 import com.txusballesteros.brewerydb.domain.repository.Repository
 import com.txusballesteros.brewerydb.domain.repository.StylesRepository
 import javax.inject.Inject
 
-class StylesRepositoryImpl @Inject constructor(private val getStylesStrategy: GetStylesStrategy.Builder) : StylesRepository {
+class StylesRepositoryImpl @Inject constructor(private val getStylesStrategy: GetStylesStrategy.Builder,
+                                               private val getStylesBuCategoryId: GetStylesByCategoryIdStrategy.Builder):
+                                   StylesRepository {
+  override fun getStylesByCategoryId(categoryId: Int, callback: Repository.RepositoryCallback<List<Style>>) {
+    getStylesBuCategoryId.build().execute(categoryId, object: Strategy.Callback<List<StyleDataModel>>() {
+      override fun onResult(result: List<StyleDataModel>?) {
+        val styles = result?.map { style -> style.map(style) }
+        callback.onResult(styles!!)
+      }
+    })
+  }
+
   override fun getStyles(callback: Repository.RepositoryCallback<List<Style>>) {
     getStylesStrategy.build().execute(callback = object: Strategy.Callback<List<StyleDataModel>>() {
       override fun onResult(result: List<StyleDataModel>?) {
