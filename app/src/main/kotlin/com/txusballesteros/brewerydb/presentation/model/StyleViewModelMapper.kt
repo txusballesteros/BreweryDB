@@ -18,9 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.model
+package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
+import com.txusballesteros.brewerydb.domain.model.Style
+import javax.inject.Inject
 
-fun Style.map(source: Style)
-    = StyleViewModel(source.id, source.categoryId, source.name, source.shortName, source.description)
+class StyleViewModelMapper @Inject constructor() {
+  fun map(source: List<Style>)
+      = source.map { style -> map(style) }
+
+  fun map(source: Style)
+      = StyleViewModel(source.id, source.categoryId, source.name, source.shortName, source.description)
+}
