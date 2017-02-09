@@ -5,6 +5,7 @@ import com.txusballesteros.brewerydb.domain.usecase.UseCase
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.domain.model.map
+import com.txusballesteros.brewerydb.exception.ApplicationException
 import javax.inject.Inject
 
 class StylesListPresenterImpl @Inject constructor(private val getStylesUseCase: GetStylesUseCase)
@@ -17,8 +18,8 @@ class StylesListPresenterImpl @Inject constructor(private val getStylesUseCase: 
         getView()?.renderStyles(result)
       }
 
-      override fun onError() {
-        getView()?.renderError()
+      override fun onError(error: ApplicationException) {
+        getView()?.renderError(error.message.toString())
       }
     })
   }

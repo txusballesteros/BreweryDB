@@ -25,4 +25,14 @@
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
   </style>
+
+  <style name="card">
+    <item name="android:background">@android:color/white</item>
+    <item name="android:layout_marginTop">@dimen/vertical_margin</item>
+    <item name="android:layout_marginBottom">@dimen/vertical_margin</item>
+    <item name="android:layout_marginLeft">@dimen/horizontal_margin</item>
+    <item name="android:layout_marginRight">@dimen/horizontal_margin</item>
+    <item name="android:foreground">?android:selectableItemBackgroundBorderless</item>
+    <item name="android:clickable">true</item>
+  </style>
 </resources>

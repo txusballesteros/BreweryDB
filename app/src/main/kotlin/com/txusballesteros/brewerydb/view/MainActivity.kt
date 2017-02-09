@@ -20,8 +20,10 @@
  */
 package com.txusballesteros.brewerydb.view
 
+import com.txusballesteros.brewerydb.view.styles.StylesListFragment
+
 class MainActivity : AbsActivity() {
   override fun onRequestFragment(): AbsFragment {
-    return MainFragment.newInstance()
+    return StylesListFragment.newInstance()
   }
 }

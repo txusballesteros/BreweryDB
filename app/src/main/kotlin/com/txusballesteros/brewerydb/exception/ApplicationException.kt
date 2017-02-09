@@ -18,9 +18,6 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.exception
 
-import com.txusballesteros.brewerydb.data.model.StyleDataModel
-
-fun StyleApiResponse.StyleApiModel.map(source: StyleApiResponse.StyleApiModel) : StyleDataModel
-    = StyleDataModel(source.id, source.categoryId, source.name, source.shortName, source.description ?: "")
+abstract class ApplicationException(error: Exception) : RuntimeException(error)
