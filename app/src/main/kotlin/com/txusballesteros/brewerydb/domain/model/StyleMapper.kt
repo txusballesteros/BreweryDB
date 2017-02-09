@@ -20,7 +20,6 @@
  */
 package com.txusballesteros.brewerydb.domain.model
 
-import com.txusballesteros.brewerydb.domain.model.Style
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 
 fun Style.map(source: Style)

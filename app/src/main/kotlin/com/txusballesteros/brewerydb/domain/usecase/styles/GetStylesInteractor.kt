@@ -21,8 +21,27 @@
 package com.txusballesteros.brewerydb.domain.usecase.styles
 
 import com.txusballesteros.brewerydb.domain.model.Style
+import com.txusballesteros.brewerydb.domain.repository.Repository
+import com.txusballesteros.brewerydb.domain.repository.StylesRepository
 import com.txusballesteros.brewerydb.domain.usecase.UseCase
+import com.txusballesteros.brewerydb.threading.PostExecutionThread
+import com.txusballesteros.brewerydb.threading.ThreadExecutor
+import javax.inject.Inject
 
-interface GetStylesUseCase {
-  fun execute(callback: UseCase.UseCaseCallback<List<Style>>)
+class GetStylesInteractor @Inject constructor(executor: ThreadExecutor,
+                                              postExecutorThread: PostExecutionThread,
+                                              private val repository: StylesRepository):
+                       UseCase<List<Style>>(executor, postExecutorThread), GetStylesUseCase {
+  @Override
+  override fun execute(callback: UseCaseCallback<List<Style>>) {
+    super.execute(callback)
+  }
+
+  override fun onExecute() {
+    repository.getStyles(object : Repository.RepositoryCallback<List<Style>> {
+      override fun onResult(result: List<Style>) {
+        notifyOnResult(result)
+      }
+    })
+  }
 }

@@ -18,22 +18,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.di
+package com.txusballesteros.brewerydb.domain.usecase.di
 
-import com.txusballesteros.brewerydb.di.ApplicationComponent
-import com.txusballesteros.brewerydb.di.scopes.PerView
-import com.txusballesteros.brewerydb.domain.usecase.di.UseCasesModule
-import com.txusballesteros.brewerydb.presentation.di.PresentationModule
-import com.txusballesteros.brewerydb.view.styles.StylesListFragment
-import dagger.Component
+import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesInteractor
+import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesUseCase
+import dagger.Module
+import dagger.Provides
 
-@PerView
-@Component(dependencies = arrayOf(
-               ApplicationComponent::class),
-           modules = arrayOf(
-               PresentationModule::class,
-               UseCasesModule::class
-           ))
-interface ViewComponent {
-  fun inject(view: StylesListFragment)
+@Module
+class UseCasesModule {
+  @Provides
+  fun provideGetStylesUseCase(useCase: GetStylesInteractor) : GetStylesUseCase {
+    return useCase
+  }
 }
