@@ -44,7 +44,7 @@ ext {
   retrofitVersion = "2.1.0"
   androidSupportVersion = "25.1.1"
   junitVersion = "4.12"
-  mockitoVersion = "2.7.0"
+  mockitoVersion = "2.7.5"
   gsonVersion = "2.8.0"
   gsonConverterVersion = "2.1.0"
   testSupportVervion = "0.5"

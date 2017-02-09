@@ -20,6 +20,15 @@
  */
 package com.txusballesteros.brewerydb.threading
 
-import java.util.concurrent.Executor
+import org.mockito.Mockito
 
-interface PostExecutionThread : Executor
+class ThreadExecutorForTest {
+  companion object {
+    fun mock() : ThreadExecutor {
+      val executor = Mockito.mock(ThreadExecutor::class.java)
+      Mockito.doAnswer { answer -> answer.getArgument<Runnable>(0).run() }
+          .`when`(executor).execute(Mockito.any(java.lang.Runnable::class.java))
+      return executor
+    }
+  }
+}
