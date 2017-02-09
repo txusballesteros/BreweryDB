@@ -18,20 +18,6 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.styles
+package com.txusballesteros.brewerydb.exception
 
-import com.txusballesteros.brewerydb.api.model.StyleApiResponse
-import com.txusballesteros.brewerydb.exception.NetworkException
-import javax.inject.Inject
-
-class StylesRetrofitApi @Inject constructor(val service: StylesRetrofitService) : StylesApi {
-  override fun getStyles() : StyleApiResponse {
-    try {
-      val call = service.getStyles()
-      val response = call.execute()
-      return response.body()
-    } catch (error: Exception) {
-      throw NetworkException(error)
-    }
-  }
-}
+class NetworkException(error: Exception) : ApplicationException(error)

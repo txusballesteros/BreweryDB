@@ -20,6 +20,7 @@
  */
 package com.txusballesteros.brewerydb.domain.usecase
 
+import com.txusballesteros.brewerydb.exception.ApplicationException
 import com.txusballesteros.brewerydb.threading.PostExecutionThread
 import com.txusballesteros.brewerydb.threading.ThreadExecutor
 
@@ -27,17 +28,17 @@ abstract class UseCase<T> (protected val executor: ThreadExecutor, protected val
   private lateinit var callback: UseCaseCallback<T>
 
   open protected fun execute(callback: UseCaseCallback<T>) {
-    try {
-      this.callback = callback
-      runExecution()
-    } catch (error: Exception) {
-      notifyOnError()
-    }
+    this.callback = callback
+    runExecution()
   }
 
   private fun runExecution() {
     executor.execute {
-      onExecute()
+      try {
+        onExecute()
+      } catch (error: ApplicationException) {
+        notifyOnError(error)
+      }
     }
   }
 
@@ -49,14 +50,14 @@ abstract class UseCase<T> (protected val executor: ThreadExecutor, protected val
     })
   }
 
-  fun notifyOnError() {
+  fun notifyOnError(error: ApplicationException) {
     postExecutorThread.execute(Runnable {
-      callback.onError()
+      callback.onError(error)
     })
   }
 
   interface UseCaseCallback<T> {
     fun onResult(result: T)
-    fun onError()
+    fun onError(error: ApplicationException)
   }
 }

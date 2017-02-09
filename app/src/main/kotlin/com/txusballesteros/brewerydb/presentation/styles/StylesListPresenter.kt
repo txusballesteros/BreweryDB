@@ -28,6 +28,6 @@ interface StylesListPresenter : Presenter<StylesListPresenter.View> {
 
   interface View : Presenter.View {
     fun renderStyles(styles: List<StyleViewModel>)
-    fun renderError()
+    fun renderError(message: String)
   }
 }

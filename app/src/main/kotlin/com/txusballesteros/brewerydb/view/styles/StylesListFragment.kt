@@ -75,13 +75,14 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
     list.adapter = adapter
     list.setHasFixedSize(true)
   }
+
   override fun renderStyles(styles: List<StyleViewModel>) {
     adapter.clear()
     adapter.addAll(styles)
     adapter.notifyDataSetChanged()
   }
 
-  override fun renderError() {
-    Toast.makeText(activity, "Upps!!", Toast.LENGTH_SHORT).show()
+  override fun renderError(message: String) {
+    Toast.makeText(activity, "Upps!! " + message, Toast.LENGTH_SHORT).show()
   }
 }
