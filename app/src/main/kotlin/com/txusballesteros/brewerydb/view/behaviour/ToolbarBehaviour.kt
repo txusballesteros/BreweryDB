@@ -47,8 +47,8 @@ class ToolbarBehaviour @Inject constructor() : Behaviour() {
 
   override fun onBehaviorReady(view: View) {
     val toolbar = view.findViewById(R.id.toolbar) as Toolbar
-    toolbar.title = "Kotlin"
-    toolbar.subtitle = "Is really easy..."
+    toolbar.title = "Brewery DB"
+    toolbar.subtitle = "The final beer directory..."
     activity.setSupportActionBar(toolbar)
   }
 }
