@@ -20,7 +20,7 @@
  */
 package com.txusballesteros.brewerydb.data.strategy
 
-abstract class Strategy<INPUT, OUTPUT> {
+abstract class Strategy<in INPUT, OUTPUT> {
   private var callback: Callback<OUTPUT>? = null
 
   fun execute(parameter: INPUT? = null, callback: Callback<OUTPUT>? = null) {
@@ -38,7 +38,7 @@ abstract class Strategy<INPUT, OUTPUT> {
     callback?.onError(error)
   }
 
-  open class Callback<OUTPUT> {
+  open class Callback<in OUTPUT> {
     open fun onResult(value: OUTPUT?) { }
 
     open fun onError(error: Exception? = null) { }

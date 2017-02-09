@@ -20,7 +20,7 @@
  */
 package com.txusballesteros.brewerydb.data.strategy
 
-abstract class LocalOrCloudStrategy<INPUT, OUTPUT> : Strategy<INPUT, OUTPUT>() {
+abstract class LocalOrCloudStrategy<in INPUT, OUTPUT> : Strategy<INPUT, OUTPUT>() {
   override fun run(params: INPUT?) {
     val localResult = onRequestCallToLocal()
     if (localResult == null) {
