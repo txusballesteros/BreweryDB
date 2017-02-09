@@ -20,7 +20,10 @@
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
 <resources>
-  <color name="colorPrimary">#F9A825</color>
-  <color name="colorPrimaryDark">#F57F17</color>
-  <color name="colorAccent">#F57F17</color>
+  <style name="card">
+    <item name="android:layout_margin">@dimen/padding_small</item>
+    <item name="android:background">@android:color/white</item>
+    <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
+    <item name="android:clickable">true</item>
+  </style>
 </resources>

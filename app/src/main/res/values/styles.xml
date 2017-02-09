@@ -27,12 +27,11 @@
   </style>
 
   <style name="card">
+    <item name="android:layout_margin">@dimen/padding_small</item>
     <item name="android:background">@android:color/white</item>
-    <item name="android:layout_marginTop">@dimen/vertical_margin</item>
-    <item name="android:layout_marginBottom">@dimen/vertical_margin</item>
-    <item name="android:layout_marginLeft">@dimen/horizontal_margin</item>
-    <item name="android:layout_marginRight">@dimen/horizontal_margin</item>
-    <item name="android:foreground">?android:selectableItemBackgroundBorderless</item>
+    <item name="cardUseCompatPadding">true</item>
+    <item name="cardElevation">2dp</item>
+    <item name="cardCornerRadius">3dp</item>
     <item name="android:clickable">true</item>
   </style>
 </resources>
