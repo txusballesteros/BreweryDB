@@ -76,9 +76,7 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
 
   override fun onViewReady(savedInstanceState: Bundle?) {
     initializeList()
-    if (savedInstanceState == null) {
-      presenter.onRequestStyles()
-    }
+    presenter.onRequestStyles()
   }
 
   private fun initializeList() {

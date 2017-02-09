@@ -35,7 +35,7 @@ class GetStylesByCategoryIdStrategy constructor(val localDataSource: StylesLocal
   }
 
   override fun onRequestCallToCloud(params: Int?): List<StyleDataModel>? {
-    var response = cloudDataSource.getStyles()
+    val response = cloudDataSource.getStyles()
     localDataSource.store(response)
     return localDataSource.getByCategoryId(params!!)
   }
