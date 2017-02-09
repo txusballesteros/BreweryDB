@@ -24,6 +24,6 @@ import com.txusballesteros.brewerydb.view.styles.StylesListFragment
 
 class MainActivity : AbsActivity() {
   override fun onRequestFragment(): AbsFragment {
-    return StylesListFragment.newInstance()
+    return StylesListFragment.newInstance(2)
   }
 }

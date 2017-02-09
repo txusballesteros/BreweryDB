@@ -35,16 +35,29 @@ import javax.inject.Inject
 
 class StylesListFragment : AbsFragment(), StylesListPresenter.View {
   companion object {
-    fun newInstance() : StylesListFragment {
-      return StylesListFragment()
+    private val EXTRA_CATEGORY_ID: String = "extra:categoryId"
+
+    fun newInstance(categoryId: Int) : StylesListFragment {
+      val arguments: Bundle = Bundle()
+      with(arguments) {
+        putInt(EXTRA_CATEGORY_ID, categoryId)
+      }
+      val result = StylesListFragment()
+      result.arguments = arguments
+      return result
     }
   }
+
   @Inject lateinit var presenter: StylesListPresenter
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
   val adapter: StyleListAdapter = StyleListAdapter()
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_styles_list
+  }
+
+  override fun getCategoryId(): Int {
+    return arguments.getInt(EXTRA_CATEGORY_ID)
   }
 
   override fun onRequestInjection(viewComponent: ViewComponent) {

@@ -30,18 +30,17 @@ import javax.inject.Inject
 
 class StylesListPresenterImpl @Inject constructor(private val getStylesUseCase: GetStylesUseCase)
                                             : AbsPresenter<StylesListPresenter.View>(), StylesListPresenter {
-  val categoryId: Int = 1
-
   override fun onRequestStyles() {
-    getStylesUseCase.execute(categoryId, object : UseCase.UseCaseCallback<List<Style>> {
-      override fun onResult(styles: List<Style>) {
-        val result = styles.map { style -> style.map(style) }
-        getView()?.renderStyles(result)
-      }
+      val categoryId = getView()?.getCategoryId() ?: throw IllegalStateException("The StylesListPresenter.View is detached")
+      getStylesUseCase.execute(categoryId, object : UseCase.UseCaseCallback<List<Style>> {
+        override fun onResult(styles: List<Style>) {
+          val result = styles.map { style -> style.map(style) }
+          getView()?.renderStyles(result)
+        }
 
-      override fun onError(error: ApplicationException) {
-        getView()?.renderError(error.message.toString())
-      }
-    })
+        override fun onError(error: ApplicationException) {
+          getView()?.renderError(error.message.toString())
+        }
+      })
   }
 }

@@ -27,6 +27,7 @@ interface StylesListPresenter : Presenter<StylesListPresenter.View> {
   fun onRequestStyles()
 
   interface View : Presenter.View {
+    fun getCategoryId() : Int
     fun renderStyles(styles: List<StyleViewModel>)
     fun renderError(message: String)
   }
