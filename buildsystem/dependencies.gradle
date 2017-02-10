@@ -49,6 +49,7 @@ ext {
   gsonConverterVersion = "2.1.0"
   testSupportVervion = "0.5"
   stethoVervion = "1.4.2"
+  mockitoKotlinVervion = "1.2.0"
 
   mobileDependencies = [
     AppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
@@ -70,5 +71,6 @@ ext {
     TestRules: "com.android.support.test:rules:${testSupportVervion}",
     Stetho: "com.facebook.stetho:stetho:${stethoVervion}",
     StethoOkHttp: "com.facebook.stetho:stetho-okhttp3:${stethoVervion}",
+    MockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVervion}",
   ]
 }

@@ -76,6 +76,7 @@ dependencies {
 
   testCompile dependencies.JUnit
   testCompile dependencies.Mockito
+  testCompile dependencies.MockitoKotlin
 
   androidTestCompile dependencies.Stetho
   androidTestCompile dependencies.StethoOkHttp
