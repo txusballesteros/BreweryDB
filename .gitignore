@@ -66,10 +66,7 @@ Thumbs.db
 
 # gradle directory
 .gradle
-#gradlew
 gradlew.bat
-gradle/*.jar
 build/
 captures/
 /local.properties
-/gradle/wrapper/gradle-wrapper.jar
