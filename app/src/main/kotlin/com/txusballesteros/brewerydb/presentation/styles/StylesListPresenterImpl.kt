@@ -35,9 +35,9 @@ class StylesListPresenterImpl @Inject constructor(private val getStylesUseCase: 
   override fun onRequestStyles() {
       val categoryId = getView()?.getCategoryId() ?: throw IllegalStateException("The StylesListPresenter.View is detached")
       getStylesUseCase.execute(categoryId, object : UseCase.UseCaseCallback<List<Style>> {
-        override fun onResult(styles: List<Style>) {
-          val result = styleMapper.map(styles)
-          getView()?.renderStyles(result)
+        override fun onResult(result: List<Style>) {
+          val styles = styleMapper.map(result)
+          getView()?.renderStyles(styles)
         }
 
         override fun onError(error: ApplicationException) {

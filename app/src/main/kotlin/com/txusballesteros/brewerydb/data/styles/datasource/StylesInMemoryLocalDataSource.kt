@@ -29,7 +29,7 @@ class StylesInMemoryLocalDataSource @Inject constructor() : StylesLocalDataSourc
 
   override fun getStylesByCategoryId(categoryId: Int): List<StyleDataModel> {
     val result: MutableList<StyleDataModel> = ArrayList()
-    cache?.filterTo(result) { it.categoryId == categoryId }
+    cache.filterTo(result) { it.categoryId == categoryId }
     return result
   }
 

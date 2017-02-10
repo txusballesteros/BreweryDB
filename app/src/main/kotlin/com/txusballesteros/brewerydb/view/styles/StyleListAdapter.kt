@@ -62,7 +62,7 @@ class StyleListAdapter(private val listener: OnStyleClickListener) : RecyclerVie
       shortNameView.text = style.shortName
       nameView.text = style.name
       descriptionView.text = style.description
-      itemView.setOnClickListener { listener?.onStyleClick(style) }
+      itemView.setOnClickListener { listener.onStyleClick(style) }
     }
   }
 

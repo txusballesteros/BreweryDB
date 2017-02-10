@@ -39,7 +39,7 @@ class StylesRepositoryImpl @Inject constructor(private val getStylesStrategy: Ge
     getStylesBuCategoryId.build().execute(categoryId, object: Strategy.Callback<List<StyleDataModel>>() {
       override fun onResult(result: List<StyleDataModel>?) {
         val styles = styleDataMapper.map(result)
-        callback?.onResult(styles!!)
+        callback.onResult(styles!!)
       }
     })
   }
