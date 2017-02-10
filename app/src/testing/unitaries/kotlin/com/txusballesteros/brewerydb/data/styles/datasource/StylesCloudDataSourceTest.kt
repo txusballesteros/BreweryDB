@@ -24,8 +24,8 @@ import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.api.model.StyleApiModelMapper
 import com.txusballesteros.brewerydb.api.model.StyleApiResponse
 import com.txusballesteros.brewerydb.api.styles.StylesApi
-import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertFalse
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Test
 import org.mockito.Mockito
 import org.mockito.Mockito.doReturn
