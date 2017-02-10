@@ -30,7 +30,8 @@ class StylesLocalDataSourceTest : UnitTest() {
   companion object {
     private val CATEGORY_A: Int = 1
     private val CATEGORY_B: Int = 2
-    private val STYLE_ID : Int = 1
+    private val STYLE_ID_A: Int = 1
+    private val STYLE_ID_B: Int = 2
     private val STYLE_NAME : String = "Classic English-Style Pale Ale"
     private val STYLE_SHORT_NAME : String = "English Pale"
     private val STYLE_DESCRIPTION : String = "Classic English pale ales are golden to copper colored and display earthy,..."
@@ -42,8 +43,8 @@ class StylesLocalDataSourceTest : UnitTest() {
   override fun onPrepareTest() {
     dataSource = StylesInMemoryLocalDataSource()
     stylesList = ArrayList<StyleDataModel>()
-    stylesList.add(StyleDataModel(STYLE_ID, CATEGORY_B, STYLE_NAME, STYLE_SHORT_NAME, STYLE_DESCRIPTION))
-    stylesList.add(StyleDataModel(STYLE_ID, CATEGORY_A, STYLE_NAME, STYLE_SHORT_NAME, STYLE_DESCRIPTION))
+    stylesList.add(StyleDataModel(STYLE_ID_B, CATEGORY_B, STYLE_NAME, STYLE_SHORT_NAME, STYLE_DESCRIPTION))
+    stylesList.add(StyleDataModel(STYLE_ID_A, CATEGORY_A, STYLE_NAME, STYLE_SHORT_NAME, STYLE_DESCRIPTION))
   }
 
   @Test
