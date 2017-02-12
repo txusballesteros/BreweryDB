@@ -18,25 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.data.categories.repository.CategoriesRepositoryImpl
-import com.txusballesteros.brewerydb.data.styles.repository.StylesRepositoryImpl
-import com.txusballesteros.brewerydb.domain.repository.CategoriesRepository
-import com.txusballesteros.brewerydb.domain.repository.StylesRepository
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
+import com.txusballesteros.brewerydb.domain.model.Category
+import javax.inject.Inject
 
-@Module
-class RepositoriesModule {
-  @Singleton @Provides
-  fun provideCategoriesRepository(repository: CategoriesRepositoryImpl) : CategoriesRepository {
-    return repository
-  }
+class CategoryDataModelMapper @Inject constructor() {
+  fun map(source: List<CategoryDataModel>?)
+      = source?.map { style -> map(style) }
 
-  @Singleton @Provides
-  fun provideStylesRepository(repository: StylesRepositoryImpl) : StylesRepository {
-    return repository
-  }
+  fun map(source: CategoryDataModel)
+      = Category(source.id, source.name)
 }

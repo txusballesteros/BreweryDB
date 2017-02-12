@@ -20,8 +20,10 @@
  */
 package com.txusballesteros.brewerydb.domain.repository.di
 
+import com.txusballesteros.brewerydb.domain.repository.CategoriesRepository
 import com.txusballesteros.brewerydb.domain.repository.StylesRepository
 
 interface RepositoriesProvider {
+  fun getCategoriesRepository(): CategoriesRepository
   fun getStyleRepository() : StylesRepository
 }
