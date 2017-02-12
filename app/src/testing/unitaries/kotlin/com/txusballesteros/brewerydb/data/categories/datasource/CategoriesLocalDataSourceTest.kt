@@ -21,9 +21,39 @@
 package com.txusballesteros.brewerydb.data.categories.datasource
 
 import com.txusballesteros.brewerydb.UnitTest
+import com.txusballesteros.brewerydb.data.model.CategoryDataModel
+import org.junit.Assert
+import org.junit.Test
+import java.util.*
 
 class CategoriesLocalDataSourceTest: UnitTest() {
-  override fun onPrepareTest() {
+  lateinit var dataSource: CategoriesLocalDataSource
+  lateinit var categoriesList: ArrayList<CategoryDataModel>
 
+  override fun onPrepareTest() {
+    dataSource = CategoriesInMemoryLocalDataSource()
+    categoriesList = ArrayList()
+    categoriesList.add(CategoryDataModel(1, "A"))
+    categoriesList.add(CategoryDataModel(2, "B"))
+  }
+
+  @Test
+  fun shouldGetCategories() {
+    dataSource.store(categoriesList)
+
+    val result = dataSource.getCategories()
+
+    Assert.assertFalse(result.isEmpty())
+    Assert.assertEquals(2, result.size)
+    Assert.assertEquals(1, result.first().id)
+    Assert.assertEquals("A", result.first().name)
+  }
+
+  @Test
+  fun shouldStoreCategories() {
+    dataSource.store(categoriesList)
+
+    val result = dataSource.getCategories()
+    Assert.assertEquals(categoriesList.size, result.size)
   }
 }
