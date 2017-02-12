@@ -18,18 +18,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
-
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
-  }
-}
+data class CategoryViewModel(val id: Int,
+                             val name: String)

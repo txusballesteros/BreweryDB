@@ -18,44 +18,32 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.styles
+package com.txusballesteros.brewerydb.view.categories
 
 import android.os.Bundle
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.widget.Toast
+import android.support.v7.widget.LinearLayoutManager
 import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
-import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
+import com.txusballesteros.brewerydb.presentation.categories.CategoriesListPresenter
+import com.txusballesteros.brewerydb.presentation.model.CategoryViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
-class StylesListFragment : AbsFragment(), StylesListPresenter.View {
+class CategoriesListFragment: AbsFragment(), CategoriesListPresenter.View {
   companion object {
-    private val EXTRA_CATEGORY_ID: String = "extra:categoryId"
-
-    fun newInstance(categoryId: Int) : StylesListFragment {
-      val arguments: Bundle = Bundle()
-      arguments.putInt(EXTRA_CATEGORY_ID, categoryId)
-      val result = StylesListFragment()
-      result.arguments = arguments
-      return result
+    fun newInstance(): CategoriesListFragment {
+      return CategoriesListFragment()
     }
   }
 
-  @Inject lateinit var presenter: StylesListPresenter
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
-  lateinit var adapter: StyleListAdapter
+  @Inject lateinit var presenter: CategoriesListPresenter
+  lateinit var adapter: CategoriesListAdapter
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.fragment_styles_list
-  }
-
-  override fun getCategoryId(): Int {
-    return arguments.getInt(EXTRA_CATEGORY_ID)
+    return R.layout.fragment_categories_list
   }
 
   override fun onRequestInjection(viewComponent: ViewComponent) {
@@ -76,27 +64,25 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
 
   override fun onViewReady(savedInstanceState: Bundle?) {
     initializeList()
-    presenter.onRequestStyles()
+    presenter.onRequestCategories()
   }
 
   private fun initializeList() {
-    adapter = StyleListAdapter(object: StyleListAdapter.OnStyleClickListener {
-      override fun onStyleClick(style: StyleViewModel) {
-        Toast.makeText(activity, style.name, Toast.LENGTH_SHORT).show()
+    adapter = CategoriesListAdapter(object: CategoriesListAdapter.OnCategoryClickListener {
+      override fun onCategoryClick(category: CategoryViewModel) {
+        presenter.onCategoryClick(category)
       }
     })
-    list.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    list.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
     list.adapter = adapter
     list.setHasFixedSize(true)
   }
 
-  override fun renderStyles(styles: List<StyleViewModel>) {
+  override fun renderCategories(categories: List<CategoryViewModel>) {
     adapter.clear()
-    adapter.addAll(styles)
+    adapter.addAll(categories)
     adapter.notifyDataSetChanged()
   }
 
-  override fun renderError(message: String) {
-    toast("Upps!! " + message)
-  }
+  override fun renderError() { }
 }

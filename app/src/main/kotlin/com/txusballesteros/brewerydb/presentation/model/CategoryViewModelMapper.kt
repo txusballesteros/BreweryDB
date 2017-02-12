@@ -18,18 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
+import com.txusballesteros.brewerydb.domain.model.Category
+import javax.inject.Inject
 
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
-  }
+class CategoryViewModelMapper @Inject constructor() {
+  fun map(source: List<Category>)
+      = source.map { category -> map(category) }
+
+  fun map(source: Category)
+      = CategoryViewModel(source.id, source.name)
 }

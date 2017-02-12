@@ -18,18 +18,13 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.view.categories
 
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
+import com.txusballesteros.brewerydb.view.AbsActivity
+import com.txusballesteros.brewerydb.view.AbsFragment
 
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
+class CategoriesListActivity : AbsActivity() {
+  override fun onRequestFragment(): AbsFragment {
+    return CategoriesListFragment.newInstance()
   }
 }

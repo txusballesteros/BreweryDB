@@ -6,10 +6,10 @@ import com.txusballesteros.brewerydb.domain.repository.Repository
 import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import java.util.concurrent.AbstractExecutorService
+import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
-class GetCategoriesInteractor @Inject constructor(private val executorService: AbstractExecutorService,
+class GetCategoriesInteractor @Inject constructor(private val executorService: ExecutorService,
                                                   private val repository: CategoriesRepository):
                               GetCategoriesUseCase {
 
