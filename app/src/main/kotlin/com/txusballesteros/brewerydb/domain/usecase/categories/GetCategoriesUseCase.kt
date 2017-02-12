@@ -18,24 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.usecase.di
+package com.txusballesteros.brewerydb.domain.usecase.categories
 
-import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesInteractor
-import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesUseCase
-import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesInteractor
-import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesUseCase
-import dagger.Module
-import dagger.Provides
+import com.txusballesteros.brewerydb.domain.model.Category
+import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 
-@Module
-class UseCasesModule {
-  @Provides
-  fun provideGetCategoriesUseCase(useCase: GetCategoriesInteractor): GetCategoriesUseCase {
-    return useCase
-  }
-
-  @Provides
-  fun provideGetStylesUseCase(useCase: GetStylesInteractor) : GetStylesUseCase {
-    return useCase
-  }
+interface GetCategoriesUseCase {
+  fun execute(callback: UseCaseCallback<List<Category>>)
 }
