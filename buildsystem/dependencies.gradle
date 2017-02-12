@@ -27,7 +27,7 @@ allprojects {
 ext {
   //Kotlin
   kotlinVersion = "1.0.6"
-  ankoVersion = "0.9"
+  ankoVersion = "0.9.1"
 
   //Android
   androidApplicationId = "com.txusballesteros.brewerydb"
@@ -58,6 +58,10 @@ ext {
     Design: "com.android.support:design:${androidSupportVersion}",
     KotlinStd: "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
     AnkoCommon: "org.jetbrains.anko:anko-common:${ankoVersion}",
+    AnkoAppCompat: "org.jetbrains.anko:anko-appcompat-v7:${ankoVersion}",
+    AnkoRecyclerView: "org.jetbrains.anko:anko-recyclerview-v7:${ankoVersion}",
+    AnkoCardView: "org.jetbrains.anko:anko-cardview-v7:${ankoVersion}",
+    AnkoDesign: "org.jetbrains.anko:anko-design:${ankoVersion}",
     JUnit: "junit:junit:${junitVersion}",
     Mockito: "org.mockito:mockito-core:${mockitoVersion}",
     Dagger: "com.google.dagger:dagger:${daggerVersion}",

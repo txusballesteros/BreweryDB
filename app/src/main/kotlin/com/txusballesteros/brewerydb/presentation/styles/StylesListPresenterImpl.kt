@@ -21,7 +21,7 @@
 package com.txusballesteros.brewerydb.presentation.styles
 
 import com.txusballesteros.brewerydb.domain.model.Style
-import com.txusballesteros.brewerydb.domain.usecase.UseCase
+import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesUseCase
 import com.txusballesteros.brewerydb.exception.ApplicationException
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
@@ -34,7 +34,7 @@ class StylesListPresenterImpl @Inject constructor(private val getStylesUseCase: 
 
   override fun onRequestStyles() {
       val categoryId = getView()?.getCategoryId() ?: throw IllegalStateException("The StylesListPresenter.View is detached")
-      getStylesUseCase.execute(categoryId, object : UseCase.UseCaseCallback<List<Style>> {
+      getStylesUseCase.execute(categoryId, object : UseCaseCallback<List<Style>> {
         override fun onResult(result: List<Style>) {
           val styles = styleMapper.map(result)
           getView()?.renderStyles(styles)

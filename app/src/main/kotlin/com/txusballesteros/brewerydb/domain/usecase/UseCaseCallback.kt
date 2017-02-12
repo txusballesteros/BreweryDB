@@ -18,8 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading
+package com.txusballesteros.brewerydb.domain.usecase
 
-import java.util.concurrent.Executor
+import com.txusballesteros.brewerydb.exception.ApplicationException
 
-interface PostExecutionThread : Executor
+interface UseCaseCallback<T> {
+  fun onResult(result: T)
+  fun onError(error: ApplicationException)
+}

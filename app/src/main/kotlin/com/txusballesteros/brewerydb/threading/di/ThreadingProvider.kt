@@ -20,10 +20,8 @@
  */
 package com.txusballesteros.brewerydb.threading.di
 
-import com.txusballesteros.brewerydb.threading.PostExecutionThread
-import com.txusballesteros.brewerydb.threading.ThreadExecutor
+import java.util.concurrent.ExecutorService
 
 interface ThreadingProvider {
-  fun getThreadExecutor() : ThreadExecutor
-  fun getPostExecutionThread() : PostExecutionThread
+  fun getThreadPoolExecutor(): ExecutorService
 }

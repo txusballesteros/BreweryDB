@@ -20,23 +20,16 @@
  */
 package com.txusballesteros.brewerydb.threading.di
 
-import com.txusballesteros.brewerydb.threading.MainPostExecutionThread
-import com.txusballesteros.brewerydb.threading.PostExecutionThread
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPool
-import com.txusballesteros.brewerydb.threading.ThreadExecutor
+import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
 import dagger.Module
 import dagger.Provides
+import java.util.concurrent.ExecutorService
 import javax.inject.Singleton
 
 @Module
 class ThreadingModule {
   @Singleton @Provides
-  fun provideThreadExecutor(executorPool: ThreadExecutorPool) : ThreadExecutor {
-    return executorPool
-  }
-
-  @Singleton @Provides
-  fun providePostExecutionThread(postExecutionThread: MainPostExecutionThread) : PostExecutionThread {
-    return postExecutionThread
+  fun provideThreadPoolEecutor() : ExecutorService {
+    return ThreadExecutorPoolFactory().get()
   }
 }

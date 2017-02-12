@@ -31,6 +31,7 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class StylesListFragment : AbsFragment(), StylesListPresenter.View {
@@ -97,6 +98,6 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
   }
 
   override fun renderError(message: String) {
-    Toast.makeText(activity, "Upps!! " + message, Toast.LENGTH_SHORT).show()
+    toast("Upps!! " + message)
   }
 }
