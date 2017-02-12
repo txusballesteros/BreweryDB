@@ -18,26 +18,8 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.styles.datasource
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.data.AbsInMemoryDataSource
-import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import java.util.*
-import javax.inject.Inject
-
-class StylesInMemoryLocalDataSource @Inject constructor() : AbsInMemoryDataSource<StyleDataModel>(), StylesLocalDataSource {
-
-  override fun getStylesByCategoryId(categoryId: Int): List<StyleDataModel> {
-    val result: MutableList<StyleDataModel> = ArrayList()
-    getAll().filterTo(result) { it.categoryId == categoryId }
-    return result
-  }
-
-  override fun getStyles(): List<StyleDataModel> {
-    return getAll()
-  }
-
-  override fun store(styles: List<StyleDataModel>) {
-    addAll(styles)
-  }
+interface DataModel {
+  val id: Int
 }

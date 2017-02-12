@@ -20,8 +20,8 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-data class StyleDataModel(val id: Int,
+data class StyleDataModel(override val id: Int,
                           val categoryId: Int,
                           val name: String,
                           val shortName: String,
-                          val description: String)
+                          val description: String): DataModel
