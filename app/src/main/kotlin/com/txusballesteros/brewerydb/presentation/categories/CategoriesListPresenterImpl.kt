@@ -24,13 +24,15 @@ import com.txusballesteros.brewerydb.domain.model.Category
 import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesUseCase
 import com.txusballesteros.brewerydb.exception.ApplicationException
+import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.CategoryViewModel
 import com.txusballesteros.brewerydb.presentation.model.CategoryViewModelMapper
 import javax.inject.Inject
 
 class CategoriesListPresenterImpl @Inject constructor(private val getCategoriesUseCase: GetCategoriesUseCase,
-                                                      private val mapper: CategoryViewModelMapper):
+                                                      private val mapper: CategoryViewModelMapper,
+                                                      private val navigator: Navigator):
                                   AbsPresenter<CategoriesListPresenter.View>(), CategoriesListPresenter {
 
   override fun onRequestCategories() {
@@ -47,6 +49,6 @@ class CategoriesListPresenterImpl @Inject constructor(private val getCategoriesU
   }
 
   override fun onCategoryClick(category: CategoryViewModel) {
-
+    navigator.navigateToStylesList(getView(), category.id)
   }
 }

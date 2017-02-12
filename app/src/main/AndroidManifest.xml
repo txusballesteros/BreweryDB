@@ -36,7 +36,6 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity android:name=".view.styles.StylesListActivity" />
   </application>
-  <activity android:name=".view.MainActivity" />
-
 </manifest>

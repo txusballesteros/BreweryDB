@@ -18,20 +18,22 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.styles.datasource
+package com.txusballesteros.brewerydb.view.styles
 
-import com.txusballesteros.brewerydb.api.model.StyleApiModelMapper
-import com.txusballesteros.brewerydb.api.styles.StylesApi
-import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.view.AbsActivity
+import com.txusballesteros.brewerydb.view.AbsFragment
 
-class StylesCloudDataSourceImpl @Inject constructor(private val api: StylesApi,
-                                                    private val styleApiModelMapper: StyleApiModelMapper):
-                                StylesCloudDataSource {
+class StylesListActivity: AbsActivity() {
+  companion object {
+    val EXTRA_CATEGORY_ID: String = "extra:categoryId"
+  }
 
-  override fun getStyles(): List<StyleDataModel> {
-    val response = api.getStyles()
-    val result = styleApiModelMapper.map(response.styles)
-    return result.sortedBy(StyleDataModel::shortName)
+  override fun onRequestFragment(): AbsFragment {
+    val categoryId = getCategoryId()
+    return StylesListFragment.newInstance(categoryId)
+  }
+
+  fun getCategoryId(): Int {
+    return intent.extras.getInt(EXTRA_CATEGORY_ID)
   }
 }

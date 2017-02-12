@@ -18,20 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.styles.datasource
+package com.txusballesteros.brewerydb.navigation.commands
 
-import com.txusballesteros.brewerydb.api.model.StyleApiModelMapper
-import com.txusballesteros.brewerydb.api.styles.StylesApi
-import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import javax.inject.Inject
+import android.content.Context
+import android.content.Intent
 
-class StylesCloudDataSourceImpl @Inject constructor(private val api: StylesApi,
-                                                    private val styleApiModelMapper: StyleApiModelMapper):
-                                StylesCloudDataSource {
-
-  override fun getStyles(): List<StyleDataModel> {
-    val response = api.getStyles()
-    val result = styleApiModelMapper.map(response.styles)
-    return result.sortedBy(StyleDataModel::shortName)
+abstract class NavigationCommand {
+  fun build(context: Context): Intent {
+    return onRequestIntent(context)
   }
+
+  protected abstract fun onRequestIntent(context: Context): Intent
 }

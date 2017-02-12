@@ -18,20 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.styles.datasource
+package com.txusballesteros.brewerydb.navigation.commands
 
-import com.txusballesteros.brewerydb.api.model.StyleApiModelMapper
-import com.txusballesteros.brewerydb.api.styles.StylesApi
-import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import javax.inject.Inject
+import android.content.Context
+import android.content.Intent
+import com.txusballesteros.brewerydb.view.styles.StylesListActivity
+import org.jetbrains.anko.intentFor
 
-class StylesCloudDataSourceImpl @Inject constructor(private val api: StylesApi,
-                                                    private val styleApiModelMapper: StyleApiModelMapper):
-                                StylesCloudDataSource {
-
-  override fun getStyles(): List<StyleDataModel> {
-    val response = api.getStyles()
-    val result = styleApiModelMapper.map(response.styles)
-    return result.sortedBy(StyleDataModel::shortName)
+class StylesListNavigationCommand constructor(val categoryId: Int): NavigationCommand() {
+  override fun onRequestIntent(context: Context): Intent {
+    return context.intentFor<StylesListActivity>(StylesListActivity.EXTRA_CATEGORY_ID to categoryId)
   }
 }
