@@ -18,23 +18,26 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.di
+package com.txusballesteros.brewerydb.api.categories
 
-import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitService
-import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
-import dagger.Module
-import dagger.Provides
+import com.txusballesteros.brewerydb.api.test.ApiIntegrationTest
+import org.junit.Assert
+import org.junit.Test
 import retrofit2.Retrofit
 
-@Module
-class RetrofitModule {
-  @Provides
-  fun provideCategoriesRetrofitService(retrofit: Retrofit): CategoriesRetrofitService {
-    return retrofit.create(CategoriesRetrofitService::class.java)
+class CategoriesApiIntegrationTest: ApiIntegrationTest() {
+  lateinit var api : CategoriesApi
+
+  override fun onPrepareTest(retrofit: Retrofit) {
+    val service = retrofit.create(CategoriesRetrofitService::class.java)
+    this.api = CategoriesRetrofitApi(service)
   }
 
-  @Provides
-  fun provideStylesRetrofitService(retrofit: Retrofit): StylesRetrofitService {
-    return retrofit.create(StylesRetrofitService::class.java)
+  @Test
+  fun shouldGetCategories() {
+    val response = api.getCategories()
+
+    Assert.assertEquals(STATUS_SUCCESS, response.status)
+    Assert.assertFalse(response.categories.isEmpty())
   }
 }

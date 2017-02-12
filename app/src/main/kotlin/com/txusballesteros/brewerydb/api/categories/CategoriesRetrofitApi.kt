@@ -18,23 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.di
+package com.txusballesteros.brewerydb.api.categories
 
-import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitService
-import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
-import dagger.Module
-import dagger.Provides
-import retrofit2.Retrofit
+import com.txusballesteros.brewerydb.api.model.CategoryApiResponse
+import com.txusballesteros.brewerydb.exception.NetworkException
+import javax.inject.Inject
 
-@Module
-class RetrofitModule {
-  @Provides
-  fun provideCategoriesRetrofitService(retrofit: Retrofit): CategoriesRetrofitService {
-    return retrofit.create(CategoriesRetrofitService::class.java)
-  }
-
-  @Provides
-  fun provideStylesRetrofitService(retrofit: Retrofit): StylesRetrofitService {
-    return retrofit.create(StylesRetrofitService::class.java)
+class CategoriesRetrofitApi @Inject constructor(private val service: CategoriesRetrofitService): CategoriesApi {
+  override fun getCategories(): CategoryApiResponse {
+    try {
+      val call = service.getCategories()
+      val response = call.execute()
+      return response.body()
+    } catch (error: Exception) {
+      throw NetworkException(error)
+    }
   }
 }

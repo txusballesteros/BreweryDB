@@ -18,23 +18,14 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.di
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitService
-import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
-import dagger.Module
-import dagger.Provides
-import retrofit2.Retrofit
+import com.google.gson.annotations.SerializedName
 
-@Module
-class RetrofitModule {
-  @Provides
-  fun provideCategoriesRetrofitService(retrofit: Retrofit): CategoriesRetrofitService {
-    return retrofit.create(CategoriesRetrofitService::class.java)
-  }
+data class CategoryApiResponse(@SerializedName("data") val categories: List<CategoryApiModel>,
+                            val message: String,
+                            val status: String) {
 
-  @Provides
-  fun provideStylesRetrofitService(retrofit: Retrofit): StylesRetrofitService {
-    return retrofit.create(StylesRetrofitService::class.java)
-  }
+  class CategoryApiModel(val id: Int,
+                         val name: String)
 }

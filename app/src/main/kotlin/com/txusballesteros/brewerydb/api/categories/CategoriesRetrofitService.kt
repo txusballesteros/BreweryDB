@@ -18,23 +18,13 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.di
+package com.txusballesteros.brewerydb.api.categories
 
-import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitService
-import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
-import dagger.Module
-import dagger.Provides
-import retrofit2.Retrofit
+import com.txusballesteros.brewerydb.api.model.CategoryApiResponse
+import retrofit2.Call
+import retrofit2.http.GET
 
-@Module
-class RetrofitModule {
-  @Provides
-  fun provideCategoriesRetrofitService(retrofit: Retrofit): CategoriesRetrofitService {
-    return retrofit.create(CategoriesRetrofitService::class.java)
-  }
-
-  @Provides
-  fun provideStylesRetrofitService(retrofit: Retrofit): StylesRetrofitService {
-    return retrofit.create(StylesRetrofitService::class.java)
-  }
+interface CategoriesRetrofitService {
+  @GET("/v2/categories")
+  fun getCategories() : Call<CategoryApiResponse>
 }

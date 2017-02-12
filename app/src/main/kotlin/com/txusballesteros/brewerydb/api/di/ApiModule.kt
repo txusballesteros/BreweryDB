@@ -20,6 +20,8 @@
  */
 package com.txusballesteros.brewerydb.api.di
 
+import com.txusballesteros.brewerydb.api.categories.CategoriesApi
+import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitApi
 import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
 import dagger.Module
@@ -27,6 +29,11 @@ import dagger.Provides
 
 @Module
 class ApiModule {
+  @Provides
+  fun provideCategoriesApi(api: CategoriesRetrofitApi): CategoriesApi {
+    return api
+  }
+
   @Provides
   fun provideStylesApi(api: StylesRetrofitApi) : StylesApi {
     return api
