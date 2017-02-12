@@ -23,27 +23,24 @@ package com.txusballesteros.brewerydb.domain.usecase.styles
 import com.txusballesteros.brewerydb.domain.model.Style
 import com.txusballesteros.brewerydb.domain.repository.Repository
 import com.txusballesteros.brewerydb.domain.repository.StylesRepository
-import com.txusballesteros.brewerydb.domain.usecase.UseCase
-import com.txusballesteros.brewerydb.threading.PostExecutionThread
-import com.txusballesteros.brewerydb.threading.ThreadExecutor
+import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
-class GetStylesInteractor @Inject constructor(executor: ThreadExecutor,
-                                              postExecutorThread: PostExecutionThread,
-                                              private val stylesRepository: StylesRepository):
-                       UseCase<List<Style>>(executor, postExecutorThread), GetStylesUseCase {
-  var categoryId: Int = 0
+class GetStylesInteractor @Inject constructor(private val executor: ExecutorService,
+                                              private val stylesRepository: StylesRepository): GetStylesUseCase {
 
   override fun execute(categoryId: Int, callback: UseCaseCallback<List<Style>>) {
-    this.categoryId = categoryId
-    super.execute(callback)
-  }
-
-  override fun onExecute() {
-    stylesRepository.getStylesByCategoryId(categoryId, object : Repository.RepositoryCallback<List<Style>> {
-      override fun onResult(result: List<Style>) {
-        notifyOnResult(result)
-      }
-    })
+    doAsync(executorService = executor) {
+      stylesRepository.getStylesByCategoryId(categoryId, object : Repository.RepositoryCallback<List<Style>> {
+        override fun onResult(result: List<Style>) {
+          uiThread {
+            callback.onResult(result)
+          }
+        }
+      })
+    }
   }
 }

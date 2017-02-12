@@ -21,9 +21,8 @@
 package com.txusballesteros.brewerydb.threading
 
 import java.util.concurrent.*
-import javax.inject.Inject
 
-class ThreadExecutorPool @Inject constructor() : ThreadExecutor {
+class ThreadExecutorPoolFactory {
   companion object {
     private val INITIAL_POOL_SIZE : Int = 5
     private val MAX_POOL_SIZE : Int = 10
@@ -31,24 +30,24 @@ class ThreadExecutorPool @Inject constructor() : ThreadExecutor {
     private val KEEP_ALIVE_TIME_UNIT = TimeUnit.SECONDS
   }
 
-  private var workQueue : BlockingQueue<Runnable>
-  private var threadPoolExecutor : ThreadPoolExecutor
-  private var threadFactory : ThreadFactory
+  private val workQueue : BlockingQueue<Runnable>
+  private val threadPoolExecutor : ThreadPoolExecutor
+  private val threadFactory : ThreadFactory
+
+  fun get() : ExecutorService {
+    return threadPoolExecutor
+  }
 
   init {
     this.workQueue = LinkedBlockingQueue<Runnable>()
     this.threadFactory = JobThreadFactory()
     this.threadPoolExecutor = ThreadPoolExecutor(
-                                  INITIAL_POOL_SIZE,
-                                  MAX_POOL_SIZE,
-                                  KEEP_ALIVE_TIME,
-                                  KEEP_ALIVE_TIME_UNIT,
-                                  workQueue,
-                                  threadFactory)
-  }
-
-  override fun execute(command: Runnable?) {
-    threadPoolExecutor.execute(command)
+        INITIAL_POOL_SIZE,
+        MAX_POOL_SIZE,
+        KEEP_ALIVE_TIME,
+        KEEP_ALIVE_TIME_UNIT,
+        workQueue,
+        threadFactory)
   }
 
   private class JobThreadFactory : ThreadFactory {

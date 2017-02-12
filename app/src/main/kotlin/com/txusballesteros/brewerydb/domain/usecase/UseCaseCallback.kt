@@ -18,17 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading
+package com.txusballesteros.brewerydb.domain.usecase
 
-import org.mockito.Mockito
+import com.txusballesteros.brewerydb.exception.ApplicationException
 
-class PostExecutorThreadForTest {
-  companion object {
-    fun mock() : PostExecutionThread {
-      val executor = Mockito.mock(PostExecutionThread::class.java)
-      Mockito.doAnswer { answer -> answer.getArgument<Runnable>(0).run() }
-          .`when`(executor).execute(Mockito.any(java.lang.Runnable::class.java))
-      return executor
-    }
-  }
+interface UseCaseCallback<T> {
+  fun onResult(result: T)
+  fun onError(error: ApplicationException)
 }

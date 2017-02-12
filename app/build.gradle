@@ -69,6 +69,10 @@ dependencies {
   compile dependencies.Design
   compile dependencies.KotlinStd
   compile dependencies.AnkoCommon
+  compile dependencies.AnkoAppCompat
+  compile dependencies.AnkoRecyclerView
+  compile dependencies.AnkoCardView
+  compile dependencies.AnkoDesign
   compile dependencies.Stetho
   compile dependencies.StethoOkHttp
   compile dependencies.Retrofit
