@@ -18,12 +18,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.test.styles
+package com.txusballesteros.brewerydb.api.styles
 
 import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
-import com.txusballesteros.brewerydb.api.test.ApiIntegrationTest
+import com.txusballesteros.brewerydb.api.ApiIntegrationTest
 import org.junit.Assert
 import org.junit.Test
 import retrofit2.Retrofit

@@ -18,7 +18,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.test
+package com.txusballesteros.brewerydb.api
 
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.txusballesteros.brewerydb.api.di.RestModule

@@ -18,25 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.di
+package com.txusballesteros.brewerydb.api.beers
 
-import com.txusballesteros.brewerydb.api.beers.BeersApi
-import com.txusballesteros.brewerydb.api.beers.BeersRetrofitApi
-import com.txusballesteros.brewerydb.api.categories.CategoriesApi
-import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitApi
-import com.txusballesteros.brewerydb.api.styles.StylesApi
-import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
-import dagger.Module
-import dagger.Provides
+import com.txusballesteros.brewerydb.api.model.BeerApiResponse
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Query
 
-@Module
-class ApiModule {
-  @Provides
-  fun provideCategoriesApi(api: CategoriesRetrofitApi): CategoriesApi = api
-
-  @Provides
-  fun provideStylesApi(api: StylesRetrofitApi) : StylesApi = api
-
-  @Provides
-  fun provideBeersApi(api: BeersRetrofitApi): BeersApi = api
+interface BeersRetrofitService {
+  @GET("/v2/beers/?hasLabels=Y")
+  fun getBeers(@Query("styleId") styleId: Int,
+               @Query("p") page: Int): Call<BeerApiResponse>
 }
