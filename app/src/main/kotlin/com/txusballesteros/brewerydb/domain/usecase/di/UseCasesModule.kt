@@ -20,6 +20,8 @@
  */
 package com.txusballesteros.brewerydb.domain.usecase.di
 
+import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersInteractor
+import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
 import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesInteractor
 import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesUseCase
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesInteractor
@@ -30,12 +32,11 @@ import dagger.Provides
 @Module
 class UseCasesModule {
   @Provides
-  fun provideGetCategoriesUseCase(useCase: GetCategoriesInteractor): GetCategoriesUseCase {
-    return useCase
-  }
+  fun provideGetCategoriesUseCase(useCase: GetCategoriesInteractor): GetCategoriesUseCase = useCase
 
   @Provides
-  fun provideGetStylesUseCase(useCase: GetStylesInteractor) : GetStylesUseCase {
-    return useCase
-  }
+  fun provideGetStylesUseCase(useCase: GetStylesInteractor): GetStylesUseCase = useCase
+
+  @Provides
+  fun provideGetBeersUseCase(useCase: GetBeersInteractor): GetBeersUseCase = useCase
 }
