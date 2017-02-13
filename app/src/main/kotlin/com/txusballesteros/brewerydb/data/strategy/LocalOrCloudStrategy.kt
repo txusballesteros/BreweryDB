@@ -37,5 +37,5 @@ abstract class LocalOrCloudStrategy<in INPUT, OUTPUT> : Strategy<INPUT, OUTPUT>(
 
   abstract fun onRequestCallToLocal(params: INPUT?) : OUTPUT?
 
-  abstract fun onRequestCallToCloud(params: INPUT?) : OUTPUT?
+  abstract fun onRequestCallToCloud(query: INPUT?) : OUTPUT?
 }
