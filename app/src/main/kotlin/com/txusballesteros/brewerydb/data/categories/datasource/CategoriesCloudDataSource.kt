@@ -18,18 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.data.styles.datasource
 
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
+import com.txusballesteros.brewerydb.data.model.CategoryDataModel
 
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
-  }
+interface CategoriesCloudDataSource {
+  fun getCategories() : List<CategoryDataModel>
 }

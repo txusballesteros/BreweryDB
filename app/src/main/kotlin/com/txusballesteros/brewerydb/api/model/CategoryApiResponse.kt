@@ -18,18 +18,14 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
+import com.google.gson.annotations.SerializedName
 
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
-  }
+data class CategoryApiResponse(@SerializedName("data") val categories: List<CategoryApiModel>,
+                            val message: String,
+                            val status: String) {
+
+  class CategoryApiModel(val id: Int,
+                         val name: String)
 }

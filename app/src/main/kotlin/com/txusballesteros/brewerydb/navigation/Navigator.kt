@@ -18,12 +18,24 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view
+package com.txusballesteros.brewerydb.navigation
 
-import com.txusballesteros.brewerydb.view.styles.StylesListFragment
+import com.txusballesteros.brewerydb.navigation.commands.NavigationCommand
+import com.txusballesteros.brewerydb.navigation.commands.StylesListNavigationCommand
+import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.view.AbsFragment
+import javax.inject.Inject
 
-class MainActivity : AbsActivity() {
-  override fun onRequestFragment(): AbsFragment {
-    return StylesListFragment.newInstance(1)
+class Navigator @Inject constructor() {
+  fun navigateToStylesList(from: Presenter.View?, categoryId: Int) {
+    val navigationCommand = StylesListNavigationCommand(categoryId)
+    navigate(from, navigationCommand)
+  }
+
+  private fun navigate(from: Presenter.View?, command: NavigationCommand) {
+    if (from is AbsFragment) {
+      val intent = command.build(from.activity)
+      from.startActivity(intent)
+    }
   }
 }

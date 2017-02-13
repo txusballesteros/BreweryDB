@@ -28,7 +28,7 @@ import javax.inject.Inject
 
 class GetStylesStrategy constructor(val localDataSource: StylesLocalDataSource,
                                     val cloudDataSource: StylesCloudDataSource):
-                                                      LocalOrCloudStrategy<Void, List<StyleDataModel>>() {
+                        LocalOrCloudStrategy<Void, List<StyleDataModel>>() {
 
   override fun onRequestCallToLocal(params: Void?): List<StyleDataModel>? {
     return localDataSource.getStyles()

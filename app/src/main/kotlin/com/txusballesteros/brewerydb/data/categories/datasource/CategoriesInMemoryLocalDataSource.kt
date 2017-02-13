@@ -18,18 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.data.categories.datasource
 
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
+import com.txusballesteros.brewerydb.data.AbsInMemoryDataSource
+import com.txusballesteros.brewerydb.data.model.CategoryDataModel
+import javax.inject.Inject
 
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
+class CategoriesInMemoryLocalDataSource @Inject constructor(): AbsInMemoryDataSource<CategoryDataModel>(),
+                                                               CategoriesLocalDataSource {
+  override fun store(categories: List<CategoryDataModel>) {
+    addAll(categories)
+  }
+
+  override fun getCategories(): List<CategoryDataModel> {
+    return getAll()
   }
 }

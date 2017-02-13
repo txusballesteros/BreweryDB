@@ -20,15 +20,25 @@
  */
 package com.txusballesteros.brewerydb.data.di
 
-import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
-import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSourceImpl
-import com.txusballesteros.brewerydb.data.styles.datasource.StylesInMemoryLocalDataSource
-import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
+import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSourceImpl
+import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesInMemoryLocalDataSource
+import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesLocalDataSource
+import com.txusballesteros.brewerydb.data.styles.datasource.*
 import dagger.Module
 import dagger.Provides
 
 @Module
 class DataSourceModule {
+  @Provides
+  fun provideCategoriesCloudDataSource(dataSource: CategoriesCloudDataSourceImpl): CategoriesCloudDataSource {
+    return dataSource
+  }
+
+  @Provides
+  fun provideCategoriesLocalDataSource(dataSource: CategoriesInMemoryLocalDataSource): CategoriesLocalDataSource {
+    return dataSource
+  }
+
   @Provides
   fun provideStylesLocalDataSource(dataSource: StylesInMemoryLocalDataSource) : StylesLocalDataSource {
       return dataSource

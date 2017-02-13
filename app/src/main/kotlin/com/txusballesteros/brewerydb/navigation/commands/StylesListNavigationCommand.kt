@@ -18,18 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.navigation.commands
 
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
+import android.content.Context
+import android.content.Intent
+import com.txusballesteros.brewerydb.view.styles.StylesListActivity
+import org.jetbrains.anko.intentFor
 
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
+class StylesListNavigationCommand constructor(val categoryId: Int): NavigationCommand() {
+  override fun onRequestIntent(context: Context): Intent {
+    return context.intentFor<StylesListActivity>(StylesListActivity.EXTRA_CATEGORY_ID to categoryId)
   }
 }

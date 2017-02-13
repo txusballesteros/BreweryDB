@@ -30,7 +30,7 @@ class StylesInMemoryLocalDataSource @Inject constructor() : AbsInMemoryDataSourc
   override fun getStylesByCategoryId(categoryId: Int): List<StyleDataModel> {
     val result: MutableList<StyleDataModel> = ArrayList()
     getAll().filterTo(result) { it.categoryId == categoryId }
-    return result
+    return result.sortedBy { it.shortName }
   }
 
   override fun getStyles(): List<StyleDataModel> {

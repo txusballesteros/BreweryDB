@@ -18,18 +18,22 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.view.styles
 
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
+import com.txusballesteros.brewerydb.view.AbsActivity
+import com.txusballesteros.brewerydb.view.AbsFragment
 
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
+class StylesListActivity: AbsActivity() {
+  companion object {
+    val EXTRA_CATEGORY_ID: String = "extra:categoryId"
+  }
+
+  override fun onRequestFragment(): AbsFragment {
+    val categoryId = getCategoryId()
+    return StylesListFragment.newInstance(categoryId)
+  }
+
+  fun getCategoryId(): Int {
+    return intent.extras.getInt(EXTRA_CATEGORY_ID)
   }
 }

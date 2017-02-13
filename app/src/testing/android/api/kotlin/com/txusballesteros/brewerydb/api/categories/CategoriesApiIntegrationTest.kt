@@ -18,18 +18,26 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.api.categories
 
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
+import com.txusballesteros.brewerydb.api.test.ApiIntegrationTest
+import org.junit.Assert
+import org.junit.Test
+import retrofit2.Retrofit
 
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
+class CategoriesApiIntegrationTest: ApiIntegrationTest() {
+  lateinit var api : CategoriesApi
+
+  override fun onPrepareTest(retrofit: Retrofit) {
+    val service = retrofit.create(CategoriesRetrofitService::class.java)
+    this.api = CategoriesRetrofitApi(service)
+  }
+
+  @Test
+  fun shouldGetCategories() {
+    val response = api.getCategories()
+
+    Assert.assertEquals(STATUS_SUCCESS, response.status)
+    Assert.assertFalse(response.categories.isEmpty())
   }
 }

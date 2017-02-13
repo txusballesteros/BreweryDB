@@ -18,18 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.api.categories
 
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
+import com.txusballesteros.brewerydb.api.model.CategoryApiResponse
+import com.txusballesteros.brewerydb.exception.NetworkException
+import javax.inject.Inject
 
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
+class CategoriesRetrofitApi @Inject constructor(private val service: CategoriesRetrofitService): CategoriesApi {
+  override fun getCategories(): CategoryApiResponse {
+    try {
+      val call = service.getCategories()
+      val response = call.execute()
+      return response.body()
+    } catch (error: Exception) {
+      throw NetworkException(error)
+    }
   }
 }

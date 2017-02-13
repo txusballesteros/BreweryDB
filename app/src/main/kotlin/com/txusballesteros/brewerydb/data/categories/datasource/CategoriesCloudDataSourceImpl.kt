@@ -18,24 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.di
+package com.txusballesteros.brewerydb.data.categories.datasource
 
 import com.txusballesteros.brewerydb.api.categories.CategoriesApi
-import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitApi
-import com.txusballesteros.brewerydb.api.styles.StylesApi
-import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
-import dagger.Module
-import dagger.Provides
+import com.txusballesteros.brewerydb.api.model.CategoryApiModelMapper
+import com.txusballesteros.brewerydb.data.model.CategoryDataModel
+import com.txusballesteros.brewerydb.data.styles.datasource.CategoriesCloudDataSource
+import javax.inject.Inject
 
-@Module
-class ApiModule {
-  @Provides
-  fun provideCategoriesApi(api: CategoriesRetrofitApi): CategoriesApi {
-    return api
-  }
-
-  @Provides
-  fun provideStylesApi(api: StylesRetrofitApi) : StylesApi {
-    return api
+class CategoriesCloudDataSourceImpl @Inject constructor(private val api: CategoriesApi,
+                                                        private val categoriesApiModelMapper: CategoryApiModelMapper):
+                                    CategoriesCloudDataSource {
+  override fun getCategories(): List<CategoryDataModel> {
+    val response = api.getCategories()
+    val result = categoriesApiModelMapper.map(response.categories)
+    return result.sortedBy(CategoryDataModel::name)
   }
 }
