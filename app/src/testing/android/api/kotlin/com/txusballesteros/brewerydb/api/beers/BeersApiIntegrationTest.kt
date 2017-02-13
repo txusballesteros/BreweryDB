@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.api.beers
 
 import com.txusballesteros.brewerydb.api.ApiIntegrationTest
+import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
 import org.junit.Assert
 import org.junit.Test
 import retrofit2.Retrofit
@@ -40,7 +41,9 @@ class BeersApiIntegrationTest: ApiIntegrationTest() {
 
   @Test
   fun shouldGetBeers() {
-    val response = api.getBeers(STYLE_ID, CURRENT_PAGE)
+    val query = BeersQueryApiModel(STYLE_ID, CURRENT_PAGE)
+
+    val response = api.getBeers(query)
 
     Assert.assertEquals(STATUS_SUCCESS, response.status)
     Assert.assertFalse(response.beers.isEmpty())

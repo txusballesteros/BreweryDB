@@ -18,21 +18,6 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.beers
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.api.model.BeerApiResponse
-import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
-import com.txusballesteros.brewerydb.exception.NetworkException
-import javax.inject.Inject
-
-class BeersRetrofitApi @Inject constructor(private val service: BeersRetrofitService): BeersApi {
-  override fun getBeers(query: BeersQueryApiModel): BeerApiResponse {
-    try {
-      val call = service.getBeers(query.styleId, query.page)
-      val response = call.execute()
-      return response.body()
-    } catch (error: Exception) {
-      throw NetworkException(error)
-    }
-  }
-}
+data class BeersQueryApiModel constructor(val styleId: Int, val page: Int = 1)

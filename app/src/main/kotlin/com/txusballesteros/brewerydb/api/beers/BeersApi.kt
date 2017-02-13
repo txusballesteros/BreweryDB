@@ -21,7 +21,8 @@
 package com.txusballesteros.brewerydb.api.beers
 
 import com.txusballesteros.brewerydb.api.model.BeerApiResponse
+import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
 
 interface BeersApi {
-  fun getBeers(styleId: Int, page: Int?): BeerApiResponse
+  fun getBeers(query: BeersQueryApiModel): BeerApiResponse
 }

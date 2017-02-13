@@ -27,6 +27,7 @@ import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.api.beers.BeersApi
 import com.txusballesteros.brewerydb.api.model.BeerApiModelMapper
 import com.txusballesteros.brewerydb.api.model.BeerApiResponse
+import com.txusballesteros.brewerydb.api.model.BeersQueryApiModelMapper
 import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import org.junit.Assert
 import org.junit.Test
@@ -54,7 +55,7 @@ class BeersCloudDataSourceTest: UnitTest() {
 
   override fun onPrepareTest() {
     api = mock()
-    dataSource = BeersCloudDataSourceImpl(api, BeerApiModelMapper())
+    dataSource = BeersCloudDataSourceImpl(api, BeerApiModelMapper(), BeersQueryApiModelMapper())
   }
 
   @Test
@@ -72,7 +73,7 @@ class BeersCloudDataSourceTest: UnitTest() {
                                            BEER_LABEL,
                                            BEER_SERVING_TEMP))
     val apiResponse = BeerApiResponse(beers, "Request Successful", "success", CURRENT_PAGE, CURRENT_PAGE, CURRENT_PAGE)
-    whenever(api.getBeers(any(), any())).thenReturn(apiResponse)
+    whenever(api.getBeers(any())).thenReturn(apiResponse)
 
     val response = dataSource.getBeers(QUERY)
 

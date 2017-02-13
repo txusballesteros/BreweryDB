@@ -18,22 +18,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.beers.datasource
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.api.beers.BeersApi
-import com.txusballesteros.brewerydb.api.model.BeerApiModelMapper
-import com.txusballesteros.brewerydb.api.model.BeersQueryApiModelMapper
-import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import javax.inject.Inject
 
-class BeersCloudDataSourceImpl @Inject constructor(private val api: BeersApi,
-                                                   private val mapper: BeerApiModelMapper,
-                                                   private val queryMapper: BeersQueryApiModelMapper) : BeersCloudDataSource {
-
-  override fun getBeers(query: BeersQueryDataModel): List<BeerDataModel> {
-    val apiQuery = queryMapper.map(query)
-    val response = api.getBeers(apiQuery)
-    return mapper.map(response)
-  }
+class BeersQueryApiModelMapper @Inject constructor() {
+  fun map(source: BeersQueryDataModel)
+      = BeersQueryApiModel(source.styleId, source.page)
 }
