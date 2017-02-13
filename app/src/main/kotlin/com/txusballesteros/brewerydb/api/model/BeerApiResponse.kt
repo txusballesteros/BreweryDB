@@ -38,8 +38,8 @@ class BeerApiResponse(@SerializedName("data") val beers: List<BeerApiModel>,
                           val glasswareId: Int?,
                           val isOrganic: String?,
                           val status: String?,
-                          val labels: Label,
+                          val labels: LabelApiModel,
                           val servingTemperature: String?)
 
-  data class Label(val icon: String, val medium: String, val large: String)
+  data class LabelApiModel(val icon: String, val medium: String, val large: String)
 }

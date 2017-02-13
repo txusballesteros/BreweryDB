@@ -18,10 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.categories.datasource
+package com.txusballesteros.brewerydb.data.beers.datasource
 
-import com.txusballesteros.brewerydb.data.model.CategoryDataModel
+import com.txusballesteros.brewerydb.data.model.BeerDataModel
+import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 
-interface CategoriesCloudDataSource {
-  fun getCategories() : List<CategoryDataModel>
+interface BeersCloudDataSource {
+  fun getBeers(query: BeersQueryDataModel): List<BeerDataModel>
 }

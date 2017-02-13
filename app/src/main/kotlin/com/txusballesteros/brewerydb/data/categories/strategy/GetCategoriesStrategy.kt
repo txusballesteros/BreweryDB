@@ -20,10 +20,10 @@
  */
 package com.txusballesteros.brewerydb.data.categories.strategy
 
+import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesLocalDataSource
 import com.txusballesteros.brewerydb.data.model.CategoryDataModel
 import com.txusballesteros.brewerydb.data.strategy.LocalOrCloudStrategy
-import com.txusballesteros.brewerydb.data.styles.datasource.CategoriesCloudDataSource
 import javax.inject.Inject
 
 class GetCategoriesStrategy private constructor(private val localDataSource: CategoriesLocalDataSource,

@@ -20,32 +20,32 @@
  */
 package com.txusballesteros.brewerydb.data.di
 
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
+import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSourceImpl
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesInMemoryLocalDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesLocalDataSource
-import com.txusballesteros.brewerydb.data.styles.datasource.*
+import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
+import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSourceImpl
+import com.txusballesteros.brewerydb.data.styles.datasource.StylesInMemoryLocalDataSource
+import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
 import dagger.Module
 import dagger.Provides
 
 @Module
 class DataSourceModule {
   @Provides
-  fun provideCategoriesCloudDataSource(dataSource: CategoriesCloudDataSourceImpl): CategoriesCloudDataSource {
-    return dataSource
-  }
+  fun provideCategoriesCloudDataSource(dataSource: CategoriesCloudDataSourceImpl): CategoriesCloudDataSource = dataSource
 
   @Provides
-  fun provideCategoriesLocalDataSource(dataSource: CategoriesInMemoryLocalDataSource): CategoriesLocalDataSource {
-    return dataSource
-  }
+  fun provideCategoriesLocalDataSource(dataSource: CategoriesInMemoryLocalDataSource): CategoriesLocalDataSource = dataSource
 
   @Provides
-  fun provideStylesLocalDataSource(dataSource: StylesInMemoryLocalDataSource) : StylesLocalDataSource {
-      return dataSource
-  }
+  fun provideStylesLocalDataSource(dataSource: StylesInMemoryLocalDataSource) : StylesLocalDataSource = dataSource
 
   @Provides
-  fun provideStylesCloudDataSource(dataSource: StylesCloudDataSourceImpl) : StylesCloudDataSource {
-    return dataSource
-  }
+  fun provideStylesCloudDataSource(dataSource: StylesCloudDataSourceImpl) : StylesCloudDataSource = dataSource
+
+  @Provides
+  fun provideBeersCloudDataSource(dataSource: BeersCloudDataSource): BeersCloudDataSource = dataSource
 }

@@ -26,7 +26,6 @@ import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.api.categories.CategoriesApi
 import com.txusballesteros.brewerydb.api.model.CategoryApiModelMapper
 import com.txusballesteros.brewerydb.api.model.CategoryApiResponse
-import com.txusballesteros.brewerydb.data.styles.datasource.CategoriesCloudDataSource
 import org.junit.Assert
 import org.junit.Test
 import java.util.*
