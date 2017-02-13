@@ -21,6 +21,8 @@
 package com.txusballesteros.brewerydb.data.di
 
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersInMemoryLocalDataSource
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSourceImpl
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesInMemoryLocalDataSource
@@ -48,4 +50,7 @@ class DataSourceModule {
 
   @Provides
   fun provideBeersCloudDataSource(dataSource: BeersCloudDataSource): BeersCloudDataSource = dataSource
+
+  @Provides
+  fun provideBeersLocalDataSource(dataSource: BeersInMemoryLocalDataSource): BeersLocalDataSource = dataSource
 }
