@@ -22,7 +22,7 @@ package com.txusballesteros.brewerydb.domain.usecase
 
 import com.txusballesteros.brewerydb.exception.ApplicationException
 
-interface UseCaseCallback<T> {
-  fun onResult(result: T)
-  fun onError(error: ApplicationException)
+abstract class UseCaseCallback<in T> {
+  open fun onResult(result: T) { }
+  open fun onError(error: ApplicationException) { }
 }

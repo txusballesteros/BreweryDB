@@ -36,7 +36,7 @@ class CategoriesListPresenterImpl @Inject constructor(private val getCategoriesU
                                   AbsPresenter<CategoriesListPresenter.View>(), CategoriesListPresenter {
 
   override fun onRequestCategories() {
-    getCategoriesUseCase.execute(object: UseCaseCallback<List<Category>> {
+    getCategoriesUseCase.execute(object: UseCaseCallback<List<Category>>() {
       override fun onResult(result: List<Category>) {
         val categories = mapper.map(result)
         getView()?.renderCategories(categories)

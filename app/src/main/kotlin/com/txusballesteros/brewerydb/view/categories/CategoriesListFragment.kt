@@ -29,6 +29,7 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class CategoriesListFragment: AbsFragment(), CategoriesListPresenter.View {
@@ -84,5 +85,7 @@ class CategoriesListFragment: AbsFragment(), CategoriesListPresenter.View {
     adapter.notifyDataSetChanged()
   }
 
-  override fun renderError() { }
+  override fun renderError() {
+    activity.toast("Upps!!")
+  }
 }
