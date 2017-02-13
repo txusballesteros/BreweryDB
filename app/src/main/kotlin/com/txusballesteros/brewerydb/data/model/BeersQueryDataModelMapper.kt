@@ -18,14 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.domain.repository.BeersRepository
-import com.txusballesteros.brewerydb.domain.repository.CategoriesRepository
-import com.txusballesteros.brewerydb.domain.repository.StylesRepository
+import com.txusballesteros.brewerydb.domain.model.BeersQuery
+import javax.inject.Inject
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
+class BeersQueryDataModelMapper @Inject constructor() {
+  fun map(source: BeersQuery) = BeersQueryDataModel(source.styleId, source.page)
 }

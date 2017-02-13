@@ -18,14 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.domain.model
 
-import com.txusballesteros.brewerydb.domain.repository.BeersRepository
-import com.txusballesteros.brewerydb.domain.repository.CategoriesRepository
-import com.txusballesteros.brewerydb.domain.repository.StylesRepository
+data class Beer(val id: String,
+                         val name: String,
+                         val displayName: String,
+                         val description: String,
+                         val styleId: Int,
+                         val abv: String?,
+                         val glasswareId: Int?,
+                         val isOrganic: String?,
+                         val status: String?,
+                         val label: Label,
+                         val servingTemperature: String?,
+                         val currentPage: Int) {
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
+  data class Label(val icon: String, val medium: String, val large: String)
 }

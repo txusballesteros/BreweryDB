@@ -20,8 +20,10 @@
  */
 package com.txusballesteros.brewerydb.domain.repository.di
 
+import com.txusballesteros.brewerydb.data.beers.repository.BeersRepositoryImpl
 import com.txusballesteros.brewerydb.data.categories.repository.CategoriesRepositoryImpl
 import com.txusballesteros.brewerydb.data.styles.repository.StylesRepositoryImpl
+import com.txusballesteros.brewerydb.domain.repository.BeersRepository
 import com.txusballesteros.brewerydb.domain.repository.CategoriesRepository
 import com.txusballesteros.brewerydb.domain.repository.StylesRepository
 import dagger.Module
@@ -31,12 +33,11 @@ import javax.inject.Singleton
 @Module
 class RepositoriesModule {
   @Singleton @Provides
-  fun provideCategoriesRepository(repository: CategoriesRepositoryImpl) : CategoriesRepository {
-    return repository
-  }
+  fun provideCategoriesRepository(repository: CategoriesRepositoryImpl): CategoriesRepository = repository
 
   @Singleton @Provides
-  fun provideStylesRepository(repository: StylesRepositoryImpl) : StylesRepository {
-    return repository
-  }
+  fun provideStylesRepository(repository: StylesRepositoryImpl): StylesRepository = repository
+
+  @Singleton @Provides
+  fun provideBeersRepository(repository: BeersRepositoryImpl): BeersRepository = repository
 }

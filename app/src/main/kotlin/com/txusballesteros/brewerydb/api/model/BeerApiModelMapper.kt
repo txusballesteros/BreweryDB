@@ -28,7 +28,7 @@ class BeerApiModelMapper @Inject constructor() {
       = map(source.beers, source.currentPage)
 
   fun map(source: List<BeerApiResponse.BeerApiModel>, page: Int)
-      = source.map { style -> map(style, page) }
+      = source.map { beer -> map(beer, page) }
 
   fun map(source: BeerApiResponse.BeerApiModel, page: Int)
       = BeerDataModel(source.id,

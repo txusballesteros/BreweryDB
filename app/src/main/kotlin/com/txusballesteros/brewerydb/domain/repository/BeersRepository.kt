@@ -18,14 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.domain.repository
 
-import com.txusballesteros.brewerydb.domain.repository.BeersRepository
-import com.txusballesteros.brewerydb.domain.repository.CategoriesRepository
-import com.txusballesteros.brewerydb.domain.repository.StylesRepository
+import com.txusballesteros.brewerydb.domain.model.Beer
+import com.txusballesteros.brewerydb.domain.model.BeersQuery
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
+interface BeersRepository {
+  fun getBeers(query: BeersQuery, callback: Repository.RepositoryCallback<List<Beer>>)
 }
