@@ -25,4 +25,5 @@ import javax.inject.Inject
 
 class BeersQueryDataModelMapper @Inject constructor() {
   fun map(source: BeersQuery) = BeersQueryDataModel(source.styleId, source.page)
+  fun map(source: BeersQueryDataModel) = BeersQuery(source.styleId, source.page)
 }

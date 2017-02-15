@@ -26,7 +26,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface BeersRetrofitService {
-  @GET("/v2/beers/?hasLabels=Y")
+  @GET("/v2/beers")
   fun getBeers(@Query("styleId") styleId: Int,
                @Query("p") page: Int): Call<BeerApiResponse>
 }

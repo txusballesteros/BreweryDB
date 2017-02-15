@@ -18,24 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.strategy
+package com.txusballesteros.brewerydb.data.di
 
-abstract class LocalOrCloudStrategy<in INPUT, OUTPUT> : Strategy<INPUT, OUTPUT>() {
-  override fun run(params: INPUT?) {
-    val localResult = onRequestCallToLocal(params)
-    if (isValid(localResult)) {
-      notifyOnResult(localResult)
-    } else {
-      val cloudResult = onRequestCallToCloud(params)
-      notifyOnResult(cloudResult)
-    }
-  }
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryInMemoryLocalDataSource
 
-  open protected fun isValid(result: OUTPUT?) : Boolean {
-    return result != null
-  }
-
-  protected abstract fun onRequestCallToLocal(params: INPUT?) : OUTPUT?
-
-  protected abstract fun onRequestCallToCloud(query: INPUT?) : OUTPUT?
+interface DataSourceProvider {
+  fun getBeersQueryInMemoryLocalDataSource(): BeersQueryInMemoryLocalDataSource
 }

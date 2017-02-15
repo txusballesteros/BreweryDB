@@ -24,5 +24,6 @@ import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.model.BeersQuery
 
 interface BeersRepository {
+  fun flush()
   fun getBeers(query: BeersQuery, callback: Repository.RepositoryCallback<List<Beer>>)
 }

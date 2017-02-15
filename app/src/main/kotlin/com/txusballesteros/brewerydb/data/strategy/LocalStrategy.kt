@@ -20,22 +20,11 @@
  */
 package com.txusballesteros.brewerydb.data.strategy
 
-abstract class LocalOrCloudStrategy<in INPUT, OUTPUT> : Strategy<INPUT, OUTPUT>() {
+abstract class LocalStrategy<in INPUT, OUTPUT> : Strategy<INPUT, OUTPUT>() {
   override fun run(params: INPUT?) {
     val localResult = onRequestCallToLocal(params)
-    if (isValid(localResult)) {
-      notifyOnResult(localResult)
-    } else {
-      val cloudResult = onRequestCallToCloud(params)
-      notifyOnResult(cloudResult)
-    }
-  }
-
-  open protected fun isValid(result: OUTPUT?) : Boolean {
-    return result != null
+    notifyOnResult(localResult)
   }
 
   protected abstract fun onRequestCallToLocal(params: INPUT?) : OUTPUT?
-
-  protected abstract fun onRequestCallToCloud(query: INPUT?) : OUTPUT?
 }

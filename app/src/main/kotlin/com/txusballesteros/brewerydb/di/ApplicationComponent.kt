@@ -26,6 +26,7 @@ import com.txusballesteros.brewerydb.api.di.RestModule
 import com.txusballesteros.brewerydb.api.di.RetrofitModule
 import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.data.di.DataSourceModule
+import com.txusballesteros.brewerydb.data.di.DataSourceProvider
 import com.txusballesteros.brewerydb.domain.repository.di.RepositoriesModule
 import com.txusballesteros.brewerydb.domain.repository.di.RepositoriesProvider
 import com.txusballesteros.brewerydb.threading.di.ThreadingProvider
@@ -42,6 +43,6 @@ import javax.inject.Singleton
         RetrofitModule::class,
         RestModule::class
 ))
-interface ApplicationComponent : RepositoriesProvider, ThreadingProvider {
+interface ApplicationComponent : RepositoriesProvider, ThreadingProvider, DataSourceProvider {
   fun inject(application: Application)
 }

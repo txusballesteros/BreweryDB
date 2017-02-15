@@ -20,10 +20,7 @@
  */
 package com.txusballesteros.brewerydb.data.di
 
-import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
-import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSourceImpl
-import com.txusballesteros.brewerydb.data.beers.datasource.BeersInMemoryLocalDataSource
-import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
+import com.txusballesteros.brewerydb.data.beers.datasource.*
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSourceImpl
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesInMemoryLocalDataSource
@@ -34,6 +31,7 @@ import com.txusballesteros.brewerydb.data.styles.datasource.StylesInMemoryLocalD
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class DataSourceModule {
@@ -54,4 +52,7 @@ class DataSourceModule {
 
   @Provides
   fun provideBeersLocalDataSource(dataSource: BeersInMemoryLocalDataSource): BeersLocalDataSource = dataSource
+
+  @Singleton @Provides
+  fun provideBeersQueryLocalDataSource(dataSource: BeersQueryInMemoryLocalDataSource): BeersQueryLocalDataSource = dataSource
 }

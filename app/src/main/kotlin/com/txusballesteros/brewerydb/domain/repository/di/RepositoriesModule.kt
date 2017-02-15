@@ -20,9 +20,11 @@
  */
 package com.txusballesteros.brewerydb.domain.repository.di
 
+import com.txusballesteros.brewerydb.data.beers.repository.BeersQueryRepositoryImpl
 import com.txusballesteros.brewerydb.data.beers.repository.BeersRepositoryImpl
 import com.txusballesteros.brewerydb.data.categories.repository.CategoriesRepositoryImpl
 import com.txusballesteros.brewerydb.data.styles.repository.StylesRepositoryImpl
+import com.txusballesteros.brewerydb.domain.repository.BeersQueryRepository
 import com.txusballesteros.brewerydb.domain.repository.BeersRepository
 import com.txusballesteros.brewerydb.domain.repository.CategoriesRepository
 import com.txusballesteros.brewerydb.domain.repository.StylesRepository
@@ -40,4 +42,7 @@ class RepositoriesModule {
 
   @Singleton @Provides
   fun provideBeersRepository(repository: BeersRepositoryImpl): BeersRepository = repository
+
+  @Singleton @Provides
+  fun provideBeersQueryRepository(repository: BeersQueryRepositoryImpl): BeersQueryRepository = repository
 }

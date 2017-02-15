@@ -34,6 +34,9 @@ import javax.inject.Inject
 class BeersRepositoryImpl @Inject constructor(private val getBeersStrategy: GetBeersStrategy.Builder,
                                               private val mapper: BeerDataModelMapper,
                                               private val queryMapper: BeersQueryDataModelMapper): BeersRepository {
+  override fun flush() {
+
+  }
 
   override fun getBeers(query: BeersQuery, callback: Repository.RepositoryCallback<List<Beer>>) {
     val queryData = queryMapper.map(query)

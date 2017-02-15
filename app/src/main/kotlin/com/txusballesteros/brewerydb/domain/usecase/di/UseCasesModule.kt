@@ -20,8 +20,7 @@
  */
 package com.txusballesteros.brewerydb.domain.usecase.di
 
-import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersInteractor
-import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
+import com.txusballesteros.brewerydb.domain.usecase.beers.*
 import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesInteractor
 import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesUseCase
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesInteractor
@@ -39,4 +38,10 @@ class UseCasesModule {
 
   @Provides
   fun provideGetBeersUseCase(useCase: GetBeersInteractor): GetBeersUseCase = useCase
+
+  @Provides
+  fun provideStoreBeersQueryUseCase(useCase: StoreBeersQueryInteractor): StoreBeersQueryUseCase = useCase
+
+  @Provides
+  fun provideGetBeersQueryUseCase(useCase: GetBeersQueryInteractor): GetBeersQueryUseCase = useCase
 }
