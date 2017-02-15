@@ -18,52 +18,32 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.styles
+package com.txusballesteros.brewerydb.view.beers
 
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
-import android.widget.Toast
 import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
-import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
+import com.txusballesteros.brewerydb.domain.model.BeerViewModel
+import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
+import com.txusballesteros.brewerydb.presentation.beers.BeersListPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-class StylesListFragment : AbsFragment(), StylesListPresenter.View {
+class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   companion object {
-    private val EXTRA_CATEGORY_ID: String = "extra:categoryId"
-
-    fun newInstance(categoryId: Int) : StylesListFragment {
-      val arguments: Bundle = Bundle()
-      arguments.putInt(EXTRA_CATEGORY_ID, categoryId)
-      val result = StylesListFragment()
-      result.arguments = arguments
-      return result
-    }
+    fun newInstance() = BeersListFragment()
   }
 
-  @Inject lateinit var presenter: StylesListPresenter
+  @Inject lateinit var presenter: BeersListPresenter
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
-  lateinit var adapter: StyleListAdapter
+  @Inject lateinit var imageDownloader: ImageDownloader
+  lateinit var adapter: BeerListAdapter
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.fragment_styles_list
-  }
-
-  override fun getCategoryId(): Int {
-    return arguments.getInt(EXTRA_CATEGORY_ID)
-  }
-
-  override fun onRequestInjection(viewComponent: ViewComponent) {
-    viewComponent.inject(this)
-  }
-
-  override fun onRequestViewComposition() {
-    toolbarBehaviour.inject(activity)
+    return R.layout.fragment_beers_list
   }
 
   override fun onPresenterShouldBeAttached() {
@@ -74,29 +54,32 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
     presenter.onDetachView()
   }
 
+  override fun onRequestInjection(viewComponent: ViewComponent) {
+    viewComponent.inject(this)
+  }
+
+  override fun onRequestViewComposition() {
+    toolbarBehaviour.inject(activity)
+  }
+
   override fun onViewReady(savedInstanceState: Bundle?) {
     initializeList()
-    presenter.onRequestStyles()
+    presenter.onRequestBeers()
   }
 
   private fun initializeList() {
-    adapter = StyleListAdapter(object: StyleListAdapter.OnStyleClickListener {
-      override fun onStyleClick(style: StyleViewModel) {
-        presenter.onStyleClick(style)
+    adapter = BeerListAdapter(object: BeerListAdapter.OnBeerClickListener {
+      override fun onBeerClick(beer: BeerViewModel) {
+
       }
-    })
+    }, imageDownloader)
     list.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
     list.adapter = adapter
     list.setHasFixedSize(true)
   }
 
-  override fun renderStyles(styles: List<StyleViewModel>) {
-    adapter.clear()
-    adapter.addAll(styles)
+  override fun renderBeers(beers: List<BeerViewModel>) {
+    adapter.addAll(beers)
     adapter.notifyDataSetChanged()
-  }
-
-  override fun renderError() {
-    activity.toast("Upps!!")
   }
 }

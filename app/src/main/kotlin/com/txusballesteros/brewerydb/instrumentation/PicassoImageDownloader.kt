@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+/*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -17,13 +17,17 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
--->
-<resources>
-  <dimen name="activity_horizontal_margin">16dp</dimen>
-  <dimen name="activity_vertical_margin">16dp</dimen>
-  <dimen name="vertical_margin">4dp</dimen>
-  <dimen name="horizontal_margin">8dp</dimen>
-  <dimen name="padding_small">4dp</dimen>
-  <dimen name="padding_normal">8dp</dimen>
-  <dimen name="label_small">80dp</dimen>
-</resources>
+ */
+package com.txusballesteros.brewerydb.instrumentation
+
+import android.widget.ImageView
+import com.squareup.picasso.Picasso
+import javax.inject.Inject
+
+class PicassoImageDownloader @Inject constructor(): ImageDownloader {
+  override fun download(url: String, view: ImageView) {
+    Picasso.with(view.context)
+        .load(url)
+        .into(view)
+  }
+}

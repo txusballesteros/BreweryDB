@@ -20,6 +20,8 @@
  */
 package com.txusballesteros.brewerydb.presentation.di
 
+import com.txusballesteros.brewerydb.presentation.beers.BeersListPresenter
+import com.txusballesteros.brewerydb.presentation.beers.BeersListPresenterImpl
 import com.txusballesteros.brewerydb.presentation.categories.CategoriesListPresenter
 import com.txusballesteros.brewerydb.presentation.categories.CategoriesListPresenterImpl
 import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
@@ -30,12 +32,11 @@ import dagger.Provides
 @Module
 class PresentationModule {
   @Provides
-  fun provideCategoriesListPresenter(presenter: CategoriesListPresenterImpl): CategoriesListPresenter {
-    return presenter
-  }
+  fun provideCategoriesListPresenter(presenter: CategoriesListPresenterImpl): CategoriesListPresenter = presenter
 
   @Provides
-  fun provideStylesListPresenter(presenter: StylesListPresenterImpl) : StylesListPresenter {
-    return presenter
-  }
+  fun provideStylesListPresenter(presenter: StylesListPresenterImpl): StylesListPresenter = presenter
+
+  @Provides
+  fun provideBeersListPresenter(presenter: BeersListPresenterImpl): BeersListPresenter = presenter
 }

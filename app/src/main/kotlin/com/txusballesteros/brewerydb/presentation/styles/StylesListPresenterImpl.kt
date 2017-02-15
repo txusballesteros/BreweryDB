@@ -24,25 +24,32 @@ import com.txusballesteros.brewerydb.domain.model.Style
 import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesUseCase
 import com.txusballesteros.brewerydb.exception.ApplicationException
+import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModelMapper
 import javax.inject.Inject
 
 class StylesListPresenterImpl @Inject constructor(private val getStylesUseCase: GetStylesUseCase,
-                                                  private val styleMapper: StyleViewModelMapper):
+                                                  private val styleMapper: StyleViewModelMapper,
+                                                  private val navigator: Navigator):
                               AbsPresenter<StylesListPresenter.View>(), StylesListPresenter {
 
   override fun onRequestStyles() {
-      val categoryId = getView()?.getCategoryId() ?: throw IllegalStateException("The StylesListPresenter.View is detached")
-      getStylesUseCase.execute(categoryId, object : UseCaseCallback<List<Style>>() {
-        override fun onResult(result: List<Style>) {
-          val styles = styleMapper.map(result)
-          getView()?.renderStyles(styles)
-        }
+    val categoryId = getView()?.getCategoryId() ?: throw IllegalStateException("The StylesListPresenter.View is detached")
+    getStylesUseCase.execute(categoryId, object : UseCaseCallback<List<Style>>() {
+      override fun onResult(result: List<Style>) {
+        val styles = styleMapper.map(result)
+        getView()?.renderStyles(styles)
+      }
 
-        override fun onError(error: ApplicationException) {
-          getView()?.renderError()
-        }
-      })
+      override fun onError(error: ApplicationException) {
+        getView()?.renderError()
+      }
+    })
+  }
+
+  override fun onStyleClick(style: StyleViewModel) {
+    navigator.navigateToBeersList(getView())
   }
 }

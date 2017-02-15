@@ -30,16 +30,16 @@ class BeerApiResponse(@SerializedName("data") val beers: List<BeerApiModel>,
                       val totalResults: Int) {
 
   data class BeerApiModel(val id: String,
-                          val name: String,
-                          @SerializedName("nameDisplay") val displayName: String,
-                          val description: String,
-                          val styleId: Int,
+                          val name: String?,
+                          @SerializedName("nameDisplay") val displayName: String?,
+                          val description: String?,
+                          val styleId: Int?,
                           val abv: String?,
                           val glasswareId: Int?,
                           val isOrganic: String?,
                           val status: String?,
-                          val labels: LabelApiModel,
+                          val labels: LabelApiModel?,
                           val servingTemperature: String?)
 
-  data class LabelApiModel(val icon: String, val medium: String, val large: String)
+  data class LabelApiModel(val icon: String?, val medium: String?, val large: String?)
 }

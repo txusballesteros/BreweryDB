@@ -18,34 +18,32 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.data.model.BeerDataModel
+import com.txusballesteros.brewerydb.domain.model.Beer
+import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import javax.inject.Inject
 
-class BeerApiModelMapper @Inject constructor() {
-  fun map(source: BeerApiResponse)
-      = map(source.beers, source.currentPage)
+class BeerViewModelMapper @Inject constructor() {
+  fun map(source: List<Beer>)
+      = source.map { beer -> map(beer) }
 
-  fun map(source: List<BeerApiResponse.BeerApiModel>, page: Int)
-      = source.map { beer -> map(beer, page) }
-
-  fun map(source: BeerApiResponse.BeerApiModel, page: Int)
-      = BeerDataModel(source.id,
+  fun map(source: Beer)
+      = BeerViewModel(source.id,
                       source.name,
                       source.displayName,
-                      source.description,
+                      source.description ?: "NA",
                       source.styleId,
                       source.abv,
                       source.glasswareId,
                       source.isOrganic,
                       source.status,
-                      map(source.labels),
+                      map(source.label),
                       source.servingTemperature,
-                      page)
+                      source.currentPage)
 
-  fun map(source: BeerApiResponse.LabelApiModel?)
-      = BeerDataModel.LabelDataModel(source?.icon,
+  fun map(source: Beer.Label?)
+      = BeerViewModel.LabelViewModel(source?.icon,
                                      source?.medium,
                                      source?.large)
 }

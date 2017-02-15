@@ -21,17 +21,17 @@
 package com.txusballesteros.brewerydb.domain.model
 
 data class Beer(val id: String,
-                         val name: String,
-                         val displayName: String,
-                         val description: String,
-                         val styleId: Int,
-                         val abv: String?,
-                         val glasswareId: Int?,
-                         val isOrganic: String?,
-                         val status: String?,
-                         val label: Label,
-                         val servingTemperature: String?,
-                         val currentPage: Int) {
+                val name: String?,
+                val displayName: String?,
+                val description: String?,
+                val styleId: Int?,
+                val abv: String?,
+                val glasswareId: Int?,
+                val isOrganic: String?,
+                val status: String?,
+                val label: Label?,
+                val servingTemperature: String?,
+                val currentPage: Int) {
 
-  data class Label(val icon: String, val medium: String, val large: String)
+  data class Label(val icon: String?, val medium: String?, val large: String?)
 }

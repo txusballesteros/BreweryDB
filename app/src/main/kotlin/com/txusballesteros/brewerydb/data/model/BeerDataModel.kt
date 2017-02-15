@@ -21,17 +21,17 @@
 package com.txusballesteros.brewerydb.data.model
 
 data class BeerDataModel(val id: String,
-                         val name: String,
-                         val displayName: String,
-                         val description: String,
-                         val styleId: Int,
+                         val name: String?,
+                         val displayName: String?,
+                         val description: String?,
+                         val styleId: Int?,
                          val abv: String?,
                          val glasswareId: Int?,
                          val isOrganic: String?,
                          val status: String?,
-                         val label: LabelDataModel,
+                         val label: LabelDataModel?,
                          val servingTemperature: String?,
                          val currentPage: Int) {
 
-  data class LabelDataModel(val icon: String, val medium: String, val large: String)
+  data class LabelDataModel(val icon: String?, val medium: String?, val large: String?)
 }
