@@ -88,9 +88,9 @@ class BeersCloudDataSourceTest: UnitTest() {
     Assert.assertEquals(BEER_IS_ORGANIC, response.first().isOrganic)
     Assert.assertEquals(BEER_STATUS, response.first().status)
     Assert.assertEquals(BEER_SERVING_TEMP, response.first().servingTemperature)
-    Assert.assertEquals(BEER_LABEL.icon, response.first().label.icon)
-    Assert.assertEquals(BEER_LABEL.medium, response.first().label.medium)
-    Assert.assertEquals(BEER_LABEL.large, response.first().label.large)
+    Assert.assertEquals(BEER_LABEL.icon, response.first().label?.icon)
+    Assert.assertEquals(BEER_LABEL.medium, response.first().label?.medium)
+    Assert.assertEquals(BEER_LABEL.large, response.first().label?.large)
     Assert.assertEquals(QUERY.page, response.first().currentPage)
   }
 }

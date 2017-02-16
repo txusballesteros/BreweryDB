@@ -83,9 +83,9 @@ class BeersLocalDataSourceTest: UnitTest() {
     Assert.assertEquals(BEER_IS_ORGANIC, result.first().isOrganic)
     Assert.assertEquals(BEER_STATUS, result.first().status)
     Assert.assertEquals(BEER_SERVING_TEMP, result.first().servingTemperature)
-    Assert.assertEquals(BEER_LABEL.icon, result.first().label.icon)
-    Assert.assertEquals(BEER_LABEL.medium, result.first().label.medium)
-    Assert.assertEquals(BEER_LABEL.large, result.first().label.large)
+    Assert.assertEquals(BEER_LABEL.icon, result.first().label?.icon)
+    Assert.assertEquals(BEER_LABEL.medium, result.first().label?.medium)
+    Assert.assertEquals(BEER_LABEL.large, result.first().label?.large)
     Assert.assertEquals(QUERY_A.page, result.first().currentPage)
   }
 
