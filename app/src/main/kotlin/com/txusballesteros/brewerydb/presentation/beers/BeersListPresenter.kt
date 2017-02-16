@@ -25,6 +25,8 @@ import com.txusballesteros.brewerydb.presentation.Presenter
 
 interface BeersListPresenter: Presenter<BeersListPresenter.View> {
   fun onRequestBeers()
+  fun onBeerClick(beer: BeerViewModel)
+  fun onRequestNextPage()
 
   interface View : Presenter.View {
     fun renderBeers(beers: List<BeerViewModel>)

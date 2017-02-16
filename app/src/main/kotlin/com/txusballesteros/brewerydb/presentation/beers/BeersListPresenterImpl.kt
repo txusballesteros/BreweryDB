@@ -22,6 +22,7 @@ package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.data.model.BeerViewModelMapper
 import com.txusballesteros.brewerydb.domain.model.Beer
+import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.domain.model.BeersQuery
 import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersQueryUseCase
@@ -33,6 +34,7 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
                                                  private val getBeersQueryUseCase: GetBeersQueryUseCase,
                                                  private val mapper: BeerViewModelMapper): AbsPresenter<BeersListPresenter.View>(),
                               BeersListPresenter {
+
   override fun onRequestBeers() {
     getBeersQuery()
   }
@@ -53,4 +55,8 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
       }
     })
   }
+
+  override fun onBeerClick(beer: BeerViewModel) { }
+
+  override fun onRequestNextPage() { }
 }
