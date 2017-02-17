@@ -22,15 +22,15 @@ package com.txusballesteros.brewerydb.di
 
 import com.txusballesteros.brewerydb.Application
 import com.txusballesteros.brewerydb.api.di.ApiModule
+import com.txusballesteros.brewerydb.api.di.ApiProvider
 import com.txusballesteros.brewerydb.api.di.RestModule
 import com.txusballesteros.brewerydb.api.di.RetrofitModule
-import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.data.di.DataSourceModule
 import com.txusballesteros.brewerydb.data.di.DataSourceProvider
 import com.txusballesteros.brewerydb.domain.repository.di.RepositoriesModule
 import com.txusballesteros.brewerydb.domain.repository.di.RepositoriesProvider
-import com.txusballesteros.brewerydb.threading.di.ThreadingProvider
 import com.txusballesteros.brewerydb.threading.di.ThreadingModule
+import com.txusballesteros.brewerydb.threading.di.ThreadingProvider
 import dagger.Component
 import javax.inject.Singleton
 
@@ -43,6 +43,6 @@ import javax.inject.Singleton
         RetrofitModule::class,
         RestModule::class
 ))
-interface ApplicationComponent : RepositoriesProvider, ThreadingProvider, DataSourceProvider {
+interface ApplicationComponent : RepositoriesProvider, ThreadingProvider, DataSourceProvider, ApiProvider {
   fun inject(application: Application)
 }

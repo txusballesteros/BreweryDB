@@ -28,15 +28,16 @@ import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class ApiModule {
-  @Provides
+  @Singleton @Provides
   fun provideCategoriesApi(api: CategoriesRetrofitApi): CategoriesApi = api
 
-  @Provides
+  @Singleton @Provides
   fun provideStylesApi(api: StylesRetrofitApi) : StylesApi = api
 
-  @Provides
+  @Singleton @Provides
   fun provideBeersApi(api: BeersRetrofitApi): BeersApi = api
 }

@@ -26,19 +26,19 @@ import java.util.*
 import javax.inject.Inject
 
 class BeersInMemoryLocalDataSource @Inject constructor(): BeersLocalDataSource {
+  val cache: MutableMap<String, BeerDataModel> = HashMap()
+
   override fun flush() {
     cache.clear()
   }
 
-  val cache: MutableMap<Int, List<BeerDataModel>> = HashMap()
-
   override fun store(query: BeersQueryDataModel, beers: List<BeerDataModel>) {
     if (!beers.isEmpty()) {
-      cache.put(query.hashCode(), beers)
+      beers.forEach { beer -> cache.put(beer.id, beer) }
     }
   }
 
   override fun getBeers(query: BeersQueryDataModel): List<BeerDataModel> {
-    return cache[query.hashCode()] ?: ArrayList()
+    return cache.values.toList()
   }
 }

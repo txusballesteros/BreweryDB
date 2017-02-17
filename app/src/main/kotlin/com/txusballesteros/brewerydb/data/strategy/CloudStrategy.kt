@@ -18,12 +18,13 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.beers
+package com.txusballesteros.brewerydb.data.strategy
 
-import com.txusballesteros.brewerydb.api.model.BeerApiResponse
-import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
+abstract class CloudStrategy<in INPUT, OUTPUT> : Strategy<INPUT, OUTPUT>() {
+  override fun run(params: INPUT?) {
+    val localResult = onRequestCallToCloud(params)
+    notifyOnResult(localResult)
+  }
 
-interface BeersApi {
-  fun getBeers(query: BeersQueryApiModel): BeerApiResponse
-  fun getNextPageBeers(query: BeersQueryApiModel): BeerApiResponse
+  protected abstract fun onRequestCallToCloud(params: INPUT?) : OUTPUT?
 }

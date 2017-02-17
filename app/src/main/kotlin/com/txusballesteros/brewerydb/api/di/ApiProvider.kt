@@ -18,12 +18,14 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.beers
+package com.txusballesteros.brewerydb.api.di
 
-import com.txusballesteros.brewerydb.api.model.BeerApiResponse
-import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
+import com.txusballesteros.brewerydb.api.beers.BeersApi
+import com.txusballesteros.brewerydb.api.categories.CategoriesApi
+import com.txusballesteros.brewerydb.api.styles.StylesApi
 
-interface BeersApi {
-  fun getBeers(query: BeersQueryApiModel): BeerApiResponse
-  fun getNextPageBeers(query: BeersQueryApiModel): BeerApiResponse
+interface ApiProvider {
+  fun getCategoriesApi(): CategoriesApi
+  fun getStylesApi(): StylesApi
+  fun getBeersApi(): BeersApi
 }

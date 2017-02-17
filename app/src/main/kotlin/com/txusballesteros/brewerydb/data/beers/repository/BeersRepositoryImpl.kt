@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.data.beers.repository
 
 import com.txusballesteros.brewerydb.data.beers.strategy.GetBeersStrategy
+import com.txusballesteros.brewerydb.data.beers.strategy.GetNextPageBeersStrategy
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.model.BeerDataModelMapper
 import com.txusballesteros.brewerydb.data.model.BeersQueryDataModelMapper
@@ -32,15 +33,24 @@ import com.txusballesteros.brewerydb.domain.repository.Repository
 import javax.inject.Inject
 
 class BeersRepositoryImpl @Inject constructor(private val getBeersStrategy: GetBeersStrategy.Builder,
+                                              private val getNextPageBeersStrategy: GetNextPageBeersStrategy.Builder,
                                               private val mapper: BeerDataModelMapper,
                                               private val queryMapper: BeersQueryDataModelMapper): BeersRepository {
-  override fun flush() {
-
-  }
+  override fun flush() { }
 
   override fun getBeers(query: BeersQuery, callback: Repository.RepositoryCallback<List<Beer>>) {
     val queryData = queryMapper.map(query)
     getBeersStrategy.build().execute(queryData, object: Strategy.Callback<List<BeerDataModel>>() {
+      override fun onResult(result: List<BeerDataModel>?) {
+        val beers = mapper.map(result!!)
+        callback.onResult(beers)
+      }
+    })
+  }
+
+  override fun getNextPageBeers(query: BeersQuery, callback: Repository.RepositoryCallback<List<Beer>>) {
+    val queryData = queryMapper.map(query)
+    getNextPageBeersStrategy.build().execute(queryData, object: Strategy.Callback<List<BeerDataModel>>() {
       override fun onResult(result: List<BeerDataModel>?) {
         val beers = mapper.map(result!!)
         callback.onResult(beers)

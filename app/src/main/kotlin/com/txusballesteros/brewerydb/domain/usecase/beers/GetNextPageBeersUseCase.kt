@@ -18,12 +18,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.beers
+package com.txusballesteros.brewerydb.domain.usecase.beers
 
-import com.txusballesteros.brewerydb.api.model.BeerApiResponse
-import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
+import com.txusballesteros.brewerydb.domain.model.Beer
+import com.txusballesteros.brewerydb.domain.model.BeersQuery
+import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 
-interface BeersApi {
-  fun getBeers(query: BeersQueryApiModel): BeerApiResponse
-  fun getNextPageBeers(query: BeersQueryApiModel): BeerApiResponse
+interface GetNextPageBeersUseCase {
+  fun execute(query: BeersQuery, callback: UseCaseCallback<List<Beer>>)
 }

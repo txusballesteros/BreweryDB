@@ -25,5 +25,5 @@ import javax.inject.Inject
 
 class BeersQueryApiModelMapper @Inject constructor() {
   fun map(source: BeersQueryDataModel)
-      = BeersQueryApiModel(source.styleId, source.page)
+      = BeersQueryApiModel(source.styleId)
 }

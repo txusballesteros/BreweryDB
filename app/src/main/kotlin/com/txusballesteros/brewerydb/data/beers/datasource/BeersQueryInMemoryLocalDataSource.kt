@@ -4,7 +4,7 @@ import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import javax.inject.Inject
 
 class BeersQueryInMemoryLocalDataSource @Inject constructor(): BeersQueryLocalDataSource {
-  private var query: BeersQueryDataModel = BeersQueryDataModel(1, 1)
+  private var query: BeersQueryDataModel = BeersQueryDataModel(1)
 
   override fun getQuery(): BeersQueryDataModel {
     return query

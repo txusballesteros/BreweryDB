@@ -26,9 +26,23 @@ import com.txusballesteros.brewerydb.exception.NetworkException
 import javax.inject.Inject
 
 class BeersRetrofitApi @Inject constructor(private val service: BeersRetrofitService): BeersApi {
+  var currentPage = 1
+
   override fun getBeers(query: BeersQueryApiModel): BeerApiResponse {
     try {
-      val call = service.getBeers(query.styleId, query.page)
+      currentPage = 1
+      val call = service.getBeers(query.styleId, currentPage)
+      val response = call.execute()
+      return response.body()
+    } catch (error: Exception) {
+      throw NetworkException(error)
+    }
+  }
+
+  override fun getNextPageBeers(query: BeersQueryApiModel): BeerApiResponse {
+    try {
+      currentPage += 1
+      val call = service.getBeers(query.styleId, currentPage)
       val response = call.execute()
       return response.body()
     } catch (error: Exception) {

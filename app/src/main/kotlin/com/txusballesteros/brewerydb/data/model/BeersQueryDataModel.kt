@@ -20,4 +20,4 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-data class BeersQueryDataModel constructor(val styleId: Int, val page: Int)
+data class BeersQueryDataModel constructor(val styleId: Int)

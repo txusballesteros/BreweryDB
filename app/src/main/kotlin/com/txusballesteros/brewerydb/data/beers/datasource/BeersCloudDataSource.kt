@@ -25,4 +25,5 @@ import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 
 interface BeersCloudDataSource {
   fun getBeers(query: BeersQueryDataModel): List<BeerDataModel>
+  fun getNextPageBeers(query: BeersQueryDataModel): List<BeerDataModel>
 }

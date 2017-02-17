@@ -44,4 +44,7 @@ class UseCasesModule {
 
   @Provides
   fun provideGetBeersQueryUseCase(useCase: GetBeersQueryInteractor): GetBeersQueryUseCase = useCase
+
+  @Provides
+  fun provideGetNextPageBeersUseCase(useCase: GetNextPageBeersInteractor): GetNextPageBeersUseCase = useCase
 }

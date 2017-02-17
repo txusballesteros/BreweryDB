@@ -27,11 +27,13 @@ import com.txusballesteros.brewerydb.domain.model.BeersQuery
 import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersQueryUseCase
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
+import com.txusballesteros.brewerydb.domain.usecase.beers.GetNextPageBeersUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import javax.inject.Inject
 
 class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: GetBeersUseCase,
                                                  private val getBeersQueryUseCase: GetBeersQueryUseCase,
+                                                 private val getNextPageBeersUseCase: GetNextPageBeersUseCase,
                                                  private val mapper: BeerViewModelMapper): AbsPresenter<BeersListPresenter.View>(),
                               BeersListPresenter {
 
@@ -58,5 +60,18 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
 
   override fun onBeerClick(beer: BeerViewModel) { }
 
-  override fun onRequestNextPage() { }
+  override fun onRequestNextPage() {
+    getBeersQueryUseCase.execute(object: UseCaseCallback<BeersQuery>() {
+      override fun onResult(result: BeersQuery) {
+        getNextPageBeersUseCase.execute(result, object: UseCaseCallback<List<Beer>>() {
+          override fun onResult(result: List<Beer>) {
+            val beersList = mapper.map(result)
+            if (!beersList.isEmpty()) {
+              getView()?.renderBeers(beersList)
+            }
+          }
+        })
+      }
+    })
+  }
 }
