@@ -24,6 +24,7 @@ import com.txusballesteros.brewerydb.api.model.BeerApiResponse
 import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
 
 interface BeersApi {
+  fun flush()
   fun getBeers(query: BeersQueryApiModel): BeerApiResponse
   fun getNextPageBeers(query: BeersQueryApiModel): BeerApiResponse
 }

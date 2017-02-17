@@ -20,6 +20,7 @@
  */
 package com.txusballesteros.brewerydb.data.beers.strategy
 
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
@@ -27,16 +28,19 @@ import com.txusballesteros.brewerydb.data.strategy.LocalStrategy
 import javax.inject.Inject
 
 class StoreBeersQueryStrategy private constructor(private val localDataSource: BeersQueryLocalDataSource,
-                                                  private val beersQueryLocalDataSource: BeersLocalDataSource):
+                                                  private val beersLocalDataSource: BeersLocalDataSource,
+                                                  private val beersCloudDataSource: BeersCloudDataSource):
                                       LocalStrategy<BeersQueryDataModel, Void>() {
   override fun onRequestCallToLocal(params: BeersQueryDataModel?): Void? {
-    beersQueryLocalDataSource.flush()
+    beersCloudDataSource.flush()
+    beersLocalDataSource.flush()
     localDataSource.storeQuery(params!!)
     return null
   }
 
   class Builder @Inject constructor(private val localDataSource: BeersQueryLocalDataSource,
-                                    private val beersQueryLocalDataSource: BeersLocalDataSource) {
-    fun build() = StoreBeersQueryStrategy(localDataSource, beersQueryLocalDataSource)
+                                    private val beersLocalDataSource: BeersLocalDataSource,
+                                    private val beersCloudDataSource: BeersCloudDataSource) {
+    fun build() = StoreBeersQueryStrategy(localDataSource, beersLocalDataSource, beersCloudDataSource)
   }
 }

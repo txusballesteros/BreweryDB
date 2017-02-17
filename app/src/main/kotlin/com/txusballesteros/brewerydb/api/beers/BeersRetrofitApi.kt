@@ -28,6 +28,10 @@ import javax.inject.Inject
 class BeersRetrofitApi @Inject constructor(private val service: BeersRetrofitService): BeersApi {
   var currentPage = 1
 
+  override fun flush() {
+    currentPage = 1
+  }
+
   override fun getBeers(query: BeersQueryApiModel): BeerApiResponse {
     try {
       currentPage = 1
