@@ -50,7 +50,7 @@ class DataSourceModule {
   @Provides
   fun provideBeersCloudDataSource(dataSource: BeersCloudDataSourceImpl): BeersCloudDataSource = dataSource
 
-  @Provides
+  @Singleton @Provides
   fun provideBeersLocalDataSource(dataSource: BeersInMemoryLocalDataSource): BeersLocalDataSource = dataSource
 
   @Singleton @Provides

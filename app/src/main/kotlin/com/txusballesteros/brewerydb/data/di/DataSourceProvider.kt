@@ -20,8 +20,10 @@
  */
 package com.txusballesteros.brewerydb.data.di
 
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryInMemoryLocalDataSource
 
 interface DataSourceProvider {
+  fun getBeersLocalDataSource(): BeersLocalDataSource
   fun getBeersQueryInMemoryLocalDataSource(): BeersQueryInMemoryLocalDataSource
 }

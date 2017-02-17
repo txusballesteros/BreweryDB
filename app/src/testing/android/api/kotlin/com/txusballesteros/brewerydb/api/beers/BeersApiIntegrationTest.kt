@@ -29,7 +29,6 @@ import retrofit2.Retrofit
 class BeersApiIntegrationTest: ApiIntegrationTest() {
   companion object {
     private val STYLE_ID = 1
-    private val CURRENT_PAGE = 1
   }
 
   lateinit var api : BeersApi
@@ -41,7 +40,7 @@ class BeersApiIntegrationTest: ApiIntegrationTest() {
 
   @Test
   fun shouldGetBeers() {
-    val query = BeersQueryApiModel(STYLE_ID, CURRENT_PAGE)
+    val query = BeersQueryApiModel(STYLE_ID)
 
     val response = api.getBeers(query)
 

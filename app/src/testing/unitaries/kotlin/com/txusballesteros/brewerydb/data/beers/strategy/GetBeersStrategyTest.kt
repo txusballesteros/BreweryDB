@@ -45,8 +45,6 @@ class GetBeersStrategyTest: UnitTest() {
     private val BEER_SERVING_TEMP = "5"
     private val BEER_LABEL = BeerDataModel.LabelDataModel("icon", "medium", "large")
     private val STYLE_ID = 2
-    private val CURRENT_PAGE = 2
-    private val QUERY = BeersQueryDataModel(STYLE_ID)
   }
 
   lateinit var queryLocalDataSource: BeersQueryLocalDataSource
