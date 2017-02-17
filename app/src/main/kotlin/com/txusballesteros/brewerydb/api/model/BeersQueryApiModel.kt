@@ -20,4 +20,6 @@
  */
 package com.txusballesteros.brewerydb.api.model
 
-data class BeersQueryApiModel constructor(val styleId: Int)
+data class BeersQueryApiModel constructor(val styleId: Int,
+                                          val withLabels: String = "Y",
+                                          val status: String = "verified")

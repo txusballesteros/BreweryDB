@@ -33,20 +33,18 @@ class BeersRetrofitApi @Inject constructor(private val service: BeersRetrofitSer
   }
 
   override fun getBeers(query: BeersQueryApiModel): BeerApiResponse {
-    try {
-      currentPage = 1
-      val call = service.getBeers(query.styleId, currentPage)
-      val response = call.execute()
-      return response.body()
-    } catch (error: Exception) {
-      throw NetworkException(error)
-    }
+    currentPage = 1
+    return getBeers(query, currentPage)
   }
 
   override fun getNextPageBeers(query: BeersQueryApiModel): BeerApiResponse {
+    currentPage += 1
+    return getBeers(query, currentPage)
+  }
+
+  private fun getBeers(query: BeersQueryApiModel, page: Int): BeerApiResponse {
     try {
-      currentPage += 1
-      val call = service.getBeers(query.styleId, currentPage)
+      val call = service.getBeers(query.styleId, query.withLabels, query.status, page)
       val response = call.execute()
       return response.body()
     } catch (error: Exception) {
