@@ -22,21 +22,23 @@ package com.txusballesteros.brewerydb.data.beers.strategy
 
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import com.txusballesteros.brewerydb.data.strategy.LocalOrCloudStrategy
 import javax.inject.Inject
 
-class GetBeersStrategy private constructor(private val localDataSource: BeersLocalDataSource,
+class GetBeersStrategy private constructor(private val queryLocalDataSource: BeersQueryLocalDataSource,
+                                           private val localDataSource: BeersLocalDataSource,
                                            private val cloudDataSource: BeersCloudDataSource):
-                       LocalOrCloudStrategy<BeersQueryDataModel, List<BeerDataModel>>() {
+                       LocalOrCloudStrategy<Void, List<BeerDataModel>>() {
 
-  override fun onRequestCallToLocal(query: BeersQueryDataModel?): List<BeerDataModel>? {
-    return localDataSource.getBeers(query!!)
+  override fun onRequestCallToLocal(params: Void?): List<BeerDataModel>? {
+    return localDataSource.getBeers()
   }
 
-  override fun onRequestCallToCloud(query: BeersQueryDataModel?): List<BeerDataModel>? {
-    val response = cloudDataSource.getBeers(query!!)
+  override fun onRequestCallToCloud(params: Void?): List<BeerDataModel>? {
+    val query = queryLocalDataSource.getQuery()
+    val response = cloudDataSource.getBeers(query)
     localDataSource.store(query, response)
     return response
   }
@@ -45,8 +47,9 @@ class GetBeersStrategy private constructor(private val localDataSource: BeersLoc
     return result != null && !result.isEmpty()
   }
 
-  class Builder @Inject constructor(private val localDataSource: BeersLocalDataSource,
+  class Builder @Inject constructor(private val queryLocalDataSource: BeersQueryLocalDataSource,
+                                    private val localDataSource: BeersLocalDataSource,
                                     private val cloudDataSource: BeersCloudDataSource) {
-    fun build() = GetBeersStrategy(localDataSource, cloudDataSource)
+    fun build() = GetBeersStrategy(queryLocalDataSource, localDataSource, cloudDataSource)
   }
 }

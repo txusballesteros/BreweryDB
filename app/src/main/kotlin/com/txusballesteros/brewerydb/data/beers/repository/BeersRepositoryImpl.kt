@@ -24,23 +24,19 @@ import com.txusballesteros.brewerydb.data.beers.strategy.GetBeersStrategy
 import com.txusballesteros.brewerydb.data.beers.strategy.GetNextPageBeersStrategy
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.model.BeerDataModelMapper
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModelMapper
 import com.txusballesteros.brewerydb.data.strategy.Strategy
 import com.txusballesteros.brewerydb.domain.model.Beer
-import com.txusballesteros.brewerydb.domain.model.BeersQuery
 import com.txusballesteros.brewerydb.domain.repository.BeersRepository
 import com.txusballesteros.brewerydb.domain.repository.Repository
 import javax.inject.Inject
 
 class BeersRepositoryImpl @Inject constructor(private val getBeersStrategy: GetBeersStrategy.Builder,
                                               private val getNextPageBeersStrategy: GetNextPageBeersStrategy.Builder,
-                                              private val mapper: BeerDataModelMapper,
-                                              private val queryMapper: BeersQueryDataModelMapper): BeersRepository {
+                                              private val mapper: BeerDataModelMapper): BeersRepository {
   override fun flush() { }
 
-  override fun getBeers(query: BeersQuery, callback: Repository.RepositoryCallback<List<Beer>>) {
-    val queryData = queryMapper.map(query)
-    getBeersStrategy.build().execute(queryData, object: Strategy.Callback<List<BeerDataModel>>() {
+  override fun getBeers(callback: Repository.RepositoryCallback<List<Beer>>) {
+    getBeersStrategy.build().execute(callback = object: Strategy.Callback<List<BeerDataModel>>() {
       override fun onResult(result: List<BeerDataModel>?) {
         val beers = mapper.map(result!!)
         callback.onResult(beers)
@@ -48,9 +44,8 @@ class BeersRepositoryImpl @Inject constructor(private val getBeersStrategy: GetB
     })
   }
 
-  override fun getNextPageBeers(query: BeersQuery, callback: Repository.RepositoryCallback<List<Beer>>) {
-    val queryData = queryMapper.map(query)
-    getNextPageBeersStrategy.build().execute(queryData, object: Strategy.Callback<List<BeerDataModel>>() {
+  override fun getNextPageBeers(callback: Repository.RepositoryCallback<List<Beer>>) {
+    getNextPageBeersStrategy.build().execute(callback = object: Strategy.Callback<List<BeerDataModel>>() {
       override fun onResult(result: List<BeerDataModel>?) {
         val beers = mapper.map(result!!)
         callback.onResult(beers)

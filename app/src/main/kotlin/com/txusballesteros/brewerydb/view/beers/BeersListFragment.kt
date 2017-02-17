@@ -32,7 +32,6 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class BeersListFragment: AbsFragment(), BeersListPresenter.View {
@@ -44,6 +43,7 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
   @Inject lateinit var imageDownloader: ImageDownloader
   lateinit var adapter: BeerListAdapter
+  lateinit var endlessScrollListener: EndlessRecyclerViewScrollListener
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beers_list
@@ -72,18 +72,17 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
 
   private fun initializeList() {
     val layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    endlessScrollListener = object: EndlessRecyclerViewScrollListener(layoutManager) {
+      override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+        presenter.onRequestNextPage()
+      }
+    }
     adapter = BeerListAdapter(object: BeerListAdapter.OnBeerClickListener {
       override fun onBeerClick(beer: BeerViewModel) {
         presenter.onBeerClick(beer)
       }
     }, imageDownloader)
-    list.addOnScrollListener(object: EndlessRecyclerViewScrollListener(layoutManager) {
-      override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-        val message: CharSequence = "On Next Page"
-        activity.toast(message)
-        presenter.onRequestNextPage()
-      }
-    })
+    list.addOnScrollListener(endlessScrollListener)
     list.layoutManager = layoutManager
     list.adapter = adapter
     list.setHasFixedSize(true)

@@ -22,23 +22,26 @@ package com.txusballesteros.brewerydb.data.beers.strategy
 
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import com.txusballesteros.brewerydb.data.strategy.CloudStrategy
 import javax.inject.Inject
 
-class GetNextPageBeersStrategy private constructor(private val localDataSource: BeersLocalDataSource,
+class GetNextPageBeersStrategy private constructor(private val queryLocalDataSource: BeersQueryLocalDataSource,
+                                                   private val localDataSource: BeersLocalDataSource,
                                                    private val cloudDataSource: BeersCloudDataSource):
-                                CloudStrategy<BeersQueryDataModel, List<BeerDataModel>>() {
+                                CloudStrategy<Void, List<BeerDataModel>>() {
 
-  override fun onRequestCallToCloud(query: BeersQueryDataModel?): List<BeerDataModel>? {
-    val response = cloudDataSource.getNextPageBeers(query!!)
+  override fun onRequestCallToCloud(params: Void?): List<BeerDataModel>? {
+    val query = queryLocalDataSource.getQuery()
+    val response = cloudDataSource.getNextPageBeers(query)
     localDataSource.store(query, response)
     return response
   }
 
-  class Builder @Inject constructor(private val localDataSource: BeersLocalDataSource,
+  class Builder @Inject constructor(private val queryLocalDataSource: BeersQueryLocalDataSource,
+                                    private val localDataSource: BeersLocalDataSource,
                                     private val cloudDataSource: BeersCloudDataSource) {
-    fun build() = GetNextPageBeersStrategy(localDataSource, cloudDataSource)
+    fun build() = GetNextPageBeersStrategy(queryLocalDataSource, localDataSource, cloudDataSource)
   }
 }

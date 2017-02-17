@@ -21,7 +21,6 @@
 package com.txusballesteros.brewerydb.domain.usecase.beers
 
 import com.txusballesteros.brewerydb.domain.model.Beer
-import com.txusballesteros.brewerydb.domain.model.BeersQuery
 import com.txusballesteros.brewerydb.domain.repository.BeersRepository
 import com.txusballesteros.brewerydb.domain.repository.Repository
 import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
@@ -33,10 +32,10 @@ import javax.inject.Inject
 
 class GetNextPageBeersInteractor @Inject constructor(private val executor: ExecutorService,
                                                      private val beersRepository: BeersRepository): GetNextPageBeersUseCase {
-  override fun execute(query: BeersQuery, callback: UseCaseCallback<List<Beer>>) {
+  override fun execute(callback: UseCaseCallback<List<Beer>>) {
     doAsync(executorService = executor) {
       try {
-        beersRepository.getNextPageBeers(query, object : Repository.RepositoryCallback<List<Beer>> {
+        beersRepository.getNextPageBeers(object : Repository.RepositoryCallback<List<Beer>> {
           override fun onResult(result: List<Beer>) {
             uiThread {
               callback.onResult(result)

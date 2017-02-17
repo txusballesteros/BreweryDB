@@ -38,7 +38,7 @@ class BeersInMemoryLocalDataSource @Inject constructor(): BeersLocalDataSource {
     }
   }
 
-  override fun getBeers(query: BeersQueryDataModel): List<BeerDataModel> {
+  override fun getBeers(): List<BeerDataModel> {
     return cache.values.toList()
   }
 }
