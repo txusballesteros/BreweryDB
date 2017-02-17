@@ -21,7 +21,6 @@
 package com.txusballesteros.brewerydb.data.beers.datasource
 
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import java.util.*
 import javax.inject.Inject
 
@@ -32,7 +31,7 @@ class BeersInMemoryLocalDataSource @Inject constructor(): BeersLocalDataSource {
     cache.clear()
   }
 
-  override fun store(query: BeersQueryDataModel, beers: List<BeerDataModel>) {
+  override fun store(beers: List<BeerDataModel>) {
     if (!beers.isEmpty()) {
       beers.forEach { beer -> cache.put(beer.id, beer) }
     }

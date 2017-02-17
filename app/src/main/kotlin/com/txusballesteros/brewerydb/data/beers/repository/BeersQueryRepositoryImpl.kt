@@ -43,8 +43,8 @@ class BeersQueryRepositoryImpl @Inject constructor(private val getBeersQueryStra
   }
 
   override fun storeQuery(query: BeersQuery, callback: Repository.RepositoryEmptyCallback) {
-    val query = mapper.map(query)
-    storeBeersQueryStrategy.build().execute(query, object: Strategy.Callback<Void>() {
+    val dataQuery = mapper.map(query)
+    storeBeersQueryStrategy.build().execute(dataQuery, object: Strategy.Callback<Void>() {
       override fun onResult(result: Void?) {
         callback.onResult()
       }

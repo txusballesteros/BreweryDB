@@ -25,12 +25,12 @@ import javax.inject.Inject
 
 class BeerApiModelMapper @Inject constructor() {
   fun map(source: BeerApiResponse)
-      = map(source.beers, source.currentPage)
+      = map(source.beers)
 
-  fun map(source: List<BeerApiResponse.BeerApiModel>, page: Int)
-      = source.map { beer -> map(beer, page) }
+  fun map(source: List<BeerApiResponse.BeerApiModel>)
+      = source.map { beer -> map(beer) }
 
-  fun map(source: BeerApiResponse.BeerApiModel, page: Int)
+  fun map(source: BeerApiResponse.BeerApiModel)
       = BeerDataModel(source.id,
                       source.name,
                       source.displayName,
@@ -41,8 +41,7 @@ class BeerApiModelMapper @Inject constructor() {
                       source.isOrganic,
                       source.status,
                       map(source.labels),
-                      source.servingTemperature,
-                      page)
+                      source.servingTemperature)
 
   fun map(source: BeerApiResponse.LabelApiModel?)
       = BeerDataModel.LabelDataModel(source?.icon,

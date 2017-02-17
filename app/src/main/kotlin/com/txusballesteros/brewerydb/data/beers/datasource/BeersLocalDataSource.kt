@@ -21,10 +21,9 @@
 package com.txusballesteros.brewerydb.data.beers.datasource
 
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 
 interface BeersLocalDataSource {
   fun flush()
-  fun store(query: BeersQueryDataModel, beers: List<BeerDataModel>)
+  fun store(beers: List<BeerDataModel>)
   fun getBeers(): List<BeerDataModel>
 }

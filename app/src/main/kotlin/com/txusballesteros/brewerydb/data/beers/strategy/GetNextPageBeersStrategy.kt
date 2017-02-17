@@ -35,7 +35,7 @@ class GetNextPageBeersStrategy private constructor(private val queryLocalDataSou
   override fun onRequestCallToCloud(params: Void?): List<BeerDataModel>? {
     val query = queryLocalDataSource.getQuery()
     val response = cloudDataSource.getNextPageBeers(query)
-    localDataSource.store(query, response)
+    localDataSource.store(response)
     return response
   }
 

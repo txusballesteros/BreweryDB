@@ -24,6 +24,7 @@ import com.nhaarman.mockito_kotlin.*
 import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import com.txusballesteros.brewerydb.data.strategy.Strategy
@@ -45,9 +46,10 @@ class GetBeersStrategyTest: UnitTest() {
     private val BEER_LABEL = BeerDataModel.LabelDataModel("icon", "medium", "large")
     private val STYLE_ID = 2
     private val CURRENT_PAGE = 2
-    private val QUERY = BeersQueryDataModel(STYLE_ID, CURRENT_PAGE)
+    private val QUERY = BeersQueryDataModel(STYLE_ID)
   }
 
+  lateinit var queryLocalDataSource: BeersQueryLocalDataSource
   lateinit var localDataSource: BeersLocalDataSource
   lateinit var cloudDataSource: BeersCloudDataSource
   lateinit var query: BeersQueryDataModel
@@ -56,35 +58,9 @@ class GetBeersStrategyTest: UnitTest() {
   override fun onPrepareTest() {
     localDataSource = mock()
     cloudDataSource = mock()
-    query = BeersQueryDataModel(1, 1)
-    strategy = GetBeersStrategy.Builder(localDataSource, cloudDataSource).build()
-  }
-
-  @Test
-  fun shouldGetFromCloud() {
-    val beers = ArrayList<BeerDataModel>()
-    beers.add(BeerDataModel(BEER_ID,
-                            BEER_NAME,
-                            BEER_DISPLAY_NAME,
-                            BEER_DESCRIPTION,
-                            STYLE_ID,
-                            BEER_ABV,
-                            BEER_GLASSWARE_ID,
-                            BEER_IS_ORGANIC,
-                            BEER_STATUS,
-                            BEER_LABEL,
-                            BEER_SERVING_TEMP,
-                            CURRENT_PAGE))
-    whenever(localDataSource.getBeers(any())).thenReturn(null)
-    whenever(cloudDataSource.getBeers(any())).thenReturn(beers)
-
-    strategy.execute(query, object: Strategy.Callback<List<BeerDataModel>>() {
-      override fun onResult(result: List<BeerDataModel>?) {
-        Assert.assertFalse(result!!.isEmpty())
-        verify(localDataSource).getBeers(any())
-        verify(cloudDataSource).getBeers(any())
-      }
-    })
+    queryLocalDataSource = mock()
+    query = BeersQueryDataModel(1)
+    strategy = GetBeersStrategy.Builder(queryLocalDataSource, localDataSource, cloudDataSource).build()
   }
 
   @Test
@@ -100,15 +76,14 @@ class GetBeersStrategyTest: UnitTest() {
                             BEER_IS_ORGANIC,
                             BEER_STATUS,
                             BEER_LABEL,
-                            BEER_SERVING_TEMP,
-                            CURRENT_PAGE))
-    whenever(localDataSource.getBeers(any())).thenReturn(beers)
+                            BEER_SERVING_TEMP))
+    whenever(localDataSource.getBeers()).thenReturn(beers)
     whenever(cloudDataSource.getBeers(any())).thenReturn(null)
 
-    strategy.execute(query, object: Strategy.Callback<List<BeerDataModel>>() {
+    strategy.execute(callback = object: Strategy.Callback<List<BeerDataModel>>() {
       override fun onResult(result: List<BeerDataModel>?) {
         Assert.assertFalse(result!!.isEmpty())
-        verify(localDataSource).getBeers(any())
+        verify(localDataSource).getBeers()
         verify(cloudDataSource, never()).getBeers(any())
       }
     })

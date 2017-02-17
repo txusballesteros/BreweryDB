@@ -47,7 +47,7 @@ class BeersCloudDataSourceTest: UnitTest() {
     private val BEER_LABEL = BeerApiResponse.LabelApiModel("icon", "medium", "large")
     private val STYLE_ID = 2
     private val CURRENT_PAGE = 2
-    private val QUERY = BeersQueryDataModel(STYLE_ID, CURRENT_PAGE)
+    private val QUERY = BeersQueryDataModel(STYLE_ID)
   }
 
   lateinit var api: BeersApi
@@ -91,6 +91,5 @@ class BeersCloudDataSourceTest: UnitTest() {
     Assert.assertEquals(BEER_LABEL.icon, response.first().label?.icon)
     Assert.assertEquals(BEER_LABEL.medium, response.first().label?.medium)
     Assert.assertEquals(BEER_LABEL.large, response.first().label?.large)
-    Assert.assertEquals(QUERY.page, response.first().currentPage)
   }
 }

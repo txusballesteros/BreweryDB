@@ -39,7 +39,7 @@ class GetBeersStrategy private constructor(private val queryLocalDataSource: Bee
   override fun onRequestCallToCloud(params: Void?): List<BeerDataModel>? {
     val query = queryLocalDataSource.getQuery()
     val response = cloudDataSource.getBeers(query)
-    localDataSource.store(query, response)
+    localDataSource.store(response)
     return response
   }
 

@@ -30,8 +30,7 @@ data class BeerViewModel(val id: String,
                 val isOrganic: String?,
                 val status: String?,
                 val label: LabelViewModel?,
-                val servingTemperature: String?,
-                val currentPage: Int) {
+                val servingTemperature: String?) {
 
   data class LabelViewModel(val icon: String?, val medium: String?, val large: String?)
 }

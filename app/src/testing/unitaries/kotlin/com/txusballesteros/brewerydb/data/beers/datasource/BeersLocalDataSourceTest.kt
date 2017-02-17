@@ -22,15 +22,13 @@ package com.txusballesteros.brewerydb.data.beers.datasource
 
 import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import org.junit.Assert
 import org.junit.Test
 import java.util.*
 
 class BeersLocalDataSourceTest: UnitTest() {
   companion object {
-    private val BEER_ID_A = "L76Lnq"
-    private val BEER_ID_B = "QNl76l"
+    private val BEER_ID = "L76Lnq"
     private val BEER_NAME = "Burton India Pale Ale"
     private val BEER_DISPLAY_NAME = "Burton India Pale Ale Display"
     private val BEER_DESCRIPTION = "This English Pale Ale is modeled after..."
@@ -40,11 +38,7 @@ class BeersLocalDataSourceTest: UnitTest() {
     private val BEER_STATUS = "verified"
     private val BEER_SERVING_TEMP = "5"
     private val BEER_LABEL = BeerDataModel.LabelDataModel("icon", "medium", "large")
-    private val STYLE_ID_A = 2
-    private val STYLE_ID_B = 66
-    private val CURRENT_PAGE = 2
-    private val QUERY_A = BeersQueryDataModel(STYLE_ID_A, CURRENT_PAGE)
-    private val QUERY_B = BeersQueryDataModel(STYLE_ID_B, CURRENT_PAGE)
+    private val STYLE_ID = 2
   }
 
   lateinit var dataSource: BeersLocalDataSource
@@ -56,28 +50,27 @@ class BeersLocalDataSourceTest: UnitTest() {
   @Test
   fun shouldStoreBeers() {
     val beers = ArrayList<BeerDataModel>()
-    beers.add(BeerDataModel(BEER_ID_A,
+    beers.add(BeerDataModel(BEER_ID,
                             BEER_NAME,
                             BEER_DISPLAY_NAME,
                             BEER_DESCRIPTION,
-                            STYLE_ID_A,
+                            STYLE_ID,
                             BEER_ABV,
                             BEER_GLASSWARE_ID,
                             BEER_IS_ORGANIC,
                             BEER_STATUS,
                             BEER_LABEL,
-                            BEER_SERVING_TEMP,
-                            CURRENT_PAGE))
+                            BEER_SERVING_TEMP))
 
-    dataSource.store(QUERY_A, beers)
-    val result = dataSource.getBeers(QUERY_A)
+    dataSource.store(beers)
+    val result = dataSource.getBeers()
 
     Assert.assertFalse(result.isEmpty())
-    Assert.assertEquals(BEER_ID_A, result.first().id)
+    Assert.assertEquals(BEER_ID, result.first().id)
     Assert.assertEquals(BEER_NAME, result.first().name)
     Assert.assertEquals(BEER_DISPLAY_NAME, result.first().displayName)
     Assert.assertEquals(BEER_DESCRIPTION, result.first().description)
-    Assert.assertEquals(STYLE_ID_A, result.first().styleId)
+    Assert.assertEquals(STYLE_ID, result.first().styleId)
     Assert.assertEquals(BEER_ABV, result.first().abv)
     Assert.assertEquals(BEER_GLASSWARE_ID, result.first().glasswareId)
     Assert.assertEquals(BEER_IS_ORGANIC, result.first().isOrganic)
@@ -86,44 +79,27 @@ class BeersLocalDataSourceTest: UnitTest() {
     Assert.assertEquals(BEER_LABEL.icon, result.first().label?.icon)
     Assert.assertEquals(BEER_LABEL.medium, result.first().label?.medium)
     Assert.assertEquals(BEER_LABEL.large, result.first().label?.large)
-    Assert.assertEquals(QUERY_A.page, result.first().currentPage)
   }
 
   @Test
   fun shouldGetBeers() {
-    val beersForQueryA = ArrayList<BeerDataModel>()
-    beersForQueryA.add(BeerDataModel(BEER_ID_A,
-                                     BEER_NAME,
-                                     BEER_DISPLAY_NAME,
-                                     BEER_DESCRIPTION,
-                                     STYLE_ID_A,
-                                     BEER_ABV,
-                                     BEER_GLASSWARE_ID,
-                                     BEER_IS_ORGANIC,
-                                     BEER_STATUS,
-                                     BEER_LABEL,
-                                     BEER_SERVING_TEMP,
-                                     CURRENT_PAGE))
+    val beers = ArrayList<BeerDataModel>()
+    beers.add(BeerDataModel(BEER_ID,
+                            BEER_NAME,
+                            BEER_DISPLAY_NAME,
+                            BEER_DESCRIPTION,
+                            STYLE_ID,
+                            BEER_ABV,
+                            BEER_GLASSWARE_ID,
+                            BEER_IS_ORGANIC,
+                            BEER_STATUS,
+                            BEER_LABEL,
+                            BEER_SERVING_TEMP))
 
-    val beersForQueryB = ArrayList<BeerDataModel>()
-    beersForQueryB.add(BeerDataModel(BEER_ID_B,
-                                     BEER_NAME,
-                                     BEER_DISPLAY_NAME,
-                                     BEER_DESCRIPTION,
-                                     STYLE_ID_A,
-                                     BEER_ABV,
-                                     BEER_GLASSWARE_ID,
-                                     BEER_IS_ORGANIC,
-                                     BEER_STATUS,
-                                     BEER_LABEL,
-                                     BEER_SERVING_TEMP,
-                                     CURRENT_PAGE))
-
-    dataSource.store(QUERY_A, beersForQueryA)
-    dataSource.store(QUERY_B, beersForQueryB)
-    val result = dataSource.getBeers(QUERY_B)
+    dataSource.store(beers)
+    val result = dataSource.getBeers()
 
     Assert.assertFalse(result.isEmpty())
-    Assert.assertEquals(BEER_ID_B, result.first().id)
+    Assert.assertEquals(BEER_ID, result.first().id)
   }
 }
