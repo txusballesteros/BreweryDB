@@ -18,7 +18,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.styles.datasource
+package com.txusballesteros.brewerydb.data.categories.datasource
 
 import com.txusballesteros.brewerydb.data.model.CategoryDataModel
 

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright Txus Ballesteros 2017 (@txusballesteros)
+ *
+ * This file is part of Foobar.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+-->
+<android.support.v7.widget.CardView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  style="@style/card"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingTop="@dimen/padding_normal"
+      android:paddingBottom="@dimen/padding_normal"
+      android:paddingLeft="@dimen/padding_small"
+      android:paddingRight="@dimen/padding_small"
+      android:orientation="vertical">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/label"
+        android:layout_width="@dimen/label_small"
+        android:layout_height="@dimen/label_small"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center_horizontal" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/displayName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="Short Name"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:fontFamily="sans-serif-thin"
+        android:textSize="15sp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        tools:text="Description..."/>
+
+  </LinearLayout>
+</android.support.v7.widget.CardView>

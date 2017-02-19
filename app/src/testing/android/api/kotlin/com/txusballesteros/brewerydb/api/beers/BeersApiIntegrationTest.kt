@@ -18,29 +18,33 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.test.styles
+package com.txusballesteros.brewerydb.api.beers
 
-import com.txusballesteros.brewerydb.api.styles.StylesApi
-import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
-import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
-import com.txusballesteros.brewerydb.api.test.ApiIntegrationTest
+import com.txusballesteros.brewerydb.api.ApiIntegrationTest
+import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
 import org.junit.Assert
 import org.junit.Test
 import retrofit2.Retrofit
 
-class StylesApiIntegrationTest : ApiIntegrationTest() {
-  lateinit var api : StylesApi
+class BeersApiIntegrationTest: ApiIntegrationTest() {
+  companion object {
+    private val STYLE_ID = 1
+  }
+
+  lateinit var api : BeersApi
 
   override fun onPrepareTest(retrofit: Retrofit) {
-    val service = retrofit.create(StylesRetrofitService::class.java)
-    this.api = StylesRetrofitApi(service)
+    val service = retrofit.create(BeersRetrofitService::class.java)
+    this.api = BeersRetrofitApi(service)
   }
 
   @Test
-  fun shouldGetStyles() {
-    val response = api.getStyles()
+  fun shouldGetBeers() {
+    val query = BeersQueryApiModel(STYLE_ID)
+
+    val response = api.getBeers(query)
 
     Assert.assertEquals(STATUS_SUCCESS, response.status)
-    Assert.assertFalse(response.styles.isEmpty())
+    Assert.assertFalse(response.beers.isEmpty())
   }
 }

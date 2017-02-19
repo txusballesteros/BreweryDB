@@ -23,5 +23,5 @@ package com.txusballesteros.brewerydb.api.categories
 import com.txusballesteros.brewerydb.api.model.CategoryApiResponse
 
 interface CategoriesApi {
-  fun getCategories() : CategoryApiResponse
+  fun getCategories(): CategoryApiResponse
 }

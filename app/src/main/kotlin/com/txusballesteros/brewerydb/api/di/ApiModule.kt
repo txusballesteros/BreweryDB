@@ -20,22 +20,24 @@
  */
 package com.txusballesteros.brewerydb.api.di
 
+import com.txusballesteros.brewerydb.api.beers.BeersApi
+import com.txusballesteros.brewerydb.api.beers.BeersRetrofitApi
 import com.txusballesteros.brewerydb.api.categories.CategoriesApi
 import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitApi
 import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class ApiModule {
-  @Provides
-  fun provideCategoriesApi(api: CategoriesRetrofitApi): CategoriesApi {
-    return api
-  }
+  @Singleton @Provides
+  fun provideCategoriesApi(api: CategoriesRetrofitApi): CategoriesApi = api
 
-  @Provides
-  fun provideStylesApi(api: StylesRetrofitApi) : StylesApi {
-    return api
-  }
+  @Singleton @Provides
+  fun provideStylesApi(api: StylesRetrofitApi) : StylesApi = api
+
+  @Singleton @Provides
+  fun provideBeersApi(api: BeersRetrofitApi): BeersApi = api
 }

@@ -21,6 +21,10 @@
 package com.txusballesteros.brewerydb.domain.repository
 
 interface Repository {
+  interface RepositoryEmptyCallback {
+    fun onResult() { }
+  }
+
   interface RepositoryCallback<in T> {
     fun onResult(result: T) { }
   }

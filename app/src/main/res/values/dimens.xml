@@ -25,4 +25,5 @@
   <dimen name="horizontal_margin">8dp</dimen>
   <dimen name="padding_small">4dp</dimen>
   <dimen name="padding_normal">8dp</dimen>
+  <dimen name="label_small">80dp</dimen>
 </resources>

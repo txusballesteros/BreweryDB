@@ -25,10 +25,10 @@ import com.nhaarman.mockito_kotlin.never
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import com.txusballesteros.brewerydb.UnitTest
+import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesLocalDataSource
 import com.txusballesteros.brewerydb.data.model.CategoryDataModel
 import com.txusballesteros.brewerydb.data.strategy.Strategy
-import com.txusballesteros.brewerydb.data.styles.datasource.CategoriesCloudDataSource
 import org.junit.Assert
 import org.junit.Test
 import java.util.*

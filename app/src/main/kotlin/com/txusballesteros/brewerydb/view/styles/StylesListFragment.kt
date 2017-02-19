@@ -30,7 +30,7 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
-import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class StylesListFragment : AbsFragment(), StylesListPresenter.View {
@@ -82,7 +82,7 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
   private fun initializeList() {
     adapter = StyleListAdapter(object: StyleListAdapter.OnStyleClickListener {
       override fun onStyleClick(style: StyleViewModel) {
-        Toast.makeText(activity, style.name, Toast.LENGTH_SHORT).show()
+        presenter.onStyleClick(style)
       }
     })
     list.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
@@ -96,7 +96,7 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
     adapter.notifyDataSetChanged()
   }
 
-  override fun renderError(message: String) {
-    toast("Upps!! " + message)
+  override fun renderError() {
+    activity.toast("Upps!!")
   }
 }

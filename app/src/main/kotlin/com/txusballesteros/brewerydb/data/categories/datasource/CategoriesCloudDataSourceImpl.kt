@@ -23,7 +23,6 @@ package com.txusballesteros.brewerydb.data.categories.datasource
 import com.txusballesteros.brewerydb.api.categories.CategoriesApi
 import com.txusballesteros.brewerydb.api.model.CategoryApiModelMapper
 import com.txusballesteros.brewerydb.data.model.CategoryDataModel
-import com.txusballesteros.brewerydb.data.styles.datasource.CategoriesCloudDataSource
 import javax.inject.Inject
 
 class CategoriesCloudDataSourceImpl @Inject constructor(private val api: CategoriesApi,

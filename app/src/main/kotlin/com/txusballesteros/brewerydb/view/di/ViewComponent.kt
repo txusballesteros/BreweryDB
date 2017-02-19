@@ -23,7 +23,9 @@ package com.txusballesteros.brewerydb.view.di
 import com.txusballesteros.brewerydb.di.ApplicationComponent
 import com.txusballesteros.brewerydb.di.scopes.PerView
 import com.txusballesteros.brewerydb.domain.usecase.di.UseCasesModule
+import com.txusballesteros.brewerydb.instrumentation.di.InstrumentationModule
 import com.txusballesteros.brewerydb.presentation.di.PresentationModule
+import com.txusballesteros.brewerydb.view.beers.BeersListFragment
 import com.txusballesteros.brewerydb.view.categories.CategoriesListFragment
 import com.txusballesteros.brewerydb.view.styles.StylesListFragment
 import dagger.Component
@@ -32,10 +34,12 @@ import dagger.Component
 @Component(dependencies = arrayOf(
                ApplicationComponent::class),
            modules = arrayOf(
+               InstrumentationModule::class,
                PresentationModule::class,
                UseCasesModule::class
            ))
 interface ViewComponent {
   fun inject(view: CategoriesListFragment)
   fun inject(view: StylesListFragment)
+  fun inject(view: BeersListFragment)
 }

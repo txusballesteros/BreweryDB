@@ -25,10 +25,11 @@ import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 
 interface StylesListPresenter : Presenter<StylesListPresenter.View> {
   fun onRequestStyles()
+  fun onStyleClick(style: StyleViewModel)
 
   interface View : Presenter.View {
     fun getCategoryId() : Int
     fun renderStyles(styles: List<StyleViewModel>)
-    fun renderError(message: String)
+    fun renderError()
   }
 }

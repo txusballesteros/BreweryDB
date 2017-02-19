@@ -20,7 +20,7 @@
  */
 package com.txusballesteros.brewerydb.api.categories
 
-import com.txusballesteros.brewerydb.api.test.ApiIntegrationTest
+import com.txusballesteros.brewerydb.api.ApiIntegrationTest
 import org.junit.Assert
 import org.junit.Test
 import retrofit2.Retrofit
