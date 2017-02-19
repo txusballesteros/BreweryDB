@@ -26,13 +26,16 @@ import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetNextPageBeersUseCase
+import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import javax.inject.Inject
 
 class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: GetBeersUseCase,
                                                  private val getNextPageBeersUseCase: GetNextPageBeersUseCase,
-                                                 private val mapper: BeerViewModelMapper): AbsPresenter<BeersListPresenter.View>(),
-                              BeersListPresenter {
+                                                 private val mapper: BeerViewModelMapper,
+                                                 private val navigator: Navigator):
+                              AbsPresenter<BeersListPresenter.View>(), BeersListPresenter {
+
   override fun onRequestBeers() {
     getBeersUseCase.execute(object: UseCaseCallback<List<Beer>>() {
       override fun onResult(result: List<Beer>) {
@@ -51,5 +54,7 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
     })
   }
 
-  override fun onBeerClick(beer: BeerViewModel) { }
+  override fun onBeerClick(beer: BeerViewModel) {
+    navigator.navigateToBeerDetail(getView(), beer.id)
+  }
 }

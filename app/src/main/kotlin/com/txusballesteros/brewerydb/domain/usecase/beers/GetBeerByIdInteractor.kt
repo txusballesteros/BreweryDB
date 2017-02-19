@@ -20,8 +20,8 @@
  */
 package com.txusballesteros.brewerydb.domain.usecase.beers
 
-import com.txusballesteros.brewerydb.domain.model.BeersQuery
-import com.txusballesteros.brewerydb.domain.repository.BeersQueryRepository
+import com.txusballesteros.brewerydb.domain.model.Beer
+import com.txusballesteros.brewerydb.domain.repository.BeersRepository
 import com.txusballesteros.brewerydb.domain.repository.Repository
 import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 import com.txusballesteros.brewerydb.exception.ApplicationException
@@ -30,13 +30,14 @@ import org.jetbrains.anko.uiThread
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
-class GetBeersQueryInteractor @Inject constructor(private val executor: ExecutorService,
-                                                  private val repository: BeersQueryRepository): GetBeersQueryUseCase {
-  override fun execute(callback: UseCaseCallback<BeersQuery>) {
+class GetBeerByIdInteractor  @Inject constructor(private val executor: ExecutorService,
+                                                 private val repository: BeersRepository): GetBeerByIdUseCase {
+
+  override fun execute(beerId: String, callback: UseCaseCallback<Beer>) {
     doAsync(executorService = executor) {
       try {
-        repository.getQuery(object : Repository.RepositoryCallback<BeersQuery> {
-          override fun onResult(result: BeersQuery) {
+        repository.getBeerById(beerId, object : Repository.RepositoryCallback<Beer> {
+          override fun onResult(result: Beer) {
             uiThread {
               callback.onResult(result)
             }

@@ -18,34 +18,22 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.beers.datasource
+package com.txusballesteros.brewerydb.view.beers
 
-import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import java.util.*
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.view.AbsActivity
+import com.txusballesteros.brewerydb.view.AbsFragment
 
-class BeersInMemoryLocalDataSource @Inject constructor(): BeersLocalDataSource {
-  val cache: MutableMap<String, BeerDataModel> = HashMap()
-
-  override fun flush() {
-    cache.clear()
+class BeerDetailActivity: AbsActivity() {
+  companion object {
+    val EXTRA_BEER_ID = "extra:beerId"
   }
 
-  override fun store(beers: List<BeerDataModel>) {
-    if (!beers.isEmpty()) {
-      beers.forEach { beer -> cache.put(beer.id, beer) }
-    }
+  override fun onRequestFragment(): AbsFragment {
+    val beerId = getBeerId()
+    return BeerDetailFragment.newInstance(beerId)
   }
 
-  override fun store(beer: BeerDataModel) {
-    cache.put(beer.id, beer)
-  }
-
-  override fun getBeers(): List<BeerDataModel> {
-    return cache.values.toList()
-  }
-
-  override fun getBeerById(beerId: String): BeerDataModel? {
-    return cache[beerId]
+  fun getBeerId(): String {
+    return intent.extras.getString(EXTRA_BEER_ID)
   }
 }

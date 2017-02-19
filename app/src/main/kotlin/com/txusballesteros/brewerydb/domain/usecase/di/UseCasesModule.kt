@@ -37,6 +37,9 @@ class UseCasesModule {
   fun provideGetStylesUseCase(useCase: GetStylesInteractor): GetStylesUseCase = useCase
 
   @Provides
+  fun provideGetBeerByIdUseCase(useCase: GetBeerByIdInteractor): GetBeerByIdUseCase = useCase
+
+  @Provides
   fun provideGetBeersUseCase(useCase: GetBeersInteractor): GetBeersUseCase = useCase
 
   @Provides

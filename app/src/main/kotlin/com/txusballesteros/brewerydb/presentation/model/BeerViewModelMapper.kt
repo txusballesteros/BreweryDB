@@ -31,7 +31,7 @@ class BeerViewModelMapper @Inject constructor() {
   fun map(source: Beer)
       = BeerViewModel(source.id,
                       source.name,
-                      source.displayName,
+                      source.displayName ?: "NA",
                       source.description ?: "NA",
                       source.styleId,
                       source.abv,

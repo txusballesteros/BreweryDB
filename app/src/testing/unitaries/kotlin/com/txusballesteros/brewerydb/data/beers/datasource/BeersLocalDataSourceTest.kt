@@ -102,4 +102,26 @@ class BeersLocalDataSourceTest: UnitTest() {
     Assert.assertFalse(result.isEmpty())
     Assert.assertEquals(BEER_ID, result.first().id)
   }
+
+  @Test
+  fun shouldGetBeerById() {
+    val beers = ArrayList<BeerDataModel>()
+    beers.add(BeerDataModel(BEER_ID,
+                            BEER_NAME,
+                            BEER_DISPLAY_NAME,
+                            BEER_DESCRIPTION,
+                            STYLE_ID,
+                            BEER_ABV,
+                            BEER_GLASSWARE_ID,
+                            BEER_IS_ORGANIC,
+                            BEER_STATUS,
+                            BEER_LABEL,
+                            BEER_SERVING_TEMP))
+
+    dataSource.store(beers)
+    val result = dataSource.getBeerById(BEER_ID)
+
+    Assert.assertNotNull(result)
+    Assert.assertEquals(BEER_ID, result!!.id)
+  }
 }

@@ -18,34 +18,6 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.beers.datasource
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import java.util.*
-import javax.inject.Inject
-
-class BeersInMemoryLocalDataSource @Inject constructor(): BeersLocalDataSource {
-  val cache: MutableMap<String, BeerDataModel> = HashMap()
-
-  override fun flush() {
-    cache.clear()
-  }
-
-  override fun store(beers: List<BeerDataModel>) {
-    if (!beers.isEmpty()) {
-      beers.forEach { beer -> cache.put(beer.id, beer) }
-    }
-  }
-
-  override fun store(beer: BeerDataModel) {
-    cache.put(beer.id, beer)
-  }
-
-  override fun getBeers(): List<BeerDataModel> {
-    return cache.values.toList()
-  }
-
-  override fun getBeerById(beerId: String): BeerDataModel? {
-    return cache[beerId]
-  }
-}
+data class LabelApiModel(val icon: String?, val medium: String?, val large: String?)

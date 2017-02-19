@@ -20,6 +20,7 @@
  */
 package com.txusballesteros.brewerydb.data.beers.repository
 
+import com.txusballesteros.brewerydb.data.beers.strategy.GetBeerByIdStrategy
 import com.txusballesteros.brewerydb.data.beers.strategy.GetBeersStrategy
 import com.txusballesteros.brewerydb.data.beers.strategy.GetNextPageBeersStrategy
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
@@ -32,8 +33,17 @@ import javax.inject.Inject
 
 class BeersRepositoryImpl @Inject constructor(private val getBeersStrategy: GetBeersStrategy.Builder,
                                               private val getNextPageBeersStrategy: GetNextPageBeersStrategy.Builder,
+                                              private val getBeerByIdStrategy: GetBeerByIdStrategy.Builder,
                                               private val mapper: BeerDataModelMapper): BeersRepository {
-  override fun flush() { }
+
+  override fun getBeerById(beerId: String, callback: Repository.RepositoryCallback<Beer>) {
+    getBeerByIdStrategy.build().execute(beerId, object: Strategy.Callback<BeerDataModel>() {
+      override fun onResult(result: BeerDataModel?) {
+        val beers = mapper.map(result!!)
+        callback.onResult(beers)
+      }
+    })
+  }
 
   override fun getBeers(callback: Repository.RepositoryCallback<List<Beer>>) {
     getBeersStrategy.build().execute(callback = object: Strategy.Callback<List<BeerDataModel>>() {

@@ -18,34 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.beers.datasource
+package com.txusballesteros.brewerydb.presentation.beers
 
-import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import java.util.*
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.domain.model.BeerViewModel
+import com.txusballesteros.brewerydb.presentation.Presenter
 
-class BeersInMemoryLocalDataSource @Inject constructor(): BeersLocalDataSource {
-  val cache: MutableMap<String, BeerDataModel> = HashMap()
+interface BeerDetailPresenter: Presenter<BeerDetailPresenter.View> {
+  fun onRequestBeer(beerId: String)
 
-  override fun flush() {
-    cache.clear()
-  }
-
-  override fun store(beers: List<BeerDataModel>) {
-    if (!beers.isEmpty()) {
-      beers.forEach { beer -> cache.put(beer.id, beer) }
-    }
-  }
-
-  override fun store(beer: BeerDataModel) {
-    cache.put(beer.id, beer)
-  }
-
-  override fun getBeers(): List<BeerDataModel> {
-    return cache.values.toList()
-  }
-
-  override fun getBeerById(beerId: String): BeerDataModel? {
-    return cache[beerId]
+  interface View: Presenter.View {
+    fun renderBeer(beer: BeerViewModel)
   }
 }

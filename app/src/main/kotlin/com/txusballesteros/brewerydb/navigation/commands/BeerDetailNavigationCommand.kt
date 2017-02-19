@@ -18,34 +18,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.beers.datasource
+package com.txusballesteros.brewerydb.navigation.commands
 
-import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import java.util.*
-import javax.inject.Inject
+import android.content.Context
+import android.content.Intent
+import com.txusballesteros.brewerydb.view.beers.BeerDetailActivity
+import org.jetbrains.anko.intentFor
 
-class BeersInMemoryLocalDataSource @Inject constructor(): BeersLocalDataSource {
-  val cache: MutableMap<String, BeerDataModel> = HashMap()
-
-  override fun flush() {
-    cache.clear()
-  }
-
-  override fun store(beers: List<BeerDataModel>) {
-    if (!beers.isEmpty()) {
-      beers.forEach { beer -> cache.put(beer.id, beer) }
-    }
-  }
-
-  override fun store(beer: BeerDataModel) {
-    cache.put(beer.id, beer)
-  }
-
-  override fun getBeers(): List<BeerDataModel> {
-    return cache.values.toList()
-  }
-
-  override fun getBeerById(beerId: String): BeerDataModel? {
-    return cache[beerId]
+class BeerDetailNavigationCommand(private val beerId: String): NavigationCommand() {
+  override fun onRequestIntent(context: Context): Intent {
+    return context.intentFor<BeerDetailActivity>(
+        BeerDetailActivity.EXTRA_BEER_ID to beerId
+    )
   }
 }

@@ -29,6 +29,7 @@ import retrofit2.Retrofit
 class BeersApiIntegrationTest: ApiIntegrationTest() {
   companion object {
     private val STYLE_ID = 1
+    private val BEER_ID = "2NLrMo"
   }
 
   lateinit var api : BeersApi
@@ -46,5 +47,13 @@ class BeersApiIntegrationTest: ApiIntegrationTest() {
 
     Assert.assertEquals(STATUS_SUCCESS, response.status)
     Assert.assertFalse(response.beers.isEmpty())
+  }
+
+  @Test
+  fun shouldGetBeerById() {
+    val response = api.getBeerById(BEER_ID)
+
+    Assert.assertEquals(STATUS_SUCCESS, response.status)
+    Assert.assertEquals(BEER_ID, response.beer.id)
   }
 }

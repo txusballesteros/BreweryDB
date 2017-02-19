@@ -37,7 +37,8 @@
       </intent-filter>
     </activity>
     <activity android:name=".view.styles.StylesListActivity" />
-    <activity android:name=".view.beers.BeersListActivity"></activity>
+    <activity android:name=".view.beers.BeersListActivity" />
+    <activity android:name=".view.beers.BeerDetailActivity" />
   </application>
 
 </manifest>

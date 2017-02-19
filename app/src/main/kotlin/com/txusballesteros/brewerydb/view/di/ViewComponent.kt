@@ -28,6 +28,7 @@ import com.txusballesteros.brewerydb.presentation.di.PresentationModule
 import com.txusballesteros.brewerydb.view.beers.BeersListFragment
 import com.txusballesteros.brewerydb.view.categories.CategoriesListFragment
 import com.txusballesteros.brewerydb.view.styles.StylesListFragment
+import com.txusballesteros.brewerydb.view.beers.BeerDetailFragment
 import dagger.Component
 
 @PerView
@@ -42,4 +43,5 @@ interface ViewComponent {
   fun inject(view: CategoriesListFragment)
   fun inject(view: StylesListFragment)
   fun inject(view: BeersListFragment)
+  fun inject(view: BeerDetailFragment)
 }

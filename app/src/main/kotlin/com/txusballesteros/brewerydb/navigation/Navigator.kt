@@ -20,6 +20,7 @@
  */
 package com.txusballesteros.brewerydb.navigation
 
+import com.txusballesteros.brewerydb.navigation.commands.BeerDetailNavigationCommand
 import com.txusballesteros.brewerydb.navigation.commands.BeersListNavigationCommand
 import com.txusballesteros.brewerydb.navigation.commands.NavigationCommand
 import com.txusballesteros.brewerydb.navigation.commands.StylesListNavigationCommand
@@ -35,6 +36,11 @@ class Navigator @Inject constructor() {
 
   fun navigateToBeersList(from: Presenter.View?) {
     val navigationCommand = BeersListNavigationCommand()
+    navigate(from, navigationCommand)
+  }
+
+  fun navigateToBeerDetail(from: Presenter.View?, beerId: String) {
+    val navigationCommand = BeerDetailNavigationCommand(beerId)
     navigate(from, navigationCommand)
   }
 
