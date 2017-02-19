@@ -25,6 +25,8 @@ import android.view.View
 import android.view.ViewStub
 
 abstract class Behaviour {
+  private lateinit var view: View
+
   open fun inject(activity: Activity) {
     inject(activity.window.decorView.rootView)
   }
@@ -45,10 +47,15 @@ abstract class Behaviour {
     val layoutResourceId = onRequestLayoutResourceId()
     placeHolderView.layoutResource = layoutResourceId
     placeHolderView.setOnInflateListener { viewStub, view ->
+      this.view = view
       viewStub.visibility = View.VISIBLE
       onBehaviorReady(view)
     }
     placeHolderView.inflate()
+  }
+
+  protected fun getView(): View {
+    return view
   }
 
   abstract fun onRequestPlaceHolderId() : Int

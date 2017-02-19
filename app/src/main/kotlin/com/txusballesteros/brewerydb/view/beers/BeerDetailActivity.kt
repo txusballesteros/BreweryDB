@@ -20,12 +20,22 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
+import android.graphics.Color
+import android.os.Build
+import android.os.Bundle
 import com.txusballesteros.brewerydb.view.AbsActivity
 import com.txusballesteros.brewerydb.view.AbsFragment
 
 class BeerDetailActivity: AbsActivity() {
   companion object {
     val EXTRA_BEER_ID = "extra:beerId"
+  }
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      window.statusBarColor = Color.TRANSPARENT
+    }
   }
 
   override fun onRequestFragment(): AbsFragment {

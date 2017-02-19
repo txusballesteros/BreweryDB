@@ -25,7 +25,7 @@ import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
-import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
+import com.txusballesteros.brewerydb.view.behaviour.ToolbarWithImageBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_beer_detail.*
 import org.jetbrains.anko.support.v4.withArguments
@@ -43,7 +43,7 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   @Inject lateinit var presenter: BeerDetailPresenter
-  @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
+  @Inject lateinit var toolbarBehaviour : ToolbarWithImageBehaviour
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beer_detail
@@ -77,13 +77,21 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   override fun renderBeer(beer: BeerViewModel) {
     renderName(beer)
     renderDescription(beer)
+    renderLabel(beer)
   }
 
   private fun renderName(beer: BeerViewModel) {
+    toolbarBehaviour.setTitle(beer.displayName)
     name.text = beer.displayName
   }
 
   private fun renderDescription(beer: BeerViewModel) {
     description.text = beer.description
+  }
+
+  private fun renderLabel(beer: BeerViewModel) {
+    if (beer.label != null && beer.label.large != null) {
+      toolbarBehaviour.setLabel(beer.label.large)
+    }
   }
 }

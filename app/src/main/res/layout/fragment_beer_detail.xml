@@ -24,7 +24,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:layout_margin="@dimen/padding_normal">
+  android:layout_margin="@dimen/padding_normal"
+  android:background="@color/white">
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -44,7 +45,8 @@
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-condensed"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:fontFamily="sans-serif-thin"
         android:textSize="16sp"
         tools:text="Description..."/>
 

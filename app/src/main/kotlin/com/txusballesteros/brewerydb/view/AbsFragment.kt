@@ -37,6 +37,11 @@ abstract class AbsFragment : Fragment() {
 
   abstract fun onRequestLayoutResourceId() : Int
 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setHasOptionsMenu(true)
+  }
+
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     onRequestInjection()
     onRequestViewComposition()
