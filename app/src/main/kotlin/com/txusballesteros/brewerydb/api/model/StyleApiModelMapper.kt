@@ -8,9 +8,19 @@ open class StyleApiModelMapper @Inject constructor() {
       = source.map { style -> map(style) }
 
   fun map(source: StyleApiResponse.StyleApiModel)
-        = StyleDataModel(source.id, source.categoryId,
-          source.name, source.shortName, source.description ?: "",
-          source.ibuMin, source.ibuMax, source.abvMin,
-          source.abvMax, source.srmMin, source.srmMax,
-          source.ogMin, source.ogMax, source.fgMin, source.fgMax)
+        = StyleDataModel(source.id,
+                         source.categoryId,
+                         source.name,
+                         source.shortName,
+                         source.description ?: "",
+                         source.ibuMin ?: "",
+                         source.ibuMax ?: "",
+                         source.abvMin ?: "",
+                         source.abvMax ?: "",
+                         source.srmMin ?: "",
+                         source.srmMax ?: "",
+                         source.ogMin ?: "",
+                         source.ogMax ?: "",
+                         source.fgMin ?: "",
+                         source.fgMax ?: "")
 }
