@@ -24,6 +24,7 @@ import android.os.Bundle
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailPresenter
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarWithImageBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
@@ -72,6 +73,10 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   private fun getBeerId(): String {
     return arguments.getString(EXTRA_BEER_ID)
+  }
+
+  override fun renderStyle(style: StyleViewModel) {
+
   }
 
   override fun renderBeer(beer: BeerViewModel) {

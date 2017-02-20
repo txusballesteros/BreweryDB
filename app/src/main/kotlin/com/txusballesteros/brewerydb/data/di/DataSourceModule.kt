@@ -38,10 +38,10 @@ class DataSourceModule {
   @Provides
   fun provideCategoriesCloudDataSource(dataSource: CategoriesCloudDataSourceImpl): CategoriesCloudDataSource = dataSource
 
-  @Provides
+  @Singleton @Provides
   fun provideCategoriesLocalDataSource(dataSource: CategoriesInMemoryLocalDataSource): CategoriesLocalDataSource = dataSource
 
-  @Provides
+  @Singleton @Provides
   fun provideStylesLocalDataSource(dataSource: StylesInMemoryLocalDataSource) : StylesLocalDataSource = dataSource
 
   @Provides

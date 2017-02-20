@@ -39,6 +39,6 @@ abstract class AbsInMemoryDataSource<T : DataModel> {
   }
 
   fun getById(id: Int): T? {
-    return cache.get(id)
+    return cache[id]
   }
 }

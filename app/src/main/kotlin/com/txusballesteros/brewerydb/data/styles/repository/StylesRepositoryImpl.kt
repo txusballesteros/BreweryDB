@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.data.styles.repository
 
 import com.txusballesteros.brewerydb.data.model.StyleDataModelMapper
+import com.txusballesteros.brewerydb.data.styles.strategy.GetStyleByIdStrategy
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesByCategoryIdStrategy
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesStrategy
 import com.txusballesteros.brewerydb.domain.model.Style
@@ -29,6 +30,7 @@ import javax.inject.Inject
 
 class StylesRepositoryImpl @Inject constructor(private val getStylesStrategy: GetStylesStrategy.Builder,
                                                private val getStylesBuCategoryId: GetStylesByCategoryIdStrategy.Builder,
+                                               private val getStyleByIdStrategu: GetStyleByIdStrategy.Builder,
                                                private val styleDataMapper: StyleDataModelMapper):
                                    StylesRepository {
 
@@ -36,6 +38,13 @@ class StylesRepositoryImpl @Inject constructor(private val getStylesStrategy: Ge
     getStylesBuCategoryId.build().execute(categoryId, onResult = {
       val styles = styleDataMapper.map(it)
       onResult(styles!!)
+    })
+  }
+
+  override fun getStyleById(styleId: Int, onResult: (Style) -> Unit) {
+    getStyleByIdStrategu.build().execute(styleId, onResult =  {
+      val style = styleDataMapper.map(it!!)
+      onResult(style)
     })
   }
 

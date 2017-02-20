@@ -18,19 +18,25 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.domain.usecase.styles
 
 import com.txusballesteros.brewerydb.domain.model.Style
+import com.txusballesteros.brewerydb.domain.repository.StylesRepository
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
-class StyleViewModelMapper @Inject constructor() {
-  fun map(source: List<Style>)
-      = source.map { style -> map(style) }
+class GetStyleByIdInteractor @Inject constructor(private val executor: ExecutorService,
+                                                 private val repository: StylesRepository): GetStyleByIdUseCase {
 
-  fun map(source: Style)
-      = StyleViewModel(source.id, source.categoryId,
-                       source.name, source.shortName, source.description,
-                       source.ibuMin, source.ibuMax, source.abvMin,
-                       source.abvMax, source.srmMin, source.srmMax,
-                       source.ogMin, source.ogMax, source.fgMin, source.fgMax)
+  override fun execute(styleId: Int, onResult: (Style) -> Unit) {
+    doAsync (executorService = executor) {
+      repository.getStyleById(styleId, {
+        result -> uiThread {
+          onResult(result)
+        }
+      })
+    }
+  }
 }

@@ -30,5 +30,15 @@ data class StyleApiResponse(@SerializedName("data") val styles: List<StyleApiMod
                       val categoryId: Int,
                       val name: String,
                       val shortName: String,
-                      val description: String?)
+                      val description: String?,
+                      val ibuMin: String?,
+                      val ibuMax: String?,
+                      val abvMin: String?,
+                      val abvMax: String?,
+                      val srmMin: String?,
+                      val srmMax: String?,
+                      val ogMin: String?,
+                      val ogMax: String?,
+                      val fgMin: String?,
+                      val fgMax: String?)
 }

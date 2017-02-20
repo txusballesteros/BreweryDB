@@ -21,20 +21,37 @@
 package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.data.model.BeerViewModelMapper
+import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
+import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModelMapper
 import javax.inject.Inject
 
 class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase,
-                                                  private val mapper: BeerViewModelMapper):
+                                                  private val getStyleByIdUseCase: GetStyleByIdUseCase,
+                                                  private val mapper: BeerViewModelMapper,
+                                                  private val styleMapper: StyleViewModelMapper):
                               AbsPresenter<BeerDetailPresenter.View>(), BeerDetailPresenter {
+
+  lateinit var beer: BeerViewModel
 
   override fun onRequestBeer(beerId: String) {
     getBeerByIdUseCase.execute(beerId, {
-      val beer = mapper.map(it)
+      beer = mapper.map(it)
+      getStyle(beer.styleId)
       getView()?.renderBeer(beer)
     }, {
       getView()?.renderError()
     })
+  }
+
+  private fun getStyle(styleId: Int?) {
+    if (styleId != null) {
+      getStyleByIdUseCase.execute(styleId, {
+        val style = styleMapper.map(it)
+        getView()?.renderStyle(style)
+      })
+    }
   }
 }

@@ -24,5 +24,6 @@ import com.txusballesteros.brewerydb.domain.model.Style
 
 interface StylesRepository {
   fun getStyles(onResult: (List<Style>) -> Unit)
+  fun getStyleById(styleId: Int, onResult: (Style) -> Unit)
   fun getStylesByCategoryId(categoryId: Int, onResult: (List<Style>) -> Unit)
 }

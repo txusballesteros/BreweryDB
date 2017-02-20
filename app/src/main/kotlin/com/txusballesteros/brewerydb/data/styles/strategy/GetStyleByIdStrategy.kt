@@ -18,30 +18,24 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.styles.datasource
+package com.txusballesteros.brewerydb.data.styles.strategy
 
-import com.txusballesteros.brewerydb.data.AbsInMemoryDataSource
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import java.util.*
+import com.txusballesteros.brewerydb.data.strategy.LocalOrCloudStrategy
+import com.txusballesteros.brewerydb.data.strategy.LocalStrategy
+import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
+import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
 import javax.inject.Inject
 
-class StylesInMemoryLocalDataSource @Inject constructor(): AbsInMemoryDataSource<StyleDataModel>(), StylesLocalDataSource {
-
-  override fun getStylesByCategoryId(categoryId: Int): List<StyleDataModel> {
-    val result: MutableList<StyleDataModel> = ArrayList()
-    getAll().filterTo(result) { it.categoryId == categoryId }
-    return result.sortedBy { it.shortName }
+class GetStyleByIdStrategy private constructor(private val localDataSource: StylesLocalDataSource):
+                           LocalStrategy<Int, StyleDataModel>() {
+  override fun onRequestCallToLocal(params: Int?): StyleDataModel? {
+    return localDataSource.getStyleById(params!!)
   }
 
-  override fun getStyleById(styleId: Int): StyleDataModel? {
-    return getById(styleId)
-  }
-
-  override fun getStyles(): List<StyleDataModel> {
-    return getAll()
-  }
-
-  override fun store(styles: List<StyleDataModel>) {
-    addAll(styles)
+  class Builder @Inject constructor(val localDataSource: StylesLocalDataSource) {
+    fun build() : GetStyleByIdStrategy {
+      return GetStyleByIdStrategy(localDataSource)
+    }
   }
 }
