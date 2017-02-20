@@ -61,11 +61,13 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDowloader: 
   }
 
   override fun onBehaviorReady(view: View) {
-    val toolbar = view.findViewById(R.id.toolbar) as Toolbar
+    val toolbar = view.find<Toolbar>(R.id.toolbar)
+    val appBarLayout = activity.find<AppBarLayout>(R.id.appBarLayout)
     val params = view.layoutParams as AppBarLayout.LayoutParams
     params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
                          AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
     view.layoutParams = params
     activity.setSupportActionBar(toolbar)
+    appBarLayout.fitsSystemWindows = true
   }
 }

@@ -25,6 +25,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.txusballesteros.brewerydb.R
+import org.jetbrains.anko.find
 import javax.inject.Inject
 
 class ToolbarBehaviour @Inject constructor() : Behaviour() {
@@ -46,7 +47,7 @@ class ToolbarBehaviour @Inject constructor() : Behaviour() {
   }
 
   override fun onBehaviorReady(view: View) {
-    val toolbar = view.findViewById(R.id.toolbar) as Toolbar
+    val toolbar = view.find<Toolbar>(R.id.toolbar)
     toolbar.title = "Brewery DB"
     toolbar.subtitle = "The final beer directory..."
     activity.setSupportActionBar(toolbar)

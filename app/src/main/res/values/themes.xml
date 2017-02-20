@@ -20,20 +20,9 @@
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
 <resources>
-  <style name="card">
-    <item name="android:layout_margin">@dimen/padding_small</item>
-    <item name="android:background">@android:color/white</item>
-    <item name="cardUseCompatPadding">true</item>
-    <item name="cardElevation">2dp</item>
-    <item name="cardCornerRadius">3dp</item>
-    <item name="android:clickable">true</item>
-  </style>
-
-  <style name="toolbar_expanded_title">
-    <item name="android:textColor">@android:color/transparent</item>
-  </style>
-
-  <style name="toolbar_collapsed_title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-    <item name="android:textColor">@color/white</item>
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
   </style>
 </resources>
