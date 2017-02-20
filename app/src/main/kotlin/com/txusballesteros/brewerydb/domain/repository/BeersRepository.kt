@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.domain.repository
 import com.txusballesteros.brewerydb.domain.model.Beer
 
 interface BeersRepository {
-  fun getBeerById(beerId: String, callback: Repository.RepositoryCallback<Beer>)
+  fun getBeerById(beerId: String, onResult: (Beer) -> Unit)
   fun getBeers(callback: Repository.RepositoryCallback<List<Beer>>)
   fun getNextPageBeers(callback: Repository.RepositoryCallback<List<Beer>>)
 }

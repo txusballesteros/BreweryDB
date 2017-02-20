@@ -36,11 +36,11 @@ class BeersRepositoryImpl @Inject constructor(private val getBeersStrategy: GetB
                                               private val getBeerByIdStrategy: GetBeerByIdStrategy.Builder,
                                               private val mapper: BeerDataModelMapper): BeersRepository {
 
-  override fun getBeerById(beerId: String, callback: Repository.RepositoryCallback<Beer>) {
+  override fun getBeerById(beerId: String, onResult: (Beer) -> Unit) {
     getBeerByIdStrategy.build().execute(beerId, object: Strategy.Callback<BeerDataModel>() {
       override fun onResult(result: BeerDataModel?) {
         val beers = mapper.map(result!!)
-        callback.onResult(beers)
+        onResult(beers)
       }
     })
   }

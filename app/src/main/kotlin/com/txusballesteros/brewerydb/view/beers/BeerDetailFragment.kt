@@ -94,4 +94,6 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
       toolbarBehaviour.setLabel(beer.label.large)
     }
   }
+
+  override fun renderError() { }
 }

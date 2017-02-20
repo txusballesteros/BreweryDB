@@ -28,5 +28,6 @@ interface BeerDetailPresenter: Presenter<BeerDetailPresenter.View> {
 
   interface View: Presenter.View {
     fun renderBeer(beer: BeerViewModel)
+    fun renderError()
   }
 }
