@@ -24,6 +24,6 @@ import com.txusballesteros.brewerydb.domain.model.Beer
 
 interface BeersRepository {
   fun getBeerById(beerId: String, onResult: (Beer) -> Unit)
-  fun getBeers(callback: Repository.RepositoryCallback<List<Beer>>)
-  fun getNextPageBeers(callback: Repository.RepositoryCallback<List<Beer>>)
+  fun getBeers(onResult: (List<Beer>) -> Unit)
+  fun getNextPageBeers(onResult: (List<Beer>) -> Unit)
 }

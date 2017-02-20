@@ -27,7 +27,6 @@ import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
-import com.txusballesteros.brewerydb.data.strategy.Strategy
 import org.junit.Assert
 import org.junit.Test
 import java.util.*
@@ -78,12 +77,10 @@ class GetBeersStrategyTest: UnitTest() {
     whenever(localDataSource.getBeers()).thenReturn(beers)
     whenever(cloudDataSource.getBeers(any())).thenReturn(null)
 
-    strategy.execute(callback = object: Strategy.Callback<List<BeerDataModel>>() {
-      override fun onResult(result: List<BeerDataModel>?) {
-        Assert.assertFalse(result!!.isEmpty())
+    strategy.execute(onResult =  {
+        Assert.assertFalse(it!!.isEmpty())
         verify(localDataSource).getBeers()
         verify(cloudDataSource, never()).getBeers(any())
-      }
     })
   }
 }

@@ -22,9 +22,6 @@ package com.txusballesteros.brewerydb.domain.usecase.beers
 
 import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.repository.BeersRepository
-import com.txusballesteros.brewerydb.domain.repository.Repository
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
-import com.txusballesteros.brewerydb.exception.ApplicationException
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.util.concurrent.ExecutorService
@@ -32,19 +29,11 @@ import javax.inject.Inject
 
 class GetNextPageBeersInteractor @Inject constructor(private val executor: ExecutorService,
                                                      private val beersRepository: BeersRepository): GetNextPageBeersUseCase {
-  override fun execute(callback: UseCaseCallback<List<Beer>>) {
+  override fun execute(onResult: (List<Beer>) -> Unit) {
     doAsync(executorService = executor) {
-      try {
-        beersRepository.getNextPageBeers(object : Repository.RepositoryCallback<List<Beer>> {
-          override fun onResult(result: List<Beer>) {
-            uiThread {
-              callback.onResult(result)
-            }
-          }
-        })
-      } catch (error: ApplicationException) {
-        uiThread {
-          callback.onError(error)
+      beersRepository.getNextPageBeers {
+        result -> uiThread {
+          onResult(result)
         }
       }
     }

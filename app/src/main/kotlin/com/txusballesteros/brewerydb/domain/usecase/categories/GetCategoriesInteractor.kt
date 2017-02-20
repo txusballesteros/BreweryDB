@@ -22,9 +22,6 @@ package com.txusballesteros.brewerydb.domain.usecase.categories
 
 import com.txusballesteros.brewerydb.domain.model.Category
 import com.txusballesteros.brewerydb.domain.repository.CategoriesRepository
-import com.txusballesteros.brewerydb.domain.repository.Repository
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
-import com.txusballesteros.brewerydb.exception.ApplicationException
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.util.concurrent.ExecutorService
@@ -34,19 +31,11 @@ class GetCategoriesInteractor @Inject constructor(private val executorService: E
                                                   private val repository: CategoriesRepository):
                               GetCategoriesUseCase {
 
-  override fun execute(callback: UseCaseCallback<List<Category>>) {
+  override fun execute(onResult: (List<Category>) -> Unit) {
     doAsync(executorService = executorService) {
-      try {
-        repository.getCategories(object : Repository.RepositoryCallback<List<Category>> {
-          override fun onResult(result: List<Category>) {
-            uiThread {
-              callback.onResult(result)
-            }
-          }
-        })
-      } catch (error: ApplicationException) {
-        uiThread {
-          callback.onError(error)
+      repository.getCategories {
+        result -> uiThread {
+          onResult(result)
         }
       }
     }

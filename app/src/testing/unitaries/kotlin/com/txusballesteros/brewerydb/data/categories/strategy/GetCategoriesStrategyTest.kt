@@ -28,7 +28,6 @@ import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesLocalDataSource
 import com.txusballesteros.brewerydb.data.model.CategoryDataModel
-import com.txusballesteros.brewerydb.data.strategy.Strategy
 import org.junit.Assert
 import org.junit.Test
 import java.util.*
@@ -52,13 +51,11 @@ class GetCategoriesStrategyTest: UnitTest() {
     whenever(localDataSource.getCategories()).thenReturn(null)
     whenever(cloudDataSource.getCategories()).thenReturn(categoriesList)
 
-    strategy.execute(callback = object: Strategy.Callback<List<CategoryDataModel>>() {
-      override fun onResult(result: List<CategoryDataModel>?) {
-        Assert.assertNotNull(result)
-        Assert.assertEquals(categoriesList.size, result?.size)
-        Assert.assertEquals(1, result?.first()?.id)
+    strategy.execute(onResult =  {
+        Assert.assertNotNull(it)
+        Assert.assertEquals(categoriesList.size, it?.size)
+        Assert.assertEquals(1, it?.first()?.id)
         verify(cloudDataSource).getCategories()
-      }
     })
   }
 
@@ -66,13 +63,11 @@ class GetCategoriesStrategyTest: UnitTest() {
   fun shouldGetFromLocal() {
     whenever(localDataSource.getCategories()).thenReturn(categoriesList)
 
-    strategy.execute(callback = object: Strategy.Callback<List<CategoryDataModel>>() {
-      override fun onResult(result: List<CategoryDataModel>?) {
-        Assert.assertNotNull(result)
-        Assert.assertEquals(categoriesList.size, result?.size)
-        Assert.assertEquals(1, result?.first()?.id)
+    strategy.execute(onResult =  {
+        Assert.assertNotNull(it)
+        Assert.assertEquals(categoriesList.size, it?.size)
+        Assert.assertEquals(1, it?.first()?.id)
         verify(cloudDataSource, never()).getCategories()
-      }
     })
   }
 }

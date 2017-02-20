@@ -21,8 +21,7 @@
 package com.txusballesteros.brewerydb.domain.usecase.categories
 
 import com.txusballesteros.brewerydb.domain.model.Category
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 
 interface GetCategoriesUseCase {
-  fun execute(callback: UseCaseCallback<List<Category>>)
+  fun execute(onResult: (List<Category>) -> Unit)
 }

@@ -92,4 +92,6 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
     adapter.addAll(beers)
     adapter.notifyDataSetChanged()
   }
+
+  override fun renderError() { }
 }

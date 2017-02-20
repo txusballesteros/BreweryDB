@@ -21,8 +21,8 @@
 package com.txusballesteros.brewerydb.domain.usecase.beers
 
 import com.txusballesteros.brewerydb.domain.model.Beer
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
+import com.txusballesteros.brewerydb.exception.ApplicationException
 
 interface GetBeersUseCase {
-  fun execute(callback: UseCaseCallback<List<Beer>>)
+  fun execute(onResult: (List<Beer>) -> Unit, onError: (ApplicationException) -> Unit)
 }

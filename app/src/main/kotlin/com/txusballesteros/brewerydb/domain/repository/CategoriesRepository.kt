@@ -22,6 +22,6 @@ package com.txusballesteros.brewerydb.domain.repository
 
 import com.txusballesteros.brewerydb.domain.model.Category
 
-interface CategoriesRepository: Repository {
-  fun getCategories(callback: Repository.RepositoryCallback<List<Category>>)
+interface CategoriesRepository {
+  fun getCategories(onResult: (List<Category>) -> Unit)
 }

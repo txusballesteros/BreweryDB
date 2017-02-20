@@ -21,24 +21,19 @@
 package com.txusballesteros.brewerydb.data.categories.repository
 
 import com.txusballesteros.brewerydb.data.categories.strategy.GetCategoriesStrategy
-import com.txusballesteros.brewerydb.data.model.CategoryDataModel
 import com.txusballesteros.brewerydb.data.model.CategoryDataModelMapper
-import com.txusballesteros.brewerydb.data.strategy.Strategy
 import com.txusballesteros.brewerydb.domain.model.Category
 import com.txusballesteros.brewerydb.domain.repository.CategoriesRepository
-import com.txusballesteros.brewerydb.domain.repository.Repository
 import javax.inject.Inject
 
 class CategoriesRepositoryImpl @Inject constructor(private val getCategoriesStrategy: GetCategoriesStrategy.Builder,
                                                    private val mapper: CategoryDataModelMapper):
                                CategoriesRepository {
 
-  override fun getCategories(callback: Repository.RepositoryCallback<List<Category>>) {
-    getCategoriesStrategy.build().execute(callback = object: Strategy.Callback<List<CategoryDataModel>>() {
-      override fun onResult(result: List<CategoryDataModel>?) {
-        val categories = mapper.map(result)
-        callback.onResult(categories!!)
-      }
+  override fun getCategories(onResult: (List<Category>) -> Unit) {
+    getCategoriesStrategy.build().execute(onResult = {
+      val categories = mapper.map(it)
+      onResult(categories!!)
     })
   }
 }

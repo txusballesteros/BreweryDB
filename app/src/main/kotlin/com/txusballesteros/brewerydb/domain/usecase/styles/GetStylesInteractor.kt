@@ -21,10 +21,7 @@
 package com.txusballesteros.brewerydb.domain.usecase.styles
 
 import com.txusballesteros.brewerydb.domain.model.Style
-import com.txusballesteros.brewerydb.domain.repository.Repository
 import com.txusballesteros.brewerydb.domain.repository.StylesRepository
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
-import com.txusballesteros.brewerydb.exception.ApplicationException
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.util.concurrent.ExecutorService
@@ -33,21 +30,13 @@ import javax.inject.Inject
 class GetStylesInteractor @Inject constructor(private val executor: ExecutorService,
                                               private val stylesRepository: StylesRepository): GetStylesUseCase {
 
-  override fun execute(categoryId: Int, callback: UseCaseCallback<List<Style>>) {
+  override fun execute(categoryId: Int, onResult: (List<Style>) -> Unit) {
     doAsync(executorService = executor) {
-      try {
-        stylesRepository.getStylesByCategoryId(categoryId, object : Repository.RepositoryCallback<List<Style>> {
-          override fun onResult(result: List<Style>) {
-            uiThread {
-              callback.onResult(result)
-            }
-          }
-        })
-      } catch (error: ApplicationException) {
-        uiThread {
-          callback.onError(error)
+      stylesRepository.getStylesByCategoryId(categoryId, {
+        result -> uiThread {
+          onResult(result)
         }
-      }
+      })
     }
   }
 }

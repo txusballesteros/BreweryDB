@@ -20,13 +20,10 @@
  */
 package com.txusballesteros.brewerydb.data.styles.repository
 
-import com.txusballesteros.brewerydb.data.model.StyleDataModel
 import com.txusballesteros.brewerydb.data.model.StyleDataModelMapper
-import com.txusballesteros.brewerydb.data.strategy.Strategy
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesByCategoryIdStrategy
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesStrategy
 import com.txusballesteros.brewerydb.domain.model.Style
-import com.txusballesteros.brewerydb.domain.repository.Repository
 import com.txusballesteros.brewerydb.domain.repository.StylesRepository
 import javax.inject.Inject
 
@@ -35,21 +32,17 @@ class StylesRepositoryImpl @Inject constructor(private val getStylesStrategy: Ge
                                                private val styleDataMapper: StyleDataModelMapper):
                                    StylesRepository {
 
-  override fun getStylesByCategoryId(categoryId: Int, callback: Repository.RepositoryCallback<List<Style>>) {
-    getStylesBuCategoryId.build().execute(categoryId, object: Strategy.Callback<List<StyleDataModel>>() {
-      override fun onResult(result: List<StyleDataModel>?) {
-        val styles = styleDataMapper.map(result)
-        callback.onResult(styles!!)
-      }
+  override fun getStylesByCategoryId(categoryId: Int, onResult: (List<Style>) -> Unit) {
+    getStylesBuCategoryId.build().execute(categoryId, onResult = {
+      val styles = styleDataMapper.map(it)
+      onResult(styles!!)
     })
   }
 
-  override fun getStyles(callback: Repository.RepositoryCallback<List<Style>>) {
-    getStylesStrategy.build().execute(callback = object: Strategy.Callback<List<StyleDataModel>>() {
-      override fun onResult(result: List<StyleDataModel>?) {
-        val styles = styleDataMapper.map(result)
-        callback.onResult(styles!!)
-      }
+  override fun getStyles(onResult: (List<Style>) -> Unit) {
+    getStylesStrategy.build().execute(onResult =  {
+      val styles = styleDataMapper.map(it)
+      onResult(styles!!)
     })
   }
 }
