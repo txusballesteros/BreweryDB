@@ -25,6 +25,7 @@ import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModelMapper
 import javax.inject.Inject
 
@@ -33,6 +34,9 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
                                                   private val mapper: BeerViewModelMapper,
                                                   private val styleMapper: StyleViewModelMapper):
                               AbsPresenter<BeerDetailPresenter.View>(), BeerDetailPresenter {
+  companion object {
+    val UNKNOWN_ABV = 0f
+  }
 
   lateinit var beer: BeerViewModel
 
@@ -50,23 +54,27 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
     if (styleId != null) {
       getStyleByIdUseCase.execute(styleId, onResult = {
         val style = styleMapper.map(it)
-        var min = 0f
-        var max = 1f
-        var value = 0f
-        if (!style.abvMin.isEmpty()) {
-          min = style.abvMin.toFloat()
-        }
-        if (!style.abvMax.isEmpty()) {
-          max = style.abvMax.toFloat()
-        }
-        if (beer.abv != null) {
-          value = beer.abv!!.toFloat()
-          if (max == 1f) {
-            max = value
-          }
-        }
-        getView()?.renderAbv(min, max, value)
+        renderAbv(style)
       })
     }
+  }
+
+  fun renderAbv(style: StyleViewModel) {
+    var min = UNKNOWN_ABV
+    var max = UNKNOWN_ABV
+    var value = UNKNOWN_ABV
+    if (!style.abvMin.isEmpty()) {
+      min = style.abvMin.toFloat()
+    }
+    if (!style.abvMax.isEmpty()) {
+      max = style.abvMax.toFloat()
+    }
+    if (beer.abv != null) {
+      value = beer.abv!!.toFloat()
+      if (max == UNKNOWN_ABV) {
+        max = value
+      }
+    }
+    getView()?.renderAbv(min, max, value)
   }
 }

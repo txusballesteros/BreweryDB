@@ -34,15 +34,15 @@ class LineLevelView: View {
     val MAIN_LINE_COLOR: Int = Color.parseColor("#fff57f17")
     val REFERENCE_LINE_COLOR: Int = Color.parseColor("#ffe5e5e5")
   }
-  var minValue: Float = 4.5f
-  var maxValue: Float = 5.5f
-  var value: Float = 5.5f
+  var minValue: Float = 0f
+  var maxValue: Float = 0f
+  var value: Float = 0f
   private var drawingArea: RectF = RectF()
   private var valueColor: Int = MAIN_LINE_COLOR
   private var referenceColor: Int = REFERENCE_LINE_COLOR
-  private var mainLinePaint: Paint
-  private var referenceLinePaint: Paint
-  private var dashSize = dp2px(DASH_SIZE_IN_DP)
+  private val mainLinePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+  private val referenceLinePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+  private val dashSize = dp2px(DASH_SIZE_IN_DP)
 
   constructor(context: Context?) : super(context)
   constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
@@ -50,17 +50,20 @@ class LineLevelView: View {
 
   init {
     setLayerType(LAYER_TYPE_SOFTWARE, null)
-    mainLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
     mainLinePaint.style = Paint.Style.STROKE
     mainLinePaint.strokeWidth = dp2px(MAIN_LINE_WEIGHT_IN_DP)
     mainLinePaint.strokeCap = Paint.Cap.ROUND
     mainLinePaint.color = valueColor
-    referenceLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
     referenceLinePaint.style = Paint.Style.STROKE
     referenceLinePaint.strokeWidth = dp2px(REFERENCE_LINE_WEIGHT_IN_DP)
     referenceLinePaint.strokeCap = Paint.Cap.ROUND
     referenceLinePaint.color = referenceColor
     referenceLinePaint.pathEffect = DashPathEffect(floatArrayOf(dashSize, dashSize), 0f)
+    if (isInEditMode) {
+      minValue = 4.5f
+      maxValue = 5.5f
+      value = 5.3f
+    }
   }
 
   override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
