@@ -78,7 +78,9 @@ class LineLevelView: View {
   override fun onDraw(canvas: Canvas?) {
     drawReferenceLine(canvas, minValue)
     drawReferenceLine(canvas, maxValue)
-    drawMainLine(canvas)
+    if (value > minValue) {
+      drawMainLine(canvas)
+    }
   }
 
   private fun drawReferenceLine(canvas: Canvas?, value: Float) {

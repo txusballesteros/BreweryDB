@@ -20,4 +20,5 @@
 -->
 <resources>
   <string name="app_name">Brewery DB</string>
+  <string name="abv_pattern">Alcohol: %.1f</string>
 </resources>

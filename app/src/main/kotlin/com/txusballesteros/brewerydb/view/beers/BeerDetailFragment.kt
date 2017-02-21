@@ -101,6 +101,7 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   override fun renderAbv(min: Float, max: Float, value: Float) {
+    abvTitle.text = getString(R.string.abv_pattern, value)
     abv.minValue = min
     abv.maxValue = max
     abv.value = value
