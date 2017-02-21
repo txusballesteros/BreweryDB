@@ -100,5 +100,12 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     }
   }
 
+  override fun renderAbv(min: Float, max: Float, value: Float) {
+    abv.minValue = min
+    abv.maxValue = max
+    abv.value = value
+    abv.invalidate()
+  }
+
   override fun renderError() { }
 }

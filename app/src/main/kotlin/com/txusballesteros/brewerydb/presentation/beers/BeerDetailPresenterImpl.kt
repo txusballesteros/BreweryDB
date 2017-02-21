@@ -50,7 +50,22 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
     if (styleId != null) {
       getStyleByIdUseCase.execute(styleId, onResult = {
         val style = styleMapper.map(it)
-        getView()?.renderStyle(style)
+        var min = 0f
+        var max = 1f
+        var value = 0f
+        if (!style.abvMin.isEmpty()) {
+          min = style.abvMin.toFloat()
+        }
+        if (!style.abvMax.isEmpty()) {
+          max = style.abvMax.toFloat()
+        }
+        if (beer.abv != null) {
+          value = beer.abv!!.toFloat()
+          if (max == 1f) {
+            max = value
+          }
+        }
+        getView()?.renderAbv(min, max, value)
       })
     }
   }

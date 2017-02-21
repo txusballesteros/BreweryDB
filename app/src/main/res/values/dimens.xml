@@ -25,6 +25,7 @@
   <dimen name="horizontal_margin">8dp</dimen>
   <dimen name="padding_small">4dp</dimen>
   <dimen name="padding_normal">8dp</dimen>
+  <dimen name="padding_big">16dp</dimen>
   <dimen name="label_small">80dp</dimen>
   <dimen name="toolbar_image_height">200dp</dimen>
 </resources>

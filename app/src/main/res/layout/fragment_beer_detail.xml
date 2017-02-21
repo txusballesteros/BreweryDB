@@ -50,5 +50,11 @@
         android:textSize="16sp"
         tools:text="Description..."/>
 
+    <com.txusballesteros.brewerydb.view.widgets.LineLevelView
+        android:id="@+id/abv"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/padding_big" />
+
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

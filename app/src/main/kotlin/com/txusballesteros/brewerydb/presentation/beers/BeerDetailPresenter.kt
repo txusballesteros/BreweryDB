@@ -29,6 +29,7 @@ interface BeerDetailPresenter: Presenter<BeerDetailPresenter.View> {
 
   interface View: Presenter.View {
     fun renderBeer(beer: BeerViewModel)
+    fun renderAbv(min: Float, max: Float, value: Float)
     fun renderStyle(style: StyleViewModel)
     fun renderError()
   }
