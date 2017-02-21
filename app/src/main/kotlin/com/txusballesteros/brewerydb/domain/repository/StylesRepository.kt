@@ -22,7 +22,8 @@ package com.txusballesteros.brewerydb.domain.repository
 
 import com.txusballesteros.brewerydb.domain.model.Style
 
-interface StylesRepository : Repository {
-  fun getStyles(callback: Repository.RepositoryCallback<List<Style>>)
-  fun getStylesByCategoryId(categoryId: Int, callback: Repository.RepositoryCallback<List<Style>>)
+interface StylesRepository {
+  fun getStyles(onResult: (List<Style>) -> Unit)
+  fun getStyleById(styleId: Int, onResult: (Style) -> Unit)
+  fun getStylesByCategoryId(categoryId: Int, onResult: (List<Style>) -> Unit)
 }

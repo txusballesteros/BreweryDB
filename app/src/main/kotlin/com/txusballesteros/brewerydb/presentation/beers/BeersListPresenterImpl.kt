@@ -21,35 +21,36 @@
 package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.data.model.BeerViewModelMapper
-import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetNextPageBeersUseCase
+import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import javax.inject.Inject
 
 class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: GetBeersUseCase,
                                                  private val getNextPageBeersUseCase: GetNextPageBeersUseCase,
-                                                 private val mapper: BeerViewModelMapper): AbsPresenter<BeersListPresenter.View>(),
-                              BeersListPresenter {
+                                                 private val mapper: BeerViewModelMapper,
+                                                 private val navigator: Navigator):
+                              AbsPresenter<BeersListPresenter.View>(), BeersListPresenter {
+
   override fun onRequestBeers() {
-    getBeersUseCase.execute(object: UseCaseCallback<List<Beer>>() {
-      override fun onResult(result: List<Beer>) {
-        val beersList = mapper.map(result)
-        getView()?.renderBeers(beersList)
-      }
+    getBeersUseCase.execute(onResult = {
+      val beersList = mapper.map(it)
+      getView()?.renderBeers(beersList)
+    }, onError = {
+      getView()?.renderError()
     })
   }
 
   override fun onRequestNextPage() {
-    getNextPageBeersUseCase.execute(object: UseCaseCallback<List<Beer>>() {
-      override fun onResult(result: List<Beer>) {
-        val beersList = mapper.map(result)
-        getView()?.renderBeers(beersList)
-      }
+    getNextPageBeersUseCase.execute(onResult = {
+      val beersList = mapper.map(it)
+      getView()?.renderBeers(beersList)
     })
   }
 
-  override fun onBeerClick(beer: BeerViewModel) { }
+  override fun onBeerClick(beer: BeerViewModel) {
+    navigator.navigateToBeerDetail(getView(), beer.id)
+  }
 }

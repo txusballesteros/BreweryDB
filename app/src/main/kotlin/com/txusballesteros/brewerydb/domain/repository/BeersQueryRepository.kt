@@ -23,6 +23,6 @@ package com.txusballesteros.brewerydb.domain.repository
 import com.txusballesteros.brewerydb.domain.model.BeersQuery
 
 interface BeersQueryRepository {
-  fun storeQuery(query: BeersQuery, callback: Repository.RepositoryEmptyCallback)
-  fun getQuery(callback: Repository.RepositoryCallback<BeersQuery>)
+  fun storeQuery(query: BeersQuery, onResult: () -> Unit)
+  fun getQuery(onResult: (BeersQuery) -> Unit)
 }

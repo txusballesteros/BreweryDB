@@ -25,12 +25,16 @@ import com.txusballesteros.brewerydb.data.model.StyleDataModel
 import java.util.*
 import javax.inject.Inject
 
-class StylesInMemoryLocalDataSource @Inject constructor() : AbsInMemoryDataSource<StyleDataModel>(), StylesLocalDataSource {
+class StylesInMemoryLocalDataSource @Inject constructor(): AbsInMemoryDataSource<StyleDataModel>(), StylesLocalDataSource {
 
   override fun getStylesByCategoryId(categoryId: Int): List<StyleDataModel> {
     val result: MutableList<StyleDataModel> = ArrayList()
     getAll().filterTo(result) { it.categoryId == categoryId }
     return result.sortedBy { it.shortName }
+  }
+
+  override fun getStyleById(styleId: Int): StyleDataModel? {
+    return getById(styleId)
   }
 
   override fun getStyles(): List<StyleDataModel> {

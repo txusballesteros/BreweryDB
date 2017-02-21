@@ -18,11 +18,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.usecase
+package com.txusballesteros.brewerydb.navigation.commands
 
-import com.txusballesteros.brewerydb.exception.ApplicationException
+import android.content.Context
+import android.content.Intent
+import com.txusballesteros.brewerydb.view.beers.BeerDetailActivity
+import org.jetbrains.anko.intentFor
 
-abstract class UseCaseCallback<in T> {
-  open fun onResult(result: T) { }
-  open fun onError(error: ApplicationException) { }
+class BeerDetailNavigationCommand(private val beerId: String): NavigationCommand() {
+  override fun onRequestIntent(context: Context): Intent {
+    return context.intentFor<BeerDetailActivity>(
+        BeerDetailActivity.EXTRA_BEER_ID to beerId
+    )
+  }
 }

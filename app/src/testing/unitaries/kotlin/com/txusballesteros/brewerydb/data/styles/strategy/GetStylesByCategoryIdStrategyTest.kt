@@ -22,7 +22,6 @@ package com.txusballesteros.brewerydb.data.styles.strategy
 
 import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import com.txusballesteros.brewerydb.data.strategy.Strategy
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
 import org.junit.Assert
@@ -61,13 +60,11 @@ class GetStylesByCategoryIdStrategyTest : UnitTest() {
         .thenReturn(null)
         .thenReturn(stylesList)
 
-    strategy.execute(CATEGORY_A, object: Strategy.Callback<List<StyleDataModel>>() {
-      override fun onResult(result: List<StyleDataModel>?) {
-        Assert.assertNotNull(result)
-        Assert.assertEquals(stylesList.size, result?.size)
-        Assert.assertEquals(CATEGORY_A, result?.first()?.categoryId)
-        verify(cloudDataSource).getStyles()
-      }
+    strategy.execute(CATEGORY_A, onResult =  {
+      Assert.assertNotNull(it)
+      Assert.assertEquals(stylesList.size, it?.size)
+      Assert.assertEquals(CATEGORY_A, it?.first()?.categoryId)
+      verify(cloudDataSource).getStyles()
     })
   }
 
@@ -76,13 +73,11 @@ class GetStylesByCategoryIdStrategyTest : UnitTest() {
     Mockito.`when`(localDataSource.getStylesByCategoryId(anyInt()))
         .thenReturn(stylesList)
 
-    strategy.execute(CATEGORY_A, object: Strategy.Callback<List<StyleDataModel>>() {
-      override fun onResult(result: List<StyleDataModel>?) {
-        Assert.assertNotNull(result)
-        Assert.assertEquals(stylesList.size, result?.size)
-        Assert.assertEquals(CATEGORY_A, result?.first()?.categoryId)
-        verify(cloudDataSource, never()).getStyles()
-      }
+    strategy.execute(CATEGORY_A, onResult =  {
+      Assert.assertNotNull(it)
+      Assert.assertEquals(stylesList.size, it?.size)
+      Assert.assertEquals(CATEGORY_A, it?.first()?.categoryId)
+      verify(cloudDataSource, never()).getStyles()
     })
   }
 }

@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.api.beers
 
 import com.txusballesteros.brewerydb.api.model.BeerApiResponse
+import com.txusballesteros.brewerydb.api.model.BeersListApiResponse
 import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
 import com.txusballesteros.brewerydb.exception.NetworkException
 import javax.inject.Inject
@@ -32,17 +33,27 @@ class BeersRetrofitApi @Inject constructor(private val service: BeersRetrofitSer
     currentPage = 1
   }
 
-  override fun getBeers(query: BeersQueryApiModel): BeerApiResponse {
+  override fun getBeerById(beerId: String): BeerApiResponse {
+    try {
+      val call = service.getBeer(beerId)
+      val response = call.execute()
+      return response.body()
+    } catch (error: Exception) {
+      throw NetworkException(error)
+    }
+  }
+
+  override fun getBeers(query: BeersQueryApiModel): BeersListApiResponse {
     currentPage = 1
     return getBeers(query, currentPage)
   }
 
-  override fun getNextPageBeers(query: BeersQueryApiModel): BeerApiResponse {
+  override fun getNextPageBeers(query: BeersQueryApiModel): BeersListApiResponse {
     currentPage += 1
     return getBeers(query, currentPage)
   }
 
-  private fun getBeers(query: BeersQueryApiModel, page: Int): BeerApiResponse {
+  private fun getBeers(query: BeersQueryApiModel, page: Int): BeersListApiResponse {
     try {
       val call = service.getBeers(query.styleId, query.withLabels, query.status, page)
       val response = call.execute()

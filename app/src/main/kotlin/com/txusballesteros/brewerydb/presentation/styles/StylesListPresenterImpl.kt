@@ -21,12 +21,8 @@
 package com.txusballesteros.brewerydb.presentation.styles
 
 import com.txusballesteros.brewerydb.domain.model.BeersQuery
-import com.txusballesteros.brewerydb.domain.model.Style
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseEmptyCallback
 import com.txusballesteros.brewerydb.domain.usecase.beers.StoreBeersQueryUseCase
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesUseCase
-import com.txusballesteros.brewerydb.exception.ApplicationException
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
@@ -41,24 +37,16 @@ class StylesListPresenterImpl @Inject constructor(private val getStylesUseCase: 
 
   override fun onRequestStyles() {
     val categoryId = getView()?.getCategoryId() ?: throw IllegalStateException("The StylesListPresenter.View is detached")
-    getStylesUseCase.execute(categoryId, object : UseCaseCallback<List<Style>>() {
-      override fun onResult(result: List<Style>) {
-        val styles = styleMapper.map(result)
-        getView()?.renderStyles(styles)
-      }
-
-      override fun onError(error: ApplicationException) {
-        getView()?.renderError()
-      }
+    getStylesUseCase.execute(categoryId, onResult = {
+      val styles = styleMapper.map(it)
+      getView()?.renderStyles(styles)
     })
   }
 
   override fun onStyleClick(style: StyleViewModel) {
     val query = BeersQuery(style.id)
-    storeBeersQueryUseCase.execute(query, object: UseCaseEmptyCallback() {
-      override fun onResult() {
-        navigator.navigateToBeersList(getView())
-      }
+    storeBeersQueryUseCase.execute (query, onResult = {
+      navigator.navigateToBeersList(getView())
     })
   }
 }

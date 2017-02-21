@@ -20,10 +20,7 @@
  */
 package com.txusballesteros.brewerydb.presentation.categories
 
-import com.txusballesteros.brewerydb.domain.model.Category
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
 import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesUseCase
-import com.txusballesteros.brewerydb.exception.ApplicationException
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.CategoryViewModel
@@ -36,15 +33,9 @@ class CategoriesListPresenterImpl @Inject constructor(private val getCategoriesU
                                   AbsPresenter<CategoriesListPresenter.View>(), CategoriesListPresenter {
 
   override fun onRequestCategories() {
-    getCategoriesUseCase.execute(object: UseCaseCallback<List<Category>>() {
-      override fun onResult(result: List<Category>) {
-        val categories = mapper.map(result)
-        getView()?.renderCategories(categories)
-      }
-
-      override fun onError(error: ApplicationException) {
-        getView()?.renderError()
-      }
+    getCategoriesUseCase.execute(onResult = {
+      val categories = mapper.map(it)
+      getView()?.renderCategories(categories)
     })
   }
 

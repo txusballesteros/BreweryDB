@@ -21,13 +21,12 @@
 package com.txusballesteros.brewerydb.data.beers.datasource
 
 import com.nhaarman.mockito_kotlin.any
+import com.nhaarman.mockito_kotlin.eq
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.whenever
 import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.api.beers.BeersApi
-import com.txusballesteros.brewerydb.api.model.BeerApiModelMapper
-import com.txusballesteros.brewerydb.api.model.BeerApiResponse
-import com.txusballesteros.brewerydb.api.model.BeersQueryApiModelMapper
+import com.txusballesteros.brewerydb.api.model.*
 import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import org.junit.Assert
 import org.junit.Test
@@ -44,7 +43,7 @@ class BeersCloudDataSourceTest: UnitTest() {
     private val BEER_IS_ORGANIC = "Y"
     private val BEER_STATUS = "verified"
     private val BEER_SERVING_TEMP = "5"
-    private val BEER_LABEL = BeerApiResponse.LabelApiModel("icon", "medium", "large")
+    private val BEER_LABEL = LabelApiModel("icon", "medium", "large")
     private val STYLE_ID = 2
     private val CURRENT_PAGE = 2
     private val QUERY = BeersQueryDataModel(STYLE_ID)
@@ -59,20 +58,41 @@ class BeersCloudDataSourceTest: UnitTest() {
   }
 
   @Test
+  fun shouldGetBeerById() {
+    val beer = BeerApiModel(BEER_ID,
+        BEER_NAME,
+        BEER_DISPLAY_NAME,
+        BEER_DESCRIPTION,
+        STYLE_ID,
+        BEER_ABV,
+        BEER_GLASSWARE_ID,
+        BEER_IS_ORGANIC,
+        BEER_STATUS,
+        BEER_LABEL,
+        BEER_SERVING_TEMP)
+    val apiResponse = BeerApiResponse(beer, "Request Successful", "success")
+    whenever(api.getBeerById(eq(BEER_ID))).thenReturn(apiResponse)
+
+    val response = dataSource.getBeerById(BEER_ID)
+
+    Assert.assertEquals(BEER_ID, response.id)
+  }
+
+  @Test
   fun shouldGetBeers() {
-    val beers = ArrayList<BeerApiResponse.BeerApiModel>()
-    beers.add(BeerApiResponse.BeerApiModel(BEER_ID,
-                                           BEER_NAME,
-                                           BEER_DISPLAY_NAME,
-                                           BEER_DESCRIPTION,
-                                           STYLE_ID,
-                                           BEER_ABV,
-                                           BEER_GLASSWARE_ID,
-                                           BEER_IS_ORGANIC,
-                                           BEER_STATUS,
-                                           BEER_LABEL,
-                                           BEER_SERVING_TEMP))
-    val apiResponse = BeerApiResponse(beers, "Request Successful", "success", CURRENT_PAGE, CURRENT_PAGE, CURRENT_PAGE)
+    val beers = ArrayList<BeerApiModel>()
+    beers.add(BeerApiModel(BEER_ID,
+                           BEER_NAME,
+                           BEER_DISPLAY_NAME,
+                           BEER_DESCRIPTION,
+                           STYLE_ID,
+                           BEER_ABV,
+                           BEER_GLASSWARE_ID,
+                           BEER_IS_ORGANIC,
+                           BEER_STATUS,
+                           BEER_LABEL,
+                           BEER_SERVING_TEMP))
+    val apiResponse = BeersListApiResponse(beers, "Request Successful", "success", CURRENT_PAGE, CURRENT_PAGE, CURRENT_PAGE)
     whenever(api.getBeers(any())).thenReturn(apiResponse)
 
     val response = dataSource.getBeers(QUERY)

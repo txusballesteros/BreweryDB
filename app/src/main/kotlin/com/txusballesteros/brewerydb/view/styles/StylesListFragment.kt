@@ -22,7 +22,6 @@ package com.txusballesteros.brewerydb.view.styles
 
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
-import android.widget.Toast
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
@@ -30,6 +29,7 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
+import org.jetbrains.anko.support.v4.withArguments
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
@@ -38,11 +38,9 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
     private val EXTRA_CATEGORY_ID: String = "extra:categoryId"
 
     fun newInstance(categoryId: Int) : StylesListFragment {
-      val arguments: Bundle = Bundle()
-      arguments.putInt(EXTRA_CATEGORY_ID, categoryId)
-      val result = StylesListFragment()
-      result.arguments = arguments
-      return result
+      return StylesListFragment().withArguments(
+        EXTRA_CATEGORY_ID to categoryId
+      )
     }
   }
 

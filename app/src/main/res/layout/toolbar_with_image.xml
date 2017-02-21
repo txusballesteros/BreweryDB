@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright Txus Ballesteros 2017 (@txusballesteros)
+ *
+ * This file is part of Foobar.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+-->
+<android.support.design.widget.CollapsingToolbarLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/collapsing_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_scrollFlags="scroll|exitUntilCollapsed"
+    app:contentScrim="?attr/colorPrimary"
+    app:expandedTitleMarginStart="48dp"
+    app:expandedTitleMarginEnd="64dp"
+    app:expandedTitleTextAppearance="@style/toolbar_expanded_title"
+    app:collapsedTitleTextAppearance="@style/toolbar_collapsed_title"
+    android:fitsSystemWindows="true">
+
+  <android.support.v7.widget.AppCompatImageView
+      android:id="@+id/headerImage"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/toolbar_image_height"
+      android:scaleType="centerCrop"
+      app:layout_collapseMode="parallax"
+      android:fitsSystemWindows="true"/>
+
+  <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+      app:titleTextColor="@color/white"
+      app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+      app:elevation="4dp"
+      app:layout_collapseMode="pin" />
+
+</android.support.design.widget.CollapsingToolbarLayout>

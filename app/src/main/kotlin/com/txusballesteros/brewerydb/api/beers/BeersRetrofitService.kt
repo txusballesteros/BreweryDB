@@ -21,8 +21,10 @@
 package com.txusballesteros.brewerydb.api.beers
 
 import com.txusballesteros.brewerydb.api.model.BeerApiResponse
+import com.txusballesteros.brewerydb.api.model.BeersListApiResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface BeersRetrofitService {
@@ -30,5 +32,8 @@ interface BeersRetrofitService {
   fun getBeers(@Query("styleId") styleId: Int,
                @Query("hasLabels") withLabels: String,
                @Query("status") status: String,
-               @Query("p") page: Int): Call<BeerApiResponse>
+               @Query("p") page: Int): Call<BeersListApiResponse>
+
+  @GET("/v2/beer/{beerId}")
+  fun getBeer(@Path("beerId") beerId: String): Call<BeerApiResponse>
 }

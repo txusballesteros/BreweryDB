@@ -34,6 +34,11 @@ class BeersCloudDataSourceImpl @Inject constructor(private val api: BeersApi,
     api.flush()
   }
 
+  override fun getBeerById(beerId: String): BeerDataModel {
+    val response = api.getBeerById(beerId)
+    return mapper.map(response.beer)
+  }
+
   override fun getBeers(query: BeersQueryDataModel): List<BeerDataModel> {
     val apiQuery = queryMapper.map(query)
     val response = api.getBeers(apiQuery)

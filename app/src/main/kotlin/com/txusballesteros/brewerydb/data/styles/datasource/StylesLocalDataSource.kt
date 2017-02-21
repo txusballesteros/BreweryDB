@@ -24,6 +24,7 @@ import com.txusballesteros.brewerydb.data.model.StyleDataModel
 
 interface StylesLocalDataSource {
   fun getStyles() : List<StyleDataModel>
+  fun getStyleById(styleId: Int) : StyleDataModel?
   fun getStylesByCategoryId(categoryId: Int) : List<StyleDataModel>
   fun store(styles: List<StyleDataModel>)
 }

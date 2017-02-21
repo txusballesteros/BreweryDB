@@ -22,7 +22,6 @@ package com.txusballesteros.brewerydb.data.styles.strategy
 
 import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import com.txusballesteros.brewerydb.data.strategy.Strategy
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
 import org.junit.Assert
@@ -58,13 +57,11 @@ class GetStylesStrategyTest : UnitTest() {
     doReturn(null).`when`(localDataSource).getStyles()
     doReturn(stylesList).`when`(cloudDataSource).getStyles()
 
-    strategy.execute(callback = object: Strategy.Callback<List<StyleDataModel>>() {
-      override fun onResult(result: List<StyleDataModel>?) {
-        Assert.assertNotNull(result)
-        Assert.assertEquals(stylesList.size, result?.size)
-        Assert.assertEquals(STYLE_ID, result?.first()?.id)
-        verify(cloudDataSource).getStyles()
-      }
+    strategy.execute(onResult =  {
+      Assert.assertNotNull(it)
+      Assert.assertEquals(stylesList.size, it?.size)
+      Assert.assertEquals(STYLE_ID, it?.first()?.id)
+      verify(cloudDataSource).getStyles()
     })
   }
 
@@ -73,13 +70,11 @@ class GetStylesStrategyTest : UnitTest() {
     doReturn(stylesList).`when`(localDataSource).getStyles()
     doReturn(null).`when`(cloudDataSource).getStyles()
 
-    strategy.execute(callback = object: Strategy.Callback<List<StyleDataModel>>() {
-      override fun onResult(result: List<StyleDataModel>?) {
-        Assert.assertNotNull(result)
-        Assert.assertEquals(stylesList.size, result?.size)
-        Assert.assertEquals(STYLE_ID, result?.first()?.id)
-        verify(cloudDataSource, never()).getStyles()
-      }
+    strategy.execute(onResult =  {
+      Assert.assertNotNull(it)
+      Assert.assertEquals(stylesList.size, it?.size)
+      Assert.assertEquals(STYLE_ID, it?.first()?.id)
+      verify(cloudDataSource, never()).getStyles()
     })
   }
 }

@@ -24,13 +24,13 @@ import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import javax.inject.Inject
 
 class BeerApiModelMapper @Inject constructor() {
-  fun map(source: BeerApiResponse)
+  fun map(source: BeersListApiResponse)
       = map(source.beers)
 
-  fun map(source: List<BeerApiResponse.BeerApiModel>)
+  fun map(source: List<BeerApiModel>)
       = source.map { beer -> map(beer) }
 
-  fun map(source: BeerApiResponse.BeerApiModel)
+  fun map(source: BeerApiModel)
       = BeerDataModel(source.id,
                       source.name,
                       source.displayName,
@@ -43,7 +43,7 @@ class BeerApiModelMapper @Inject constructor() {
                       map(source.labels),
                       source.servingTemperature)
 
-  fun map(source: BeerApiResponse.LabelApiModel?)
+  fun map(source: LabelApiModel?)
       = BeerDataModel.LabelDataModel(source?.icon,
                                      source?.medium,
                                      source?.large)

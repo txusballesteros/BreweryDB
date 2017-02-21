@@ -18,14 +18,13 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository
+package com.txusballesteros.brewerydb.api.model
 
-interface Repository {
-  interface RepositoryEmptyCallback {
-    fun onResult() { }
-  }
+import com.google.gson.annotations.SerializedName
 
-  interface RepositoryCallback<in T> {
-    fun onResult(result: T) { }
-  }
-}
+class BeersListApiResponse(@SerializedName("data") val beers: List<BeerApiModel>,
+                           val message: String,
+                           val status: String,
+                           val currentPage: Int,
+                           val numberOfPages: Int,
+                           val totalResults: Int)

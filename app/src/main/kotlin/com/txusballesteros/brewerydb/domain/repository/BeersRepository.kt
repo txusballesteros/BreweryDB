@@ -21,10 +21,9 @@
 package com.txusballesteros.brewerydb.domain.repository
 
 import com.txusballesteros.brewerydb.domain.model.Beer
-import com.txusballesteros.brewerydb.domain.model.BeersQuery
 
 interface BeersRepository {
-  fun flush()
-  fun getBeers(callback: Repository.RepositoryCallback<List<Beer>>)
-  fun getNextPageBeers(callback: Repository.RepositoryCallback<List<Beer>>)
+  fun getBeerById(beerId: String, onResult: (Beer) -> Unit)
+  fun getBeers(onResult: (List<Beer>) -> Unit)
+  fun getNextPageBeers(onResult: (List<Beer>) -> Unit)
 }

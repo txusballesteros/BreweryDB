@@ -21,8 +21,9 @@
 package com.txusballesteros.brewerydb.domain.usecase.beers
 
 import com.txusballesteros.brewerydb.domain.model.BeersQuery
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseEmptyCallback
+import com.txusballesteros.brewerydb.domain.usecase.UseCase
+import com.txusballesteros.brewerydb.exception.ApplicationException
 
-interface StoreBeersQueryUseCase {
-  fun execute(query: BeersQuery, callback: UseCaseEmptyCallback)
+interface StoreBeersQueryUseCase: UseCase<Unit> {
+  fun execute(query: BeersQuery, onResult: (Unit) -> Unit, onError: (ApplicationException) -> Unit = { })
 }

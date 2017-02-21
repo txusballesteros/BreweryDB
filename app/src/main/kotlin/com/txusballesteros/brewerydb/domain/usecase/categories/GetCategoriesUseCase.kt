@@ -21,8 +21,6 @@
 package com.txusballesteros.brewerydb.domain.usecase.categories
 
 import com.txusballesteros.brewerydb.domain.model.Category
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
+import com.txusballesteros.brewerydb.domain.usecase.UseCase
 
-interface GetCategoriesUseCase {
-  fun execute(callback: UseCaseCallback<List<Category>>)
-}
+interface GetCategoriesUseCase: UseCase<List<Category>>

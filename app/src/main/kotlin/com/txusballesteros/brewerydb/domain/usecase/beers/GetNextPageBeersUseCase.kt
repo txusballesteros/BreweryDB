@@ -21,8 +21,6 @@
 package com.txusballesteros.brewerydb.domain.usecase.beers
 
 import com.txusballesteros.brewerydb.domain.model.Beer
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
+import com.txusballesteros.brewerydb.domain.usecase.UseCase
 
-interface GetNextPageBeersUseCase {
-  fun execute(callback: UseCaseCallback<List<Beer>>)
-}
+interface GetNextPageBeersUseCase: UseCase<List<Beer>>

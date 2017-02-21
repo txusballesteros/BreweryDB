@@ -21,8 +21,9 @@
 package com.txusballesteros.brewerydb.domain.usecase.styles
 
 import com.txusballesteros.brewerydb.domain.model.Style
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
+import com.txusballesteros.brewerydb.domain.usecase.UseCase
+import com.txusballesteros.brewerydb.exception.ApplicationException
 
-interface GetStylesUseCase {
-  fun execute(categoryId: Int, callback: UseCaseCallback<List<Style>>)
+interface GetStylesUseCase: UseCase<List<Style>> {
+  fun execute(categoryId: Int, onResult: (List<Style>) -> Unit, onError: (ApplicationException) -> Unit = { })
 }

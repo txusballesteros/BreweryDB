@@ -23,6 +23,8 @@ package com.txusballesteros.brewerydb.domain.usecase.di
 import com.txusballesteros.brewerydb.domain.usecase.beers.*
 import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesInteractor
 import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesUseCase
+import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdInteractor
+import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesInteractor
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesUseCase
 import dagger.Module
@@ -37,6 +39,9 @@ class UseCasesModule {
   fun provideGetStylesUseCase(useCase: GetStylesInteractor): GetStylesUseCase = useCase
 
   @Provides
+  fun provideGetBeerByIdUseCase(useCase: GetBeerByIdInteractor): GetBeerByIdUseCase = useCase
+
+  @Provides
   fun provideGetBeersUseCase(useCase: GetBeersInteractor): GetBeersUseCase = useCase
 
   @Provides
@@ -47,4 +52,7 @@ class UseCasesModule {
 
   @Provides
   fun provideGetNextPageBeersUseCase(useCase: GetNextPageBeersInteractor): GetNextPageBeersUseCase = useCase
+
+  @Provides
+  fun provideGetStyleById(useCase: GetStyleByIdInteractor): GetStyleByIdUseCase = useCase
 }

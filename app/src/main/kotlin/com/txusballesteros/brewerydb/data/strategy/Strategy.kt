@@ -21,26 +21,24 @@
 package com.txusballesteros.brewerydb.data.strategy
 
 abstract class Strategy<in INPUT, OUTPUT> {
-  private var callback: Callback<OUTPUT>? = null
+  lateinit var onResult: (OUTPUT?) -> Unit
+  lateinit var onError: (Exception?) -> Unit
 
-  fun execute(parameter: INPUT? = null, callback: Callback<OUTPUT>? = null) {
-    this.callback = callback
+  fun execute(parameter: INPUT? = null,
+              onResult: (OUTPUT?) -> Unit = { },
+              onError: (Exception?) -> Unit = { }) {
+    this.onResult = onResult
+    this.onError = onError
     run(parameter)
   }
 
   protected abstract fun run(params: INPUT?)
 
   fun notifyOnResult(result: OUTPUT? = null) {
-    callback?.onResult(result)
+    onResult(result)
   }
 
   fun notifyOnError(error: Exception? = null) {
-    callback?.onError(error)
-  }
-
-  open class Callback<in OUTPUT> {
-    open fun onResult(result: OUTPUT?) { }
-
-    open fun onError(error: Exception? = null) { }
+    onError(error)
   }
 }

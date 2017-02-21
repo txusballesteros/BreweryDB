@@ -22,32 +22,25 @@ package com.txusballesteros.brewerydb.data.beers.repository
 
 import com.txusballesteros.brewerydb.data.beers.strategy.GetBeersQueryStrategy
 import com.txusballesteros.brewerydb.data.beers.strategy.StoreBeersQueryStrategy
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import com.txusballesteros.brewerydb.data.model.BeersQueryDataModelMapper
-import com.txusballesteros.brewerydb.data.strategy.Strategy
 import com.txusballesteros.brewerydb.domain.model.BeersQuery
 import com.txusballesteros.brewerydb.domain.repository.BeersQueryRepository
-import com.txusballesteros.brewerydb.domain.repository.Repository
 import javax.inject.Inject
 
 class BeersQueryRepositoryImpl @Inject constructor(private val getBeersQueryStrategy: GetBeersQueryStrategy.Builder,
                                                    private val storeBeersQueryStrategy: StoreBeersQueryStrategy.Builder,
                                                    private val mapper: BeersQueryDataModelMapper): BeersQueryRepository {
-  override fun getQuery(callback: Repository.RepositoryCallback<BeersQuery>) {
-    getBeersQueryStrategy.build().execute(callback = object: Strategy.Callback<BeersQueryDataModel>() {
-      override fun onResult(result: BeersQueryDataModel?) {
-        val query = mapper.map(result!!)
-        callback.onResult(query)
-      }
+  override fun getQuery(onResult: (BeersQuery) -> Unit) {
+    getBeersQueryStrategy.build().execute(onResult = {
+      val query = mapper.map(it!!)
+      onResult(query)
     })
   }
 
-  override fun storeQuery(query: BeersQuery, callback: Repository.RepositoryEmptyCallback) {
+  override fun storeQuery(query: BeersQuery, onResult: () -> Unit) {
     val dataQuery = mapper.map(query)
-    storeBeersQueryStrategy.build().execute(dataQuery, object: Strategy.Callback<Void>() {
-      override fun onResult(result: Void?) {
-        callback.onResult()
-      }
+    storeBeersQueryStrategy.build().execute(dataQuery, onResult = {
+      onResult()
     })
   }
 }

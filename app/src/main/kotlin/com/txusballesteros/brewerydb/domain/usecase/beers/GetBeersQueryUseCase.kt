@@ -21,8 +21,6 @@
 package com.txusballesteros.brewerydb.domain.usecase.beers
 
 import com.txusballesteros.brewerydb.domain.model.BeersQuery
-import com.txusballesteros.brewerydb.domain.usecase.UseCaseCallback
+import com.txusballesteros.brewerydb.domain.usecase.UseCase
 
-interface GetBeersQueryUseCase {
-  fun execute(callback: UseCaseCallback<BeersQuery>)
-}
+interface GetBeersQueryUseCase: UseCase<BeersQuery>
