@@ -33,10 +33,10 @@ class CategoriesListPresenterImpl @Inject constructor(private val getCategoriesU
                                   AbsPresenter<CategoriesListPresenter.View>(), CategoriesListPresenter {
 
   override fun onRequestCategories() {
-    getCategoriesUseCase.execute {
+    getCategoriesUseCase.execute(onResult = {
       val categories = mapper.map(it)
       getView()?.renderCategories(categories)
-    }
+    })
   }
 
   override fun onCategoryClick(category: CategoryViewModel) {

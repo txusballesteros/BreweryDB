@@ -18,9 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.usecase.beers
+package com.txusballesteros.brewerydb.domain.usecase
 
-import com.txusballesteros.brewerydb.domain.model.Beer
-import com.txusballesteros.brewerydb.domain.usecase.UseCase
+import com.txusballesteros.brewerydb.exception.ApplicationException
 
-interface GetBeersUseCase: UseCase<List<Beer>>
+interface UseCase<out OUTPUT> {
+  fun execute(onResult: (OUTPUT) -> Unit = { }, onError: (ApplicationException) -> Unit = { })
+}

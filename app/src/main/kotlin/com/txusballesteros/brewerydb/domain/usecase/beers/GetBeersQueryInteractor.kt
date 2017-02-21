@@ -22,20 +22,17 @@ package com.txusballesteros.brewerydb.domain.usecase.beers
 
 import com.txusballesteros.brewerydb.domain.model.BeersQuery
 import com.txusballesteros.brewerydb.domain.repository.BeersQueryRepository
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import com.txusballesteros.brewerydb.domain.usecase.AnkoUseCase
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
-class GetBeersQueryInteractor @Inject constructor(private val executor: ExecutorService,
-                                                  private val repository: BeersQueryRepository): GetBeersQueryUseCase {
-  override fun execute(onResult: (BeersQuery) -> Unit) {
-    doAsync(executorService = executor) {
-      repository.getQuery {
-        result -> uiThread {
-          onResult(result)
-        }
-      }
+class GetBeersQueryInteractor @Inject constructor(executor: ExecutorService,
+                                                  private val repository: BeersQueryRepository):
+                              AnkoUseCase<BeersQuery>(executor), GetBeersQueryUseCase {
+
+  override fun onExecute(onResult: (BeersQuery) -> Unit) {
+    repository.getQuery {
+      onResult(it)
     }
   }
 }

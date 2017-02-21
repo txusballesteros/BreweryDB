@@ -37,7 +37,7 @@ class StylesListPresenterImpl @Inject constructor(private val getStylesUseCase: 
 
   override fun onRequestStyles() {
     val categoryId = getView()?.getCategoryId() ?: throw IllegalStateException("The StylesListPresenter.View is detached")
-    getStylesUseCase.execute(categoryId, {
+    getStylesUseCase.execute(categoryId, onResult = {
       val styles = styleMapper.map(it)
       getView()?.renderStyles(styles)
     })
@@ -45,7 +45,7 @@ class StylesListPresenterImpl @Inject constructor(private val getStylesUseCase: 
 
   override fun onStyleClick(style: StyleViewModel) {
     val query = BeersQuery(style.id)
-    storeBeersQueryUseCase.execute (query, {
+    storeBeersQueryUseCase.execute (query, onResult = {
       navigator.navigateToBeersList(getView())
     })
   }

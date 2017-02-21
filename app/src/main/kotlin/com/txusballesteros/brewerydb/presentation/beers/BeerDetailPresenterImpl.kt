@@ -37,18 +37,18 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
   lateinit var beer: BeerViewModel
 
   override fun onRequestBeer(beerId: String) {
-    getBeerByIdUseCase.execute(beerId, {
+    getBeerByIdUseCase.execute(beerId, onResult = {
       beer = mapper.map(it)
       getStyle(beer.styleId)
       getView()?.renderBeer(beer)
-    }, {
+    }, onError = {
       getView()?.renderError()
     })
   }
 
   private fun getStyle(styleId: Int?) {
     if (styleId != null) {
-      getStyleByIdUseCase.execute(styleId, {
+      getStyleByIdUseCase.execute(styleId, onResult = {
         val style = styleMapper.map(it)
         getView()?.renderStyle(style)
       })

@@ -30,7 +30,7 @@ import javax.inject.Inject
 
 class StylesRepositoryImpl @Inject constructor(private val getStylesStrategy: GetStylesStrategy.Builder,
                                                private val getStylesBuCategoryId: GetStylesByCategoryIdStrategy.Builder,
-                                               private val getStyleByIdStrategu: GetStyleByIdStrategy.Builder,
+                                               private val getStyleByIdStrategy: GetStyleByIdStrategy.Builder,
                                                private val styleDataMapper: StyleDataModelMapper):
                                    StylesRepository {
 
@@ -42,7 +42,7 @@ class StylesRepositoryImpl @Inject constructor(private val getStylesStrategy: Ge
   }
 
   override fun getStyleById(styleId: Int, onResult: (Style) -> Unit) {
-    getStyleByIdStrategu.build().execute(styleId, onResult =  {
+    getStyleByIdStrategy.build().execute(styleId, onResult =  {
       val style = styleDataMapper.map(it!!)
       onResult(style)
     })

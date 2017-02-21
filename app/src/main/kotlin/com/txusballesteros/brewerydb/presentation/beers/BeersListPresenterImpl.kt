@@ -35,19 +35,19 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
                               AbsPresenter<BeersListPresenter.View>(), BeersListPresenter {
 
   override fun onRequestBeers() {
-    getBeersUseCase.execute({
+    getBeersUseCase.execute(onResult = {
       val beersList = mapper.map(it)
       getView()?.renderBeers(beersList)
-    }, {
+    }, onError = {
       getView()?.renderError()
     })
   }
 
   override fun onRequestNextPage() {
-    getNextPageBeersUseCase.execute {
+    getNextPageBeersUseCase.execute(onResult = {
       val beersList = mapper.map(it)
       getView()?.renderBeers(beersList)
-    }
+    })
   }
 
   override fun onBeerClick(beer: BeerViewModel) {

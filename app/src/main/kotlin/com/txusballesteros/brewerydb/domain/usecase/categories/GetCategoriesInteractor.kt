@@ -22,22 +22,18 @@ package com.txusballesteros.brewerydb.domain.usecase.categories
 
 import com.txusballesteros.brewerydb.domain.model.Category
 import com.txusballesteros.brewerydb.domain.repository.CategoriesRepository
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import com.txusballesteros.brewerydb.domain.usecase.AnkoUseCase
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
-class GetCategoriesInteractor @Inject constructor(private val executorService: ExecutorService,
+class GetCategoriesInteractor @Inject constructor(executor: ExecutorService,
                                                   private val repository: CategoriesRepository):
-                              GetCategoriesUseCase {
+                              AnkoUseCase<List<Category>>(executor), GetCategoriesUseCase {
 
-  override fun execute(onResult: (List<Category>) -> Unit) {
-    doAsync(executorService = executorService) {
-      repository.getCategories {
-        result -> uiThread {
-          onResult(result)
-        }
-      }
+  override fun onExecute(onResult: (List<Category>) -> Unit) {
+    repository.getCategories {
+      onResult(it)
     }
   }
+
 }

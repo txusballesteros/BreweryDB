@@ -18,9 +18,29 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.usecase.beers
+package com.txusballesteros.brewerydb.domain.usecase
 
-import com.txusballesteros.brewerydb.domain.model.Beer
-import com.txusballesteros.brewerydb.domain.usecase.UseCase
+import com.txusballesteros.brewerydb.exception.ApplicationException
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import java.util.concurrent.ExecutorService
 
-interface GetBeersUseCase: UseCase<List<Beer>>
+abstract class AnkoUseCase<out OUTPUT>(private val executor: ExecutorService): UseCase<OUTPUT> {
+  override fun execute(onResult: (OUTPUT) -> Unit, onError: (ApplicationException) -> Unit) {
+    doAsync(executorService = executor) {
+      try {
+        onExecute {
+          result -> uiThread {
+            onResult(result)
+          }
+        }
+      } catch (error: ApplicationException) {
+        uiThread {
+          onError(error)
+        }
+      }
+    }
+  }
+
+  protected abstract fun onExecute(onResult: (OUTPUT) -> Unit)
+}

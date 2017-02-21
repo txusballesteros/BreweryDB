@@ -22,21 +22,24 @@ package com.txusballesteros.brewerydb.domain.usecase.styles
 
 import com.txusballesteros.brewerydb.domain.model.Style
 import com.txusballesteros.brewerydb.domain.repository.StylesRepository
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
+import com.txusballesteros.brewerydb.domain.usecase.AnkoUseCase
+import com.txusballesteros.brewerydb.exception.ApplicationException
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
-class GetStyleByIdInteractor @Inject constructor(private val executor: ExecutorService,
-                                                 private val repository: StylesRepository): GetStyleByIdUseCase {
+class GetStyleByIdInteractor @Inject constructor(executor: ExecutorService,
+                                                 private val repository: StylesRepository):
+                             AnkoUseCase<Style>(executor), GetStyleByIdUseCase {
+  private var styleId: Int = -1
 
-  override fun execute(styleId: Int, onResult: (Style) -> Unit) {
-    doAsync (executorService = executor) {
-      repository.getStyleById(styleId, {
-        result -> uiThread {
-          onResult(result)
-        }
-      })
-    }
+  override fun execute(styleId: Int, onResult: (Style) -> Unit, onError: (ApplicationException) -> Unit) {
+    this.styleId = styleId
+    execute(onResult, onError)
+  }
+
+  override fun onExecute(onResult: (Style) -> Unit) {
+    repository.getStyleById(styleId, {
+      onResult(it)
+    })
   }
 }
