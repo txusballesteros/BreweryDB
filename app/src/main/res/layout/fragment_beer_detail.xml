@@ -25,19 +25,20 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:padding="@dimen/padding_normal"
   android:background="@color/white">
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:layout_margin="@dimen/padding_normal"
       android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_medium"
+        android:textColor="@color/gray_1"
         android:fontFamily="sans-serif-condensed"
         android:textStyle="bold"
         tools:text="Beer Name"/>
@@ -48,27 +49,98 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_normal"
         android:fontFamily="sans-serif-thin"
-        android:textSize="16sp"
+        android:textColor="@color/gray_2"
+        android:textSize="@dimen/text_size_normal"
         tools:text="Description..."/>
+
+    <include layout="@layout/include_line_decorator" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center|center_vertical">
+
+      <android.support.v7.widget.AppCompatImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/padding_small"
+          android:tint="@color/gray_2"
+          app:srcCompat="@drawable/ic_glass_mug" />
+
+      <android.support.v7.widget.AppCompatTextView
+          android:id="@+id/glass"
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/padding_small"
+          android:fontFamily="sans-serif-thin"
+          android:textColor="@color/gray_2"
+          android:textSize="@dimen/text_size_normal"
+          android:text="Pilsner"/>
+
+      <android.support.v7.widget.AppCompatImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/padding_small"
+          android:tint="@color/gray_2"
+          app:srcCompat="@drawable/ic_thermometer" />
+
+      <android.support.v7.widget.AppCompatTextView
+          android:id="@+id/temperature"
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/padding_small"
+          android:fontFamily="sans-serif-thin"
+          android:textColor="@color/gray_2"
+          android:textSize="@dimen/text_size_normal"
+          android:text="5 ºC"/>
+
+      <android.support.v7.widget.AppCompatImageView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:tint="@color/gray_2"
+          android:layout_marginLeft="@dimen/padding_small"
+          app:srcCompat="@drawable/ic_tree" />
+
+      <android.support.v7.widget.AppCompatTextView
+          android:id="@+id/organic"
+          android:layout_weight="1"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/padding_small"
+          android:fontFamily="sans-serif-thin"
+          android:textColor="@color/gray_2"
+          android:textSize="@dimen/text_size_normal"
+          android:text="Is Organic"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/include_line_decorator" />
 
     <com.txusballesteros.brewerydb.view.widgets.LineLevelView
         android:id="@+id/abv"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginTop="@dimen/padding_big"
-        app:mainLineWeight="1dp"
-        app:referenceLineWeight="0.5dp"
-        app:showReferenceBackground="false"/>
+        app:minValue="0"
+        app:maxValue="10"
+        app:mainLineWeight="2dp"
+        app:mainLineColor="@color/colorAccent"
+        app:referenceBackgroundColor="@color/colorPrimaryLight"
+        app:referenceLineWeight="1dp"
+        app:showReferenceBackground="false" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/abvTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_normal"
-        android:fontFamily="sans-serif"
+        android:fontFamily="sans-serif-thin"
+        android:textColor="@color/gray_2"
         android:gravity="center"
-        android:textSize="14sp"
-        tools:text="Alcohol: 4.5%"/>
+        android:textSize="@dimen/text_size_normal"
+        tools:text="ABV: 4.5"/>
 
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

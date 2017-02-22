@@ -35,6 +35,7 @@ android {
     versionCode globalConfiguration.getAt("androidVersionCode")
     versionName globalConfiguration.getAt("androidVersionName")
 
+    vectorDrawables.useSupportLibrary true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 

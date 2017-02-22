@@ -134,8 +134,10 @@ class LineLevelView: View {
   }
 
   private fun drawReferenceLine(canvas: Canvas?, value: Float) {
-    val levelY = getLevel(value)
-    canvas?.drawLine(drawingArea.left, levelY, drawingArea.right, levelY, referenceLinePaint)
+    if (value > EMPTY_VALUE) {
+      val levelY = getLevel(value)
+      canvas?.drawLine(drawingArea.left, levelY, drawingArea.right, levelY, referenceLinePaint)
+    }
   }
 
   private fun drawMainLine(canvas: Canvas?) {
