@@ -71,9 +71,6 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
     }
     if (beer.abv != null) {
       value = beer.abv!!.toFloat()
-      if (max == UNKNOWN_ABV) {
-        max = value
-      }
     }
     getView()?.renderAbv(min, max, value)
   }

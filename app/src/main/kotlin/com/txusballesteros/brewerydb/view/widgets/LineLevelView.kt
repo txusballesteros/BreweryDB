@@ -25,6 +25,7 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import com.txusballesteros.brewerydb.R;
 
 class LineLevelView: View {
   companion object {
@@ -36,40 +37,69 @@ class LineLevelView: View {
     val REFERENCE_LINE_COLOR: Int = Color.parseColor("#ffe5e5e5")
     val VALUES_WINDOW_FILL_COLOR: Int = Color.parseColor("#ffffecce")
   }
-  var minValue: Float = EMPTY_VALUE
-  var maxValue: Float = EMPTY_VALUE
+  var minimumReferenceValue: Float = EMPTY_VALUE
+  var maximumReferenceValue: Float = EMPTY_VALUE
   var value: Float = EMPTY_VALUE
-  private var maximumReferenceValue: Float = 12f
-  private var minimumReferenceValue: Float = 0f
+  var maximumValue: Float = EMPTY_VALUE
+  var minimumValue: Float = EMPTY_VALUE
   private var drawingArea: RectF = RectF()
-  private var valueColor: Int = MAIN_LINE_COLOR
-  private var referenceColor: Int = REFERENCE_LINE_COLOR
-  private var valuesWindowColor: Int = VALUES_WINDOW_FILL_COLOR
+  private var mainLineColor: Int = MAIN_LINE_COLOR
+  private var referenceLineColor: Int = REFERENCE_LINE_COLOR
+  private var referenceBackgroundColor: Int = VALUES_WINDOW_FILL_COLOR
+  private var mainLineWeight = dp2px(MAIN_LINE_WEIGHT_IN_DP)
+  private var referenceLineWeight = dp2px(REFERENCE_LINE_WEIGHT_IN_DP)
   private val mainLinePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
   private val referenceLinePaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
   private val valuesWindowPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
   private val dashSize = dp2px(DASH_SIZE_IN_DP)
+  private var showReferenceBackground = true
 
   constructor(context: Context?) : super(context)
-  constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs)
-  constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+  constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
+    initializeAttributes(attrs)
+    initializeView()
+  }
+  constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    initializeAttributes(attrs)
+    initializeView()
+  }
 
-  init {
+  private fun initializeAttributes(attrs: AttributeSet?) {
+    if (attrs != null) {
+      val attributes = context.obtainStyledAttributes(attrs, R.styleable.LineLevelView)
+      minimumValue = attributes.getFloat(R.styleable.LineLevelView_minValue, minimumValue)
+      maximumValue = attributes.getFloat(R.styleable.LineLevelView_maxValue, maximumValue)
+      minimumReferenceValue = attributes.getFloat(R.styleable.LineLevelView_minReference, minimumReferenceValue)
+      maximumReferenceValue = attributes.getFloat(R.styleable.LineLevelView_maxReference, maximumReferenceValue)
+      mainLineWeight = attributes.getDimension(R.styleable.LineLevelView_mainLineWeight, mainLineWeight)
+      mainLineColor = attributes.getColor(R.styleable.LineLevelView_mainLineColor, mainLineColor)
+      referenceLineColor = attributes.getColor(R.styleable.LineLevelView_referenceLineColor, referenceLineColor)
+      referenceLineWeight = attributes.getDimension(R.styleable.LineLevelView_referenceLineWeight, referenceLineWeight)
+      referenceBackgroundColor = attributes.getColor(R.styleable.LineLevelView_referenceBackgroundColor, referenceBackgroundColor)
+      showReferenceBackground = attributes
+                                  .getBoolean(R.styleable.LineLevelView_showReferenceBackground, showReferenceBackground)
+      attributes.recycle()
+    }
+  }
+
+  fun initializeView() {
     setLayerType(LAYER_TYPE_SOFTWARE, null)
     mainLinePaint.style = Paint.Style.STROKE
-    mainLinePaint.strokeWidth = dp2px(MAIN_LINE_WEIGHT_IN_DP)
+    mainLinePaint.strokeWidth = mainLineWeight
     mainLinePaint.strokeCap = Paint.Cap.ROUND
-    mainLinePaint.color = valueColor
+    mainLinePaint.color = mainLineColor
     referenceLinePaint.style = Paint.Style.STROKE
-    referenceLinePaint.strokeWidth = dp2px(REFERENCE_LINE_WEIGHT_IN_DP)
+    referenceLinePaint.strokeWidth = referenceLineWeight
     referenceLinePaint.strokeCap = Paint.Cap.ROUND
-    referenceLinePaint.color = referenceColor
+    referenceLinePaint.color = referenceLineColor
     referenceLinePaint.pathEffect = DashPathEffect(floatArrayOf(dashSize, dashSize), 0f)
     valuesWindowPaint.style = Paint.Style.FILL
-    valuesWindowPaint.color = valuesWindowColor
+    valuesWindowPaint.color = referenceBackgroundColor
     if (isInEditMode) {
-      minValue = 4.5f
-      maxValue = 5.5f
+      maximumValue = 6f
+      minimumValue = 0f
+      minimumReferenceValue = 2.5f
+      maximumReferenceValue = 5.5f
       value = 5.3f
     }
   }
@@ -88,17 +118,17 @@ class LineLevelView: View {
 
   override fun onDraw(canvas: Canvas?) {
     drawValuesWindow(canvas)
-    drawReferenceLine(canvas, minValue)
-    drawReferenceLine(canvas, maxValue)
-    if (value > minimumReferenceValue) {
+    drawReferenceLine(canvas, minimumReferenceValue)
+    drawReferenceLine(canvas, maximumReferenceValue)
+    if (value > minimumValue) {
       drawMainLine(canvas)
     }
   }
 
   private fun drawValuesWindow(canvas: Canvas?) {
-    if (maxValue > minValue) {
-      val maximumValueY = getLevel(maxValue)
-      val minimumValueY = getLevel(minValue)
+    if (maximumReferenceValue > minimumReferenceValue) {
+      val maximumValueY = getLevel(maximumReferenceValue)
+      val minimumValueY = getLevel(minimumReferenceValue)
       canvas?.drawRect(RectF(drawingArea.left, maximumValueY, drawingArea.right, minimumValueY), valuesWindowPaint)
     }
   }
@@ -132,8 +162,8 @@ class LineLevelView: View {
   }
 
   private fun getLevel(value: Float): Float {
-    val minimumValue = Math.min(minimumReferenceValue, this.value)
-    val maximumValue = Math.max(maximumReferenceValue, this.value)
+    val minimumValue = Math.min(minimumValue, this.value)
+    val maximumValue = Math.max(maximumValue, this.value)
     val difference = maximumValue - minimumValue
     val referenceValue = value - minimumValue
     val scale = drawingArea.height() / difference
