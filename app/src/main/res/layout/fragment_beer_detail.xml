@@ -119,28 +119,66 @@
 
     <include layout="@layout/include_line_decorator" />
 
-    <com.txusballesteros.brewerydb.view.widgets.LineLevelView
-        android:id="@+id/abv"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        app:minValue="0"
-        app:maxValue="10"
-        app:mainLineWeight="2dp"
-        app:mainLineColor="@color/colorAccent"
-        app:referenceBackgroundColor="@color/colorPrimaryLight"
-        app:referenceLineWeight="1dp"
-        app:showReferenceBackground="false" />
+        android:layout_height="wrap_content">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/abvTitle"
+      <com.txusballesteros.brewerydb.view.widgets.LineLevelView
+          android:id="@+id/abv"
+          android:layout_width="match_parent"
+          android:layout_height="100dp"
+          app:minValue="0"
+          app:maxValue="10"
+          app:mainLineWeight="2dp"
+          app:mainLineColor="@color/colorAccent"
+          app:referenceBackgroundColor="@color/colorPrimaryLight"
+          app:referenceLineWeight="1dp"
+          app:showReferenceBackground="true" />
+
+      <android.support.v7.widget.AppCompatTextView
+          android:id="@+id/abvTitle"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/padding_normal"
+          android:layout_alignParentBottom="true"
+          android:fontFamily="sans-serif-thin"
+          android:textColor="@color/gray_2"
+          android:gravity="center"
+          android:textSize="@dimen/text_size_normal"
+          tools:text="ABV: 4.5"/>
+
+    </RelativeLayout>
+
+    <include layout="@layout/include_line_decorator" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_normal"
-        android:fontFamily="sans-serif-thin"
-        android:textColor="@color/gray_2"
-        android:gravity="center"
-        android:textSize="@dimen/text_size_normal"
-        tools:text="ABV: 4.5"/>
+        android:layout_height="wrap_content">
 
+      <com.txusballesteros.brewerydb.view.widgets.LineLevelView
+          android:id="@+id/ibu"
+          android:layout_width="match_parent"
+          android:layout_height="100dp"
+          app:minValue="0"
+          app:maxValue="20"
+          app:mainLineWeight="2dp"
+          app:mainLineColor="@color/colorPrimary"
+          app:referenceBackgroundColor="@color/colorPrimaryLight"
+          app:referenceLineWeight="1dp"
+          app:showReferenceBackground="true" />
+
+      <android.support.v7.widget.AppCompatTextView
+          android:id="@+id/ibuTitle"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/padding_normal"
+          android:layout_alignParentBottom="true"
+          android:fontFamily="sans-serif-thin"
+          android:textColor="@color/gray_2"
+          android:gravity="center"
+          android:textSize="@dimen/text_size_normal"
+          tools:text="IBU: 16"/>
+
+    </RelativeLayout>
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

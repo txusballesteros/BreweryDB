@@ -55,6 +55,7 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
       getStyleByIdUseCase.execute(styleId, onResult = {
         val style = styleMapper.map(it)
         renderAbv(style)
+        renderIbu(style)
       })
     }
   }
@@ -73,5 +74,21 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
       value = beer.abv!!.toFloat()
     }
     getView()?.renderAbv(min, max, value)
+  }
+
+  fun renderIbu(style: StyleViewModel) {
+    var min = UNKNOWN_ABV
+    var max = UNKNOWN_ABV
+    var value = UNKNOWN_ABV
+    if (!style.ibuMin.isEmpty()) {
+      min = style.ibuMin.toFloat()
+    }
+    if (!style.ibuMax.isEmpty()) {
+      max = style.ibuMax.toFloat()
+    }
+    if (beer.ibu != null) {
+      value = beer.ibu!!.toFloat()
+    }
+    getView()?.renderIbu(min, max, value)
   }
 }

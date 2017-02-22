@@ -108,5 +108,13 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     abv.invalidate()
   }
 
+  override fun renderIbu(min: Float, max: Float, value: Float) {
+    ibuTitle.text = getString(R.string.ibu_pattern, value)
+    ibu.minimumReferenceValue = min
+    ibu.maximumReferenceValue = max
+    ibu.value = value
+    ibu.invalidate()
+  }
+
   override fun renderError() { }
 }

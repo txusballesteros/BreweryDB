@@ -34,6 +34,7 @@ class BeerDataModelMapper @Inject constructor() {
              source.description,
              source.styleId,
              source.abv,
+             source.ibu,
              source.glasswareId,
              source.isOrganic,
              source.status,

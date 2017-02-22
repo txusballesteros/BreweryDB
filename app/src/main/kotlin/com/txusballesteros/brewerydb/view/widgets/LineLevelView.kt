@@ -126,7 +126,7 @@ class LineLevelView: View {
   }
 
   private fun drawValuesWindow(canvas: Canvas?) {
-    if (maximumReferenceValue > minimumReferenceValue) {
+    if (showReferenceBackground && maximumReferenceValue > minimumReferenceValue) {
       val maximumValueY = getLevel(maximumReferenceValue)
       val minimumValueY = getLevel(minimumReferenceValue)
       canvas?.drawRect(RectF(drawingArea.left, maximumValueY, drawingArea.right, minimumValueY), valuesWindowPaint)
@@ -164,8 +164,10 @@ class LineLevelView: View {
   }
 
   private fun getLevel(value: Float): Float {
-    val minimumValue = Math.min(minimumValue, this.value)
-    val maximumValue = Math.max(maximumValue, this.value)
+    var minimumValue = Math.min(minimumValue, this.value)
+        minimumValue = Math.min(minimumValue, this.minimumReferenceValue)
+    var maximumValue = Math.max(maximumValue, this.value)
+        maximumValue = Math.max(maximumValue, this.maximumReferenceValue)
     val difference = maximumValue - minimumValue
     val referenceValue = value - minimumValue
     val scale = drawingArea.height() / difference
