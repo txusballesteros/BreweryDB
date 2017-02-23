@@ -31,7 +31,8 @@ data class Beer(val id: String,
                 val isOrganic: String?,
                 val status: String?,
                 val label: Label?,
-                val servingTemperature: String?) {
+                val servingTemperature: String?,
+                val servingTemperatureDisplay: String?) {
 
   data class Label(val icon: String?, val medium: String?, val large: String?)
 }

@@ -33,4 +33,5 @@ data class BeerApiModel(val id: String,
                         val isOrganic: String?,
                         val status: String?,
                         val labels: LabelApiModel?,
-                        val servingTemperature: String?)
+                        val servingTemperature: String?,
+                        val servingTemperatureDisplay: String?)

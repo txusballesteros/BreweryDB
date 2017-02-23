@@ -39,7 +39,8 @@ class BeerDataModelMapper @Inject constructor() {
              source.isOrganic,
              source.status,
              map(source.label),
-             source.servingTemperature)
+             source.servingTemperature,
+             source.servingTemperatureDisplay)
 
   fun map(source: BeerDataModel.LabelDataModel?)
       = Beer.Label(source?.icon,

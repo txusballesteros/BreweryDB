@@ -40,9 +40,11 @@ class BeersCloudDataSourceTest: UnitTest() {
     private val BEER_DESCRIPTION = "This English Pale Ale is modeled after..."
     private val BEER_GLASSWARE_ID = 5
     private val BEER_ABV = "4.5"
+    private val BEER_IBU = "15"
     private val BEER_IS_ORGANIC = "Y"
     private val BEER_STATUS = "verified"
     private val BEER_SERVING_TEMP = "5"
+    private val BEER_SERVING_TEMP_DISPLAY = "5 C"
     private val BEER_LABEL = LabelApiModel("icon", "medium", "large")
     private val STYLE_ID = 2
     private val CURRENT_PAGE = 2
@@ -65,11 +67,13 @@ class BeersCloudDataSourceTest: UnitTest() {
         BEER_DESCRIPTION,
         STYLE_ID,
         BEER_ABV,
+        BEER_IBU,
         BEER_GLASSWARE_ID,
         BEER_IS_ORGANIC,
         BEER_STATUS,
         BEER_LABEL,
-        BEER_SERVING_TEMP)
+        BEER_SERVING_TEMP,
+        BEER_SERVING_TEMP_DISPLAY)
     val apiResponse = BeerApiResponse(beer, "Request Successful", "success")
     whenever(api.getBeerById(eq(BEER_ID))).thenReturn(apiResponse)
 
@@ -87,11 +91,13 @@ class BeersCloudDataSourceTest: UnitTest() {
                            BEER_DESCRIPTION,
                            STYLE_ID,
                            BEER_ABV,
+                           BEER_IBU,
                            BEER_GLASSWARE_ID,
                            BEER_IS_ORGANIC,
                            BEER_STATUS,
                            BEER_LABEL,
-                           BEER_SERVING_TEMP))
+                           BEER_SERVING_TEMP,
+                           BEER_SERVING_TEMP_DISPLAY))
     val apiResponse = BeersListApiResponse(beers, "Request Successful", "success", CURRENT_PAGE, CURRENT_PAGE, CURRENT_PAGE)
     whenever(api.getBeers(any())).thenReturn(apiResponse)
 
@@ -104,10 +110,12 @@ class BeersCloudDataSourceTest: UnitTest() {
     Assert.assertEquals(BEER_DESCRIPTION, response.first().description)
     Assert.assertEquals(STYLE_ID, response.first().styleId)
     Assert.assertEquals(BEER_ABV, response.first().abv)
+    Assert.assertEquals(BEER_IBU, response.first().ibu)
     Assert.assertEquals(BEER_GLASSWARE_ID, response.first().glasswareId)
     Assert.assertEquals(BEER_IS_ORGANIC, response.first().isOrganic)
     Assert.assertEquals(BEER_STATUS, response.first().status)
     Assert.assertEquals(BEER_SERVING_TEMP, response.first().servingTemperature)
+    Assert.assertEquals(BEER_SERVING_TEMP_DISPLAY, response.first().servingTemperatureDisplay)
     Assert.assertEquals(BEER_LABEL.icon, response.first().label?.icon)
     Assert.assertEquals(BEER_LABEL.medium, response.first().label?.medium)
     Assert.assertEquals(BEER_LABEL.large, response.first().label?.large)
