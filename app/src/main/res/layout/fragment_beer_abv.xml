@@ -36,7 +36,8 @@
       app:mainLineColor="@color/colorAccent"
       app:referenceBackgroundColor="@color/colorPrimaryLight"
       app:referenceLineWeight="1dp"
-      app:showReferenceBackground="true" />
+      app:referenceLineColor="@color/gray_5"
+      app:showReferenceBackground="false" />
 
   <android.support.v7.widget.AppCompatTextView
       android:id="@+id/abvTitle"
