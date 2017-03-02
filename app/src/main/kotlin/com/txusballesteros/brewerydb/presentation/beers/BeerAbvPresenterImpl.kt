@@ -20,23 +20,41 @@
  */
 package com.txusballesteros.brewerydb.presentation.beers
 
-import com.txusballesteros.brewerydb.data.model.BeerViewModelMapper
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
+import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
+import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import javax.inject.Inject
 
-class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase,
-                                                  private val mapper: BeerViewModelMapper):
-                              AbsPresenter<BeerDetailPresenter.View>(), BeerDetailPresenter {
-  lateinit var beer: BeerViewModel
+class BeerAbvPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase,
+                                               private val getStyleByIdUseCase: GetStyleByIdUseCase):
+                           AbsPresenter<BeerAbvPresenter.View>(), BeerAbvPresenter {
+  companion object {
+    val UNKNOWN_ABV = 0f
+  }
 
-  override fun onRequestBeer(beerId: String) {
+  override fun onRequestAbv(beerId: String) {
     getBeerByIdUseCase.execute(beerId, onResult = {
-      beer = mapper.map(it)
-      getView()?.renderBeer(beer)
-    }, onError = {
-      getView()?.renderError()
+      getStyle(it)
     })
+  }
+
+  private fun getStyle(beer: Beer) {
+    if (beer.styleId != null) {
+      getStyleByIdUseCase.execute(beer.styleId, onResult = {
+        val min = string2float(it.abvMin)
+        val max = string2float(it.abvMax)
+        val value = string2float(beer.abv)
+        getView()?.renderAbv(min, max, value)
+      })
+    }
+  }
+
+  private fun string2float(value: String?): Float {
+    var result = UNKNOWN_ABV
+    if (value != null) {
+      result = value.toFloat()
+    }
+    return result
   }
 }

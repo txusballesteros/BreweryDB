@@ -120,34 +120,10 @@
 
     <include layout="@layout/include_line_decorator" />
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/abvPlaceHolder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-      <com.txusballesteros.brewerydb.view.widgets.LineLevelView
-          android:id="@+id/abv"
-          android:layout_width="match_parent"
-          android:layout_height="100dp"
-          app:minValue="0"
-          app:maxValue="10"
-          app:mainLineWeight="2dp"
-          app:mainLineColor="@color/colorAccent"
-          app:referenceBackgroundColor="@color/colorPrimaryLight"
-          app:referenceLineWeight="1dp"
-          app:showReferenceBackground="true" />
-
-      <android.support.v7.widget.AppCompatTextView
-          android:id="@+id/abvTitle"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:fontFamily="sans-serif-thin"
-          android:textColor="@color/gray_2"
-          android:gravity="center"
-          android:textSize="@dimen/text_size_normal"
-          tools:text="ABV: 4.5"/>
-
-    </RelativeLayout>
+        android:layout_height="wrap_content" />
 
     <include layout="@layout/include_line_decorator" />
 

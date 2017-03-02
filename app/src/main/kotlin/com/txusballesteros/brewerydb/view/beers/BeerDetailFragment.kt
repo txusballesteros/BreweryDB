@@ -67,8 +67,19 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   override fun onComposeView() {
-    val ibuFragment = getIbuFragment();
+    val abvFragment = getAbvFragment()
+    val ibuFragment = getIbuFragment()
+    addFragment(R.id.abvPlaceHolder, abvFragment)
     addFragment(R.id.ibuPlaceHolder, ibuFragment)
+  }
+
+  private fun getAbvFragment(): BeerAbvFragment {
+    val tag = BeerAbvFragment::class.java.name
+    var fragment = childFragmentManager.findFragmentByTag(tag) as BeerAbvFragment?
+    if (fragment == null) {
+      fragment = BeerAbvFragment.newInstance(getBeerId())
+    }
+    return fragment
   }
 
   private fun getIbuFragment(): BeerIbuFragment {
@@ -119,14 +130,6 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     if (beer.label != null && beer.label.large != null) {
       toolbarBehaviour.setLabel(beer.label.large)
     }
-  }
-
-  override fun renderAbv(min: Float, max: Float, value: Float) {
-    abvTitle.text = getString(R.string.abv_pattern, value)
-    abv.minimumReferenceValue = min
-    abv.maximumReferenceValue = max
-    abv.value = value
-    abv.invalidate()
   }
 
   override fun renderError() { }
