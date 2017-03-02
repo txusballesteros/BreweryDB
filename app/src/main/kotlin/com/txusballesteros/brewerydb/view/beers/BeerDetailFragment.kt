@@ -93,7 +93,8 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   private fun addFragment(containerView: Int, fragment: AbsFragment) {
     val tag = fragment.javaClass.name
-    childFragmentManager.beginTransaction()
+    childFragmentManager
+        .beginTransaction()
         .replace(containerView, fragment, tag)
         .commitAllowingStateLoss()
   }
