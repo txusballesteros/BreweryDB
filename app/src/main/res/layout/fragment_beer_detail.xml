@@ -151,33 +151,10 @@
 
     <include layout="@layout/include_line_decorator" />
 
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/ibuPlaceHolder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" />
 
-      <com.txusballesteros.brewerydb.view.widgets.LineLevelView
-          android:id="@+id/ibu"
-          android:layout_width="match_parent"
-          android:layout_height="100dp"
-          app:minValue="0"
-          app:maxValue="20"
-          app:mainLineWeight="2dp"
-          app:mainLineColor="@color/colorPrimary"
-          app:referenceBackgroundColor="@color/colorPrimaryLight"
-          app:referenceLineWeight="1dp"
-          app:showReferenceBackground="true" />
-
-      <android.support.v7.widget.AppCompatTextView
-          android:id="@+id/ibuTitle"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_alignParentBottom="true"
-          android:fontFamily="sans-serif-thin"
-          android:textColor="@color/gray_2"
-          android:gravity="center"
-          android:textSize="@dimen/text_size_normal"
-          tools:text="IBU: 16"/>
-
-    </RelativeLayout>
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -66,6 +66,27 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     toolbarBehaviour.inject(activity)
   }
 
+  override fun onComposeView() {
+    val ibuFragment = getIbuFragment();
+    addFragment(R.id.ibuPlaceHolder, ibuFragment)
+  }
+
+  private fun getIbuFragment(): BeerIbuFragment {
+    val tag = BeerIbuFragment::class.java.name
+    var fragment = childFragmentManager.findFragmentByTag(tag) as BeerIbuFragment?
+    if (fragment == null) {
+      fragment = BeerIbuFragment.newInstance(getBeerId())
+    }
+    return fragment
+  }
+
+  private fun addFragment(containerView: Int, fragment: AbsFragment) {
+    val tag = fragment.javaClass.name
+    childFragmentManager.beginTransaction()
+        .replace(containerView, fragment, tag)
+        .commitAllowingStateLoss()
+  }
+
   override fun onViewReady(savedInstanceState: Bundle?) {
     val beerId = getBeerId()
     presenter.onRequestBeer(beerId)
@@ -106,14 +127,6 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     abv.maximumReferenceValue = max
     abv.value = value
     abv.invalidate()
-  }
-
-  override fun renderIbu(min: Float, max: Float, value: Float) {
-    ibuTitle.text = getString(R.string.ibu_pattern, value)
-    ibu.minimumReferenceValue = min
-    ibu.maximumReferenceValue = max
-    ibu.value = value
-    ibu.invalidate()
   }
 
   override fun renderError() { }
