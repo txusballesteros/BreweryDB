@@ -58,8 +58,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center|center_vertical">
+        android:layout_marginTop="@dimen/padding_normal"
+        android:orientation="horizontal">
 
       <android.support.v7.widget.AppCompatImageView
           android:layout_width="wrap_content"
@@ -81,6 +81,14 @@
           android:ellipsize="end"
           android:text="Pilsner"/>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:orientation="horizontal">
+
       <android.support.v7.widget.AppCompatImageView
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -100,6 +108,14 @@
           android:maxLines="1"
           android:ellipsize="end"
           android:text="5 ºC"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:orientation="horizontal">
 
       <android.support.v7.widget.AppCompatImageView
           android:layout_width="wrap_content"
