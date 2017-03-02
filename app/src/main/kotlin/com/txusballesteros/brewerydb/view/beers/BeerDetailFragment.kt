@@ -116,6 +116,8 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     renderName(beer)
     renderDescription(beer)
     renderLabel(beer)
+    renderServingTemperature(beer)
+    renderIsOrganic(beer)
   }
 
   private fun renderName(beer: BeerViewModel) {
@@ -130,6 +132,18 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   private fun renderLabel(beer: BeerViewModel) {
     if (beer.label != null && beer.label.large != null) {
       toolbarBehaviour.setLabel(beer.label.large)
+    }
+  }
+
+  private fun renderServingTemperature(beer: BeerViewModel) {
+    temperature.text = beer.servingTemperatureDisplay
+  }
+
+  private fun renderIsOrganic(beer: BeerViewModel) {
+    if (beer.isOrganic) {
+      organic.setText(R.string.is_organic)
+    } else {
+      organic.setText(R.string.is_not_organic)
     }
   }
 

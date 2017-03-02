@@ -77,6 +77,8 @@
           android:fontFamily="sans-serif-thin"
           android:textColor="@color/gray_2"
           android:textSize="@dimen/text_size_normal"
+          android:maxLines="1"
+          android:ellipsize="end"
           android:text="Pilsner"/>
 
       <android.support.v7.widget.AppCompatImageView
@@ -95,6 +97,8 @@
           android:fontFamily="sans-serif-thin"
           android:textColor="@color/gray_2"
           android:textSize="@dimen/text_size_normal"
+          android:maxLines="1"
+          android:ellipsize="end"
           android:text="5 ºC"/>
 
       <android.support.v7.widget.AppCompatImageView
@@ -113,6 +117,8 @@
           android:fontFamily="sans-serif-thin"
           android:textColor="@color/gray_2"
           android:textSize="@dimen/text_size_normal"
+          android:maxLines="1"
+          android:ellipsize="end"
           android:text="Is Organic"/>
 
     </LinearLayout>
@@ -130,6 +136,8 @@
         android:id="@+id/ibuPlaceHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <include layout="@layout/include_line_decorator" />
 
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

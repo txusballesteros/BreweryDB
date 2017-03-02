@@ -37,7 +37,7 @@ class BeerViewModelMapper @Inject constructor() {
                       source.abv,
                       source.ibu,
                       source.glasswareId,
-                      source.isOrganic,
+                      mapIsOrganic(source.isOrganic),
                       source.status,
                       map(source.label),
                       source.servingTemperature,
@@ -47,4 +47,12 @@ class BeerViewModelMapper @Inject constructor() {
       = BeerViewModel.LabelViewModel(source?.icon,
                                      source?.medium,
                                      source?.large)
+
+  fun mapIsOrganic(isOrganic: String?): Boolean {
+    var result = false
+    if (isOrganic != null && isOrganic == "Y") {
+      result = true
+    }
+    return result
+  }
 }
