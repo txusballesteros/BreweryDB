@@ -52,7 +52,7 @@ class BeerAbvPresenterImpl @Inject constructor(private val getBeerByIdUseCase: G
 
   private fun string2float(value: String?): Float {
     var result = UNKNOWN_ABV
-    if (value != null) {
+    if (value != null && !value.isEmpty()) {
       result = value.toFloat()
     }
     return result
