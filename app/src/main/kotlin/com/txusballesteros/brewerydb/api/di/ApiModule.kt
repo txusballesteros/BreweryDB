@@ -24,6 +24,8 @@ import com.txusballesteros.brewerydb.api.beers.BeersApi
 import com.txusballesteros.brewerydb.api.beers.BeersRetrofitApi
 import com.txusballesteros.brewerydb.api.categories.CategoriesApi
 import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitApi
+import com.txusballesteros.brewerydb.api.glassware.GlasswareApi
+import com.txusballesteros.brewerydb.api.glassware.GlasswareRetrofitApi
 import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitApi
 import dagger.Module
@@ -40,4 +42,7 @@ class ApiModule {
 
   @Singleton @Provides
   fun provideBeersApi(api: BeersRetrofitApi): BeersApi = api
+
+  @Singleton @Provides
+  fun provideGlasswareApi(api: GlasswareRetrofitApi): GlasswareApi = api
 }
