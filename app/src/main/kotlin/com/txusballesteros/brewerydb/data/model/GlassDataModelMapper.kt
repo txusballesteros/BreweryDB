@@ -18,14 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import com.txusballesteros.brewerydb.domain.model.Glass
+import javax.inject.Inject
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
+class GlassDataModelMapper @Inject constructor() {
+  fun map(source: GlassDataModel): Glass = Glass(source.id, source.name)
 }
