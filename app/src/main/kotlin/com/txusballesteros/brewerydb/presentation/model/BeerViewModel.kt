@@ -26,11 +26,13 @@ data class BeerViewModel(val id: String,
                 val description: String = "NA",
                 val styleId: Int?,
                 val abv: String?,
+                val ibu: String?,
                 val glasswareId: Int?,
-                val isOrganic: String?,
+                val isOrganic: Boolean,
                 val status: String?,
                 val label: LabelViewModel?,
-                val servingTemperature: String?) {
+                val servingTemperature: String?,
+                val servingTemperatureDisplay: String) {
 
   data class LabelViewModel(val icon: String?, val medium: String?, val large: String?)
 }

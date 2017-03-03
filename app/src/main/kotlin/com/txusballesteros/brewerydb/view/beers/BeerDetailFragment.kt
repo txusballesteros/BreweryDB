@@ -66,6 +66,39 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     toolbarBehaviour.inject(activity)
   }
 
+  override fun onComposeView() {
+    val abvFragment = getAbvFragment()
+    val ibuFragment = getIbuFragment()
+    addFragment(R.id.abvPlaceHolder, abvFragment)
+    addFragment(R.id.ibuPlaceHolder, ibuFragment)
+  }
+
+  private fun getAbvFragment(): BeerAbvFragment {
+    val tag = BeerAbvFragment::class.java.name
+    var fragment = childFragmentManager.findFragmentByTag(tag) as BeerAbvFragment?
+    if (fragment == null) {
+      fragment = BeerAbvFragment.newInstance(getBeerId())
+    }
+    return fragment
+  }
+
+  private fun getIbuFragment(): BeerIbuFragment {
+    val tag = BeerIbuFragment::class.java.name
+    var fragment = childFragmentManager.findFragmentByTag(tag) as BeerIbuFragment?
+    if (fragment == null) {
+      fragment = BeerIbuFragment.newInstance(getBeerId())
+    }
+    return fragment
+  }
+
+  private fun addFragment(containerView: Int, fragment: AbsFragment) {
+    val tag = fragment.javaClass.name
+    childFragmentManager
+        .beginTransaction()
+        .replace(containerView, fragment, tag)
+        .commitAllowingStateLoss()
+  }
+
   override fun onViewReady(savedInstanceState: Bundle?) {
     val beerId = getBeerId()
     presenter.onRequestBeer(beerId)
@@ -83,6 +116,8 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     renderName(beer)
     renderDescription(beer)
     renderLabel(beer)
+    renderServingTemperature(beer)
+    renderIsOrganic(beer)
   }
 
   private fun renderName(beer: BeerViewModel) {
@@ -97,6 +132,18 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   private fun renderLabel(beer: BeerViewModel) {
     if (beer.label != null && beer.label.large != null) {
       toolbarBehaviour.setLabel(beer.label.large)
+    }
+  }
+
+  private fun renderServingTemperature(beer: BeerViewModel) {
+    temperature.text = beer.servingTemperatureDisplay
+  }
+
+  private fun renderIsOrganic(beer: BeerViewModel) {
+    if (beer.isOrganic) {
+      organic.setText(R.string.is_organic)
+    } else {
+      organic.setText(R.string.is_not_organic)
     }
   }
 

@@ -20,23 +20,12 @@
  */
 package com.txusballesteros.brewerydb.presentation.beers
 
-import com.txusballesteros.brewerydb.data.model.BeerViewModelMapper
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
-import com.txusballesteros.brewerydb.presentation.AbsPresenter
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.presentation.Presenter
 
-class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase,
-                                                  private val mapper: BeerViewModelMapper):
-                              AbsPresenter<BeerDetailPresenter.View>(), BeerDetailPresenter {
-  lateinit var beer: BeerViewModel
+interface BeerIbuPresenter: Presenter<BeerIbuPresenter.View> {
+  fun onRequestIbu(beerId: String)
 
-  override fun onRequestBeer(beerId: String) {
-    getBeerByIdUseCase.execute(beerId, onResult = {
-      beer = mapper.map(it)
-      getView()?.renderBeer(beer)
-    }, onError = {
-      getView()?.renderError()
-    })
+  interface View: Presenter.View {
+    fun renderIbu(min: Float, max: Float, value: Float)
   }
 }

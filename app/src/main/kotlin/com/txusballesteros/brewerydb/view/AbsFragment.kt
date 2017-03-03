@@ -46,6 +46,7 @@ abstract class AbsFragment : Fragment() {
     onRequestInjection()
     onRequestViewComposition()
     onPresenterShouldBeAttached()
+    onComposeView()
     onViewReady(savedInstanceState)
   }
 
@@ -73,6 +74,8 @@ abstract class AbsFragment : Fragment() {
     val application = activity.application as Application
     return application.applicationComponent
   }
+
+  open fun onComposeView() { }
 
   open fun onViewReady(savedInstanceState: Bundle?) { }
 }

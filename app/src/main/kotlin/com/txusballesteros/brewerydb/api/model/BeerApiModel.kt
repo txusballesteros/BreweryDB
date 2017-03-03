@@ -28,8 +28,10 @@ data class BeerApiModel(val id: String,
                         val description: String?,
                         val styleId: Int?,
                         val abv: String?,
+                        val ibu: String?,
                         val glasswareId: Int?,
                         val isOrganic: String?,
                         val status: String?,
                         val labels: LabelApiModel?,
-                        val servingTemperature: String?)
+                        val servingTemperature: String?,
+                        val servingTemperatureDisplay: String?)

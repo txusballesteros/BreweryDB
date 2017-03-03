@@ -20,9 +20,9 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.view.AbsActivity
 import com.txusballesteros.brewerydb.view.AbsFragment
 
@@ -34,7 +34,7 @@ class BeerDetailActivity: AbsActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      window.statusBarColor = Color.TRANSPARENT
+      window.statusBarColor = resources.getColor(R.color.gray_1_50)
     }
   }
 

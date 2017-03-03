@@ -1,4 +1,5 @@
-/*
+<?xml version="1.0" encoding="utf-8"?>
+<!--
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -17,22 +18,18 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
- */
-package com.txusballesteros.brewerydb.domain.model
-
-data class Beer(val id: String,
-                val name: String?,
-                val displayName: String?,
-                val description: String?,
-                val styleId: Int?,
-                val abv: String?,
-                val ibu: String?,
-                val glasswareId: Int?,
-                val isOrganic: String?,
-                val status: String?,
-                val label: Label?,
-                val servingTemperature: String?,
-                val servingTemperatureDisplay: String?) {
-
-  data class Label(val icon: String?, val medium: String?, val large: String?)
-}
+-->
+<resources>
+  <declare-styleable name="LineLevelView">
+    <attr name="maxValue" format="float|reference" />
+    <attr name="minValue" format="float|reference" />
+    <attr name="maxReference" format="float|reference" />
+    <attr name="minReference" format="float|reference" />
+    <attr name="mainLineColor" format="color|reference" />
+    <attr name="mainLineWeight" format="dimension|reference" />
+    <attr name="referenceLineWeight" format="dimension|reference" />
+    <attr name="referenceLineColor" format="color|reference" />
+    <attr name="referenceBackgroundColor" format="color|reference" />
+    <attr name="showReferenceBackground" format="boolean|reference" />
+  </declare-styleable>
+</resources>

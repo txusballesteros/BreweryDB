@@ -25,6 +25,12 @@
   <dimen name="horizontal_margin">8dp</dimen>
   <dimen name="padding_small">4dp</dimen>
   <dimen name="padding_normal">8dp</dimen>
+  <dimen name="padding_big">16dp</dimen>
+  <dimen name="padding_x_big">24dp</dimen>
   <dimen name="label_small">80dp</dimen>
   <dimen name="toolbar_image_height">200dp</dimen>
+
+  <dimen name="text_size_small">12sp</dimen>
+  <dimen name="text_size_normal">16sp</dimen>
+  <dimen name="text_size_medium">20sp</dimen>
 </resources>

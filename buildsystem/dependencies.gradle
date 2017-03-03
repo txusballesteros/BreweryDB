@@ -42,7 +42,7 @@ ext {
   daggerVersion = "2.9"
   picassoVersion = "2.5.2"
   retrofitVersion = "2.1.0"
-  androidSupportVersion = "25.1.1"
+  androidSupportVersion = "25.2.0"
   junitVersion = "4.12"
   mockitoVersion = "2.7.5"
   gsonVersion = "2.8.0"
