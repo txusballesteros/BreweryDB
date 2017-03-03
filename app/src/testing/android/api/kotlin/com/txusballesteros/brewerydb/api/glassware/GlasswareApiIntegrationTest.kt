@@ -18,14 +18,26 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.api.glassware
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import com.txusballesteros.brewerydb.api.ApiIntegrationTest
+import org.junit.Assert
+import org.junit.Test
+import retrofit2.Retrofit
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
+class GlasswareApiIntegrationTest: ApiIntegrationTest() {
+  lateinit var api : GlasswareApi
+
+  override fun onPrepareTest(retrofit: Retrofit) {
+    val service = retrofit.create(GlasswareRetrofitService::class.java)
+    this.api = GlasswareRetrofitApi(service)
+  }
+
+  @Test
+  fun shouldGetBeers() {
+    val response = api.getGlasses()
+
+    Assert.assertEquals(STATUS_SUCCESS, response.status)
+    Assert.assertFalse(response.glasses.isEmpty())
+  }
 }

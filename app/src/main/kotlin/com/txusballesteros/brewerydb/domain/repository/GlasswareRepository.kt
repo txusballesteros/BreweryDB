@@ -18,14 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.domain.repository
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import com.txusballesteros.brewerydb.domain.model.Glass
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
+interface GlasswareRepository {
+  fun getGlassById(id: Int, onResult: (Glass) -> Unit)
 }

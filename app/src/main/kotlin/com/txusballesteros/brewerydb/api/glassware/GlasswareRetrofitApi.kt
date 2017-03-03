@@ -18,14 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.api.glassware
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import com.txusballesteros.brewerydb.api.model.GlasswareApiResponse
+import com.txusballesteros.brewerydb.exception.NetworkException
+import javax.inject.Inject
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
+class GlasswareRetrofitApi @Inject constructor(private val service: GlasswareRetrofitService): GlasswareApi {
+  override fun getGlasses(): GlasswareApiResponse {
+    try {
+      val call = service.getGlassware()
+      val response = call.execute()
+      return response.body()
+    } catch (error: Exception) {
+      throw NetworkException(error)
+    }
+  }
 }

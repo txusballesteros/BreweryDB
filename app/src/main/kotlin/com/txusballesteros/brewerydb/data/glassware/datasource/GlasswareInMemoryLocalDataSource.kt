@@ -18,14 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.data.glassware.datasource
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import com.txusballesteros.brewerydb.data.model.GlassDataModel
+import java.util.HashMap
+import javax.inject.Inject
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
+class GlasswareInMemoryLocalDataSource @Inject constructor(): GlasswareLocalDataSource {
+  val cache: MutableMap<Int, GlassDataModel> = HashMap()
+
+  override fun store(glassware: List<GlassDataModel>) {
+    cache.clear()
+    glassware.forEach { glass -> cache.put(glass.id, glass) }
+  }
+
+  override fun getGlassById(id: Int): GlassDataModel? {
+    return cache[id]
+  }
 }

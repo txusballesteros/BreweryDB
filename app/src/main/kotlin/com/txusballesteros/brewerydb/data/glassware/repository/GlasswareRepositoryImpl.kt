@@ -18,20 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.data.glassware.repository
 
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
+import com.txusballesteros.brewerydb.data.glassware.strategy.GetGlassByIdStrategy
+import com.txusballesteros.brewerydb.data.model.GlassDataModelMapper
+import com.txusballesteros.brewerydb.domain.model.Glass
+import com.txusballesteros.brewerydb.domain.repository.GlasswareRepository
+import javax.inject.Inject
 
-interface BeerDetailPresenter: Presenter<BeerDetailPresenter.View> {
-  fun onRequestBeer(beerId: String)
-
-  interface View: Presenter.View {
-    fun renderBeer(beer: BeerViewModel)
-    fun renderGlass(glassName: String)
-    fun renderEmptyGlass()
-    fun renderStyle(style: StyleViewModel)
-    fun renderError()
+class GlasswareRepositoryImpl @Inject constructor(private val getGlassByIdStrategy: GetGlassByIdStrategy.Builder,
+                                                  private val mapper: GlassDataModelMapper): GlasswareRepository {
+  override fun getGlassById(id: Int, onResult: (Glass) -> Unit) {
+    getGlassByIdStrategy.build().execute(id, onResult = {
+      val glass = mapper.map(it!!)
+      onResult(glass)
+    })
   }
 }

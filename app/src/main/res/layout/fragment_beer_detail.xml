@@ -79,7 +79,7 @@
           android:textSize="@dimen/text_size_normal"
           android:maxLines="1"
           android:ellipsize="end"
-          android:text="Pilsner"/>
+          tools:text="Pilsner"/>
 
     </LinearLayout>
 

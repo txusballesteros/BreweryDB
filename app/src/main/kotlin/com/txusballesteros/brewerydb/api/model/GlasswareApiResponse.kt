@@ -18,14 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import com.google.gson.annotations.SerializedName
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
-}
+class GlasswareApiResponse(@SerializedName("data") val glasses: List<GlassApiModel>,
+                           val message: String,
+                           val status: String)
