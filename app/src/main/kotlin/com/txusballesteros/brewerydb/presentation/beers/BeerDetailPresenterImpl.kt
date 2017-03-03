@@ -21,22 +21,43 @@
 package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.data.model.BeerViewModelMapper
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
+import com.txusballesteros.brewerydb.domain.model.Beer
+import com.txusballesteros.brewerydb.domain.model.Glass
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
+import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import javax.inject.Inject
 
 class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase,
+                                                  private val getGlassByIdUseCase: GetGlassByIdUseCase,
                                                   private val mapper: BeerViewModelMapper):
                               AbsPresenter<BeerDetailPresenter.View>(), BeerDetailPresenter {
-  lateinit var beer: BeerViewModel
 
   override fun onRequestBeer(beerId: String) {
     getBeerByIdUseCase.execute(beerId, onResult = {
-      beer = mapper.map(it)
-      getView()?.renderBeer(beer)
+      requestGlass(it)
+      renderBeer(it)
     }, onError = {
       getView()?.renderError()
     })
+  }
+
+  private fun requestGlass(beer: Beer) {
+    if (beer.glasswareId != null) {
+      getGlassByIdUseCase.execute(beer.glasswareId, onResult = {
+        renderGlass(it)
+      })
+    } else {
+      getView()?.renderEmptyGlass()
+    }
+  }
+
+  private fun renderBeer(beer: Beer) {
+    val beerViewModel = mapper.map(beer)
+    getView()?.renderBeer(beerViewModel)
+  }
+
+  private fun renderGlass(glass: Glass) {
+    getView()?.renderGlass(glass.name)
   }
 }

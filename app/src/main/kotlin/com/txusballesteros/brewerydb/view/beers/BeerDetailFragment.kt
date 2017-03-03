@@ -120,6 +120,14 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     renderIsOrganic(beer)
   }
 
+  override fun renderGlass(glassName: String) {
+    glass.text = glassName
+  }
+
+  override fun renderEmptyGlass() {
+    glass.text = "NA"
+  }
+
   private fun renderName(beer: BeerViewModel) {
     toolbarBehaviour.setTitle(beer.displayName)
     name.text = beer.displayName

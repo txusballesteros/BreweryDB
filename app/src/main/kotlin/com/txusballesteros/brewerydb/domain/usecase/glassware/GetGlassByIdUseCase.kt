@@ -18,20 +18,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.domain.usecase.glassware
 
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
+import com.txusballesteros.brewerydb.domain.model.Glass
+import com.txusballesteros.brewerydb.domain.usecase.UseCase
+import com.txusballesteros.brewerydb.exception.ApplicationException
 
-interface BeerDetailPresenter: Presenter<BeerDetailPresenter.View> {
-  fun onRequestBeer(beerId: String)
-
-  interface View: Presenter.View {
-    fun renderBeer(beer: BeerViewModel)
-    fun renderGlass(glassName: String)
-    fun renderEmptyGlass()
-    fun renderStyle(style: StyleViewModel)
-    fun renderError()
-  }
+interface GetGlassByIdUseCase: UseCase<Glass> {
+  fun execute(id: Int, onResult: (Glass) -> Unit, onError: (ApplicationException) -> Unit = { })
 }
