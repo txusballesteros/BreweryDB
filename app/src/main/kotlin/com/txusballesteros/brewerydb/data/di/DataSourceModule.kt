@@ -25,6 +25,10 @@ import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudD
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSourceImpl
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesInMemoryLocalDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesLocalDataSource
+import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareCloudDataSource
+import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareCloudDataSourceImpl
+import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareInMemoryLocalDataSource
+import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareLocalDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSourceImpl
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesInMemoryLocalDataSource
@@ -55,4 +59,10 @@ class DataSourceModule {
 
   @Singleton @Provides
   fun provideBeersQueryLocalDataSource(dataSource: BeersQueryInMemoryLocalDataSource): BeersQueryLocalDataSource = dataSource
+
+  @Provides
+  fun provideGlasswareCloudDataSource(dataSource: GlasswareCloudDataSourceImpl): GlasswareCloudDataSource = dataSource
+
+  @Singleton @Provides
+  fun provideGlasswareLocalDataSource(dataSource: GlasswareInMemoryLocalDataSource): GlasswareLocalDataSource = dataSource
 }
