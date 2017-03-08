@@ -21,6 +21,7 @@
 -->
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/white">
@@ -28,6 +29,17 @@
   <FrameLayout
       android:id="@+id/content"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content" />
+      android:layout_height="match_parent"
+      android:layout_above="@+id/bottomNavigationMenu"/>
+
+  <android.support.design.widget.BottomNavigationView
+      android:id="@+id/bottomNavigationMenu"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      app:itemBackground="@color/colorPrimary"
+      app:itemIconTint="@color/white"
+      app:itemTextColor="@color/white"
+      app:menu="@menu/bottom_navigation_beer_detail" />
 
 </RelativeLayout>

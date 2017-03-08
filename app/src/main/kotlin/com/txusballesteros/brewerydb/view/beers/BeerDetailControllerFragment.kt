@@ -27,7 +27,6 @@ import com.txusballesteros.brewerydb.presentation.beers.BeerDetailControllerPres
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarWithImageBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import kotlinx.android.synthetic.main.fragment_beer_detail.*
 import org.jetbrains.anko.support.v4.withArguments
 import javax.inject.Inject
 
@@ -48,6 +47,10 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beer_detail_controller
+  }
+
+  override fun onRequestInjection(viewComponent: ViewComponent) {
+    viewComponent.inject(this)
   }
 
   override fun onPresenterShouldBeAttached() {
@@ -88,7 +91,6 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
 
   private fun renderName(beer: BeerViewModel) {
     toolbarBehaviour.setTitle(beer.displayName)
-    name.text = beer.displayName
   }
 
   private fun renderLabel(beer: BeerViewModel) {
@@ -99,9 +101,5 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
 
   private fun getBeerId(): String {
     return arguments.getString(EXTRA_BEER_ID)
-  }
-
-  override fun onRequestInjection(viewComponent: ViewComponent) {
-    viewComponent.inject(this)
   }
 }
