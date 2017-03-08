@@ -75,6 +75,11 @@ abstract class AbsFragment : Fragment() {
     return application.applicationComponent
   }
 
+  protected fun consume(function: () -> Any): Boolean {
+    function()
+    return true
+  }
+
   open fun onComposeView() { }
 
   open fun onViewReady(savedInstanceState: Bundle?) { }

@@ -30,16 +30,22 @@
       android:id="@+id/content"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:layout_above="@+id/bottomNavigationMenu"/>
+      android:layout_above="@+id/bottomNavigationMenuPlaceHolder"/>
 
-  <android.support.design.widget.BottomNavigationView
-      android:id="@+id/bottomNavigationMenu"
+  <FrameLayout
+      android:id="@+id/bottomNavigationMenuPlaceHolder"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
-      app:itemBackground="@color/colorPrimary"
-      app:itemIconTint="@color/white"
-      app:itemTextColor="@color/white"
-      app:menu="@menu/bottom_navigation_beer_detail" />
+      android:background="@color/colorPrimary">
 
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigationMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:itemIconTint="@drawable/bottom_navigation_color_state"
+        app:itemTextColor="@drawable/bottom_navigation_color_state"
+        app:menu="@menu/bottom_navigation_beer_detail" />
+
+  </FrameLayout>
 </RelativeLayout>

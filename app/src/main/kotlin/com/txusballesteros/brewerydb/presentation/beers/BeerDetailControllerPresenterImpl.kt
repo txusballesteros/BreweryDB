@@ -29,14 +29,28 @@ import javax.inject.Inject
 class BeerDetailControllerPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase,
                                                             private val mapper: BeerViewModelMapper):
                                         AbsPresenter<BeerDetailControllerPresenter.View>(), BeerDetailControllerPresenter {
+
   override fun onRequestBeer(beerId: String) {
     getBeerByIdUseCase.execute(beerId, onResult = {
       renderBeer(it)
+      getView()?.showBeerDetail()
     })
   }
 
   private fun renderBeer(beer: Beer) {
     val beerViewModel = mapper.map(beer)
     getView()?.renderBeer(beerViewModel)
+  }
+
+  override fun onBeerDetailSelected() {
+    getView()?.showBeerDetail()
+  }
+
+  override fun onBeerIngredientsSelected() {
+    getView()?.showBeerIngredients()
+  }
+
+  override fun onBeerBreweriesSelected() {
+    getView()?.showBeerBreweries()
   }
 }

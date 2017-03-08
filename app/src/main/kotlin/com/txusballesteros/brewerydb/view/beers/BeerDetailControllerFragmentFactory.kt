@@ -29,4 +29,16 @@ class BeerDetailControllerFragmentFactory @Inject constructor() {
     val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerDetailFragment.newInstance(beerId)
     return fragment as BeerDetailFragment
   }
+
+  fun getBeerIngredientsFragment(fragmentManager: FragmentManager, beerId: String ): BeerIngredientsFragment {
+    val tag = BeerIngredientsFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerIngredientsFragment.newInstance(beerId)
+    return fragment as BeerIngredientsFragment
+  }
+
+  fun getBeerBreweriesFragment(fragmentManager: FragmentManager, beerId: String ): BeerBreweriesFragment {
+    val tag = BeerBreweriesFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerBreweriesFragment.newInstance(beerId)
+    return fragment as BeerBreweriesFragment
+  }
 }

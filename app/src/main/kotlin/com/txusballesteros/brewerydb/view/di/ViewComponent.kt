@@ -46,4 +46,6 @@ interface ViewComponent {
   fun inject(view: BeerIbuFragment)
   fun inject(view: BeerAbvFragment)
   fun inject(view: BeerDetailControllerFragment)
+  fun inject(view: BeerIngredientsFragment)
+  fun inject(view: BeerBreweriesFragment)
 }

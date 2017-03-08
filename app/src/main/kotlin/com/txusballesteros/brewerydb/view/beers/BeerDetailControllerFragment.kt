@@ -27,6 +27,7 @@ import com.txusballesteros.brewerydb.presentation.beers.BeerDetailControllerPres
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarWithImageBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
+import kotlinx.android.synthetic.main.fragment_beer_detail_controller.*
 import org.jetbrains.anko.support.v4.withArguments
 import javax.inject.Inject
 
@@ -61,12 +62,6 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
     presenter.onDetachView()
   }
 
-  override fun onComposeView() {
-    val beerId = getBeerId()
-    val beerDetailFragment = fragmentFactory.getBeerDetailFragment(childFragmentManager, beerId)
-    addFragment(beerDetailFragment)
-  }
-
   override fun onRequestViewComposition() {
     toolbarBehaviour.inject(activity)
   }
@@ -74,6 +69,35 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
   override fun onViewReady(savedInstanceState: Bundle?) {
     val beerId = getBeerId()
     presenter.onRequestBeer(beerId)
+    initializeBottomNavigationBar()
+  }
+
+  private fun initializeBottomNavigationBar() {
+    bottomNavigationMenu.setOnNavigationItemSelectedListener {
+      when(it.itemId) {
+        R.id.action_beer_ingredients -> consume { presenter.onBeerIngredientsSelected() }
+        R.id.action_beer_breweries -> consume { presenter.onBeerBreweriesSelected() }
+        else -> consume { presenter.onBeerDetailSelected() }
+      }
+    }
+  }
+
+  override fun showBeerDetail() {
+    val beerId = getBeerId()
+    val fragment = fragmentFactory.getBeerDetailFragment(childFragmentManager, beerId)
+    addFragment(fragment)
+  }
+
+  override fun showBeerIngredients() {
+    val beerId = getBeerId()
+    val fragment = fragmentFactory.getBeerIngredientsFragment(childFragmentManager, beerId)
+    addFragment(fragment)
+  }
+
+  override fun showBeerBreweries() {
+    val beerId = getBeerId()
+    val fragment = fragmentFactory.getBeerBreweriesFragment(childFragmentManager, beerId)
+    addFragment(fragment)
   }
 
   private fun addFragment(fragment: AbsFragment) {
