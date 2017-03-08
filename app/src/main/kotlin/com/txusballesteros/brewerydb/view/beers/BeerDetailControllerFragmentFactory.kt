@@ -20,30 +20,13 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
-import android.os.Build
-import android.os.Bundle
-import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.view.AbsActivity
-import com.txusballesteros.brewerydb.view.AbsFragment
+import android.support.v4.app.FragmentManager
+import javax.inject.Inject
 
-class BeerDetailActivity: AbsActivity() {
-  companion object {
-    val EXTRA_BEER_ID = "extra:beerId"
-  }
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      window.statusBarColor = resources.getColor(R.color.gray_1_50)
-    }
-  }
-
-  override fun onRequestFragment(): AbsFragment {
-    val beerId = getBeerId()
-    return BeerDetailControllerFragment.newInstance(beerId)
-  }
-
-  fun getBeerId(): String {
-    return intent.extras.getString(EXTRA_BEER_ID)
+class BeerDetailControllerFragmentFactory @Inject constructor() {
+  fun getBeerDetailFragment(fragmentManager: FragmentManager, beerId: String ): BeerDetailFragment {
+    val tag = BeerDetailFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerDetailFragment.newInstance(beerId)
+    return fragment as BeerDetailFragment
   }
 }

@@ -44,7 +44,6 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   @Inject lateinit var presenter: BeerDetailPresenter
-  @Inject lateinit var toolbarBehaviour : ToolbarWithImageBehaviour
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beer_detail
@@ -60,10 +59,6 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   override fun onRequestInjection(viewComponent: ViewComponent) {
     viewComponent.inject(this)
-  }
-
-  override fun onRequestViewComposition() {
-    toolbarBehaviour.inject(activity)
   }
 
   override fun onComposeView() {
@@ -108,14 +103,8 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     return arguments.getString(EXTRA_BEER_ID)
   }
 
-  override fun renderStyle(style: StyleViewModel) {
-
-  }
-
   override fun renderBeer(beer: BeerViewModel) {
-    renderName(beer)
     renderDescription(beer)
-    renderLabel(beer)
     renderServingTemperature(beer)
     renderIsOrganic(beer)
   }
@@ -128,19 +117,8 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     glass.text = "NA"
   }
 
-  private fun renderName(beer: BeerViewModel) {
-    toolbarBehaviour.setTitle(beer.displayName)
-    name.text = beer.displayName
-  }
-
   private fun renderDescription(beer: BeerViewModel) {
     description.text = beer.description
-  }
-
-  private fun renderLabel(beer: BeerViewModel) {
-    if (beer.label != null && beer.label.large != null) {
-      toolbarBehaviour.setLabel(beer.label.large)
-    }
   }
 
   private fun renderServingTemperature(beer: BeerViewModel) {

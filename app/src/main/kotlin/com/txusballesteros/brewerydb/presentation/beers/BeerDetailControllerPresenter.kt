@@ -24,13 +24,10 @@ import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.Presenter
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 
-interface BeerDetailPresenter: Presenter<BeerDetailPresenter.View> {
+interface BeerDetailControllerPresenter: Presenter<BeerDetailControllerPresenter.View> {
   fun onRequestBeer(beerId: String)
 
   interface View: Presenter.View {
     fun renderBeer(beer: BeerViewModel)
-    fun renderGlass(glassName: String)
-    fun renderEmptyGlass()
-    fun renderError()
   }
 }
