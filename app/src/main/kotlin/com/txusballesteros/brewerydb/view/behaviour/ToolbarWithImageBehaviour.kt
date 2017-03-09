@@ -46,6 +46,10 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDowloader: 
     return R.id.toolbar_place_holder
   }
 
+  override fun onRequestBehaviourRootViewId(): Int {
+    return R.id.collapsing_toolbar
+  }
+
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.toolbar_with_image
   }

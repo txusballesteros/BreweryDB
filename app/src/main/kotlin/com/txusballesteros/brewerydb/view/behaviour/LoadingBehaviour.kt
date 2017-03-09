@@ -43,6 +43,10 @@ class LoadingBehaviour @Inject constructor(): Behaviour() {
     return R.id.loading_place_holder
   }
 
+  override fun onRequestBehaviourRootViewId(): Int {
+    return R.id.loadingHolder
+  }
+
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.loading
   }

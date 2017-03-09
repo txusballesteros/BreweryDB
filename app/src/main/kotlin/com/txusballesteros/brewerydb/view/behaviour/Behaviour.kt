@@ -23,6 +23,7 @@ package com.txusballesteros.brewerydb.view.behaviour
 import android.app.Activity
 import android.view.View
 import android.view.ViewStub
+import org.jetbrains.anko.find
 
 abstract class Behaviour {
   private lateinit var view: View
@@ -35,6 +36,9 @@ abstract class Behaviour {
     val placeHolderView = findPlaceHolderView(rootView)
     if (placeHolderView != null) {
       attachBehaviorLayout(placeHolderView)
+    } else {
+      val behaviourView = rootView.find<View>(onRequestBehaviourRootViewId())
+      onBehaviorReady(behaviourView)
     }
   }
 
@@ -60,6 +64,8 @@ abstract class Behaviour {
   }
 
   abstract fun onRequestPlaceHolderId() : Int
+
+  abstract fun onRequestBehaviourRootViewId() : Int
 
   abstract fun onRequestLayoutResourceId() : Int
 
