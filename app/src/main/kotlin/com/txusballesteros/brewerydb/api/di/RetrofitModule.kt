@@ -20,10 +20,11 @@
  */
 package com.txusballesteros.brewerydb.api.di
 
+import com.txusballesteros.brewerydb.api.beers.BeerIngredientsRetrofitService
 import com.txusballesteros.brewerydb.api.beers.BeersRetrofitService
 import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitService
 import com.txusballesteros.brewerydb.api.glassware.GlasswareRetrofitService
-import com.txusballesteros.brewerydb.api.beers.BeerIngredientsRetrofitService
+import com.txusballesteros.brewerydb.api.ingredients.HopsRetrofitService
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
 import dagger.Module
 import dagger.Provides
@@ -50,4 +51,9 @@ class RetrofitModule {
   @Provides
   fun provideIngredientsRetrofitService(retrofit: Retrofit): BeerIngredientsRetrofitService
       = retrofit.create(BeerIngredientsRetrofitService::class.java)
+
+  @Provides
+  fun provideHopsRetrofitService(retrofit: Retrofit): HopsRetrofitService
+      = retrofit.create(HopsRetrofitService::class.java)
+
 }
