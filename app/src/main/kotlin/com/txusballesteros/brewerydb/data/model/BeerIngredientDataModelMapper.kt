@@ -18,14 +18,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.data.model.BeerIngredient
-import com.txusballesteros.brewerydb.domain.model.Beer
+class BeerIngredientDataModelMapper {
+  fun map(source: List<BeerIngredientDataModel>): List<BeerIngredient>
+    = source.map { ingredient -> map(ingredient) }
 
-interface BeersRepository {
-  fun getBeerIngredients(beerId: String, onResult: (List<BeerIngredient>) -> Unit)
-  fun getBeerById(beerId: String, onResult: (Beer) -> Unit)
-  fun getBeers(onResult: (List<Beer>) -> Unit)
-  fun getNextPageBeers(onResult: (List<Beer>) -> Unit)
+  fun map(source: BeerIngredientDataModel): BeerIngredient
+    = BeerIngredient(source.id, source.name, source.category, source.categoryDisplay)
 }

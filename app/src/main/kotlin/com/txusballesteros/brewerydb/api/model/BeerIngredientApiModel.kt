@@ -20,4 +20,7 @@
  */
 package com.txusballesteros.brewerydb.api.model
 
-data class BeerIngredientApiModel(val id: Int, val name: String, val category: String, val categoryDisplay: String)
+data class BeerIngredientApiModel(val id: Int,
+                                  val name: String,
+                                  val category: String,
+                                  val categoryDisplay: String)

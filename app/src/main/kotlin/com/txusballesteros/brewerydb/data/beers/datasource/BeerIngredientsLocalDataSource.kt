@@ -18,14 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository
+package com.txusballesteros.brewerydb.data.beers.datasource
 
-import com.txusballesteros.brewerydb.data.model.BeerIngredient
-import com.txusballesteros.brewerydb.domain.model.Beer
+import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModel
 
-interface BeersRepository {
-  fun getBeerIngredients(beerId: String, onResult: (List<BeerIngredient>) -> Unit)
-  fun getBeerById(beerId: String, onResult: (Beer) -> Unit)
-  fun getBeers(onResult: (List<Beer>) -> Unit)
-  fun getNextPageBeers(onResult: (List<Beer>) -> Unit)
+interface BeerIngredientsLocalDataSource {
+  fun get(beerId: String): List<BeerIngredientDataModel>
+  fun store(beerId: String, ingredients: List<BeerIngredientDataModel>)
 }

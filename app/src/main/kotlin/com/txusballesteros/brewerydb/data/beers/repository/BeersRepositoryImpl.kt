@@ -21,9 +21,12 @@
 package com.txusballesteros.brewerydb.data.beers.repository
 
 import com.txusballesteros.brewerydb.data.beers.strategy.GetBeerByIdStrategy
+import com.txusballesteros.brewerydb.data.beers.strategy.GetBeerIngredientsStrategy
 import com.txusballesteros.brewerydb.data.beers.strategy.GetBeersStrategy
 import com.txusballesteros.brewerydb.data.beers.strategy.GetNextPageBeersStrategy
 import com.txusballesteros.brewerydb.data.model.BeerDataModelMapper
+import com.txusballesteros.brewerydb.data.model.BeerIngredient
+import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModelMapper
 import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.repository.BeersRepository
 import javax.inject.Inject
@@ -31,25 +34,34 @@ import javax.inject.Inject
 class BeersRepositoryImpl @Inject constructor(private val getBeersStrategy: GetBeersStrategy.Builder,
                                               private val getNextPageBeersStrategy: GetNextPageBeersStrategy.Builder,
                                               private val getBeerByIdStrategy: GetBeerByIdStrategy.Builder,
-                                              private val mapper: BeerDataModelMapper): BeersRepository {
+                                              private val getBeerIngredientsStrategy: GetBeerIngredientsStrategy.Builder,
+                                              private val beersMapper: BeerDataModelMapper,
+                                              private val ingredientsMapper: BeerIngredientDataModelMapper): BeersRepository {
+
+  override fun getBeerIngredients(beerId: String, onResult: (List<BeerIngredient>) -> Unit) {
+    getBeerIngredientsStrategy.build().execute(beerId, onResult = {
+      val ingredients = ingredientsMapper.map(it!!)
+      onResult(ingredients)
+    })
+  }
 
   override fun getBeerById(beerId: String, onResult: (Beer) -> Unit) {
     getBeerByIdStrategy.build().execute(beerId, onResult = {
-      val beers = mapper.map(it!!)
+      val beers = beersMapper.map(it!!)
       onResult(beers)
     })
   }
 
   override fun getBeers(onResult: (List<Beer>) -> Unit) {
     getBeersStrategy.build().execute(onResult = {
-      val beers = mapper.map(it!!)
+      val beers = beersMapper.map(it!!)
       onResult(beers)
     })
   }
 
   override fun getNextPageBeers(onResult: (List<Beer>) -> Unit) {
     getNextPageBeersStrategy.build().execute(onResult = {
-      val beers = mapper.map(it!!)
+      val beers = beersMapper.map(it!!)
       onResult(beers)
     })
   }

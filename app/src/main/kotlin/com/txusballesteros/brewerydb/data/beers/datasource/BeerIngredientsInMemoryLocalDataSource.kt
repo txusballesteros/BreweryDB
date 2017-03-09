@@ -18,14 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository
+package com.txusballesteros.brewerydb.data.beers.datasource
 
-import com.txusballesteros.brewerydb.data.model.BeerIngredient
-import com.txusballesteros.brewerydb.domain.model.Beer
+import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModel
+import javax.inject.Inject
 
-interface BeersRepository {
-  fun getBeerIngredients(beerId: String, onResult: (List<BeerIngredient>) -> Unit)
-  fun getBeerById(beerId: String, onResult: (Beer) -> Unit)
-  fun getBeers(onResult: (List<Beer>) -> Unit)
-  fun getNextPageBeers(onResult: (List<Beer>) -> Unit)
+class BeerIngredientsInMemoryLocalDataSource @Inject constructor(): BeerIngredientsLocalDataSource {
+  val cache: MutableMap<String, List<BeerIngredientDataModel>> = HashMap()
+
+  override fun store(beerId: String, ingredients: List<BeerIngredientDataModel>) {
+    cache.put(beerId, ingredients)
+  }
+
+  override fun get(beerId: String): List<BeerIngredientDataModel> {
+    return cache[beerId] ?: ArrayList<BeerIngredientDataModel>()
+  }
 }
