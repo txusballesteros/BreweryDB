@@ -33,13 +33,14 @@ abstract class Behaviour {
 
   open fun inject(rootView: View) {
     val placeHolderView = findPlaceHolderView(rootView)
-    attachBehaviorLayout(placeHolderView)
+    if (placeHolderView != null) {
+      attachBehaviorLayout(placeHolderView)
+    }
   }
 
-  fun findPlaceHolderView(rootView: View) : ViewStub {
+  fun findPlaceHolderView(rootView: View) : ViewStub? {
     val placeHolderId = onRequestPlaceHolderId()
     val result = rootView.findViewById(placeHolderId) as? ViewStub
-        ?: throw IllegalArgumentException("Invalid behaviour place holder, that should be a ViewStub.")
     return result
   }
 
