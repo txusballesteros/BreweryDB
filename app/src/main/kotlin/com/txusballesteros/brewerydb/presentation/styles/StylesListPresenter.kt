@@ -31,5 +31,7 @@ interface StylesListPresenter : Presenter<StylesListPresenter.View> {
     fun getCategoryId() : Int
     fun renderStyles(styles: List<StyleViewModel>)
     fun renderError()
+    fun showLoading()
+    fun hideLoading()
   }
 }

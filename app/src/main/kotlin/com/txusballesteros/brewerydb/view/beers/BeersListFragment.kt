@@ -33,6 +33,7 @@ import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class BeersListFragment: AbsFragment(), BeersListPresenter.View {
@@ -104,5 +105,7 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
     loadingBehaviour.hideLoading()
   }
 
-  override fun renderError() { }
+  override fun renderError() {
+    toast("Upps!!!")
+  }
 }
