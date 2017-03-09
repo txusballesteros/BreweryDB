@@ -22,7 +22,7 @@ package com.txusballesteros.brewerydb.api.model
 
 data class HopApiModel(val id: Int,
                        val name: String,
-                       val description: String,
+                       val description: String?,
                        val alphaAcidMin: Float?,
                        val betaAcidMin: Float?,
                        val betaAcidMax: Float?,

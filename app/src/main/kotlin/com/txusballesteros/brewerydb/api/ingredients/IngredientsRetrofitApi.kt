@@ -20,14 +20,39 @@
  */
 package com.txusballesteros.brewerydb.api.ingredients
 
+import com.txusballesteros.brewerydb.api.model.FermentableApiResponse
 import com.txusballesteros.brewerydb.api.model.HopApiResponse
+import com.txusballesteros.brewerydb.api.model.YeastApiResponse
 import com.txusballesteros.brewerydb.exception.NetworkException
 import javax.inject.Inject
 
-class HopsRetrofitApi @Inject constructor(private val service: HopsRetrofitService): HopsApi {
+class IngredientsRetrofitApi @Inject constructor(private val hopService: HopsRetrofitService,
+                                                 private val yeastService: YeastsRetrofitService,
+                                                 private val fermentableService: FermentableRetrofitService): IngredientsApi {
+
   override fun getHop(ingredientId: Int): HopApiResponse {
     try {
-      val call = service.getIngredient(ingredientId)
+      val call = hopService.getIngredient(ingredientId)
+      val response = call.execute()
+      return response.body()
+    } catch (error: Exception) {
+      throw NetworkException(error)
+    }
+  }
+
+  override fun getYeast(ingredientId: Int): YeastApiResponse {
+    try {
+      val call = yeastService.getIngredient(ingredientId)
+      val response = call.execute()
+      return response.body()
+    } catch (error: Exception) {
+      throw NetworkException(error)
+    }
+  }
+
+  override fun getFermentable(ingredientId: Int): FermentableApiResponse {
+    try {
+      val call = fermentableService.getIngredient(ingredientId)
       val response = call.execute()
       return response.body()
     } catch (error: Exception) {

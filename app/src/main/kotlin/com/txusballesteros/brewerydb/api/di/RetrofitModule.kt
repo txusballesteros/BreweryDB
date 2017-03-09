@@ -24,7 +24,9 @@ import com.txusballesteros.brewerydb.api.beers.BeerIngredientsRetrofitService
 import com.txusballesteros.brewerydb.api.beers.BeersRetrofitService
 import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitService
 import com.txusballesteros.brewerydb.api.glassware.GlasswareRetrofitService
+import com.txusballesteros.brewerydb.api.ingredients.FermentableRetrofitService
 import com.txusballesteros.brewerydb.api.ingredients.HopsRetrofitService
+import com.txusballesteros.brewerydb.api.ingredients.YeastsRetrofitService
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
 import dagger.Module
 import dagger.Provides
@@ -56,4 +58,11 @@ class RetrofitModule {
   fun provideHopsRetrofitService(retrofit: Retrofit): HopsRetrofitService
       = retrofit.create(HopsRetrofitService::class.java)
 
+  @Provides
+  fun provideYeastRetrofitService(retrofit: Retrofit): YeastsRetrofitService
+      = retrofit.create(YeastsRetrofitService::class.java)
+
+  @Provides
+  fun provideFermentableRetrofitService(retrofit: Retrofit): FermentableRetrofitService
+      = retrofit.create(FermentableRetrofitService::class.java)
 }

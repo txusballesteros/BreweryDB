@@ -20,28 +20,12 @@
  */
 package com.txusballesteros.brewerydb.api.ingredients
 
-import com.txusballesteros.brewerydb.api.ApiIntegrationTest
-import junit.framework.Assert.assertEquals
-import org.junit.Test
-import retrofit2.Retrofit
+import com.txusballesteros.brewerydb.api.model.YeastApiResponse
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-class HopsApiIntegrationTest: ApiIntegrationTest() {
-  companion object {
-    val INGREDIENT_ID = 1
-  }
-
-  lateinit var api: HopsApi
-
-  override fun onPrepareTest(retrofit: Retrofit) {
-    val service = retrofit.create(HopsRetrofitService::class.java)
-    api = HopsRetrofitApi(service)
-  }
-
-  @Test
-  fun shouldGetHop() {
-    val response = api.getHop(INGREDIENT_ID)
-
-    assertEquals(STATUS_SUCCESS, response.status)
-    assertEquals(INGREDIENT_ID, response.ingredient.id)
-  }
+interface YeastsRetrofitService {
+  @GET("/v2/yeast/{ingredientId}")
+  fun getIngredient(@Path("ingredientId") ingredientId: Int): Call<YeastApiResponse>
 }

@@ -18,10 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.ingredients
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.api.model.HopApiResponse
+import com.google.gson.annotations.SerializedName
 
-interface HopsApi {
-  fun getHop(ingredientId: Int): HopApiResponse
-}
+data class FermentableApiResponse(@SerializedName("data") val ingredient: FermentableApiModel,
+                                  val message: String,
+                                  val status: String)
