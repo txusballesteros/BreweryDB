@@ -20,7 +20,9 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-class BeerIngredientDataModelMapper {
+import javax.inject.Inject
+
+class BeerIngredientDataModelMapper @Inject constructor() {
   fun map(source: List<BeerIngredientDataModel>): List<BeerIngredient>
     = source.map { ingredient -> map(ingredient) }
 
