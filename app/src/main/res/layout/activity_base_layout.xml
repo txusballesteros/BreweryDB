@@ -40,6 +40,11 @@
 
   </android.support.design.widget.AppBarLayout>
 
+  <ViewStub
+      android:id="@+id/loading_place_holder"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent" />
+
   <FrameLayout
       android:id="@+id/content_place_holder"
       android:layout_width="match_parent"

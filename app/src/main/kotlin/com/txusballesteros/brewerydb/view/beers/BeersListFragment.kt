@@ -29,6 +29,7 @@ import com.txusballesteros.brewerydb.instrumentation.EndlessRecyclerViewScrollLi
 import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 import com.txusballesteros.brewerydb.presentation.beers.BeersListPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
@@ -41,6 +42,7 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
 
   @Inject lateinit var presenter: BeersListPresenter
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
+  @Inject lateinit var loadingBehaviour: LoadingBehaviour
   @Inject lateinit var imageDownloader: ImageDownloader
   lateinit var adapter: BeerListAdapter
   lateinit var endlessScrollListener: EndlessRecyclerViewScrollListener
@@ -63,6 +65,7 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
 
   override fun onRequestViewComposition() {
     toolbarBehaviour.inject(activity)
+    loadingBehaviour.inject(activity)
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
@@ -91,6 +94,14 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   override fun renderBeers(beers: List<BeerViewModel>) {
     adapter.addAll(beers)
     adapter.notifyDataSetChanged()
+  }
+
+  override fun showLoading() {
+    loadingBehaviour.showLoading()
+  }
+
+  override fun hideLoading() {
+    loadingBehaviour.hideLoading()
   }
 
   override fun renderError() { }

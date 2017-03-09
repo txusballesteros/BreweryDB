@@ -35,10 +35,13 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
                               AbsPresenter<BeersListPresenter.View>(), BeersListPresenter {
 
   override fun onRequestBeers() {
+    getView()?.showLoading()
     getBeersUseCase.execute(onResult = {
       val beersList = mapper.map(it)
       getView()?.renderBeers(beersList)
+      getView()?.hideLoading()
     }, onError = {
+      getView()?.hideLoading()
       getView()?.renderError()
     })
   }

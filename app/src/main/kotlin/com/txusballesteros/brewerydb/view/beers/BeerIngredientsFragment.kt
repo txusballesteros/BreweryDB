@@ -22,8 +22,10 @@ package com.txusballesteros.brewerydb.view.beers
 
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import org.jetbrains.anko.support.v4.withArguments
+import javax.inject.Inject
 
 class BeerIngredientsFragment: AbsFragment() {
   companion object {
@@ -36,6 +38,8 @@ class BeerIngredientsFragment: AbsFragment() {
     }
   }
 
+  @Inject lateinit var loadingBehaviour: LoadingBehaviour
+
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beer_ingredients
   }
@@ -47,4 +51,8 @@ class BeerIngredientsFragment: AbsFragment() {
   override fun onPresenterShouldBeAttached() { }
 
   override fun onPresenterShouldBeDetached() { }
+
+  override fun onRequestViewComposition() {
+    loadingBehaviour.inject(activity)
+  }
 }
