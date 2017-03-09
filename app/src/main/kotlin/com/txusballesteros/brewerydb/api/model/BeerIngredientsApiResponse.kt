@@ -20,4 +20,8 @@
  */
 package com.txusballesteros.brewerydb.api.model
 
-data class IngredientApiModel(val id: Int, val name: String, val category: String, val categoryDisplay: String)
+import com.google.gson.annotations.SerializedName
+
+class BeerIngredientsApiResponse(@SerializedName("data") val ingredients: List<BeerIngredientApiModel>,
+                                 val message: String,
+                                 val status: String)

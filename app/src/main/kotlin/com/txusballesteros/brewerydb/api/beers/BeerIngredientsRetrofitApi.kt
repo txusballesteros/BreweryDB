@@ -20,12 +20,14 @@
  */
 package com.txusballesteros.brewerydb.api.beers
 
-import com.txusballesteros.brewerydb.api.model.IngredientsApiResponse
+import com.txusballesteros.brewerydb.api.model.BeerIngredientsApiResponse
 import com.txusballesteros.brewerydb.exception.NetworkException
 import javax.inject.Inject
 
-class BeerIngredientsRetrofitApi @Inject constructor(private val serviceBeer: BeerIngredientsRetrofitService): BeerIngredientsApi {
-  override fun getIngredients(beerId: String): IngredientsApiResponse {
+class BeerIngredientsRetrofitApi @Inject constructor(private val serviceBeer: BeerIngredientsRetrofitService):
+                                  BeerIngredientsApi {
+
+  override fun getIngredients(beerId: String): BeerIngredientsApiResponse {
     try {
       val call = serviceBeer.getIngredients(beerId)
       val response = call.execute()

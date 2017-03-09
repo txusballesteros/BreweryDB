@@ -20,12 +20,12 @@
  */
 package com.txusballesteros.brewerydb.api.beers
 
-import com.txusballesteros.brewerydb.api.model.IngredientsApiResponse
+import com.txusballesteros.brewerydb.api.model.BeerIngredientsApiResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 interface BeerIngredientsRetrofitService {
   @GET("/v2/beer/{beerId}/ingredients")
-  fun getIngredients(@Path("beerId") beerId: String): Call<IngredientsApiResponse>
+  fun getIngredients(@Path("beerId") beerId: String): Call<BeerIngredientsApiResponse>
 }

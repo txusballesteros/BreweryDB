@@ -20,8 +20,8 @@
  */
 package com.txusballesteros.brewerydb.api.beers
 
-import com.txusballesteros.brewerydb.api.model.IngredientsApiResponse
+import com.txusballesteros.brewerydb.api.model.BeerIngredientsApiResponse
 
 interface BeerIngredientsApi {
-  fun getIngredients(beerId: String): IngredientsApiResponse
+  fun getIngredients(beerId: String): BeerIngredientsApiResponse
 }
