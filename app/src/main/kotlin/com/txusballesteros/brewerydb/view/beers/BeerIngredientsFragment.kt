@@ -20,14 +20,18 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
+import android.os.Bundle
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
+import com.txusballesteros.brewerydb.presentation.beers.BeerIngredientsPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.support.v4.withArguments
 import javax.inject.Inject
 
-class BeerIngredientsFragment: AbsFragment() {
+class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
   companion object {
     val EXTRA_BEER_ID = "extra:beerId"
 
@@ -39,6 +43,7 @@ class BeerIngredientsFragment: AbsFragment() {
   }
 
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
+  @Inject lateinit var presenter: BeerIngredientsPresenter
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beer_ingredients
@@ -48,11 +53,40 @@ class BeerIngredientsFragment: AbsFragment() {
     viewComponent.inject(this)
   }
 
-  override fun onPresenterShouldBeAttached() { }
+  override fun onPresenterShouldBeAttached() {
+    presenter.onAttachView(this)
+  }
 
-  override fun onPresenterShouldBeDetached() { }
+  override fun onPresenterShouldBeDetached() {
+    presenter.onDetachView()
+  }
 
   override fun onRequestViewComposition() {
     loadingBehaviour.inject(activity)
+  }
+
+  override fun onViewReady(savedInstanceState: Bundle?) {
+    val beerId = getBeerId()
+    presenter.onRequestIngredients(beerId)
+  }
+
+  override fun showLoading() {
+    loadingBehaviour.showLoading()
+  }
+
+  override fun hideLoading() {
+    loadingBehaviour.hideLoading()
+  }
+
+  override fun renderIngredients(ingredients: List<BeerIngredientViewModel>) {
+    toast(String.format("%d Ingredients", ingredients.size))
+  }
+
+  override fun renderError() {
+    toast("Upss!!")
+  }
+
+  private fun getBeerId(): String {
+    return arguments.getString(EXTRA_BEER_ID)
   }
 }

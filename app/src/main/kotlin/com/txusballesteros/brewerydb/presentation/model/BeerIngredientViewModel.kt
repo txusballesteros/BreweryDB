@@ -18,24 +18,9 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModel
-import javax.inject.Inject
-
-class BeerIngredientApiModelMapper @Inject constructor() {
-  fun map(source: BeerIngredientsApiResponse): List<BeerIngredientDataModel>
-    = map(source.ingredients)
-
-  fun map(source: List<BeerIngredientApiModel>?): List<BeerIngredientDataModel> {
-    var result: List<BeerIngredientDataModel> = ArrayList()
-    if (source != null) {
-      result = source.map { ingredient -> map(ingredient) }
-    }
-    return result
-  }
-
-
-  fun map(source: BeerIngredientApiModel): BeerIngredientDataModel
-    = BeerIngredientDataModel(source.id, source.name, source.category, source.categoryDisplay)
-}
+data class BeerIngredientViewModel(val id: Int,
+                                   val name: String,
+                                   val category: String,
+                                   val categoryDisplay: String)

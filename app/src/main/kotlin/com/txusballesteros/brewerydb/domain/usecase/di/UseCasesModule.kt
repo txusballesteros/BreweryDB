@@ -60,4 +60,7 @@ class UseCasesModule {
 
   @Provides
   fun provideGetGlassByIdUseCase(useCase: GetGlassByIdInteractor): GetGlassByIdUseCase = useCase
+
+  @Provides
+  fun provideGetBeerIngredientsUseCase(useCase: GetBeerIngredientsInteractor): GetBeerIngredientsUseCase = useCase
 }
