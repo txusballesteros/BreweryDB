@@ -47,4 +47,7 @@ class PresentationModule {
 
   @Provides
   fun provideBeerAbvPresenter(presenter: BeerAbvPresenterImpl): BeerAbvPresenter = presenter
+
+  @Provides
+  fun provideBeerDetailControllerPresenter(presenter: BeerDetailControllerPresenterImpl): BeerDetailControllerPresenter = presenter
 }

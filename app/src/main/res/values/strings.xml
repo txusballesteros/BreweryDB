@@ -24,4 +24,7 @@
   <string name="ibu_pattern">IBU: %.1f</string>
   <string name="is_organic">Is Organic</string>
   <string name="is_not_organic">Is not Organic</string>
+  <string name="beer">Beer</string>
+  <string name="ingredients">Ingredients</string>
+  <string name="breweries">Breweries</string>
 </resources>

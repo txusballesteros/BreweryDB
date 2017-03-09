@@ -20,30 +20,31 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
-import android.os.Build
-import android.os.Bundle
 import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.view.AbsActivity
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.di.ViewComponent
+import org.jetbrains.anko.support.v4.withArguments
 
-class BeerDetailActivity: AbsActivity() {
+class BeerIngredientsFragment: AbsFragment() {
   companion object {
     val EXTRA_BEER_ID = "extra:beerId"
-  }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      window.statusBarColor = resources.getColor(R.color.gray_1_50)
+    fun newInstance(beerId: String): BeerIngredientsFragment {
+      return BeerIngredientsFragment().withArguments(
+          EXTRA_BEER_ID to beerId
+      )
     }
   }
 
-  override fun onRequestFragment(): AbsFragment {
-    val beerId = getBeerId()
-    return BeerDetailControllerFragment.newInstance(beerId)
+  override fun onRequestLayoutResourceId(): Int {
+    return R.layout.fragment_beer_ingredients
   }
 
-  fun getBeerId(): String {
-    return intent.extras.getString(EXTRA_BEER_ID)
+  override fun onRequestInjection(viewComponent: ViewComponent) {
+    viewComponent.inject(this)
   }
+
+  override fun onPresenterShouldBeAttached() { }
+
+  override fun onPresenterShouldBeDetached() { }
 }
