@@ -27,8 +27,8 @@ import com.txusballesteros.brewerydb.presentation.beers.BeerIngredientsPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.support.v4.withArguments
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
@@ -79,11 +79,11 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
   }
 
   override fun renderIngredients(ingredients: List<BeerIngredientViewModel>) {
-    toast(String.format("%d Ingredients", ingredients.size))
+    activity.toast(String.format("%d Ingredients", ingredients.size))
   }
 
   override fun renderError() {
-    toast("Upss!!")
+    activity.toast("Upss!!")
   }
 
   private fun getBeerId(): String {
