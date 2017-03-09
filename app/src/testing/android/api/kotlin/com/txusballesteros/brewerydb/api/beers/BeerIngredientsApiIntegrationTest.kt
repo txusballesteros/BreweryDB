@@ -18,20 +18,31 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.ingredients
+package com.txusballesteros.brewerydb.api.beers
 
-import com.txusballesteros.brewerydb.api.model.IngredientsApiResponse
-import com.txusballesteros.brewerydb.exception.NetworkException
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.api.ApiIntegrationTest
+import junit.framework.Assert.assertEquals
+import junit.framework.Assert.assertFalse
+import org.junit.Test
+import retrofit2.Retrofit
 
-class IngredientsRetrofitApi @Inject constructor(private val service: IngredientsRetrofitService): IngredientsApi {
-  override fun getIngredients(beerId: String): IngredientsApiResponse {
-    try {
-      val call = service.getIngredients(beerId)
-      val response = call.execute()
-      return response.body()
-    } catch (error: Exception) {
-      throw NetworkException(error)
-    }
+class BeerIngredientsApiIntegrationTest : ApiIntegrationTest() {
+  companion object {
+    val BEER_ID = "WHQisc"
+  }
+
+  lateinit var api: BeerIngredientsApi
+
+  override fun onPrepareTest(retrofit: Retrofit) {
+    val service = retrofit.create(BeerIngredientsRetrofitService::class.java)
+    api = BeerIngredientsRetrofitApi(service)
+  }
+
+  @Test
+  fun shouldGetIngredients() {
+    val response = api.getIngredients(BEER_ID)
+
+    assertEquals(STATUS_SUCCESS, response.status)
+    assertFalse(response.ingredients.isEmpty())
   }
 }

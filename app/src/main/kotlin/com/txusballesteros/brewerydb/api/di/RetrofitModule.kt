@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.api.di
 import com.txusballesteros.brewerydb.api.beers.BeersRetrofitService
 import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitService
 import com.txusballesteros.brewerydb.api.glassware.GlasswareRetrofitService
-import com.txusballesteros.brewerydb.api.ingredients.IngredientsRetrofitService
+import com.txusballesteros.brewerydb.api.beers.BeerIngredientsRetrofitService
 import com.txusballesteros.brewerydb.api.styles.StylesRetrofitService
 import dagger.Module
 import dagger.Provides
@@ -48,6 +48,6 @@ class RetrofitModule {
       = retrofit.create(GlasswareRetrofitService::class.java)
 
   @Provides
-  fun provideIngredientsRetrofitService(retrofit: Retrofit): IngredientsRetrofitService
-      = retrofit.create(IngredientsRetrofitService::class.java)
+  fun provideIngredientsRetrofitService(retrofit: Retrofit): BeerIngredientsRetrofitService
+      = retrofit.create(BeerIngredientsRetrofitService::class.java)
 }

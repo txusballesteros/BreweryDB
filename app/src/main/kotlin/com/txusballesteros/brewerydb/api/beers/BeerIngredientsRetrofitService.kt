@@ -18,10 +18,14 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.ingredients
+package com.txusballesteros.brewerydb.api.beers
 
 import com.txusballesteros.brewerydb.api.model.IngredientsApiResponse
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-interface IngredientsApi {
-  fun getIngredients(beerId: String): IngredientsApiResponse
+interface BeerIngredientsRetrofitService {
+  @GET("/v2/beer/{beerId}/ingredients")
+  fun getIngredients(@Path("beerId") beerId: String): Call<IngredientsApiResponse>
 }
