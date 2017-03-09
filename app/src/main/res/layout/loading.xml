@@ -34,7 +34,7 @@
       android:layout_gravity="center"
       android:layout_centerInParent="true"
       app:balls="3"
-      app:movement_cycle_time="3000"
+      app:movement_cycle_time="2000"
       app:enable_size_animation="true"
       app:size_cycle_time="500"
       app:min_ball_size="5dp"
