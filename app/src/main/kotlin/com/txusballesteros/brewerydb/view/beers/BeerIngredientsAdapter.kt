@@ -18,7 +18,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.categories
+package com.txusballesteros.brewerydb.view.beers
 
 import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
@@ -26,46 +26,40 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.presentation.model.CategoryViewModel
+import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
 import org.jetbrains.anko.find
 import java.util.*
 
-class CategoriesListAdapter(private val listener: OnCategoryClickListener):
-                      RecyclerView.Adapter<CategoriesListAdapter.ViewHolder>() {
-  private val cache: MutableList<CategoryViewModel> = ArrayList()
+class BeerIngredientsAdapter: RecyclerView.Adapter<BeerIngredientsAdapter.ViewHolder>() {
+  private val cache: MutableList<BeerIngredientViewModel> = ArrayList()
 
   fun clear() {
     cache.clear()
   }
 
-  fun addAll(styles: List<CategoryViewModel>) {
+  fun addAll(styles: List<BeerIngredientViewModel>) {
     cache.addAll(styles)
   }
 
-  override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-    val category = cache.get(position)
-    holder?.render(category, listener)
-  }
-
-  override fun getItemCount(): Int {
-    return cache.size
-  }
-
   override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-    val holderView = LayoutInflater.from(parent!!.context).inflate(R.layout.item_category, parent, false)
+    val holderView = LayoutInflater.from(parent!!.context).inflate(R.layout.item_beer_ingredient, parent, false)
     return ViewHolder(holderView)
   }
 
-  class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val nameView = view.find<AppCompatTextView>(R.id.name)
+  override fun getItemCount(): Int = cache.size
 
-    fun render(category: CategoryViewModel, listener: OnCategoryClickListener) {
-      nameView.text = category.name
-      itemView.setOnClickListener { listener.onCategoryClick(category) }
-    }
+  override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    val ingredient = cache[position]
+    holder?.render(ingredient)
   }
 
-  interface OnCategoryClickListener {
-    fun onCategoryClick(category: CategoryViewModel)
+  class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+    val nameView = view.find<AppCompatTextView>(R.id.name)
+    val categoryView = view.find<AppCompatTextView>(R.id.category)
+
+    fun render(ingredient: BeerIngredientViewModel) {
+      nameView.text = ingredient.name
+      categoryView.text = ingredient.name
+    }
   }
 }
