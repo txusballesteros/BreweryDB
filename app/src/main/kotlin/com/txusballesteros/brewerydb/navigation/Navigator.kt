@@ -20,11 +20,9 @@
  */
 package com.txusballesteros.brewerydb.navigation
 
-import com.txusballesteros.brewerydb.navigation.commands.BeerDetailNavigationCommand
-import com.txusballesteros.brewerydb.navigation.commands.BeersListNavigationCommand
-import com.txusballesteros.brewerydb.navigation.commands.NavigationCommand
-import com.txusballesteros.brewerydb.navigation.commands.StylesListNavigationCommand
+import com.txusballesteros.brewerydb.navigation.commands.*
 import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import javax.inject.Inject
 
@@ -41,6 +39,11 @@ class Navigator @Inject constructor() {
 
   fun navigateToBeerDetail(from: Presenter.View?, beerId: String) {
     val navigationCommand = BeerDetailNavigationCommand(beerId)
+    navigate(from, navigationCommand)
+  }
+
+  fun navigateToIngredientDetail(from: Presenter.View?, ingredientId: Int, ingredientType: IngredientTypeViewModel) {
+    val navigationCommand = IngredientDetailNavigationCommand(ingredientId, ingredientType)
     navigate(from, navigationCommand)
   }
 

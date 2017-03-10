@@ -27,6 +27,8 @@ import com.txusballesteros.brewerydb.instrumentation.di.InstrumentationModule
 import com.txusballesteros.brewerydb.presentation.di.PresentationModule
 import com.txusballesteros.brewerydb.view.beers.*
 import com.txusballesteros.brewerydb.view.categories.CategoriesListFragment
+import com.txusballesteros.brewerydb.view.ingredients.HopDetailFragment
+import com.txusballesteros.brewerydb.view.ingredients.IngredientDetailControllerFragment
 import com.txusballesteros.brewerydb.view.styles.StylesListFragment
 import dagger.Component
 
@@ -48,4 +50,6 @@ interface ViewComponent {
   fun inject(view: BeerDetailControllerFragment)
   fun inject(view: BeerIngredientsFragment)
   fun inject(view: BeerBreweriesFragment)
+  fun inject(view: IngredientDetailControllerFragment)
+  fun inject(view: HopDetailFragment)
 }

@@ -1,4 +1,5 @@
-/*
+<?xml version="1.0" encoding="utf-8"?>
+<!--
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -17,20 +18,8 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
- */
-package com.txusballesteros.brewerydb.presentation.beers
-
-import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
-
-interface BeerIngredientsPresenter: Presenter<BeerIngredientsPresenter.View> {
-  fun onRequestIngredients(beerId: String)
-  fun onIngredientClick(ingredient: BeerIngredientViewModel)
-
-  interface View: Presenter.View {
-    fun showLoading()
-    fun hideLoading()
-    fun renderIngredients(ingredients: List<BeerIngredientViewModel>)
-    fun renderError()
-  }
-}
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/content"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent" />

@@ -18,19 +18,9 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
-
-interface BeerIngredientsPresenter: Presenter<BeerIngredientsPresenter.View> {
-  fun onRequestIngredients(beerId: String)
-  fun onIngredientClick(ingredient: BeerIngredientViewModel)
-
-  interface View: Presenter.View {
-    fun showLoading()
-    fun hideLoading()
-    fun renderIngredients(ingredients: List<BeerIngredientViewModel>)
-    fun renderError()
-  }
+interface IngredientViewModel {
+  val id: Int
+  val type: IngredientTypeViewModel
 }

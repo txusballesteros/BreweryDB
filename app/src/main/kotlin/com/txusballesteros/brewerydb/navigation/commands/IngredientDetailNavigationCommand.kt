@@ -1,0 +1,38 @@
+/*
+ * Copyright Txus Ballesteros 2017 (@txusballesteros)
+ *
+ * This file is part of Foobar.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+ */
+package com.txusballesteros.brewerydb.navigation.commands
+
+import android.content.Context
+import android.content.Intent
+import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
+import com.txusballesteros.brewerydb.view.beers.BeerDetailActivity
+import com.txusballesteros.brewerydb.view.ingredients.IngredientDetailActivity
+import org.jetbrains.anko.intentFor
+
+class IngredientDetailNavigationCommand(private val ingredientId: Int,
+                                        private val ingredientType: IngredientTypeViewModel): NavigationCommand() {
+  override fun onRequestIntent(context: Context): Intent {
+    return context.intentFor<IngredientDetailActivity>(
+        IngredientDetailActivity.EXTRA_INGREDIENT_ID to ingredientId,
+        IngredientDetailActivity.EXTRA_INGREDIENT_TYPE to ingredientType.value
+    )
+  }
+}

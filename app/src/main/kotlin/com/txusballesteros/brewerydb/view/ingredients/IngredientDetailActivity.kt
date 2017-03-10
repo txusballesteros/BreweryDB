@@ -18,19 +18,28 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.view.ingredients
 
-import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.view.AbsActivity
+import com.txusballesteros.brewerydb.view.AbsFragment
 
-interface BeerIngredientsPresenter: Presenter<BeerIngredientsPresenter.View> {
-  fun onRequestIngredients(beerId: String)
-  fun onIngredientClick(ingredient: BeerIngredientViewModel)
+class IngredientDetailActivity: AbsActivity() {
+  companion object {
+    val EXTRA_INGREDIENT_ID = "extra:ingredientId"
+    val EXTRA_INGREDIENT_TYPE = "extra:ingredientType"
+  }
 
-  interface View: Presenter.View {
-    fun showLoading()
-    fun hideLoading()
-    fun renderIngredients(ingredients: List<BeerIngredientViewModel>)
-    fun renderError()
+  override fun onRequestFragment(): AbsFragment {
+    val ingredientId = getIngredientId()
+    val ingredientType = getIngredientType()
+    return IngredientDetailControllerFragment.newInstance(ingredientId, ingredientType)
+  }
+
+  private fun getIngredientId(): Int {
+    return intent.extras.getInt(EXTRA_INGREDIENT_ID)
+  }
+
+  private fun getIngredientType(): String {
+    return intent.extras.getString(EXTRA_INGREDIENT_TYPE)
   }
 }

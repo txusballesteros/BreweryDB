@@ -18,19 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.domain.model.Country
+import javax.inject.Inject
 
-interface BeerIngredientsPresenter: Presenter<BeerIngredientsPresenter.View> {
-  fun onRequestIngredients(beerId: String)
-  fun onIngredientClick(ingredient: BeerIngredientViewModel)
-
-  interface View: Presenter.View {
-    fun showLoading()
-    fun hideLoading()
-    fun renderIngredients(ingredients: List<BeerIngredientViewModel>)
-    fun renderError()
+class CountryViewModelMapper @Inject constructor() {
+  fun map(source: Country?): CountryViewModel? {
+    var result: CountryViewModel? = null
+    if (source != null) {
+       result = CountryViewModel(source.isoCode,
+                   source.displayName,
+                   source.name,
+                   source.isoThree,
+                   source.numberCode)
+    }
+    return result
   }
 }

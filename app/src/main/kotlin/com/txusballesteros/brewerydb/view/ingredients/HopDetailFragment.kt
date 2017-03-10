@@ -18,45 +18,37 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.beers
+package com.txusballesteros.brewerydb.view.ingredients
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
-import com.txusballesteros.brewerydb.navigation.Navigator
-import com.txusballesteros.brewerydb.presentation.beers.BeerIngredientsPresenter
-import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
+import com.txusballesteros.brewerydb.presentation.ingredients.HopDetailPresenter
+import com.txusballesteros.brewerydb.presentation.model.HopViewModel
+import com.txusballesteros.brewerydb.presentation.model.IngredientViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import kotlinx.android.synthetic.main.fragment_styles_list.*
+import kotlinx.android.synthetic.main.fragment_beer_detail.*
 import org.jetbrains.anko.support.v4.withArguments
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
+class HopDetailFragment: AbsFragment(), HopDetailPresenter.View {
   companion object {
-    val EXTRA_BEER_ID = "extra:beerId"
+    val EXTRA_INGREDIENT_ID = "extra:ingredientId"
 
-    fun newInstance(beerId: String): BeerIngredientsFragment {
-      return BeerIngredientsFragment().withArguments(
-          EXTRA_BEER_ID to beerId
+    fun newInstance(ingredientId: Int): HopDetailFragment {
+      return HopDetailFragment().withArguments(
+          EXTRA_INGREDIENT_ID to ingredientId
       )
     }
   }
 
+  @Inject lateinit var presenter: HopDetailPresenter
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
-  @Inject lateinit var presenter: BeerIngredientsPresenter
-  @Inject lateinit var navigator: Navigator
-  lateinit var adapter: BeerIngredientsAdapter
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.fragment_beer_ingredients
-  }
-
-  override fun onRequestInjection(viewComponent: ViewComponent) {
-    viewComponent.inject(this)
+    return R.layout.fragment_hop_detail
   }
 
   override fun onPresenterShouldBeAttached() {
@@ -67,23 +59,28 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
     presenter.onDetachView()
   }
 
-  override fun onRequestViewComposition() {
+  override fun onRequestInjection(viewComponent: ViewComponent) {
+    viewComponent.inject(this)
+  }
+
+  override fun onComposeView() {
     loadingBehaviour.inject(activity)
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
-    initializeList()
-    val beerId = getBeerId()
-    presenter.onRequestIngredients(beerId)
+    val ingredientId = getIngredientId()
+    presenter.onRequestIngredient(ingredientId)
   }
 
-  private fun initializeList() {
-    adapter = BeerIngredientsAdapter({
-      presenter.onIngredientClick(it)
-    })
-    list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-    list.setHasFixedSize(true)
-    list.adapter = adapter
+  private fun getIngredientId(): Int {
+    return arguments.getInt(EXTRA_INGREDIENT_ID)
+  }
+
+  override fun renderIngredient(ingredient: IngredientViewModel) {
+    if (ingredient is HopViewModel) {
+      name.text = ingredient.name
+      description.text = ingredient.description
+    }
   }
 
   override fun showLoading() {
@@ -94,17 +91,7 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
     loadingBehaviour.hideLoading()
   }
 
-  override fun renderIngredients(ingredients: List<BeerIngredientViewModel>) {
-    adapter.clear()
-    adapter.addAll(ingredients)
-    adapter.notifyDataSetChanged()
-  }
-
   override fun renderError() {
     activity.toast("Upss!!")
-  }
-
-  private fun getBeerId(): String {
-    return arguments.getString(EXTRA_BEER_ID)
   }
 }

@@ -39,6 +39,6 @@
     <activity android:name=".view.styles.StylesListActivity" />
     <activity android:name=".view.beers.BeersListActivity" />
     <activity android:name=".view.beers.BeerDetailActivity" />
+    <activity android:name=".view.ingredients.IngredientDetailActivity" />
   </application>
-
 </manifest>
