@@ -27,6 +27,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.CategoryViewModel
+import org.jetbrains.anko.find
 import java.util.*
 
 class CategoriesListAdapter(private val listener: OnCategoryClickListener):
@@ -40,6 +41,7 @@ class CategoriesListAdapter(private val listener: OnCategoryClickListener):
   fun addAll(styles: List<CategoryViewModel>) {
     cache.addAll(styles)
   }
+
   override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
     val category = cache.get(position)
     holder?.render(category, listener)
@@ -55,7 +57,7 @@ class CategoriesListAdapter(private val listener: OnCategoryClickListener):
   }
 
   class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val nameView = view.findViewById(R.id.name) as AppCompatTextView
+    private val nameView = view.find<AppCompatTextView>(R.id.name)
 
     fun render(category: CategoryViewModel, listener: OnCategoryClickListener) {
       nameView.text = category.name

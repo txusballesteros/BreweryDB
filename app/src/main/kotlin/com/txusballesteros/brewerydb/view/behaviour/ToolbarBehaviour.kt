@@ -42,6 +42,10 @@ class ToolbarBehaviour @Inject constructor() : Behaviour() {
     return R.id.toolbar_place_holder
   }
 
+  override fun onRequestBehaviourRootViewId(): Int {
+    return R.id.toolbar
+  }
+
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.toolbar_simple
   }

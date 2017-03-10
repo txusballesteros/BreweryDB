@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright Txus Ballesteros 2017 (@txusballesteros)
+ *
+ * This file is part of Foobar.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+-->
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/loadingHolder"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:visibility="gone">
+
+  <com.github.glomadrian.loadingballs.BallView
+      android:id="@+id/loading"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      android:layout_gravity="center"
+      android:layout_centerInParent="true"
+      app:balls="3"
+      app:movement_cycle_time="2000"
+      app:enable_size_animation="true"
+      app:size_cycle_time="500"
+      app:min_ball_size="5dp"
+      app:max_ball_size="12dp"
+      app:ball_colors="@array/loadingColors" />
+
+</RelativeLayout>
+

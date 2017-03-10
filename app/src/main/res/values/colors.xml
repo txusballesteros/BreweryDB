@@ -32,4 +32,10 @@
   <color name="gray_4">#e5e5e5</color>
   <color name="gray_5">#f4f4f4</color>
   <color name="gray_5_50">#80f4f4f4</color>
+
+  <integer-array name="loadingColors">
+    <item>@color/colorPrimaryLight</item>
+    <item>@color/colorPrimary</item>
+    <item>@color/colorPrimaryDark</item>
+  </integer-array>
 </resources>

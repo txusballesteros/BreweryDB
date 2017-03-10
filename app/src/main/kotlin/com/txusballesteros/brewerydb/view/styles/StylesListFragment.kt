@@ -26,11 +26,12 @@ import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.support.v4.withArguments
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class StylesListFragment : AbsFragment(), StylesListPresenter.View {
@@ -46,6 +47,7 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
 
   @Inject lateinit var presenter: StylesListPresenter
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
+  @Inject lateinit var loadingBehaviour: LoadingBehaviour
   lateinit var adapter: StyleListAdapter
 
   override fun onRequestLayoutResourceId(): Int {
@@ -62,6 +64,7 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
 
   override fun onRequestViewComposition() {
     toolbarBehaviour.inject(activity)
+    loadingBehaviour.inject(activity)
   }
 
   override fun onPresenterShouldBeAttached() {
@@ -95,6 +98,14 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
   }
 
   override fun renderError() {
-    activity.toast("Upps!!")
+    toast("Upps!!")
+  }
+
+  override fun showLoading() {
+    loadingBehaviour.showLoading()
+  }
+
+  override fun hideLoading() {
+    loadingBehaviour.hideLoading()
   }
 }

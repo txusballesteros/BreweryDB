@@ -29,6 +29,8 @@ interface BeersListPresenter: Presenter<BeersListPresenter.View> {
   fun onRequestNextPage()
 
   interface View : Presenter.View {
+    fun showLoading()
+    fun hideLoading()
     fun renderBeers(beers: List<BeerViewModel>)
     fun renderError()
   }

@@ -23,6 +23,7 @@ package com.txusballesteros.brewerydb.view.behaviour
 import android.app.Activity
 import android.view.View
 import android.view.ViewStub
+import org.jetbrains.anko.find
 
 abstract class Behaviour {
   private lateinit var view: View
@@ -33,13 +34,17 @@ abstract class Behaviour {
 
   open fun inject(rootView: View) {
     val placeHolderView = findPlaceHolderView(rootView)
-    attachBehaviorLayout(placeHolderView)
+    if (placeHolderView != null) {
+      attachBehaviorLayout(placeHolderView)
+    } else {
+      val behaviourView = rootView.find<View>(onRequestBehaviourRootViewId())
+      onBehaviorReady(behaviourView)
+    }
   }
 
-  fun findPlaceHolderView(rootView: View) : ViewStub {
+  fun findPlaceHolderView(rootView: View) : ViewStub? {
     val placeHolderId = onRequestPlaceHolderId()
     val result = rootView.findViewById(placeHolderId) as? ViewStub
-        ?: throw IllegalArgumentException("Invalid behaviour place holder, that should be a ViewStub.")
     return result
   }
 
@@ -59,6 +64,8 @@ abstract class Behaviour {
   }
 
   abstract fun onRequestPlaceHolderId() : Int
+
+  abstract fun onRequestBehaviourRootViewId() : Int
 
   abstract fun onRequestLayoutResourceId() : Int
 

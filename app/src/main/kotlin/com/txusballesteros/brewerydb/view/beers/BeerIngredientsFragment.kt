@@ -20,12 +20,20 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
+import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
+import com.txusballesteros.brewerydb.presentation.beers.BeerIngredientsPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
+import kotlinx.android.synthetic.main.fragment_styles_list.*
 import org.jetbrains.anko.support.v4.withArguments
+import org.jetbrains.anko.toast
+import javax.inject.Inject
 
-class BeerIngredientsFragment: AbsFragment() {
+class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
   companion object {
     val EXTRA_BEER_ID = "extra:beerId"
 
@@ -36,6 +44,10 @@ class BeerIngredientsFragment: AbsFragment() {
     }
   }
 
+  @Inject lateinit var loadingBehaviour: LoadingBehaviour
+  @Inject lateinit var presenter: BeerIngredientsPresenter
+  lateinit var adapter: BeerIngredientsAdapter
+
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beer_ingredients
   }
@@ -44,7 +56,52 @@ class BeerIngredientsFragment: AbsFragment() {
     viewComponent.inject(this)
   }
 
-  override fun onPresenterShouldBeAttached() { }
+  override fun onPresenterShouldBeAttached() {
+    presenter.onAttachView(this)
+  }
 
-  override fun onPresenterShouldBeDetached() { }
+  override fun onPresenterShouldBeDetached() {
+    presenter.onDetachView()
+  }
+
+  override fun onRequestViewComposition() {
+    loadingBehaviour.inject(activity)
+  }
+
+  override fun onViewReady(savedInstanceState: Bundle?) {
+    initializeList()
+    val beerId = getBeerId()
+    presenter.onRequestIngredients(beerId)
+  }
+
+  private fun initializeList() {
+    adapter = BeerIngredientsAdapter({
+      activity.toast(it.name)
+    })
+    list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    list.setHasFixedSize(true)
+    list.adapter = adapter
+  }
+
+  override fun showLoading() {
+    loadingBehaviour.showLoading()
+  }
+
+  override fun hideLoading() {
+    loadingBehaviour.hideLoading()
+  }
+
+  override fun renderIngredients(ingredients: List<BeerIngredientViewModel>) {
+    adapter.clear()
+    adapter.addAll(ingredients)
+    adapter.notifyDataSetChanged()
+  }
+
+  override fun renderError() {
+    activity.toast("Upss!!")
+  }
+
+  private fun getBeerId(): String {
+    return arguments.getString(EXTRA_BEER_ID)
+  }
 }

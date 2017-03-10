@@ -26,7 +26,7 @@ allprojects {
 
 ext {
   //Kotlin
-  kotlinVersion = "1.0.6"
+  kotlinVersion = "1.1.0"
   ankoVersion = "0.9.1"
 
   //Android
@@ -50,6 +50,7 @@ ext {
   testSupportVervion = "0.5"
   stethoVervion = "1.4.2"
   mockitoKotlinVervion = "1.2.0"
+  loadingBallsVervion = "1.1"
 
   mobileDependencies = [
     AppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
@@ -76,5 +77,6 @@ ext {
     Stetho: "com.facebook.stetho:stetho:${stethoVervion}",
     StethoOkHttp: "com.facebook.stetho:stetho-okhttp3:${stethoVervion}",
     MockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVervion}",
+    LoadingBalls: "com.github.glomadrian:loadingballs:${loadingBallsVervion}@aar",
   ]
 }

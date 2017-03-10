@@ -68,6 +68,7 @@ dependencies {
   compile dependencies.RecyclerView
   compile dependencies.CardView
   compile dependencies.Design
+  compile dependencies.LoadingBalls
   compile dependencies.KotlinStd
   compile dependencies.AnkoCommon
   compile dependencies.AnkoAppCompat
@@ -99,6 +100,12 @@ dependencies {
   androidTestCompile dependencies.GsonConverter
   androidTestCompile dependencies.Dagger
   kaptAndroidTest dependencies.DaggerCompiler
+}
+
+repositories {
+  maven {
+    url "http://dl.bintray.com/glomadrian/maven"
+  }
 }
 
 kapt {
