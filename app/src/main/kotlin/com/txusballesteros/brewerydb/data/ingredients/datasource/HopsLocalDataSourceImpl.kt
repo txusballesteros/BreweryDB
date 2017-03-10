@@ -18,15 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.data.ingredients.datasource
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import com.txusballesteros.brewerydb.data.model.HopDataModel
+import javax.inject.Inject
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
-  fun getIngredientsRepository(): IngredientsRepository
+class HopsLocalDataSourceImpl @Inject constructor(): HopsLocalDataSource {
+  private val cache: MutableMap<Int, HopDataModel> = HashMap()
+
+  override fun get(id: Int): HopDataModel? {
+    return cache[id]
+  }
+
+  override fun store(hop: HopDataModel) {
+    cache.put(hop.id, hop)
+  }
 }

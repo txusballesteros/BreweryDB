@@ -36,6 +36,5 @@ data class HopApiModel(val id: Int,
                        val myrceneMax: Float?,
                        val farneseneMin: Float?,
                        val farneseneMax: Float?,
-                       val countryOfOrigin: String,
-                       val country: CountryApiModel,
-                       val type: IngredientTypeApiModel = IngredientTypeApiModel.HOP)
+                       val countryOfOrigin: String?,
+                       val country: CountryApiModel?)

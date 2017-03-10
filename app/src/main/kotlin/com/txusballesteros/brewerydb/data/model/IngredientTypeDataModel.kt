@@ -18,15 +18,8 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.domain.repository.*
-
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
-  fun getIngredientsRepository(): IngredientsRepository
+enum class IngredientTypeDataModel {
+  FERMENTABLE, HOP, YEAST
 }

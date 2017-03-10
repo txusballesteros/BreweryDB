@@ -18,15 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import com.txusballesteros.brewerydb.data.model.CountryDataModel
+import javax.inject.Inject
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
-  fun getIngredientsRepository(): IngredientsRepository
+class CountryApiModelMapper @Inject constructor() {
+  fun map(source: CountryApiModel?): CountryDataModel? {
+    var result: CountryDataModel? = null
+    if (source != null) {
+      result = CountryDataModel(source.isoCode,
+                                source.displayName,
+                                source.name,
+                                source.numberCode,
+                                source.isoThree)
+    }
+    return result;
+  }
 }

@@ -18,8 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.domain.repository
 
-enum class IngredientTypeApiModel(val value: String) {
-  MALT("malt"), HOP("hop"), YEAST("yeast")
+import com.txusballesteros.brewerydb.domain.model.Ingredient
+import com.txusballesteros.brewerydb.domain.model.IngredientQuery
+
+interface IngredientsRepository {
+  fun getIngredient(query: IngredientQuery, onResult: (Ingredient) -> Unit)
 }

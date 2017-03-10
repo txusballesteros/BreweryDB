@@ -32,5 +32,4 @@ data class FermentableApiModel(val id: Int,
                                val potential: Float?,
                                val protein: Float?,
                                val maxInBatch: Float?,
-                               val requiresMashing: String?,
-                               val type: IngredientTypeApiModel = IngredientTypeApiModel.MALT)
+                               val requiresMashing: String?)
