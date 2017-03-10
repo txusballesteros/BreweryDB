@@ -75,7 +75,9 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
   }
 
   private fun initializeList() {
-    adapter = BeerIngredientsAdapter()
+    adapter = BeerIngredientsAdapter({
+      activity.toast(it.name)
+    })
     list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     list.setHasFixedSize(true)
     list.adapter = adapter

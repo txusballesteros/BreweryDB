@@ -30,7 +30,8 @@ import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
 import org.jetbrains.anko.find
 import java.util.*
 
-class BeerIngredientsAdapter: RecyclerView.Adapter<BeerIngredientsAdapter.ViewHolder>() {
+class BeerIngredientsAdapter(private val onIngredientClick: (BeerIngredientViewModel) -> Unit):
+      RecyclerView.Adapter<BeerIngredientsAdapter.ViewHolder>() {
   private val cache: MutableList<BeerIngredientViewModel> = ArrayList()
 
   fun clear() {
@@ -43,7 +44,7 @@ class BeerIngredientsAdapter: RecyclerView.Adapter<BeerIngredientsAdapter.ViewHo
 
   override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
     val holderView = LayoutInflater.from(parent!!.context).inflate(R.layout.item_beer_ingredient, parent, false)
-    return ViewHolder(holderView)
+    return ViewHolder(holderView, onIngredientClick)
   }
 
   override fun getItemCount(): Int = cache.size
@@ -53,13 +54,19 @@ class BeerIngredientsAdapter: RecyclerView.Adapter<BeerIngredientsAdapter.ViewHo
     holder?.render(ingredient)
   }
 
-  class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+  class ViewHolder(view: View, private val onIngredientClick: (BeerIngredientViewModel) -> Unit): RecyclerView.ViewHolder(view) {
+    val rootView = view.find<View>(R.id.root)
     val nameView = view.find<AppCompatTextView>(R.id.name)
     val categoryView = view.find<AppCompatTextView>(R.id.category)
 
     fun render(ingredient: BeerIngredientViewModel) {
       nameView.text = ingredient.name
       categoryView.text = ingredient.name
+      rootView.setOnClickListener { onIngredientClick(ingredient) }
     }
+  }
+
+  interface OnIngredientClick {
+    fun onClick(ingredient: BeerIngredientViewModel)
   }
 }
