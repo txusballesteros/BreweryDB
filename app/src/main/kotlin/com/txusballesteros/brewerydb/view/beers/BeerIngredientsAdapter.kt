@@ -61,12 +61,8 @@ class BeerIngredientsAdapter(private val onIngredientClick: (BeerIngredientViewM
 
     fun render(ingredient: BeerIngredientViewModel) {
       nameView.text = ingredient.name
-      categoryView.text = ingredient.name
+      categoryView.text = ingredient.categoryDisplay
       rootView.setOnClickListener { onIngredientClick(ingredient) }
     }
-  }
-
-  interface OnIngredientClick {
-    fun onClick(ingredient: BeerIngredientViewModel)
   }
 }

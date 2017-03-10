@@ -35,11 +35,11 @@
       android:id="@+id/name"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:textSize="@dimen/text_size_normal"
+      android:textSize="@dimen/text_size_medium"
       android:layout_marginTop="@dimen/padding_normal"
       android:layout_marginLeft="@dimen/padding_normal"
       android:layout_marginRight="@dimen/padding_normal"
-      android:fontFamily="sans-serif"
+      android:fontFamily="sans-serif-thin"
       android:maxLines="2"
       android:ellipsize="end"
       tools:text="Awesome Hop"/>
