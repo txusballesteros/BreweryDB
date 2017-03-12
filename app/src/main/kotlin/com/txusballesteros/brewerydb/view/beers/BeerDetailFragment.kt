@@ -104,8 +104,9 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   override fun renderBeer(beer: BeerViewModel) {
-    renderDescription(beer)
-    renderServingTemperature(beer)
+    name.text = beer.name
+    description.text = beer.description
+    temperature.text = beer.servingTemperatureDisplay
     renderIsOrganic(beer)
   }
 
@@ -115,14 +116,6 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   override fun renderEmptyGlass() {
     glass.text = "NA"
-  }
-
-  private fun renderDescription(beer: BeerViewModel) {
-    description.text = beer.description
-  }
-
-  private fun renderServingTemperature(beer: BeerViewModel) {
-    temperature.text = beer.servingTemperatureDisplay
   }
 
   private fun renderIsOrganic(beer: BeerViewModel) {

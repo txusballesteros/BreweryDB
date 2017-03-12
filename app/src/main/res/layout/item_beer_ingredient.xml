@@ -39,9 +39,10 @@
       android:layout_marginTop="@dimen/padding_normal"
       android:layout_marginLeft="@dimen/padding_normal"
       android:layout_marginRight="@dimen/padding_normal"
-      android:fontFamily="sans-serif-thin"
+      android:fontFamily="sans-serif"
       android:maxLines="2"
       android:ellipsize="end"
+      android:textColor="@color/gray_2"
       tools:text="Awesome Hop"/>
 
   <android.support.v7.widget.AppCompatTextView
@@ -49,21 +50,14 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:textSize="@dimen/text_size_small"
-      android:layout_marginTop="@dimen/padding_normal"
       android:layout_marginLeft="@dimen/padding_normal"
       android:layout_marginRight="@dimen/padding_normal"
       android:fontFamily="sans-serif"
-      android:textStyle="bold"
+      android:textColor="@color/gray_3"
       android:maxLines="1"
       android:ellipsize="end"
       tools:text="Hop"/>
 
-  <View
-      android:layout_width="match_parent"
-      android:layout_height="0.5dp"
-      android:layout_marginTop="@dimen/padding_big"
-      android:layout_marginLeft="@dimen/padding_big"
-      android:layout_marginRight="@dimen/padding_big"
-      android:background="@color/gray_5" />
+  <include layout="@layout/include_item_line_decorator" />
 
 </LinearLayout>

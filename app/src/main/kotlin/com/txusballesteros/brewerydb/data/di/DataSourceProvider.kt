@@ -25,6 +25,7 @@ import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesLocalDataSource
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareLocalDataSource
+import com.txusballesteros.brewerydb.data.ingredients.datasource.HopsLocalDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
 
 interface DataSourceProvider {
@@ -34,4 +35,5 @@ interface DataSourceProvider {
   fun getStylesLocalDataSource(): StylesLocalDataSource
   fun getGlasswareLocalDataSource(): GlasswareLocalDataSource
   fun getBeerIngredientsLocalDataSource(): BeerIngredientsLocalDataSource
+  fun getHopsLocalDataSource(): HopsLocalDataSource
 }

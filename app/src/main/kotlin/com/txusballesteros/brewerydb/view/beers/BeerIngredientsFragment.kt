@@ -24,7 +24,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
+import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.beers.BeerIngredientsPresenter
+import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
@@ -46,6 +48,7 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
 
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
   @Inject lateinit var presenter: BeerIngredientsPresenter
+  @Inject lateinit var navigator: Navigator
   lateinit var adapter: BeerIngredientsAdapter
 
   override fun onRequestLayoutResourceId(): Int {
@@ -76,7 +79,7 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
 
   private fun initializeList() {
     adapter = BeerIngredientsAdapter({
-      activity.toast(it.name)
+      presenter.onIngredientClick(it)
     })
     list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     list.setHasFixedSize(true)

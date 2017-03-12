@@ -28,4 +28,5 @@ interface RepositoriesProvider {
   fun getBeersRepository(): BeersRepository
   fun getBeersQueryRepository(): BeersQueryRepository
   fun getGlasswareRepository(): GlasswareRepository
+  fun getIngredientsRepository(): IngredientsRepository
 }

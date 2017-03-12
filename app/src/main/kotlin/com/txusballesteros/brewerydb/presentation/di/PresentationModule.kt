@@ -23,6 +23,10 @@ package com.txusballesteros.brewerydb.presentation.di
 import com.txusballesteros.brewerydb.presentation.beers.*
 import com.txusballesteros.brewerydb.presentation.categories.CategoriesListPresenter
 import com.txusballesteros.brewerydb.presentation.categories.CategoriesListPresenterImpl
+import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPresenter
+import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPresenterImpl
+import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailControllerPresenter
+import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailControllerPresenterImpl
 import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
 import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenterImpl
 import dagger.Module
@@ -49,9 +53,16 @@ class PresentationModule {
   fun provideBeerAbvPresenter(presenter: BeerAbvPresenterImpl): BeerAbvPresenter = presenter
 
   @Provides
-  fun provideBeerDetailControllerPresenter(presenter: BeerDetailControllerPresenterImpl): BeerDetailControllerPresenter
-      = presenter
+  fun provideBeerDetailControllerPresenter(presenter: BeerDetailControllerPresenterImpl):
+      BeerDetailControllerPresenter = presenter
 
   @Provides
   fun provideBeerIngredientsPresenter(presenter: BeerIngredientsPresenterImpl): BeerIngredientsPresenter = presenter
+
+  @Provides
+  fun provideIngredientDetailControllerPresenter(presenter: IngredientDetailControllerPresenterImpl):
+      IngredientDetailControllerPresenter = presenter
+
+  @Provides
+  fun provideHopDetailPresenter(presenter: IngredientDetailPresenterImpl): IngredientDetailPresenter = presenter
 }

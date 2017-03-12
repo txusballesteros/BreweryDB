@@ -25,6 +25,8 @@ import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesInte
 import com.txusballesteros.brewerydb.domain.usecase.categories.GetCategoriesUseCase
 import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdInteractor
 import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdUseCase
+import com.txusballesteros.brewerydb.domain.usecase.ingredients.GetIngredientInteractor
+import com.txusballesteros.brewerydb.domain.usecase.ingredients.GetIngredientUseCase
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdInteractor
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesInteractor
@@ -63,4 +65,7 @@ class UseCasesModule {
 
   @Provides
   fun provideGetBeerIngredientsUseCase(useCase: GetBeerIngredientsInteractor): GetBeerIngredientsUseCase = useCase
+
+  @Provides
+  fun provideGetIngredientUseCase(useCase: GetIngredientInteractor): GetIngredientUseCase = useCase
 }

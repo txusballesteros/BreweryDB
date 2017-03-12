@@ -24,6 +24,7 @@ import com.txusballesteros.brewerydb.data.beers.repository.BeersQueryRepositoryI
 import com.txusballesteros.brewerydb.data.beers.repository.BeersRepositoryImpl
 import com.txusballesteros.brewerydb.data.categories.repository.CategoriesRepositoryImpl
 import com.txusballesteros.brewerydb.data.glassware.repository.GlasswareRepositoryImpl
+import com.txusballesteros.brewerydb.data.ingredients.repository.IngredientsRepositoryImpl
 import com.txusballesteros.brewerydb.data.styles.repository.StylesRepositoryImpl
 import com.txusballesteros.brewerydb.domain.repository.*
 import dagger.Module
@@ -46,4 +47,7 @@ class RepositoriesModule {
 
   @Singleton @Provides
   fun provideGlasswareRepository(repository: GlasswareRepositoryImpl): GlasswareRepository = repository
+
+  @Singleton @Provides
+  fun provideIngredientsRepository(repository: IngredientsRepositoryImpl): IngredientsRepository = repository
 }

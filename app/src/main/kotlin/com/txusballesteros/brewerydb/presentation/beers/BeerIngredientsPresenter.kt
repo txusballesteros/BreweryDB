@@ -25,6 +25,7 @@ import com.txusballesteros.brewerydb.presentation.Presenter
 
 interface BeerIngredientsPresenter: Presenter<BeerIngredientsPresenter.View> {
   fun onRequestIngredients(beerId: String)
+  fun onIngredientClick(ingredient: BeerIngredientViewModel)
 
   interface View: Presenter.View {
     fun showLoading()

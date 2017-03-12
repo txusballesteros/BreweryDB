@@ -31,5 +31,4 @@ data class YeastApiModel(val id: Int,
                          val alcoholToleranceMax: Float?,
                          val productId: String?,
                          val supplier: String?,
-                         val yeastFormat: String?,
-                         val type: IngredientTypeApiModel = IngredientTypeApiModel.YEAST)
+                         val yeastFormat: String?)

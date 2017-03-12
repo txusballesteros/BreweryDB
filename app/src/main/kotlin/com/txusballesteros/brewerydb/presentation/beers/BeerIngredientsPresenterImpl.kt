@@ -20,14 +20,20 @@
  */
 package com.txusballesteros.brewerydb.presentation.beers
 
+import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
 import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModelMapper
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerIngredientsUseCase
+import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModelMapper
 import javax.inject.Inject
 
 class BeerIngredientsPresenterImpl @Inject constructor(private val getBeerIngredientsUseCase: GetBeerIngredientsUseCase,
-                                                       private val mapper: BeerIngredientViewModelMapper):
+                                                       private val mapper: BeerIngredientViewModelMapper,
+                                                       private val ingredientTypeMapper: IngredientTypeViewModelMapper,
+                                                       private val navigator: Navigator):
                                    AbsPresenter<BeerIngredientsPresenter.View>(), BeerIngredientsPresenter {
+
   override fun onRequestIngredients(beerId: String) {
     getView()?.showLoading()
     getBeerIngredientsUseCase.execute(beerId, onResult = {
@@ -38,5 +44,13 @@ class BeerIngredientsPresenterImpl @Inject constructor(private val getBeerIngred
       getView()?.hideLoading()
       getView()?.renderError()
     })
+  }
+
+  override fun onIngredientClick(ingredient: BeerIngredientViewModel) {
+    val ingredientId = ingredient.id
+    val ingredientType = ingredientTypeMapper.map(ingredient.category)
+    if (ingredientType != null) {
+      navigator.navigateToIngredientDetail(getView(), ingredientId, ingredientType)
+    }
   }
 }

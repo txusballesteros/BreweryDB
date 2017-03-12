@@ -27,4 +27,18 @@
   <string name="beer">Beer</string>
   <string name="ingredients">Ingredients</string>
   <string name="breweries">Breweries</string>
+  <string name="alpha_acid_min">Alpha Acid Min:</string>
+  <string name="alpha_acid_max">Alpha Acid Max:</string>
+  <string name="beta_acid_min">Beta Acid Min:</string>
+  <string name="beta_acid_max">Beta Acid Max:</string>
+  <string name="humulene_min">Humulene Min:</string>
+  <string name="humulene_max">Humulene Max:</string>
+  <string name="caryophyllene_min">Caryophyllene Min:</string>
+  <string name="caryophyllene_max">Caryophyllene Max:</string>
+  <string name="cohumulone_min">Cohumulone Min:</string>
+  <string name="cohumulone_max">Cohumulone Max:</string>
+  <string name="myrcene_min">Myrcene Min:</string>
+  <string name="myrcene_max">Myrcene Max:</string>
+  <string name="farnesene_min">Farnesene Min:</string>
+  <string name="farnesene_max">Farnesene Max:</string>
 </resources>
