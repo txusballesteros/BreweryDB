@@ -33,9 +33,12 @@ class FermentableViewModelMapper @Inject constructor(private val countryMapper: 
                            source.srmId,
                            source.srmPrecise,
                            source.moistureContent,
+                           source.coarseFineDifference,
+                           source.diastaticPower,
                            source.dryYield,
                            source.potential,
                            source.protein,
+                           source.solubleNitrogenRatio,
                            source.maxInBatch,
                            source.requiresMashing)
 }

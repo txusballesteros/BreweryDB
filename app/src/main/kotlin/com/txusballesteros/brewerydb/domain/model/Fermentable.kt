@@ -28,9 +28,12 @@ data class Fermentable(override val id: Int,
                        val srmId: Float?,
                        val srmPrecise: Float?,
                        val moistureContent: Float?,
+                       val coarseFineDifference: Float?,
+                       val diastaticPower: Float?,
                        val dryYield: Float?,
                        val potential: Float?,
                        val protein: Float?,
+                       val solubleNitrogenRatio: Float?,
                        val maxInBatch: Float?,
                        val requiresMashing: String?): Ingredient {
 

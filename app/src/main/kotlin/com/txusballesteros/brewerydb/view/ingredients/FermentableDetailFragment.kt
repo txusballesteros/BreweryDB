@@ -24,7 +24,6 @@ import android.os.Bundle
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPresenter
 import com.txusballesteros.brewerydb.presentation.model.FermentableViewModel
-import com.txusballesteros.brewerydb.presentation.model.HopViewModel
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.presentation.model.IngredientViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
@@ -82,6 +81,19 @@ class FermentableDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
     if (ingredient is FermentableViewModel) {
       name.text = ingredient.name
       description.text = ingredient.description ?: "NA"
+      if (ingredient.country != null) {
+        country.text = ingredient.country.displayName
+      } else {
+        country.text = "NA"
+      }
+      moistureContent.text = toString(ingredient.moistureContent) ?: "-"
+      coarseFineDifference.text = toString(ingredient.coarseFineDifference) ?: "-"
+      diastaticPower.text = toString(ingredient.diastaticPower) ?: "-"
+      dryYield.text = toString(ingredient.dryYield) ?: "-"
+      potential.text = toString(ingredient.potential) ?: "-"
+      protein.text = toString(ingredient.protein) ?: "-"
+      solubleNitrogenRatio.text = toString(ingredient.solubleNitrogenRatio) ?: "-"
+      maxInBatch.text = toString(ingredient.maxInBatch) ?: "-"
     }
   }
 
