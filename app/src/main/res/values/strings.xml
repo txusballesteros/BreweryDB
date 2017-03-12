@@ -42,12 +42,12 @@
   <string name="farnesene_min">Farnesene Min:</string>
   <string name="farnesene_max">Farnesene Max:</string>
   <string name="moisture_content">Moisture Content:</string>
-  <string name="coarse_fine_difference">Coarse Fine Difference:</string>
+  <string name="coarse_fine_difference">Coarse Fine Diff.:</string>
   <string name="diastatic_power">Diastatic Power:</string>
   <string name="potential">Potential:</string>
   <string name="protein">Protein:</string>
   <string name="dry_yield">Dry Yield:</string>
-  <string name="soluble_nitrogen_ratio">Soluble Nitrogen Ratio:</string>
+  <string name="soluble_nitrogen_ratio">Solu. Nitro. Ratio:</string>
   <string name="max_in_batch">Max In Batch:</string>
   <string name="origin">Origin:</string>
 </resources>

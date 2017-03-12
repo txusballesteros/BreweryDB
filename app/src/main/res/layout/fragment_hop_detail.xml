@@ -52,10 +52,47 @@
         tools:text="Description..."/>
 
     <FrameLayout
-        android:id="@+id/divider"
+        android:id="@+id/originDivider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/description">
+
+      <include layout="@layout/include_line_decorator" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/origin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/originDivider">
+
+      <android.support.v7.widget.AppCompatTextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:fontFamily="sans-serif"
+          android:textColor="@color/gray_2"
+          android:textSize="@dimen/text_size_normal"
+          android:text="@string/origin"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          android:id="@+id/country"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginLeft="@dimen/padding_normal"
+          android:fontFamily="sans-serif"
+          android:textColor="@color/gray_3"
+          android:textSize="@dimen/text_size_normal"
+          tools:text="Spain"/>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/origin">
 
       <include layout="@layout/include_line_decorator" />
     </FrameLayout>
@@ -72,7 +109,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/alpha_acid_min" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -90,7 +127,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/alpha_acid_max"/>
 
         <android.support.v7.widget.AppCompatTextView
@@ -109,7 +146,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/beta_acid_min" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -127,7 +164,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/beta_acid_max"/>
 
         <android.support.v7.widget.AppCompatTextView
@@ -146,7 +183,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/humulene_min" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -164,7 +201,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/humulene_max"/>
 
         <android.support.v7.widget.AppCompatTextView
@@ -183,7 +220,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/caryophyllene_min" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -201,7 +238,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/caryophyllene_max"/>
 
         <android.support.v7.widget.AppCompatTextView
@@ -220,7 +257,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/cohumulone_min" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -238,7 +275,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/cohumulone_max"/>
 
         <android.support.v7.widget.AppCompatTextView
@@ -257,7 +294,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/myrcene_min" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -275,7 +312,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/myrcene_max"/>
 
         <android.support.v7.widget.AppCompatTextView
@@ -294,7 +331,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/farnesene_min" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -312,7 +349,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif"
             android:text="@string/farnesene_max"/>
 
         <android.support.v7.widget.AppCompatTextView

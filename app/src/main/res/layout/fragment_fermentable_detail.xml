@@ -38,7 +38,7 @@
         android:textSize="@dimen/text_size_medium"
         android:textColor="@color/gray_2"
         android:fontFamily="sans-serif"
-        tools:text="Hop Name"/>
+        tools:text="Fermentable Name"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/description"
@@ -51,14 +51,22 @@
         android:textSize="@dimen/text_size_normal"
         tools:text="Description..."/>
 
+    <FrameLayout
+        android:id="@+id/originDivider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/description">
+
+      <include layout="@layout/include_line_decorator" />
+
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/origin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/padding_normal"
-        android:paddingBottom="@dimen/padding_normal"
         android:orientation="horizontal"
-        android:layout_below="@+id/description">
+        android:layout_below="@+id/originDivider">
 
       <android.support.v7.widget.AppCompatTextView
           android:layout_width="wrap_content"
@@ -87,6 +95,7 @@
         android:layout_below="@+id/origin">
 
       <include layout="@layout/include_line_decorator" />
+
     </FrameLayout>
 
     <TableLayout

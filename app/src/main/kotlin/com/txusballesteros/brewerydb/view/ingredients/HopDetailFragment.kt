@@ -81,6 +81,11 @@ class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
     if (ingredient is HopViewModel) {
       name.text = ingredient.name
       description.text = ingredient.description ?: "NA"
+      if (ingredient.country != null) {
+        country.text = ingredient.country.displayName
+      } else {
+        country.text = "NA"
+      }
       alphaAcidMin.text = toString(ingredient.alphaAcidMin) ?: "-"
       alphaAcidMax.text = toString(ingredient.alphaAcidMin) ?: "-"
       betaAcidMin.text = toString(ingredient.betaAcidMin) ?: "-"
