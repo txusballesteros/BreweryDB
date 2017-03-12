@@ -21,9 +21,10 @@
 package com.txusballesteros.brewerydb.api.model
 
 import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModel
+import com.txusballesteros.brewerydb.data.model.IngredientTypeDataModelMapper
 import javax.inject.Inject
 
-class BeerIngredientApiModelMapper @Inject constructor() {
+class BeerIngredientApiModelMapper @Inject constructor(private val typeMapper: IngredientTypeDataModelMapper) {
   fun map(source: BeerIngredientsApiResponse): List<BeerIngredientDataModel>
     = map(source.ingredients)
 
@@ -37,5 +38,8 @@ class BeerIngredientApiModelMapper @Inject constructor() {
 
 
   fun map(source: BeerIngredientApiModel): BeerIngredientDataModel
-    = BeerIngredientDataModel(source.id, source.name, source.category, source.categoryDisplay)
+    = BeerIngredientDataModel(source.id,
+                              source.name,
+                              typeMapper.map(source.category),
+                              source.categoryDisplay)
 }

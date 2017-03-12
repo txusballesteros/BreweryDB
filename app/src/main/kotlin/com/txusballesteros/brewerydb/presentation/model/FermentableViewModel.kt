@@ -20,20 +20,19 @@
  */
 package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.domain.model.Fermentable
-import com.txusballesteros.brewerydb.domain.model.Hop
-import com.txusballesteros.brewerydb.domain.model.Ingredient
-import com.txusballesteros.brewerydb.domain.model.IngredientType
-import javax.inject.Inject
+data class FermentableViewModel(override val id: Int,
+                                val name: String,
+                                val description: String?,
+                                val country: CountryViewModel?,
+                                val countryOfOrigin: String?,
+                                val srmId: Float?,
+                                val srmPrecise: Float?,
+                                val moistureContent: Float?,
+                                val dryYield: Float?,
+                                val potential: Float?,
+                                val protein: Float?,
+                                val maxInBatch: Float?,
+                                val requiresMashing: String?): IngredientViewModel {
 
-class IngredientViewModelMapper @Inject constructor(private val hopMapper: HopViewModelMapper,
-                                                    private val fermentableMapper: FermentableViewModelMapper) {
-  fun map(source: Ingredient): IngredientViewModel {
-    var result: IngredientViewModel? = null
-    when(source.type) {
-      IngredientType.HOP -> result = hopMapper.map(source as Hop)
-      IngredientType.FERMENTABLE -> result = fermentableMapper.map(source as Fermentable)
-    }
-    return result!!
-  }
+  override val type = IngredientTypeViewModel.FERMENTABLE
 }

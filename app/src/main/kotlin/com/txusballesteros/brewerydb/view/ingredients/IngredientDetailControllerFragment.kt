@@ -35,7 +35,7 @@ class IngredientDetailControllerFragment: AbsFragment(), IngredientDetailControl
     val EXTRA_INGREDIENT_ID = "extra:ingredientId"
     val EXTRA_INGREDIENT_TYPE = "extra:ingredientType"
 
-    fun newInstance(ingredientId: Int, ingredientType: String): IngredientDetailControllerFragment {
+    fun newInstance(ingredientId: Int, ingredientType: IngredientTypeViewModel): IngredientDetailControllerFragment {
       return IngredientDetailControllerFragment().withArguments(
           EXTRA_INGREDIENT_ID to ingredientId,
           EXTRA_INGREDIENT_TYPE to ingredientType
@@ -77,18 +77,14 @@ class IngredientDetailControllerFragment: AbsFragment(), IngredientDetailControl
     return arguments.getInt(EXTRA_INGREDIENT_ID)
   }
 
-  private fun getIngredientType(): String {
-    return arguments.getString(EXTRA_INGREDIENT_TYPE)
+  private fun getIngredientType(): IngredientTypeViewModel {
+    return arguments.getSerializable(EXTRA_INGREDIENT_TYPE) as IngredientTypeViewModel
   }
 
-  override fun renderHop(ingredientId: Int) {
-    val fragment = fragmentFactory.getFragment(childFragmentManager, ingredientId, IngredientTypeViewModel.HOP)
+  override fun renderIngredient(ingredientId: Int, type: IngredientTypeViewModel) {
+    val fragment = fragmentFactory.getFragment(childFragmentManager, ingredientId, type)
     addFragment(fragment)
   }
-
-  override fun renderYeast(ingredientId: Int) { }
-
-  override fun renderFermentable(ingredientId: Int) { }
 
   private fun addFragment(fragment: AbsFragment?) {
     if (fragment != null) {

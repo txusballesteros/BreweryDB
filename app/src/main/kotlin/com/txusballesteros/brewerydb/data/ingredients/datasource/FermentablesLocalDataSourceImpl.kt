@@ -18,19 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.ingredients
+package com.txusballesteros.brewerydb.data.ingredients.datasource
 
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
-import com.txusballesteros.brewerydb.presentation.model.IngredientViewModel
+import com.txusballesteros.brewerydb.data.model.FermentableDataModel
+import javax.inject.Inject
 
-interface IngredientDetailPresenter : Presenter<IngredientDetailPresenter.View> {
-  fun onRequestIngredient(ingredientId: Int, type: IngredientTypeViewModel)
+class FermentablesLocalDataSourceImpl @Inject constructor(): FermentablesLocalDataSource {
+  private val cache: MutableMap<Int, FermentableDataModel> = HashMap()
 
-  interface View: Presenter.View {
-    fun renderIngredient(ingredient: IngredientViewModel)
-    fun renderError()
-    fun showLoading()
-    fun hideLoading()
+  override fun get(id: Int): FermentableDataModel? {
+    return cache[id]
+  }
+
+  override fun store(fermentable: FermentableDataModel) {
+    cache.put(fermentable.id, fermentable)
   }
 }

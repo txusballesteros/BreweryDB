@@ -18,19 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.ingredients
+package com.txusballesteros.brewerydb.data.ingredients.datasource
 
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
-import com.txusballesteros.brewerydb.presentation.model.IngredientViewModel
+import com.txusballesteros.brewerydb.data.model.FermentableDataModel
 
-interface IngredientDetailPresenter : Presenter<IngredientDetailPresenter.View> {
-  fun onRequestIngredient(ingredientId: Int, type: IngredientTypeViewModel)
-
-  interface View: Presenter.View {
-    fun renderIngredient(ingredient: IngredientViewModel)
-    fun renderError()
-    fun showLoading()
-    fun hideLoading()
-  }
+interface FermentablesLocalDataSource {
+  fun get(id: Int): FermentableDataModel?
+  fun store(fermentable: FermentableDataModel)
 }

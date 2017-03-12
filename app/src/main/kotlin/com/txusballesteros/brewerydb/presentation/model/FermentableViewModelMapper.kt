@@ -21,19 +21,21 @@
 package com.txusballesteros.brewerydb.presentation.model
 
 import com.txusballesteros.brewerydb.domain.model.Fermentable
-import com.txusballesteros.brewerydb.domain.model.Hop
-import com.txusballesteros.brewerydb.domain.model.Ingredient
-import com.txusballesteros.brewerydb.domain.model.IngredientType
 import javax.inject.Inject
 
-class IngredientViewModelMapper @Inject constructor(private val hopMapper: HopViewModelMapper,
-                                                    private val fermentableMapper: FermentableViewModelMapper) {
-  fun map(source: Ingredient): IngredientViewModel {
-    var result: IngredientViewModel? = null
-    when(source.type) {
-      IngredientType.HOP -> result = hopMapper.map(source as Hop)
-      IngredientType.FERMENTABLE -> result = fermentableMapper.map(source as Fermentable)
-    }
-    return result!!
-  }
+class FermentableViewModelMapper @Inject constructor(private val countryMapper: CountryViewModelMapper) {
+  fun map(source: Fermentable): FermentableViewModel
+    = FermentableViewModel(source.id,
+                           source.name,
+                           source.description,
+                           countryMapper.map(source.country),
+                           source.countryOfOrigin,
+                           source.srmId,
+                           source.srmPrecise,
+                           source.moistureContent,
+                           source.dryYield,
+                           source.potential,
+                           source.protein,
+                           source.maxInBatch,
+                           source.requiresMashing)
 }

@@ -20,6 +20,6 @@
  */
 package com.txusballesteros.brewerydb.presentation.model
 
-enum class IngredientTypeViewModel(val value: String) {
-  HOP("hop"), YEAST("yeast"), MALT("malt"), MISCELLANEOUS("misc")
+enum class IngredientTypeViewModel {
+  HOP, YEAST, FERMENTABLE, UNKNOWN
 }

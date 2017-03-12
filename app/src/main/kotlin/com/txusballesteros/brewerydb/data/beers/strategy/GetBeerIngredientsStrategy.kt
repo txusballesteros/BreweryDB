@@ -36,7 +36,7 @@ class GetBeerIngredientsStrategy private constructor(private val localDataSource
 
   override fun onRequestCallToCloud(params: String?): List<BeerIngredientDataModel>? {
     val response = cloudDataSource.getIngredients(params!!)
-    localDataSource.store(params!!, response)
+    localDataSource.store(params, response)
     return response
   }
 

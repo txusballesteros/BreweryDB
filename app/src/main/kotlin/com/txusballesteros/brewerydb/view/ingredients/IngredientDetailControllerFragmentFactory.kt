@@ -30,12 +30,23 @@ class IngredientDetailControllerFragmentFactory @Inject constructor() {
   fun getFragment(fragmentManager: FragmentManager,
                                   ingredientId: Int,
                                   ingredientType: IngredientTypeViewModel): AbsFragment? {
-    return getHopDetailFragment(fragmentManager, ingredientId)
+    var result: AbsFragment? = null
+    when(ingredientType) {
+      IngredientTypeViewModel.HOP -> result = getHopDetailFragment(fragmentManager, ingredientId)
+      IngredientTypeViewModel.FERMENTABLE -> result = getFermentableDetailFragment(fragmentManager, ingredientId)
+    }
+    return result
   }
 
   private fun getHopDetailFragment(fragmentManager: FragmentManager, ingredientId: Int): AbsFragment {
     val tag = HopDetailFragment::class.java.name
     val fragment = fragmentManager.findFragmentByTag(tag) ?: HopDetailFragment.newInstance(ingredientId)
+    return fragment as AbsFragment
+  }
+
+  private fun getFermentableDetailFragment(fragmentManager: FragmentManager, ingredientId: Int): AbsFragment {
+    val tag = FermentableDetailFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: FermentableDetailFragment.newInstance(ingredientId)
     return fragment as AbsFragment
   }
 }

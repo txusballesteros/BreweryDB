@@ -32,7 +32,7 @@ class IngredientDetailNavigationCommand(private val ingredientId: Int,
   override fun onRequestIntent(context: Context): Intent {
     return context.intentFor<IngredientDetailActivity>(
         IngredientDetailActivity.EXTRA_INGREDIENT_ID to ingredientId,
-        IngredientDetailActivity.EXTRA_INGREDIENT_TYPE to ingredientType.value
+        IngredientDetailActivity.EXTRA_INGREDIENT_TYPE to ingredientType
     )
   }
 }

@@ -18,16 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.model
+package com.txusballesteros.brewerydb.data.ingredients.datasource
 
-import com.txusballesteros.brewerydb.domain.model.Ingredient
+import com.txusballesteros.brewerydb.api.ingredients.IngredientsApi
+import com.txusballesteros.brewerydb.api.model.FermentableApiModelMapper
+import com.txusballesteros.brewerydb.api.model.HopApiModelMapper
+import com.txusballesteros.brewerydb.data.model.FermentableDataModel
+import com.txusballesteros.brewerydb.data.model.HopDataModel
 import javax.inject.Inject
 
-class IngredientDataModelMapper @Inject constructor(private val hopMapper: HopDataModelMapper,
-                                                    private val fermentableMapper: FermentableDataModelMapper) {
-  fun map(source: HopDataModel): Ingredient
-      = hopMapper.map(source)
+class FermentablesCloudDataSourceImpl @Inject constructor(private val api: IngredientsApi,
+                                                          private val mapper: FermentableApiModelMapper):
+                                      FermentablesCloudDataSource {
 
-  fun map(source: FermentableDataModel): Ingredient
-      = fermentableMapper.map(source)
+  override fun get(ingredientId: Int): FermentableDataModel {
+    val response = api.getFermentable(ingredientId)
+    return mapper.map(response)
+  }
 }

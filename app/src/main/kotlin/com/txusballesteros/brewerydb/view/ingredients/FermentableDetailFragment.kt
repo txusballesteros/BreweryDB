@@ -23,23 +23,24 @@ package com.txusballesteros.brewerydb.view.ingredients
 import android.os.Bundle
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPresenter
+import com.txusballesteros.brewerydb.presentation.model.FermentableViewModel
 import com.txusballesteros.brewerydb.presentation.model.HopViewModel
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.presentation.model.IngredientViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import kotlinx.android.synthetic.main.fragment_hop_detail.*
+import kotlinx.android.synthetic.main.fragment_fermentable_detail.*
 import org.jetbrains.anko.support.v4.withArguments
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
+class FermentableDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
   companion object {
     val EXTRA_INGREDIENT_ID = "extra:ingredientId"
 
-    fun newInstance(ingredientId: Int): HopDetailFragment {
-      return HopDetailFragment().withArguments(
+    fun newInstance(ingredientId: Int): FermentableDetailFragment {
+      return FermentableDetailFragment().withArguments(
           EXTRA_INGREDIENT_ID to ingredientId
       )
     }
@@ -49,7 +50,7 @@ class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.fragment_hop_detail
+    return R.layout.fragment_fermentable_detail
   }
 
   override fun onPresenterShouldBeAttached() {
@@ -70,7 +71,7 @@ class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
 
   override fun onViewReady(savedInstanceState: Bundle?) {
     val ingredientId = getIngredientId()
-    presenter.onRequestIngredient(ingredientId, IngredientTypeViewModel.HOP)
+    presenter.onRequestIngredient(ingredientId, IngredientTypeViewModel.FERMENTABLE)
   }
 
   private fun getIngredientId(): Int {
@@ -78,23 +79,9 @@ class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
   }
 
   override fun renderIngredient(ingredient: IngredientViewModel) {
-    if (ingredient is HopViewModel) {
+    if (ingredient is FermentableViewModel) {
       name.text = ingredient.name
       description.text = ingredient.description ?: "NA"
-      alphaAcidMin.text = toString(ingredient.alphaAcidMin) ?: "-"
-      alphaAcidMax.text = toString(ingredient.alphaAcidMin) ?: "-"
-      betaAcidMin.text = toString(ingredient.betaAcidMin) ?: "-"
-      betaAcidMax.text = toString(ingredient.betaAcidMax) ?: "-"
-      humuleneMin.text = toString(ingredient.humuleneMin) ?: "-"
-      humuleneMax.text = toString(ingredient.humuleneMax) ?: "-"
-      caryophylleneMin.text = toString(ingredient.caryophylleneMin) ?: "-"
-      caryophylleneMax.text = toString(ingredient.caryophylleneMax) ?: "-"
-      cohumuloneMin.text = toString(ingredient.cohumuloneMin) ?: "-"
-      cohumuloneMax.text = toString(ingredient.cohumuloneMax) ?: "-"
-      myrceneMin.text = toString(ingredient.myrceneMin) ?: "-"
-      myrceneMax.text = toString(ingredient.myrceneMax) ?: "-"
-      farneseneMin.text = toString(ingredient.farneseneMin) ?: "-"
-      farneseneMax.text = toString(ingredient.farneseneMax) ?: "-"
     }
   }
 
