@@ -52,7 +52,6 @@
         android:fontFamily="sans-serif"
         android:textSize="@dimen/text_size_medium"
         android:textColor="@color/gray_2"
-        android:textStyle="bold"
         android:maxLines="1"
         android:ellipsize="end"
         tools:text="Short Name"/>
