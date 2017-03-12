@@ -30,6 +30,7 @@ class HopViewModelMapper @Inject constructor(private val countryMapper: CountryV
                    source.name,
                    source.description,
                    source.alphaAcidMin,
+                   source.alphaAcidMax,
                    source.betaAcidMin,
                    source.betaAcidMax,
                    source.humuleneMin,

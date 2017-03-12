@@ -26,9 +26,9 @@ import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.IngredientViewModelMapper
 import javax.inject.Inject
 
-class HopDetailPresenterImpl @Inject constructor(private val getIngredientUseCase: GetIngredientUseCase,
-                                                 private val mapper: IngredientViewModelMapper):
-                             AbsPresenter<HopDetailPresenter.View>(), HopDetailPresenter {
+class IngredientDetailPresenterImpl @Inject constructor(private val getIngredientUseCase: GetIngredientUseCase,
+                                                        private val mapper: IngredientViewModelMapper):
+                             AbsPresenter<IngredientDetailPresenter.View>(), IngredientDetailPresenter {
 
   override fun onRequestIngredient(ingredientId: Int) {
     getView()?.showLoading()

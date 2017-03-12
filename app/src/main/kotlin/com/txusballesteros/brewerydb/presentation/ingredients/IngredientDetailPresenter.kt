@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -18,14 +17,19 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
--->
-<merge xmlns:android="http://schemas.android.com/apk/res/android">
-  <View
-      android:layout_width="match_parent"
-      android:layout_marginLeft="@dimen/padding_big"
-      android:layout_marginRight="@dimen/padding_big"
-      android:layout_marginTop="@dimen/padding_big"
-      android:layout_marginBottom="@dimen/padding_big"
-      android:background="@color/gray_4"
-      android:layout_height="1dp" />
-</merge>
+ */
+package com.txusballesteros.brewerydb.presentation.ingredients
+
+import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.presentation.model.IngredientViewModel
+
+interface IngredientDetailPresenter : Presenter<IngredientDetailPresenter.View> {
+  fun onRequestIngredient(ingredientId: Int)
+
+  interface View: Presenter.View {
+    fun renderIngredient(ingredient: IngredientViewModel)
+    fun renderError()
+    fun showLoading()
+    fun hideLoading()
+  }
+}

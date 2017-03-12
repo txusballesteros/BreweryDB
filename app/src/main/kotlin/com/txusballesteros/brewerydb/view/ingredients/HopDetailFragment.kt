@@ -22,18 +22,18 @@ package com.txusballesteros.brewerydb.view.ingredients
 
 import android.os.Bundle
 import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.presentation.ingredients.HopDetailPresenter
+import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPresenter
 import com.txusballesteros.brewerydb.presentation.model.HopViewModel
 import com.txusballesteros.brewerydb.presentation.model.IngredientViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import kotlinx.android.synthetic.main.fragment_beer_detail.*
+import kotlinx.android.synthetic.main.fragment_hop_detail.*
 import org.jetbrains.anko.support.v4.withArguments
 import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-class HopDetailFragment: AbsFragment(), HopDetailPresenter.View {
+class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
   companion object {
     val EXTRA_INGREDIENT_ID = "extra:ingredientId"
 
@@ -44,7 +44,7 @@ class HopDetailFragment: AbsFragment(), HopDetailPresenter.View {
     }
   }
 
-  @Inject lateinit var presenter: HopDetailPresenter
+  @Inject lateinit var presenter: IngredientDetailPresenter
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
 
   override fun onRequestLayoutResourceId(): Int {
@@ -80,7 +80,29 @@ class HopDetailFragment: AbsFragment(), HopDetailPresenter.View {
     if (ingredient is HopViewModel) {
       name.text = ingredient.name
       description.text = ingredient.description
+      alphaAcidMin.text = toString(ingredient.alphaAcidMin) ?: "-"
+      alphaAcidMax.text = toString(ingredient.alphaAcidMin) ?: "-"
+      betaAcidMin.text = toString(ingredient.betaAcidMin) ?: "-"
+      betaAcidMax.text = toString(ingredient.betaAcidMax) ?: "-"
+      humuleneMin.text = toString(ingredient.humuleneMin) ?: "-"
+      humuleneMax.text = toString(ingredient.humuleneMax) ?: "-"
+      caryophylleneMin.text = toString(ingredient.caryophylleneMin) ?: "-"
+      caryophylleneMax.text = toString(ingredient.caryophylleneMax) ?: "-"
+      cohumuloneMin.text = toString(ingredient.cohumuloneMin) ?: "-"
+      cohumuloneMax.text = toString(ingredient.cohumuloneMax) ?: "-"
+      myrceneMin.text = toString(ingredient.myrceneMin) ?: "-"
+      myrceneMax.text = toString(ingredient.myrceneMax) ?: "-"
+      farneseneMin.text = toString(ingredient.farneseneMin) ?: "-"
+      farneseneMax.text = toString(ingredient.farneseneMax) ?: "-"
     }
+  }
+
+  fun toString(value: Float?): String? {
+    var result: String? = null
+    if (value != null) {
+      result = value.toString()
+    }
+    return result
   }
 
   override fun showLoading() {
