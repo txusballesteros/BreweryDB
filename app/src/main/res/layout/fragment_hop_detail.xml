@@ -37,8 +37,7 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_medium"
         android:textColor="@color/gray_2"
-        android:fontFamily="sans-serif-condensed"
-        android:textStyle="bold"
+        android:fontFamily="sans-serif"
         tools:text="Hop Name"/>
 
     <android.support.v7.widget.AppCompatTextView
