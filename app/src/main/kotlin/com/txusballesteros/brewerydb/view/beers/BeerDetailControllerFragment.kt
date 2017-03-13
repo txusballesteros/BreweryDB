@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.view.beers
 
 import android.os.Bundle
+import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailControllerPresenter
@@ -65,7 +66,7 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
   }
 
   override fun onRequestViewBehaviours() {
-    toolbarBehaviour.inject(activity)
+    toolbarBehaviour.inject(activity, true)
     bottomNavigationBehaviour.inject(activity, R.menu.bottom_navigation_beer_detail, {
       when(it.itemId) {
         R.id.action_beer_ingredients -> consume { presenter.onBeerIngredientsSelected() }
@@ -73,6 +74,19 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
         else -> consume { presenter.onBeerDetailSelected() }
       }
     })
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    var result: Boolean = true
+    when(item?.itemId) {
+      android.R.id.home -> closeView()
+      else -> result = super.onOptionsItemSelected(item)
+    }
+    return result
+  }
+
+  private fun closeView() {
+    activity.finish()
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {

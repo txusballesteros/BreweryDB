@@ -34,8 +34,14 @@ import javax.inject.Inject
 
 class ToolbarWithImageBehaviour @Inject constructor(private val imageDowloader: ImageDownloader) : Behaviour() {
   lateinit var activity : AppCompatActivity
+  var enableBack: Boolean = false
 
   override fun inject(activity: Activity) {
+    this.inject(activity, false)
+  }
+
+  fun inject(activity: Activity, enableBack: Boolean) {
+    this.enableBack = enableBack
     if (activity is AppCompatActivity) {
       this.activity = activity
     }
@@ -72,6 +78,8 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDowloader: 
                          AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
     view.layoutParams = params
     activity.setSupportActionBar(toolbar)
+    activity.supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
+    activity.supportActionBar?.setHomeButtonEnabled(enableBack)
     appBarLayout.fitsSystemWindows = true
   }
 }

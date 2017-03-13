@@ -29,9 +29,15 @@ import org.jetbrains.anko.find
 import javax.inject.Inject
 
 class ToolbarBehaviour @Inject constructor() : Behaviour() {
-  lateinit var activity : AppCompatActivity
+  lateinit var activity: AppCompatActivity
+  var enableBack: Boolean = false
 
   override fun inject(activity: Activity) {
+    this.inject(activity, false)
+  }
+
+  fun inject(activity: Activity, enableBack: Boolean) {
+    this.enableBack = enableBack
     if (activity is AppCompatActivity) {
       this.activity = activity
     }
@@ -55,5 +61,7 @@ class ToolbarBehaviour @Inject constructor() : Behaviour() {
     toolbar.title = "Brewery DB"
     toolbar.subtitle = "The final beer directory..."
     activity.setSupportActionBar(toolbar)
+    activity.supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
+    activity.supportActionBar?.setHomeButtonEnabled(enableBack)
   }
 }

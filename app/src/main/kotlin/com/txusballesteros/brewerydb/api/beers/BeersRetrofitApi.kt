@@ -55,7 +55,10 @@ class BeersRetrofitApi @Inject constructor(private val service: BeersRetrofitSer
 
   private fun getBeers(query: BeersQueryApiModel, page: Int): BeersListApiResponse {
     try {
-      val call = service.getBeers(query.styleId, query.withLabels, query.status, page)
+      val call = service.getBeers(query.styleId,
+                                  query.withLabels,
+                                  query.status,
+                                  page)
       val response = call.execute()
       return response.body()
     } catch (error: Exception) {

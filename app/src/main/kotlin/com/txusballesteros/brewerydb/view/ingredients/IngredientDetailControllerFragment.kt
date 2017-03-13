@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.view.ingredients
 
 import android.os.Bundle
+import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailControllerPresenter
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
@@ -64,7 +65,20 @@ class IngredientDetailControllerFragment: AbsFragment(), IngredientDetailControl
   }
 
   override fun onRequestViewBehaviours() {
-    toolbarBehaviour.inject(activity)
+    toolbarBehaviour.inject(activity, true)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    var result: Boolean = true
+    when(item?.itemId) {
+      android.R.id.home -> closeView()
+      else -> result = super.onOptionsItemSelected(item)
+    }
+    return result
+  }
+
+  private fun closeView() {
+    activity.finish()
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
