@@ -26,6 +26,7 @@ import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailPresenter
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour_Factory
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarWithImageBehaviour
@@ -47,6 +48,7 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   @Inject lateinit var presenter: BeerDetailPresenter
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
+  @Inject lateinit var errorBehaviour: ErrorBehaviour
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beer_detail
@@ -66,6 +68,7 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   override fun onRequestViewBehaviours() {
     loadingBehaviour.inject(activity)
+    errorBehaviour.inject(activity)
   }
 
   override fun onComposeView() {
@@ -134,6 +137,7 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   override fun showLoading() {
+    errorBehaviour.hideError()
     loadingBehaviour.showLoading()
   }
 
@@ -141,5 +145,7 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     loadingBehaviour.hideLoading()
   }
 
-  override fun renderError() { }
+  override fun renderError() {
+    errorBehaviour.showError()
+  }
 }

@@ -58,6 +58,18 @@
     </FrameLayout>
 
     <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigationHolder">
+
+      <ViewStub
+          android:id="@+id/error_place_holder"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <FrameLayout
         android:id="@+id/content_place_holder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

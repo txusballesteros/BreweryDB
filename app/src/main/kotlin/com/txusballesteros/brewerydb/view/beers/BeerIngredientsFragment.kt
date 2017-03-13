@@ -28,6 +28,7 @@ import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.beers.BeerIngredientsPresenter
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
@@ -47,6 +48,7 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
   }
 
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
+  @Inject lateinit var errorBehaviour: ErrorBehaviour
   @Inject lateinit var presenter: BeerIngredientsPresenter
   @Inject lateinit var navigator: Navigator
   lateinit var adapter: BeerIngredientsAdapter
@@ -69,6 +71,7 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
 
   override fun onRequestViewBehaviours() {
     loadingBehaviour.inject(activity)
+    errorBehaviour.inject(activity)
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
@@ -87,6 +90,7 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
   }
 
   override fun showLoading() {
+    errorBehaviour.hideError()
     loadingBehaviour.showLoading()
   }
 
@@ -101,7 +105,7 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
   }
 
   override fun renderError() {
-    activity.toast("Upss!!")
+    errorBehaviour.showError()
   }
 
   private fun getBeerId(): String {
