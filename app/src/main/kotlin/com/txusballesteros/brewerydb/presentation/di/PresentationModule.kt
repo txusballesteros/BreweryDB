@@ -65,4 +65,7 @@ class PresentationModule {
 
   @Provides
   fun provideHopDetailPresenter(presenter: IngredientDetailPresenterImpl): IngredientDetailPresenter = presenter
+
+  @Provides
+  fun provideBeerBreweriesPresenter(presenter: BeerBreweriesPresenterImpl): BeerBreweriesPresenter = presenter
 }
