@@ -18,20 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.model
+package com.txusballesteros.brewerydb.data.ingredients.datasource
 
-import com.txusballesteros.brewerydb.domain.model.Ingredient
+import com.txusballesteros.brewerydb.data.model.YeastDataModel
 import javax.inject.Inject
 
-class IngredientDataModelMapper @Inject constructor(private val hopMapper: HopDataModelMapper,
-                                                    private val fermentableMapper: FermentableDataModelMapper,
-                                                    private val yeastMapper: YeastDataModelMapper) {
-  fun map(source: YeastDataModel): Ingredient
-      = yeastMapper.map(source)
+class YeastsInMemoryLocalDataSource @Inject constructor(): YeastsLocalDataSource {
+  private val cache: MutableMap<Int, YeastDataModel> = HashMap()
 
-  fun map(source: HopDataModel): Ingredient
-      = hopMapper.map(source)
+  override fun get(id: Int): YeastDataModel? {
+    return cache[id]
+  }
 
-  fun map(source: FermentableDataModel): Ingredient
-      = fermentableMapper.map(source)
+  override fun store(ingredient: YeastDataModel) {
+    cache.put(ingredient.id, ingredient)
+  }
 }

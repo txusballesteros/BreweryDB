@@ -20,6 +20,7 @@
  */
 package com.txusballesteros.brewerydb.presentation.model
 
+import com.txusballesteros.brewerydb.data.model.Yeast
 import com.txusballesteros.brewerydb.domain.model.Fermentable
 import com.txusballesteros.brewerydb.domain.model.Hop
 import com.txusballesteros.brewerydb.domain.model.Ingredient
@@ -27,13 +28,16 @@ import com.txusballesteros.brewerydb.domain.model.IngredientType
 import javax.inject.Inject
 
 class IngredientViewModelMapper @Inject constructor(private val hopMapper: HopViewModelMapper,
-                                                    private val fermentableMapper: FermentableViewModelMapper) {
-  fun map(source: Ingredient): IngredientViewModel {
-    var result: IngredientViewModel? = null
+                                                    private val fermentableMapper: FermentableViewModelMapper,
+                                                    private val yeastViewModelMapper: YeastViewModelMapper) {
+  fun map(source: Ingredient): IngredientViewModel? {
+    val result: IngredientViewModel?
     when(source.type) {
       IngredientType.HOP -> result = hopMapper.map(source as Hop)
       IngredientType.FERMENTABLE -> result = fermentableMapper.map(source as Fermentable)
+      IngredientType.YEAST -> result = yeastViewModelMapper.map(source as Yeast)
+      else -> result = null
     }
-    return result!!
+    return result
   }
 }

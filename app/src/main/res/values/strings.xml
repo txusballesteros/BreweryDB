@@ -50,4 +50,12 @@
   <string name="soluble_nitrogen_ratio">Solu. Nitro. Ratio:</string>
   <string name="max_in_batch">Max In Batch:</string>
   <string name="origin">Origin:</string>
+  <string name="attenuation_min">Attenuation Min:</string>
+  <string name="attenuation_max">Attenuation Max:</string>
+  <string name="type">Type:</string>
+  <string name="ferment_temp_min">Ferment Temp. Min:</string>
+  <string name="ferment_temp_max">Ferment Temp. Max:</string>
+  <string name="alcohol_tolerance_min">Alcohol Tlce. Min:</string>
+  <string name="alcohol_tolerance_max">Alcohol Tlce. Max:</string>
+  <string name="format">Format:</string>
 </resources>

@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.data.ingredients.datasource
 import com.txusballesteros.brewerydb.data.model.HopDataModel
 import javax.inject.Inject
 
-class HopsLocalDataSourceImpl @Inject constructor(): HopsLocalDataSource {
+class HopsInMemoryLocalDataSource @Inject constructor(): HopsLocalDataSource {
   private val cache: MutableMap<Int, HopDataModel> = HashMap()
 
   override fun get(id: Int): HopDataModel? {
