@@ -21,11 +21,15 @@
 package com.txusballesteros.brewerydb.view.beers
 
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.presentation.beers.BeerBreweriesPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import org.jetbrains.anko.support.v4.withArguments
+import javax.inject.Inject
 
-class BeerBreweriesFragment: AbsFragment() {
+class BeerBreweriesFragment: AbsFragment(), BeerBreweriesPresenter.View {
   companion object {
     val EXTRA_BEER_ID = "extra:beerId"
 
@@ -36,6 +40,10 @@ class BeerBreweriesFragment: AbsFragment() {
     }
   }
 
+  @Inject lateinit var presenter: BeerBreweriesPresenter
+  @Inject lateinit var loadingBehaviour: LoadingBehaviour
+  @Inject lateinit var errorBehaviour: ErrorBehaviour
+
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beer_breweries
   }
@@ -44,7 +52,24 @@ class BeerBreweriesFragment: AbsFragment() {
     viewComponent.inject(this)
   }
 
-  override fun onPresenterShouldBeAttached() { }
+  override fun onPresenterShouldBeAttached() {
+    presenter.onAttachView(this)
+  }
 
-  override fun onPresenterShouldBeDetached() { }
+  override fun onPresenterShouldBeDetached() {
+    presenter.onDetachView()
+  }
+
+  override fun showLoading() {
+    errorBehaviour.hideError()
+    loadingBehaviour.showLoading()
+  }
+
+  override fun hideLoading() {
+    loadingBehaviour.hideLoading()
+  }
+
+  override fun showError() {
+    errorBehaviour.showError()
+  }
 }

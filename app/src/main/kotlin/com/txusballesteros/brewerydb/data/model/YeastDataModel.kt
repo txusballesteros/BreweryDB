@@ -20,18 +20,19 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.domain.model.Ingredient
-import javax.inject.Inject
+data class YeastDataModel(override val id: Int,
+                          val name: String,
+                          val description: String?,
+                          val yeastType: String?,
+                          val attenuationMin: Float?,
+                          val attenuationMax: Float?,
+                          val fermentTempMin: Float?,
+                          val fermentTempMax: Float?,
+                          val alcoholToleranceMin: Float?,
+                          val alcoholToleranceMax: Float?,
+                          val productId: String?,
+                          val supplier: String?,
+                          val yeastFormat: String?): IngredientDataModel {
 
-class IngredientDataModelMapper @Inject constructor(private val hopMapper: HopDataModelMapper,
-                                                    private val fermentableMapper: FermentableDataModelMapper,
-                                                    private val yeastMapper: YeastDataModelMapper) {
-  fun map(source: YeastDataModel): Ingredient
-      = yeastMapper.map(source)
-
-  fun map(source: HopDataModel): Ingredient
-      = hopMapper.map(source)
-
-  fun map(source: FermentableDataModel): Ingredient
-      = fermentableMapper.map(source)
+  override val type = IngredientTypeDataModel.YEAST
 }

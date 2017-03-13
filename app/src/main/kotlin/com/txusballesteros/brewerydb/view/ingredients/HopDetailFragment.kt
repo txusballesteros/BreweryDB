@@ -27,11 +27,11 @@ import com.txusballesteros.brewerydb.presentation.model.HopViewModel
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.presentation.model.IngredientViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_hop_detail.*
 import org.jetbrains.anko.support.v4.withArguments
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
@@ -47,6 +47,7 @@ class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
 
   @Inject lateinit var presenter: IngredientDetailPresenter
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
+  @Inject lateinit var errorBehaviour: ErrorBehaviour
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_hop_detail
@@ -66,6 +67,7 @@ class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
 
   override fun onComposeView() {
     loadingBehaviour.inject(activity)
+    errorBehaviour.inject(activity)
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
@@ -112,6 +114,7 @@ class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
   }
 
   override fun showLoading() {
+    errorBehaviour.hideError()
     loadingBehaviour.showLoading()
   }
 
@@ -120,6 +123,6 @@ class HopDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
   }
 
   override fun renderError() {
-    activity.toast("Upss!!")
+    errorBehaviour.showError()
   }
 }

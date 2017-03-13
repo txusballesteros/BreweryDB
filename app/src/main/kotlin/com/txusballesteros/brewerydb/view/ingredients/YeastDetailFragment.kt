@@ -22,25 +22,24 @@ package com.txusballesteros.brewerydb.view.ingredients
 
 import android.os.Bundle
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.data.model.YeastViewModel
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPresenter
-import com.txusballesteros.brewerydb.presentation.model.FermentableViewModel
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.presentation.model.IngredientViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import kotlinx.android.synthetic.main.fragment_fermentable_detail.*
+import kotlinx.android.synthetic.main.fragment_yeast_detail.*
 import org.jetbrains.anko.support.v4.withArguments
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
-class FermentableDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
+class YeastDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
   companion object {
     val EXTRA_INGREDIENT_ID = "extra:ingredientId"
 
-    fun newInstance(ingredientId: Int): FermentableDetailFragment {
-      return FermentableDetailFragment().withArguments(
+    fun newInstance(ingredientId: Int): YeastDetailFragment {
+      return YeastDetailFragment().withArguments(
           EXTRA_INGREDIENT_ID to ingredientId
       )
     }
@@ -51,7 +50,7 @@ class FermentableDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
   @Inject lateinit var errorBehaviour: ErrorBehaviour
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.fragment_fermentable_detail
+    return R.layout.fragment_yeast_detail
   }
 
   override fun onPresenterShouldBeAttached() {
@@ -73,7 +72,7 @@ class FermentableDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
 
   override fun onViewReady(savedInstanceState: Bundle?) {
     val ingredientId = getIngredientId()
-    presenter.onRequestIngredient(ingredientId, IngredientTypeViewModel.FERMENTABLE)
+    presenter.onRequestIngredient(ingredientId, IngredientTypeViewModel.YEAST)
   }
 
   private fun getIngredientId(): Int {
@@ -81,22 +80,17 @@ class FermentableDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
   }
 
   override fun renderIngredient(ingredient: IngredientViewModel) {
-    if (ingredient is FermentableViewModel) {
+    if (ingredient is YeastViewModel) {
       name.text = ingredient.name
       description.text = ingredient.description ?: "NA"
-      if (ingredient.country != null) {
-        country.text = ingredient.country.displayName
-      } else {
-        country.text = "NA"
-      }
-      moistureContent.text = toString(ingredient.moistureContent) ?: "-"
-      coarseFineDifference.text = toString(ingredient.coarseFineDifference) ?: "-"
-      diastaticPower.text = toString(ingredient.diastaticPower) ?: "-"
-      dryYield.text = toString(ingredient.dryYield) ?: "-"
-      potential.text = toString(ingredient.potential) ?: "-"
-      protein.text = toString(ingredient.protein) ?: "-"
-      solubleNitrogenRatio.text = toString(ingredient.solubleNitrogenRatio) ?: "-"
-      maxInBatch.text = toString(ingredient.maxInBatch) ?: "-"
+      yeastType.text = ingredient.yeastType ?: "-"
+      yeastFormat.text = ingredient.yeastFormat ?: "-"
+      attenuationMin.text = toString(ingredient.attenuationMin) ?: "-"
+      attenuationMax.text = toString(ingredient.attenuationMax) ?: "-"
+      fermentTempMin.text = toString(ingredient.fermentTempMin) ?: "-"
+      fermentTempMax.text = toString(ingredient.fermentTempMax) ?: "-"
+      alcoholToleranceMin.text = toString(ingredient.alcoholToleranceMin) ?: "-"
+      alcoholToleranceMax.text = toString(ingredient.alcoholToleranceMax) ?: "-"
     }
   }
 

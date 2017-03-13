@@ -20,9 +20,7 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.api.model.CountryApiModel
-
-data class FermentableDataModel(val id: Int,
+data class FermentableDataModel(override val id: Int,
                                 val name: String,
                                 val description: String?,
                                 val country: CountryDataModel?,
@@ -37,4 +35,7 @@ data class FermentableDataModel(val id: Int,
                                 val protein: Float?,
                                 val solubleNitrogenRatio: Float?,
                                 val maxInBatch: Float?,
-                                val requiresMashing: String?)
+                                val requiresMashing: String?): IngredientDataModel {
+
+  override val type = IngredientTypeDataModel.FERMENTABLE
+}

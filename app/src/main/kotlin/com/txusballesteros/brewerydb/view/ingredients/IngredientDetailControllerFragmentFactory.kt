@@ -34,6 +34,7 @@ class IngredientDetailControllerFragmentFactory @Inject constructor() {
     when(ingredientType) {
       IngredientTypeViewModel.HOP -> result = getHopDetailFragment(fragmentManager, ingredientId)
       IngredientTypeViewModel.FERMENTABLE -> result = getFermentableDetailFragment(fragmentManager, ingredientId)
+      IngredientTypeViewModel.YEAST -> result = getYeastDetailFragment(fragmentManager, ingredientId)
     }
     return result
   }
@@ -47,6 +48,12 @@ class IngredientDetailControllerFragmentFactory @Inject constructor() {
   private fun getFermentableDetailFragment(fragmentManager: FragmentManager, ingredientId: Int): AbsFragment {
     val tag = FermentableDetailFragment::class.java.name
     val fragment = fragmentManager.findFragmentByTag(tag) ?: FermentableDetailFragment.newInstance(ingredientId)
+    return fragment as AbsFragment
+  }
+
+  private fun getYeastDetailFragment(fragmentManager: FragmentManager, ingredientId: Int): AbsFragment {
+    val tag = YeastDetailFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: YeastDetailFragment.newInstance(ingredientId)
     return fragment as AbsFragment
   }
 }

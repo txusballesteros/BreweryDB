@@ -37,7 +37,9 @@ class IngredientDetailPresenterImpl @Inject constructor(private val getIngredien
     val ingredientType = typeMapper.map(type)
     getIngredientUseCase.execute(ingredientId, ingredientType, onResult = {
       val ingredient = mapper.map(it)
-      getView()?.renderIngredient(ingredient)
+      if (ingredient != null) {
+        getView()?.renderIngredient(ingredient)
+      }
       getView()?.hideLoading()
     }, onError = {
       getView()?.hideLoading()

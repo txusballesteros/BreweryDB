@@ -18,19 +18,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.ingredients.datasource
+package com.txusballesteros.brewerydb.presentation.beers
 
-import com.txusballesteros.brewerydb.data.model.HopDataModel
+import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import javax.inject.Inject
 
-class HopsLocalDataSourceImpl @Inject constructor(): HopsLocalDataSource {
-  private val cache: MutableMap<Int, HopDataModel> = HashMap()
+class BeerBreweriesPresenterImpl @Inject constructor(): AbsPresenter<BeerBreweriesPresenter.View>(),
+                                 BeerBreweriesPresenter {
 
-  override fun get(id: Int): HopDataModel? {
-    return cache[id]
-  }
-
-  override fun store(hop: HopDataModel) {
-    cache.put(hop.id, hop)
+  override fun onRequestBreweries(beerId: Int) {
+    getView()?.showLoading()
+    getView()?.hideLoading()
   }
 }

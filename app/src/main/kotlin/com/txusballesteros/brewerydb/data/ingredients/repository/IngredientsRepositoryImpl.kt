@@ -22,6 +22,7 @@ package com.txusballesteros.brewerydb.data.ingredients.repository
 
 import com.txusballesteros.brewerydb.data.ingredients.strategy.GetFermentableStrategy
 import com.txusballesteros.brewerydb.data.ingredients.strategy.GetHopStrategy
+import com.txusballesteros.brewerydb.data.ingredients.strategy.GetYeastStrategy
 import com.txusballesteros.brewerydb.data.model.IngredientDataModelMapper
 import com.txusballesteros.brewerydb.domain.model.Ingredient
 import com.txusballesteros.brewerydb.domain.model.IngredientQuery
@@ -31,6 +32,7 @@ import javax.inject.Inject
 
 class IngredientsRepositoryImpl @Inject constructor(private val getHopStrategy: GetHopStrategy.Builder,
                                                     private val getFermentableStrategy: GetFermentableStrategy.Builder,
+                                                    private val getYeastStrategy: GetYeastStrategy.Builder,
                                                     private val ingredientsMapper: IngredientDataModelMapper):
                                 IngredientsRepository {
 
@@ -38,6 +40,7 @@ class IngredientsRepositoryImpl @Inject constructor(private val getHopStrategy: 
     when(query.type) {
       IngredientType.HOP -> getHop(query, onResult)
       IngredientType.FERMENTABLE -> getFermentable(query, onResult)
+      IngredientType.YEAST -> getYeast(query, onResult)
     }
   }
 
@@ -50,6 +53,13 @@ class IngredientsRepositoryImpl @Inject constructor(private val getHopStrategy: 
 
   private fun getFermentable(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
     getFermentableStrategy.build().execute(query.id, onResult = {
+      val ingredient = ingredientsMapper.map(it!!)
+      onResult(ingredient)
+    })
+  }
+
+  private fun getYeast(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
+    getYeastStrategy.build().execute(query.id, onResult = {
       val ingredient = ingredientsMapper.map(it!!)
       onResult(ingredient)
     })

@@ -18,20 +18,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.model
+package com.txusballesteros.brewerydb.presentation.beers
 
-import com.txusballesteros.brewerydb.domain.model.Ingredient
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.presentation.Presenter
 
-class IngredientDataModelMapper @Inject constructor(private val hopMapper: HopDataModelMapper,
-                                                    private val fermentableMapper: FermentableDataModelMapper,
-                                                    private val yeastMapper: YeastDataModelMapper) {
-  fun map(source: YeastDataModel): Ingredient
-      = yeastMapper.map(source)
+interface BeerBreweriesPresenter: Presenter<BeerBreweriesPresenter.View> {
+  fun onRequestBreweries(beerId: Int)
 
-  fun map(source: HopDataModel): Ingredient
-      = hopMapper.map(source)
-
-  fun map(source: FermentableDataModel): Ingredient
-      = fermentableMapper.map(source)
+  interface View: Presenter.View {
+    fun showLoading()
+    fun hideLoading()
+    fun showError()
+  }
 }

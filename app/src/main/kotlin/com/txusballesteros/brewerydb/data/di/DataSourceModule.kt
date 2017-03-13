@@ -79,13 +79,19 @@ class DataSourceModule {
   fun provideHopsCloudDataSource(dataSource: HopsCloudDataSourceImpl): HopsCloudDataSource = dataSource
 
   @Singleton @Provides
-  fun provideHopsLocalDataSource(dataSource: HopsLocalDataSourceImpl): HopsLocalDataSource = dataSource
+  fun provideHopsLocalDataSource(dataSourceInMemory: HopsInMemoryLocalDataSource): HopsLocalDataSource = dataSourceInMemory
 
   @Singleton @Provides
-  fun provideFermentablesLocalDataSource(dataSource: FermentablesLocalDataSourceImpl): FermentablesLocalDataSource
-      = dataSource
+  fun provideFermentablesLocalDataSource(dataSourceInMemory: FermentablesInMemoryLocalDataSource): FermentablesLocalDataSource
+    = dataSourceInMemory
 
   @Provides
   fun provideFermentablesCloudDataSource(dataSource: FermentablesCloudDataSourceImpl): FermentablesCloudDataSource
-      = dataSource
+    = dataSource
+
+  @Provides
+  fun provideYeastsCloudDataSource(dataSource: YeastsCloudDataSourceImpl): YeastsCloudDataSource = dataSource
+
+  @Provides @Singleton
+  fun provideYeastsLocalDataSource(dataSource: YeastsInMemoryLocalDataSource): YeastsLocalDataSource = dataSource
 }
