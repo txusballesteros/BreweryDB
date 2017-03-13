@@ -38,8 +38,7 @@ class Navigator @Inject constructor() {
   }
 
   fun navigateToBeerDetail(from: Presenter.View?, beerId: String) {
-//    val navigationCommand = BeerDetailNavigationCommand(beerId)
-    val navigationCommand = BeerDetailNavigationCommand("WHQisc")
+    val navigationCommand = BeerDetailNavigationCommand(beerId)
     navigate(from, navigationCommand)
   }
 

@@ -29,8 +29,8 @@ import org.jetbrains.anko.find
 import javax.inject.Inject
 
 class ToolbarBehaviour @Inject constructor() : Behaviour() {
-  lateinit var activity: AppCompatActivity
-  var enableBack: Boolean = false
+  private lateinit var activity: AppCompatActivity
+  private var enableBack: Boolean = false
 
   override fun inject(activity: Activity) {
     this.inject(activity, false)

@@ -28,9 +28,9 @@ import org.jetbrains.anko.find
 import javax.inject.Inject
 
 class LoadingBehaviour @Inject constructor(): Behaviour() {
-  lateinit var contentHolder: View
-  lateinit var loadingHolder: View
-  lateinit var activity : AppCompatActivity
+  private lateinit var contentHolder: View
+  private lateinit var loadingHolder: View
+  private lateinit var activity : AppCompatActivity
 
   override fun inject(activity: Activity) {
     if (activity is AppCompatActivity) {
