@@ -58,4 +58,5 @@
   <string name="alcohol_tolerance_min">Alcohol Tlce. Min:</string>
   <string name="alcohol_tolerance_max">Alcohol Tlce. Max:</string>
   <string name="format">Format:</string>
+  <string name="something_was_wrong">Shit!! Something was wrong…</string>
 </resources>

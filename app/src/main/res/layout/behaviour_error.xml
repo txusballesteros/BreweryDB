@@ -46,7 +46,7 @@
       android:textColor="@color/gray_2"
       android:textSize="@dimen/text_size_normal"
       android:fontFamily="sans-serif-thin"
-      android:text="Shit!! Something goes wrong..."/>
+      android:text="@string/something_was_wrong"/>
 
 </RelativeLayout>
 
