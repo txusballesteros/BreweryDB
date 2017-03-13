@@ -27,5 +27,5 @@
       android:layout_marginTop="@dimen/padding_big"
       android:layout_marginBottom="@dimen/padding_big"
       android:background="@color/gray_4"
-      android:layout_height="1dp" />
+      android:layout_height="0.5dp" />
 </merge>

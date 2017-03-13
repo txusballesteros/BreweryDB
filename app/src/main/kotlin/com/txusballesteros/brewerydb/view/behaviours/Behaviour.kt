@@ -18,7 +18,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.behaviour
+package com.txusballesteros.brewerydb.view.behaviours
 
 import android.app.Activity
 import android.view.View

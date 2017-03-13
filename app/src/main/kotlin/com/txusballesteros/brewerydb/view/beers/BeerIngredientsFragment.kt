@@ -28,7 +28,7 @@ import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.beers.BeerIngredientsPresenter
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
-import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
 import org.jetbrains.anko.support.v4.withArguments
@@ -67,7 +67,7 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
     presenter.onDetachView()
   }
 
-  override fun onRequestViewComposition() {
+  override fun onRequestViewBehaviours() {
     loadingBehaviour.inject(activity)
   }
 

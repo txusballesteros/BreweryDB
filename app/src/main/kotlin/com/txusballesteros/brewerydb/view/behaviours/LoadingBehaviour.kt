@@ -18,7 +18,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.behaviour
+package com.txusballesteros.brewerydb.view.behaviours
 
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity
@@ -48,7 +48,7 @@ class LoadingBehaviour @Inject constructor(): Behaviour() {
   }
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.loading
+    return R.layout.behaviour_loading
   }
 
   fun showLoading() {

@@ -18,7 +18,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.behaviour
+package com.txusballesteros.brewerydb.view.behaviours
 
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity
@@ -47,7 +47,7 @@ class ToolbarBehaviour @Inject constructor() : Behaviour() {
   }
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.toolbar_simple
+    return R.layout.behaviour_toolbar_simple
   }
 
   override fun onBehaviorReady(view: View) {

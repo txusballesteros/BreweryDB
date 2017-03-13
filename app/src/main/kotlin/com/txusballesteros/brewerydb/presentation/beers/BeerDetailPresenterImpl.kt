@@ -34,10 +34,13 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
                               AbsPresenter<BeerDetailPresenter.View>(), BeerDetailPresenter {
 
   override fun onRequestBeer(beerId: String) {
+    getView()?.showLoading()
     getBeerByIdUseCase.execute(beerId, onResult = {
+      getView()?.hideLoading()
       requestGlass(it)
       renderBeer(it)
     }, onError = {
+      getView()?.hideLoading()
       getView()?.renderError()
     })
   }

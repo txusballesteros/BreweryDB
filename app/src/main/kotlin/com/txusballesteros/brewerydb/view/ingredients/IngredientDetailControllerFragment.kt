@@ -25,7 +25,7 @@ import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailControllerPresenter
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
-import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import org.jetbrains.anko.support.v4.withArguments
 import javax.inject.Inject
@@ -63,7 +63,7 @@ class IngredientDetailControllerFragment: AbsFragment(), IngredientDetailControl
     viewComponent.inject(this)
   }
 
-  override fun onRequestViewComposition() {
+  override fun onRequestViewBehaviours() {
     toolbarBehaviour.inject(activity)
   }
 

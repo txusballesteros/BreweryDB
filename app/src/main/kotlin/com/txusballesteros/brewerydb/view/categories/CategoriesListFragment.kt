@@ -26,7 +26,7 @@ import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.categories.CategoriesListPresenter
 import com.txusballesteros.brewerydb.presentation.model.CategoryViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
-import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
 import org.jetbrains.anko.toast
@@ -51,7 +51,7 @@ class CategoriesListFragment: AbsFragment(), CategoriesListPresenter.View {
     viewComponent.inject(this)
   }
 
-  override fun onRequestViewComposition() {
+  override fun onRequestViewBehaviours() {
     toolbarBehaviour.inject(activity)
   }
 

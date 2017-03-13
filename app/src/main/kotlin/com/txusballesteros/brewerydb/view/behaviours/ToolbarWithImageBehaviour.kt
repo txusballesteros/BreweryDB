@@ -18,7 +18,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.behaviour
+package com.txusballesteros.brewerydb.view.behaviours
 
 import android.app.Activity
 import android.support.design.widget.AppBarLayout
@@ -51,7 +51,7 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDowloader: 
   }
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.toolbar_with_image
+    return R.layout.behaviour_toolbar_with_image
   }
 
   fun setTitle(title: String) {
