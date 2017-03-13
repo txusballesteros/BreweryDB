@@ -29,8 +29,8 @@ import com.txusballesteros.brewerydb.instrumentation.EndlessRecyclerViewScrollLi
 import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 import com.txusballesteros.brewerydb.presentation.beers.BeersListPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
-import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
-import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
 import org.jetbrains.anko.support.v4.toast
@@ -64,7 +64,7 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
     viewComponent.inject(this)
   }
 
-  override fun onRequestViewComposition() {
+  override fun onRequestViewBehaviours() {
     toolbarBehaviour.inject(activity)
     loadingBehaviour.inject(activity)
   }

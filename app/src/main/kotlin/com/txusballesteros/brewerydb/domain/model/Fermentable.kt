@@ -20,6 +20,22 @@
  */
 package com.txusballesteros.brewerydb.domain.model
 
-enum class IngredientType {
-  FERMENTABLE, HOP, YEAST, UNKNOWN
+data class Fermentable(override val id: Int,
+                       val name: String,
+                       val description: String?,
+                       val country: Country?,
+                       val countryOfOrigin: String?,
+                       val srmId: Float?,
+                       val srmPrecise: Float?,
+                       val moistureContent: Float?,
+                       val coarseFineDifference: Float?,
+                       val diastaticPower: Float?,
+                       val dryYield: Float?,
+                       val potential: Float?,
+                       val protein: Float?,
+                       val solubleNitrogenRatio: Float?,
+                       val maxInBatch: Float?,
+                       val requiresMashing: String?): Ingredient {
+
+  override val type = IngredientType.FERMENTABLE
 }

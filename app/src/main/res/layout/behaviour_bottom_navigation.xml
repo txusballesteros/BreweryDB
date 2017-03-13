@@ -1,4 +1,5 @@
-/*
+<?xml version="1.0" encoding="utf-8"?>
+<!--
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -17,20 +18,22 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
- */
-package com.txusballesteros.brewerydb.presentation.ingredients
+-->
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/bottomNavigationMenuPlaceHolder"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:layout_alignParentBottom="true"
+  android:background="@color/colorPrimary">
 
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
-import com.txusballesteros.brewerydb.presentation.model.IngredientViewModel
+  <android.support.design.widget.BottomNavigationView
+      android:id="@+id/bottomNavigationMenu"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:itemIconTint="@drawable/bottom_navigation_color_state"
+      app:itemTextColor="@drawable/bottom_navigation_color_state" />
 
-interface IngredientDetailPresenter : Presenter<IngredientDetailPresenter.View> {
-  fun onRequestIngredient(ingredientId: Int, type: IngredientTypeViewModel)
+</FrameLayout>
 
-  interface View: Presenter.View {
-    fun renderIngredient(ingredient: IngredientViewModel)
-    fun renderError()
-    fun showLoading()
-    fun hideLoading()
-  }
-}

@@ -20,21 +20,24 @@
  */
 package com.txusballesteros.brewerydb.presentation.ingredients
 
-import com.txusballesteros.brewerydb.domain.model.IngredientType
 import com.txusballesteros.brewerydb.domain.usecase.ingredients.GetIngredientUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
+import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModelMapper
 import com.txusballesteros.brewerydb.presentation.model.IngredientViewModelMapper
 import javax.inject.Inject
 
 class IngredientDetailPresenterImpl @Inject constructor(private val getIngredientUseCase: GetIngredientUseCase,
-                                                        private val mapper: IngredientViewModelMapper):
+                                                        private val mapper: IngredientViewModelMapper,
+                                                        private val typeMapper: IngredientTypeViewModelMapper):
                              AbsPresenter<IngredientDetailPresenter.View>(), IngredientDetailPresenter {
 
-  override fun onRequestIngredient(ingredientId: Int) {
+  override fun onRequestIngredient(ingredientId: Int, type: IngredientTypeViewModel) {
     getView()?.showLoading()
-    getIngredientUseCase.execute(ingredientId, IngredientType.HOP, onResult = {
-      val hop = mapper.map(it)
-      getView()?.renderIngredient(hop)
+    val ingredientType = typeMapper.map(type)
+    getIngredientUseCase.execute(ingredientId, ingredientType, onResult = {
+      val ingredient = mapper.map(it)
+      getView()?.renderIngredient(ingredient)
       getView()?.hideLoading()
     }, onError = {
       getView()?.hideLoading()

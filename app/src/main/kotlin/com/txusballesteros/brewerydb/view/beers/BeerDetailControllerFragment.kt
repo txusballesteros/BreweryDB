@@ -21,11 +21,13 @@
 package com.txusballesteros.brewerydb.view.beers
 
 import android.os.Bundle
+import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailControllerPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
-import com.txusballesteros.brewerydb.view.behaviour.ToolbarWithImageBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.BottomNavigationBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.ToolbarWithImageBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_beer_detail_controller.*
 import org.jetbrains.anko.support.v4.withArguments
@@ -44,6 +46,7 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
 
   @Inject lateinit var fragmentFactory: BeerDetailControllerFragmentFactory
   @Inject lateinit var toolbarBehaviour : ToolbarWithImageBehaviour
+  @Inject lateinit var bottomNavigationBehaviour: BottomNavigationBehaviour
   @Inject lateinit var presenter: BeerDetailControllerPresenter
 
   override fun onRequestLayoutResourceId(): Int {
@@ -62,24 +65,33 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
     presenter.onDetachView()
   }
 
-  override fun onRequestViewComposition() {
-    toolbarBehaviour.inject(activity)
-  }
-
-  override fun onViewReady(savedInstanceState: Bundle?) {
-    val beerId = getBeerId()
-    presenter.onRequestBeer(beerId)
-    initializeBottomNavigationBar()
-  }
-
-  private fun initializeBottomNavigationBar() {
-    bottomNavigationMenu.setOnNavigationItemSelectedListener {
+  override fun onRequestViewBehaviours() {
+    toolbarBehaviour.inject(activity, true)
+    bottomNavigationBehaviour.inject(activity, R.menu.bottom_navigation_beer_detail, {
       when(it.itemId) {
         R.id.action_beer_ingredients -> consume { presenter.onBeerIngredientsSelected() }
         R.id.action_beer_breweries -> consume { presenter.onBeerBreweriesSelected() }
         else -> consume { presenter.onBeerDetailSelected() }
       }
+    })
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    var result: Boolean = true
+    when(item?.itemId) {
+      android.R.id.home -> closeView()
+      else -> result = super.onOptionsItemSelected(item)
     }
+    return result
+  }
+
+  private fun closeView() {
+    activity.finish()
+  }
+
+  override fun onViewReady(savedInstanceState: Bundle?) {
+    val beerId = getBeerId()
+    presenter.onRequestBeer(beerId)
   }
 
   override fun showBeerDetail() {

@@ -25,6 +25,7 @@ import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModelMapper
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerIngredientsUseCase
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModelMapper
 import javax.inject.Inject
 
@@ -47,10 +48,8 @@ class BeerIngredientsPresenterImpl @Inject constructor(private val getBeerIngred
   }
 
   override fun onIngredientClick(ingredient: BeerIngredientViewModel) {
-    val ingredientId = ingredient.id
-    val ingredientType = ingredientTypeMapper.map(ingredient.category)
-    if (ingredientType != null) {
-      navigator.navigateToIngredientDetail(getView(), ingredientId, ingredientType)
+    if (ingredient.type != IngredientTypeViewModel.UNKNOWN) {
+      navigator.navigateToIngredientDetail(getView(), ingredient.id, ingredient.type)
     }
   }
 }

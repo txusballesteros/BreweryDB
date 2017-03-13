@@ -20,14 +20,25 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.domain.model.Ingredient
+import com.txusballesteros.brewerydb.domain.model.Fermentable
 import javax.inject.Inject
 
-class IngredientDataModelMapper @Inject constructor(private val hopMapper: HopDataModelMapper,
-                                                    private val fermentableMapper: FermentableDataModelMapper) {
-  fun map(source: HopDataModel): Ingredient
-      = hopMapper.map(source)
-
-  fun map(source: FermentableDataModel): Ingredient
-      = fermentableMapper.map(source)
+class FermentableDataModelMapper @Inject constructor(private val countryMapper: CountryDataModelMapper) {
+  fun map(source: FermentableDataModel): Fermentable
+    = Fermentable(source.id,
+                  source.name,
+                  source.description,
+                  countryMapper.map(source.country),
+                  source.countryOfOrigin,
+                  source.srmId,
+                  source.srmPrecise,
+                  source.moistureContent,
+                  source.coarseFineDifference,
+                  source.diastaticPower,
+                  source.dryYield,
+                  source.potential,
+                  source.protein,
+                  source.solubleNitrogenRatio,
+                  source.maxInBatch,
+                  source.requiresMashing)
 }

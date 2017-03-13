@@ -21,13 +21,12 @@
 package com.txusballesteros.brewerydb.presentation.ingredients
 
 import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 
 interface IngredientDetailControllerPresenter: Presenter<IngredientDetailControllerPresenter.View> {
-  fun onRequestIngredient(ingredientId: Int, ingredientType: String)
+  fun onRequestIngredient(ingredientId: Int, ingredientType: IngredientTypeViewModel)
 
   interface View: Presenter.View {
-    fun renderHop(ingredientId: Int)
-    fun renderYeast(ingredientId: Int)
-    fun renderFermentable(ingredientId: Int)
+    fun renderIngredient(ingredientId: Int, type: IngredientTypeViewModel)
   }
 }

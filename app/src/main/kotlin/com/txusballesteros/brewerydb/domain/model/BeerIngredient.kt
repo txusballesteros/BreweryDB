@@ -20,7 +20,9 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
+import com.txusballesteros.brewerydb.domain.model.IngredientType
+
 data class BeerIngredient(val id: Int,
                           val name: String,
-                          val category: String,
+                          val type: IngredientType,
                           val categoryDisplay: String)

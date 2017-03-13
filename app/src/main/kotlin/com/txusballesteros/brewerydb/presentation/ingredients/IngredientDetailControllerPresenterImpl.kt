@@ -22,20 +22,13 @@ package com.txusballesteros.brewerydb.presentation.ingredients
 
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
-import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModelMapper
 import javax.inject.Inject
 
-class IngredientDetailControllerPresenterImpl @Inject constructor(private val ingredientTypeMapper: IngredientTypeViewModelMapper):
+class IngredientDetailControllerPresenterImpl @Inject constructor():
                                               AbsPresenter<IngredientDetailControllerPresenter.View>(),
                                               IngredientDetailControllerPresenter {
 
-  override fun onRequestIngredient(ingredientId: Int, ingredientType: String) {
-    val ingredientTypeViewModel = ingredientTypeMapper.map(ingredientType)
-    when(ingredientTypeViewModel) {
-      IngredientTypeViewModel.HOP -> getView()?.renderHop(ingredientId)
-      IngredientTypeViewModel.YEAST -> getView()?.renderYeast(ingredientId)
-      IngredientTypeViewModel.MALT,
-      IngredientTypeViewModel.MISCELLANEOUS -> getView()?.renderFermentable(ingredientId)
-    }
+  override fun onRequestIngredient(ingredientId: Int, ingredientType: IngredientTypeViewModel) {
+    getView()?.renderIngredient(ingredientId, ingredientType)
   }
 }

@@ -21,13 +21,32 @@
 -->
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/errorHolder"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/white">
+  android:visibility="gone"
+  tools:visibility="visible">
 
-  <FrameLayout
-      android:id="@+id/content"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent" />
+  <android.support.v7.widget.AppCompatImageView
+      android:id="@+id/icon"
+      android:layout_width="100dp"
+      android:layout_height="100dp"
+      app:srcCompat="@drawable/ic_thumb_down_100dp"
+      android:layout_centerInParent="true"
+      android:tint="@color/gray_4"/>
+
+  <android.support.v7.widget.AppCompatTextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/icon"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="@dimen/padding_big"
+      android:textColor="@color/gray_2"
+      android:textSize="@dimen/text_size_normal"
+      android:fontFamily="sans-serif-thin"
+      android:text="Shit!! Something goes wrong..."/>
 
 </RelativeLayout>
+

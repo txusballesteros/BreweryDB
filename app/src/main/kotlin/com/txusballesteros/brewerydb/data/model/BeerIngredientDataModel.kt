@@ -22,5 +22,5 @@ package com.txusballesteros.brewerydb.data.model
 
 data class BeerIngredientDataModel(val id: Int,
                                    val name: String,
-                                   val category: String,
+                                   val type: IngredientTypeDataModel,
                                    val categoryDisplay: String)

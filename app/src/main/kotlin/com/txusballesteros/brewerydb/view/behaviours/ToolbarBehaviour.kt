@@ -18,24 +18,26 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.behaviour
+package com.txusballesteros.brewerydb.view.behaviours
 
 import android.app.Activity
-import android.support.design.widget.AppBarLayout
-import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.AppCompatImageView
 import android.support.v7.widget.Toolbar
 import android.view.View
 import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 import org.jetbrains.anko.find
 import javax.inject.Inject
 
-class ToolbarWithImageBehaviour @Inject constructor(private val imageDowloader: ImageDownloader) : Behaviour() {
-  lateinit var activity : AppCompatActivity
+class ToolbarBehaviour @Inject constructor() : Behaviour() {
+  lateinit var activity: AppCompatActivity
+  var enableBack: Boolean = false
 
   override fun inject(activity: Activity) {
+    this.inject(activity, false)
+  }
+
+  fun inject(activity: Activity, enableBack: Boolean) {
+    this.enableBack = enableBack
     if (activity is AppCompatActivity) {
       this.activity = activity
     }
@@ -47,31 +49,19 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDowloader: 
   }
 
   override fun onRequestBehaviourRootViewId(): Int {
-    return R.id.collapsing_toolbar
+    return R.id.toolbar
   }
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.toolbar_with_image
-  }
-
-  fun setTitle(title: String) {
-    val collapsingToolbar = getView().find<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
-    collapsingToolbar.title = title
-  }
-
-  fun setLabel(label: String) {
-    val imageView = getView().find<AppCompatImageView>(R.id.headerImage)
-    imageDowloader.download(label, imageView)
+    return R.layout.behaviour_toolbar_simple
   }
 
   override fun onBehaviorReady(view: View) {
     val toolbar = view.find<Toolbar>(R.id.toolbar)
-    val appBarLayout = activity.find<AppBarLayout>(R.id.appBarLayout)
-    val params = view.layoutParams as AppBarLayout.LayoutParams
-    params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
-                         AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
-    view.layoutParams = params
+    toolbar.title = "Brewery DB"
+    toolbar.subtitle = "The final beer directory..."
     activity.setSupportActionBar(toolbar)
-    appBarLayout.fitsSystemWindows = true
+    activity.supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
+    activity.supportActionBar?.setHomeButtonEnabled(enableBack)
   }
 }

@@ -26,8 +26,8 @@ import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
-import com.txusballesteros.brewerydb.view.behaviour.LoadingBehaviour
-import com.txusballesteros.brewerydb.view.behaviour.ToolbarBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
 import org.jetbrains.anko.support.v4.toast
@@ -62,7 +62,7 @@ class StylesListFragment : AbsFragment(), StylesListPresenter.View {
     viewComponent.inject(this)
   }
 
-  override fun onRequestViewComposition() {
+  override fun onRequestViewBehaviours() {
     toolbarBehaviour.inject(activity)
     loadingBehaviour.inject(activity)
   }

@@ -26,7 +26,10 @@ import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailPresenter
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
-import com.txusballesteros.brewerydb.view.behaviour.ToolbarWithImageBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
+import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour_Factory
+import com.txusballesteros.brewerydb.view.behaviours.ToolbarWithImageBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_beer_detail.*
 import org.jetbrains.anko.support.v4.withArguments
@@ -44,6 +47,8 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   @Inject lateinit var presenter: BeerDetailPresenter
+  @Inject lateinit var loadingBehaviour: LoadingBehaviour
+  @Inject lateinit var errorBehaviour: ErrorBehaviour
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beer_detail
@@ -59,6 +64,11 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   override fun onRequestInjection(viewComponent: ViewComponent) {
     viewComponent.inject(this)
+  }
+
+  override fun onRequestViewBehaviours() {
+    loadingBehaviour.inject(activity)
+    errorBehaviour.inject(activity)
   }
 
   override fun onComposeView() {
@@ -126,5 +136,16 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
     }
   }
 
-  override fun renderError() { }
+  override fun showLoading() {
+    errorBehaviour.hideError()
+    loadingBehaviour.showLoading()
+  }
+
+  override fun hideLoading() {
+    loadingBehaviour.hideLoading()
+  }
+
+  override fun renderError() {
+    errorBehaviour.showError()
+  }
 }

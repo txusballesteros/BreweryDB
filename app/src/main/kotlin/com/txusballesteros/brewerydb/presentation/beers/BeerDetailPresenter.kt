@@ -32,5 +32,7 @@ interface BeerDetailPresenter: Presenter<BeerDetailPresenter.View> {
     fun renderGlass(glassName: String)
     fun renderEmptyGlass()
     fun renderError()
+    fun showLoading()
+    fun hideLoading()
   }
 }

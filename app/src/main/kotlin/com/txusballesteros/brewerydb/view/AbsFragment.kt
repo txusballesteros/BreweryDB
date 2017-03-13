@@ -44,7 +44,7 @@ abstract class AbsFragment : Fragment() {
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
     onRequestInjection()
-    onRequestViewComposition()
+    onRequestViewBehaviours()
     onPresenterShouldBeAttached()
     onComposeView()
     onViewReady(savedInstanceState)
@@ -68,7 +68,7 @@ abstract class AbsFragment : Fragment() {
 
   abstract protected fun onRequestInjection(viewComponent: ViewComponent)
 
-  open fun onRequestViewComposition() { }
+  open fun onRequestViewBehaviours() { }
 
   private fun getApplicationComponent() : ApplicationComponent {
     val application = activity.application as Application

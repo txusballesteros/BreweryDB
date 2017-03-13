@@ -38,7 +38,7 @@
         android:textSize="@dimen/text_size_medium"
         android:textColor="@color/gray_2"
         android:fontFamily="sans-serif"
-        tools:text="Hop Name"/>
+        tools:text="Fermentable Name"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/description"
@@ -95,6 +95,7 @@
         android:layout_below="@+id/origin">
 
       <include layout="@layout/include_line_decorator" />
+
     </FrameLayout>
 
     <TableLayout
@@ -110,10 +111,10 @@
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
             android:fontFamily="sans-serif"
-            android:text="@string/alpha_acid_min" />
+            android:text="@string/moisture_content" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/alphaAcidMin"
+            android:id="@+id/moistureContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
@@ -128,47 +129,10 @@
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
             android:fontFamily="sans-serif"
-            android:text="@string/alpha_acid_max"/>
+            android:text="@string/coarse_fine_difference"/>
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/alphaAcidMax"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
-            tools:text="55.6"/>
-      </TableRow>
-      <TableRow android:paddingBottom="@dimen/padding_normal">
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
-            android:text="@string/beta_acid_min" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/betaAcidMin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
-            tools:text="55.6"/>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
-            android:text="@string/beta_acid_max"/>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/betaAcidMax"
+            android:id="@+id/coarseFineDifference"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
@@ -184,10 +148,10 @@
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
             android:fontFamily="sans-serif"
-            android:text="@string/humulene_min" />
+            android:text="@string/diastatic_power" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/humuleneMin"
+            android:id="@+id/diastaticPower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
@@ -202,47 +166,10 @@
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
             android:fontFamily="sans-serif"
-            android:text="@string/humulene_max"/>
+            android:text="@string/dry_yield"/>
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/humuleneMax"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
-            tools:text="55.6"/>
-      </TableRow>
-      <TableRow android:paddingBottom="@dimen/padding_normal">
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
-            android:text="@string/caryophyllene_min" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/caryophylleneMin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
-            tools:text="55.6"/>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
-            android:text="@string/caryophyllene_max"/>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/caryophylleneMax"
+            android:id="@+id/dryYield"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
@@ -258,10 +185,10 @@
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
             android:fontFamily="sans-serif"
-            android:text="@string/cohumulone_min" />
+            android:text="@string/potential" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/cohumuloneMin"
+            android:id="@+id/potential"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
@@ -276,47 +203,10 @@
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
             android:fontFamily="sans-serif"
-            android:text="@string/cohumulone_max"/>
+            android:text="@string/protein"/>
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/cohumuloneMax"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
-            tools:text="55.6"/>
-      </TableRow>
-      <TableRow android:paddingBottom="@dimen/padding_normal">
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
-            android:text="@string/myrcene_min" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/myrceneMin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
-            tools:text="55.6"/>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
-            android:text="@string/myrcene_max"/>
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/myrceneMax"
+            android:id="@+id/protein"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
@@ -332,10 +222,10 @@
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
             android:fontFamily="sans-serif"
-            android:text="@string/farnesene_min" />
+            android:text="@string/soluble_nitrogen_ratio" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/farneseneMin"
+            android:id="@+id/solubleNitrogenRatio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
@@ -350,10 +240,10 @@
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/gray_2"
             android:fontFamily="sans-serif"
-            android:text="@string/farnesene_max"/>
+            android:text="@string/max_in_batch"/>
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/farneseneMax"
+            android:id="@+id/maxInBatch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"

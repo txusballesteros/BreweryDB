@@ -18,17 +18,18 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.behaviour
+package com.txusballesteros.brewerydb.view.behaviours
 
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
 import android.view.View
 import com.txusballesteros.brewerydb.R
 import org.jetbrains.anko.find
 import javax.inject.Inject
 
-class ToolbarBehaviour @Inject constructor() : Behaviour() {
+class ErrorBehaviour @Inject constructor(): Behaviour() {
+  lateinit var contentHolder: View
+  lateinit var errorHolder: View
   lateinit var activity : AppCompatActivity
 
   override fun inject(activity: Activity) {
@@ -38,22 +39,27 @@ class ToolbarBehaviour @Inject constructor() : Behaviour() {
     super.inject(activity)
   }
 
-  override fun onRequestPlaceHolderId(): Int {
-    return R.id.toolbar_place_holder
+  override fun onRequestPlaceHolderId(): Int
+      = R.id.error_place_holder
+
+  override fun onRequestBehaviourRootViewId(): Int
+      = R.id.errorHolder
+
+  override fun onRequestLayoutResourceId(): Int
+    = R.layout.behaviour_error
+
+  fun showError() {
+    contentHolder.visibility = View.GONE
+    errorHolder.visibility = View.VISIBLE
   }
 
-  override fun onRequestBehaviourRootViewId(): Int {
-    return R.id.toolbar
-  }
-
-  override fun onRequestLayoutResourceId(): Int {
-    return R.layout.toolbar_simple
+  fun hideError() {
+    contentHolder.visibility = View.VISIBLE
+    errorHolder.visibility = View.GONE
   }
 
   override fun onBehaviorReady(view: View) {
-    val toolbar = view.find<Toolbar>(R.id.toolbar)
-    toolbar.title = "Brewery DB"
-    toolbar.subtitle = "The final beer directory..."
-    activity.setSupportActionBar(toolbar)
+    this.errorHolder = activity.find<View>(R.id.errorHolder)
+    this.contentHolder = activity.find<View>(R.id.content_place_holder)
   }
 }

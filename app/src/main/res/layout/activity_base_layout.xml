@@ -40,15 +40,52 @@
 
   </android.support.design.widget.AppBarLayout>
 
-  <ViewStub
-      android:id="@+id/loading_place_holder"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent" />
-
-  <FrameLayout
-      android:id="@+id/content_place_holder"
+  <RelativeLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+      app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigationHolder">
+
+      <ViewStub
+          android:id="@+id/loading_place_holder"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigationHolder">
+
+      <ViewStub
+          android:id="@+id/error_place_holder"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/content_place_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigationHolder" />
+
+    <FrameLayout
+        android:id="@+id/bottomNavigationHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <ViewStub
+            android:id="@+id/bottom_navigation_place_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+  </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

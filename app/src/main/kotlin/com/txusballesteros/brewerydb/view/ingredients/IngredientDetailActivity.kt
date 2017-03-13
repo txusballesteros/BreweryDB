@@ -20,6 +20,7 @@
  */
 package com.txusballesteros.brewerydb.view.ingredients
 
+import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.view.AbsActivity
 import com.txusballesteros.brewerydb.view.AbsFragment
 
@@ -39,7 +40,7 @@ class IngredientDetailActivity: AbsActivity() {
     return intent.extras.getInt(EXTRA_INGREDIENT_ID)
   }
 
-  private fun getIngredientType(): String {
-    return intent.extras.getString(EXTRA_INGREDIENT_TYPE)
+  private fun getIngredientType(): IngredientTypeViewModel {
+    return intent.extras.getSerializable(EXTRA_INGREDIENT_TYPE) as IngredientTypeViewModel
   }
 }

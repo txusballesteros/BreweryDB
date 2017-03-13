@@ -21,5 +21,5 @@
 package com.txusballesteros.brewerydb.data.model
 
 enum class IngredientTypeDataModel {
-  FERMENTABLE, HOP, YEAST
+  FERMENTABLE, HOP, YEAST, UNKNOWN
 }

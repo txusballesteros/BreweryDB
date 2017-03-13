@@ -18,7 +18,7 @@
  # Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 
  machine:
-     environment:
+   environment:
          _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
          ANDROID_HOME: /usr/local/android-sdk-linux
          GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'

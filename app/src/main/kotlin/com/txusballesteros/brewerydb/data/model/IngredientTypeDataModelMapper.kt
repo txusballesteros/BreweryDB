@@ -18,30 +18,30 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.IngredientType
 import javax.inject.Inject
 
-class IngredientTypeViewModelMapper @Inject constructor() {
-  fun map(source: IngredientType): IngredientTypeViewModel {
-    val result: IngredientTypeViewModel
+class IngredientTypeDataModelMapper @Inject constructor() {
+  fun map(source: String): IngredientTypeDataModel {
+    val result: IngredientTypeDataModel
     when(source) {
-      IngredientType.HOP -> result = IngredientTypeViewModel.HOP
-      IngredientType.YEAST -> result = IngredientTypeViewModel.YEAST
-      IngredientType.FERMENTABLE -> result = IngredientTypeViewModel.FERMENTABLE
-      IngredientType.UNKNOWN -> result = IngredientTypeViewModel.UNKNOWN
+      "hop" -> result = IngredientTypeDataModel.HOP
+      "yeast" -> result = IngredientTypeDataModel.YEAST
+      "malt" -> result = IngredientTypeDataModel.FERMENTABLE
+      else -> result = IngredientTypeDataModel.UNKNOWN
     }
     return result
   }
 
-  fun map(source: IngredientTypeViewModel): IngredientType {
+  fun map(source: IngredientTypeDataModel): IngredientType {
     val result: IngredientType
     when(source) {
-      IngredientTypeViewModel.HOP -> result = IngredientType.HOP
-      IngredientTypeViewModel.YEAST -> result = IngredientType.YEAST
-      IngredientTypeViewModel.FERMENTABLE -> result = IngredientType.FERMENTABLE
-      IngredientTypeViewModel.UNKNOWN -> result = IngredientType.UNKNOWN
+      IngredientTypeDataModel.HOP -> result = IngredientType.HOP
+      IngredientTypeDataModel.YEAST -> result = IngredientType.YEAST
+      IngredientTypeDataModel.FERMENTABLE -> result = IngredientType.FERMENTABLE
+      IngredientTypeDataModel.UNKNOWN -> result = IngredientType.UNKNOWN
     }
     return result
   }
