@@ -5,7 +5,7 @@ BreweryDB
 
 ## License
 
-Copyright Txus Ballesteros 2017 (@txusballesteros)
+Copyright Txus Ballesteros 2017 ([@txusballesteros](https://es.linkedin.com/in/txusballesteros))
 
 This file is part of Foobar.
 
@@ -22,4 +22,4 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 
-Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+Contact: Txus Ballesteros [txus.ballesteros@gmail.com](mailto:txus.ballesteros@gmail.com)
