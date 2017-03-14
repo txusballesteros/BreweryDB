@@ -20,6 +20,8 @@
  */
 package com.txusballesteros.brewerydb.api.model
 
-data class LabelApiModel(val icon: String?,
-                         val medium: String?,
-                         val large: String?)
+import com.google.gson.annotations.SerializedName
+
+class BeerBreweriesApiResponse(@SerializedName("data") val breweries: List<BreweryApiModel>,
+                               val message: String,
+                               val status: String)

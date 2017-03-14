@@ -20,6 +20,8 @@
  */
 package com.txusballesteros.brewerydb.api.model
 
-data class LabelApiModel(val icon: String?,
+data class ImageApiModel(val icon: String?,
                          val medium: String?,
-                         val large: String?)
+                         val large: String?,
+                         val squareMedium: String?,
+                         val squareLarge: String?)

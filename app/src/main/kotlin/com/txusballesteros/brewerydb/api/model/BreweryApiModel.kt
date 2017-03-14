@@ -20,6 +20,11 @@
  */
 package com.txusballesteros.brewerydb.api.model
 
-data class LabelApiModel(val icon: String?,
-                         val medium: String?,
-                         val large: String?)
+data class BreweryApiModel(val id: String,
+                           val name: String,
+                           val description: String?,
+                           val website: String?,
+                           val established: String?,
+                           val mailingListUrl: String?,
+                           val isOrganic: String?,
+                           val images: ImageApiModel?)

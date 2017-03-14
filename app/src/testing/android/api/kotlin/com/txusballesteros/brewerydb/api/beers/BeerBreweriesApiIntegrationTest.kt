@@ -18,8 +18,32 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.api.beers
 
-data class LabelApiModel(val icon: String?,
-                         val medium: String?,
-                         val large: String?)
+import com.txusballesteros.brewerydb.api.ApiIntegrationTest
+import org.junit.Assert.*
+import org.junit.Test
+import retrofit2.Retrofit
+
+class BeerBreweriesApiIntegrationTest: ApiIntegrationTest() {
+  companion object {
+    val BEER_ID = "KE3f43"
+  }
+
+  lateinit var api: BeerBreweriesApi
+
+  override fun onPrepareTest(retrofit: Retrofit) {
+    val service = retrofit.create(BeerBreweriesRetrofitService::class.java)
+    api = BeerBreweriesRetrofitApi(service)
+  }
+
+  @Test
+  fun shouldGetBeerBreweries() {
+    val response = api.getBreweries(BEER_ID)
+
+    assertNotNull(response)
+    assertNotNull(response.breweries)
+    assertFalse(response.breweries.isEmpty())
+    assertEquals(STATUS_SUCCESS, response.status)
+  }
+}

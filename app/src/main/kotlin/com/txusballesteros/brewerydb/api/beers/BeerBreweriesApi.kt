@@ -18,8 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.api.beers
 
-data class LabelApiModel(val icon: String?,
-                         val medium: String?,
-                         val large: String?)
+import com.txusballesteros.brewerydb.api.model.BeerBreweriesApiResponse
+
+interface BeerBreweriesApi {
+  fun getBreweries(beerId: String): BeerBreweriesApiResponse
+}
