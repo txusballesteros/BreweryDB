@@ -3,7 +3,7 @@ BreweryDB
 
 ![](https://circleci.com/gh/txusballesteros/BreweryDB.svg?&style=shield&circle-token=e2c21e95bb6a281fbffba33d6d8ea78a76df2795)
 
-#License
+## License
 
 Copyright Txus Ballesteros 2017 (@txusballesteros)
 
