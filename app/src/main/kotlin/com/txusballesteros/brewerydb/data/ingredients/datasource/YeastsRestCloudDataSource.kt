@@ -21,14 +21,14 @@
 package com.txusballesteros.brewerydb.data.ingredients.datasource
 
 import com.txusballesteros.brewerydb.api.ingredients.IngredientsApi
-import com.txusballesteros.brewerydb.api.model.HopApiModelMapper
-import com.txusballesteros.brewerydb.data.model.HopDataModel
+import com.txusballesteros.brewerydb.data.model.YeastApiModelMapper
+import com.txusballesteros.brewerydb.data.model.YeastDataModel
 import javax.inject.Inject
 
-class HopsCloudDataSourceImpl @Inject constructor(private val api: IngredientsApi,
-                                                  private val mapper: HopApiModelMapper) : HopsCloudDataSource {
-  override fun get(ingredientId: Int): HopDataModel {
-    val repsonse = api.getHop(ingredientId)
-    return mapper.map(repsonse)
+class YeastsRestCloudDataSource @Inject constructor(private val api: IngredientsApi,
+                                                    private val mapper: YeastApiModelMapper) : YeastsCloudDataSource {
+  override fun get(ingredientId: Int): YeastDataModel {
+    val response = api.getYeast(ingredientId)
+    return mapper.map(response)
   }
 }

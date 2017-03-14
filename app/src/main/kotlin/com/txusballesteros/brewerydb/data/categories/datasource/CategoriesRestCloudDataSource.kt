@@ -18,21 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.ingredients.datasource
+package com.txusballesteros.brewerydb.data.categories.datasource
 
-import com.txusballesteros.brewerydb.api.ingredients.IngredientsApi
-import com.txusballesteros.brewerydb.api.model.FermentableApiModelMapper
-import com.txusballesteros.brewerydb.api.model.HopApiModelMapper
-import com.txusballesteros.brewerydb.data.model.FermentableDataModel
-import com.txusballesteros.brewerydb.data.model.HopDataModel
+import com.txusballesteros.brewerydb.api.categories.CategoriesApi
+import com.txusballesteros.brewerydb.api.model.CategoryApiModelMapper
+import com.txusballesteros.brewerydb.data.model.CategoryDataModel
 import javax.inject.Inject
 
-class FermentablesCloudDataSourceImpl @Inject constructor(private val api: IngredientsApi,
-                                                          private val mapper: FermentableApiModelMapper):
-                                      FermentablesCloudDataSource {
-
-  override fun get(ingredientId: Int): FermentableDataModel {
-    val response = api.getFermentable(ingredientId)
-    return mapper.map(response)
+class CategoriesRestCloudDataSource @Inject constructor(private val api: CategoriesApi,
+                                                        private val categoriesApiModelMapper: CategoryApiModelMapper):
+                                    CategoriesCloudDataSource {
+  override fun getCategories(): List<CategoryDataModel> {
+    val response = api.getCategories()
+    val result = categoriesApiModelMapper.map(response.categories)
+    return result.sortedBy(CategoryDataModel::name)
   }
 }

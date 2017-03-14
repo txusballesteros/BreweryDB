@@ -18,19 +18,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.beers.datasource
+package com.txusballesteros.brewerydb.data.glassware.datasource
 
-import com.txusballesteros.brewerydb.api.beers.BeerIngredientsApi
-import com.txusballesteros.brewerydb.api.model.BeerIngredientApiModelMapper
-import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModel
+import com.txusballesteros.brewerydb.api.glassware.GlasswareApi
+import com.txusballesteros.brewerydb.api.model.GlassApiModelMapper
+import com.txusballesteros.brewerydb.data.model.GlassDataModel
 import javax.inject.Inject
 
-class BeerIngredientsCloudDataSourceImpl @Inject constructor(private val api: BeerIngredientsApi,
-                                                             private val mapper: BeerIngredientApiModelMapper):
-                                         BeerIngredientsCloudDataSource {
-
-  override fun getIngredients(beerId: String): List<BeerIngredientDataModel> {
-    val response = api.getIngredients(beerId)
+class GlasswareRestCloudDataSource @Inject constructor(private val api: GlasswareApi,
+                                                       private val mapper: GlassApiModelMapper): GlasswareCloudDataSource {
+  override fun getGlassware(): List<GlassDataModel> {
+    val response = api.getGlasses()
     return mapper.map(response)
   }
 }

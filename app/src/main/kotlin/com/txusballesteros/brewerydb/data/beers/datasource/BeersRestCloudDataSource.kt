@@ -27,7 +27,7 @@ import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
 import javax.inject.Inject
 
-class BeersCloudDataSourceImpl @Inject constructor(private val api: BeersApi,
+class BeersRestCloudDataSource @Inject constructor(private val api: BeersApi,
                                                    private val mapper: BeerApiModelMapper,
                                                    private val queryMapper: BeersQueryApiModelMapper) : BeersCloudDataSource {
   override fun flush() {

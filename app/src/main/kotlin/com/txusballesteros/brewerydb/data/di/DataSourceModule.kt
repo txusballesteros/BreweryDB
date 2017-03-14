@@ -22,18 +22,18 @@ package com.txusballesteros.brewerydb.data.di
 
 import com.txusballesteros.brewerydb.data.beers.datasource.*
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSource
-import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesCloudDataSourceImpl
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesInMemoryLocalDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesLocalDataSource
+import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesRestCloudDataSource
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareCloudDataSource
-import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareCloudDataSourceImpl
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareInMemoryLocalDataSource
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareLocalDataSource
+import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareRestCloudDataSource
 import com.txusballesteros.brewerydb.data.ingredients.datasource.*
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
-import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSourceImpl
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesInMemoryLocalDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
+import com.txusballesteros.brewerydb.data.styles.datasource.StylesRestCloudDataSource
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -41,7 +41,7 @@ import javax.inject.Singleton
 @Module
 class DataSourceModule {
   @Provides
-  fun provideCategoriesCloudDataSource(dataSource: CategoriesCloudDataSourceImpl): CategoriesCloudDataSource = dataSource
+  fun provideCategoriesCloudDataSource(dataSourceRest: CategoriesRestCloudDataSource): CategoriesCloudDataSource = dataSourceRest
 
   @Singleton @Provides
   fun provideCategoriesLocalDataSource(dataSource: CategoriesInMemoryLocalDataSource): CategoriesLocalDataSource = dataSource
@@ -50,10 +50,10 @@ class DataSourceModule {
   fun provideStylesLocalDataSource(dataSource: StylesInMemoryLocalDataSource) : StylesLocalDataSource = dataSource
 
   @Provides
-  fun provideStylesCloudDataSource(dataSource: StylesCloudDataSourceImpl) : StylesCloudDataSource = dataSource
+  fun provideStylesCloudDataSource(dataSourceRest: StylesRestCloudDataSource) : StylesCloudDataSource = dataSourceRest
 
   @Provides
-  fun provideBeersCloudDataSource(dataSource: BeersCloudDataSourceImpl): BeersCloudDataSource = dataSource
+  fun provideBeersCloudDataSource(dataSourceRest: BeersRestCloudDataSource): BeersCloudDataSource = dataSourceRest
 
   @Singleton @Provides
   fun provideBeersLocalDataSource(dataSource: BeersInMemoryLocalDataSource): BeersLocalDataSource = dataSource
@@ -62,21 +62,21 @@ class DataSourceModule {
   fun provideBeersQueryLocalDataSource(dataSource: BeersQueryInMemoryLocalDataSource): BeersQueryLocalDataSource = dataSource
 
   @Provides
-  fun provideGlasswareCloudDataSource(dataSource: GlasswareCloudDataSourceImpl): GlasswareCloudDataSource = dataSource
+  fun provideGlasswareCloudDataSource(dataSourceRest: GlasswareRestCloudDataSource): GlasswareCloudDataSource = dataSourceRest
 
   @Singleton @Provides
   fun provideGlasswareLocalDataSource(dataSource: GlasswareInMemoryLocalDataSource): GlasswareLocalDataSource = dataSource
 
   @Provides
-  fun provideBeerIngredientsCloudDataSource(dataSource: BeerIngredientsCloudDataSourceImpl): BeerIngredientsCloudDataSource
-      = dataSource
+  fun provideBeerIngredientsCloudDataSource(dataSourceRest: BeerIngredientsRestCloudDataSource): BeerIngredientsCloudDataSource
+      = dataSourceRest
 
   @Singleton @Provides
   fun provideBeerIngredientsLocalDataSource(dataSource: BeerIngredientsInMemoryLocalDataSource): BeerIngredientsLocalDataSource
       = dataSource
 
   @Provides
-  fun provideHopsCloudDataSource(dataSource: HopsCloudDataSourceImpl): HopsCloudDataSource = dataSource
+  fun provideHopsCloudDataSource(dataSourceRest: HopsRestCloudDataSource): HopsCloudDataSource = dataSourceRest
 
   @Singleton @Provides
   fun provideHopsLocalDataSource(dataSourceInMemory: HopsInMemoryLocalDataSource): HopsLocalDataSource = dataSourceInMemory
@@ -86,11 +86,11 @@ class DataSourceModule {
     = dataSourceInMemory
 
   @Provides
-  fun provideFermentablesCloudDataSource(dataSource: FermentablesCloudDataSourceImpl): FermentablesCloudDataSource
-    = dataSource
+  fun provideFermentablesCloudDataSource(dataSourceRest: FermentablesRestCloudDataSource): FermentablesCloudDataSource
+    = dataSourceRest
 
   @Provides
-  fun provideYeastsCloudDataSource(dataSource: YeastsCloudDataSourceImpl): YeastsCloudDataSource = dataSource
+  fun provideYeastsCloudDataSource(dataSourceRest: YeastsRestCloudDataSource): YeastsCloudDataSource = dataSourceRest
 
   @Provides @Singleton
   fun provideYeastsLocalDataSource(dataSource: YeastsInMemoryLocalDataSource): YeastsLocalDataSource = dataSource

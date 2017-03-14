@@ -18,19 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.categories.datasource
+package com.txusballesteros.brewerydb.data.styles.datasource
 
-import com.txusballesteros.brewerydb.api.categories.CategoriesApi
-import com.txusballesteros.brewerydb.api.model.CategoryApiModelMapper
-import com.txusballesteros.brewerydb.data.model.CategoryDataModel
+import com.txusballesteros.brewerydb.api.model.StyleApiModelMapper
+import com.txusballesteros.brewerydb.api.styles.StylesApi
+import com.txusballesteros.brewerydb.data.model.StyleDataModel
 import javax.inject.Inject
 
-class CategoriesCloudDataSourceImpl @Inject constructor(private val api: CategoriesApi,
-                                                        private val categoriesApiModelMapper: CategoryApiModelMapper):
-                                    CategoriesCloudDataSource {
-  override fun getCategories(): List<CategoryDataModel> {
-    val response = api.getCategories()
-    val result = categoriesApiModelMapper.map(response.categories)
-    return result.sortedBy(CategoryDataModel::name)
+class StylesRestCloudDataSource @Inject constructor(private val api: StylesApi,
+                                                    private val styleApiModelMapper: StyleApiModelMapper):
+                                StylesCloudDataSource {
+
+  override fun getStyles(): List<StyleDataModel> {
+    val response = api.getStyles()
+    val result = styleApiModelMapper.map(response.styles)
+    return result.sortedBy(StyleDataModel::shortName)
   }
 }

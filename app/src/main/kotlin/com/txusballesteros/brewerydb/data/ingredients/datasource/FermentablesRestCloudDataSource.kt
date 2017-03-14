@@ -18,20 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.styles.datasource
+package com.txusballesteros.brewerydb.data.ingredients.datasource
 
-import com.txusballesteros.brewerydb.api.model.StyleApiModelMapper
-import com.txusballesteros.brewerydb.api.styles.StylesApi
-import com.txusballesteros.brewerydb.data.model.StyleDataModel
+import com.txusballesteros.brewerydb.api.ingredients.IngredientsApi
+import com.txusballesteros.brewerydb.api.model.FermentableApiModelMapper
+import com.txusballesteros.brewerydb.data.model.FermentableDataModel
 import javax.inject.Inject
 
-class StylesCloudDataSourceImpl @Inject constructor(private val api: StylesApi,
-                                                    private val styleApiModelMapper: StyleApiModelMapper):
-                                StylesCloudDataSource {
+class FermentablesRestCloudDataSource @Inject constructor(private val api: IngredientsApi,
+                                                          private val mapper: FermentableApiModelMapper):
+                                      FermentablesCloudDataSource {
 
-  override fun getStyles(): List<StyleDataModel> {
-    val response = api.getStyles()
-    val result = styleApiModelMapper.map(response.styles)
-    return result.sortedBy(StyleDataModel::shortName)
+  override fun get(ingredientId: Int): FermentableDataModel {
+    val response = api.getFermentable(ingredientId)
+    return mapper.map(response)
   }
 }
