@@ -22,8 +22,10 @@ package com.txusballesteros.brewerydb.domain.repository
 
 import com.txusballesteros.brewerydb.data.model.BeerIngredient
 import com.txusballesteros.brewerydb.domain.model.Beer
+import com.txusballesteros.brewerydb.domain.model.Brewery
 
 interface BeersRepository {
+  fun getBeerBreweries(beerId: String, onResult: (List<Brewery>) -> Unit)
   fun getBeerIngredients(beerId: String, onResult: (List<BeerIngredient>) -> Unit)
   fun getBeerById(beerId: String, onResult: (Beer) -> Unit)
   fun getBeers(onResult: (List<Beer>) -> Unit)

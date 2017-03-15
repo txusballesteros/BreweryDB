@@ -21,11 +21,14 @@
 package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
 
 interface BeerBreweriesPresenter: Presenter<BeerBreweriesPresenter.View> {
-  fun onRequestBreweries(beerId: Int)
+  fun onRequestBreweries(beerId: String)
+  fun onBreweryClick(brewery: BreweryViewModel)
 
   interface View: Presenter.View {
+    fun renderBreweries(breweries: List<BreweryViewModel>)
     fun showLoading()
     fun hideLoading()
     fun showError()

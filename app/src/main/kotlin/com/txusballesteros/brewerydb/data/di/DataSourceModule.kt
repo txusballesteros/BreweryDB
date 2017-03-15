@@ -94,4 +94,12 @@ class DataSourceModule {
 
   @Provides @Singleton
   fun provideYeastsLocalDataSource(dataSource: YeastsInMemoryLocalDataSource): YeastsLocalDataSource = dataSource
+
+  @Provides
+  fun provideBeerBreweriesCloudDataSource(dataSource: BeerBreweriesRestCloudDataSource): BeerBreweriesCloudDataSource
+    = dataSource
+
+  @Provides @Singleton
+  fun provideBeerBreweriesLocalDataSource(dataSource: BeerBreweriesInMemoryLocalDataSource): BeerBreweriesLocalDataSource
+    = dataSource
 }

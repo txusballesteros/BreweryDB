@@ -20,14 +20,29 @@
  */
 package com.txusballesteros.brewerydb.presentation.beers
 
+import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerBreweriesUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
+import com.txusballesteros.brewerydb.presentation.model.BreweryViewModelMapper
 import javax.inject.Inject
 
-class BeerBreweriesPresenterImpl @Inject constructor(): AbsPresenter<BeerBreweriesPresenter.View>(),
-                                 BeerBreweriesPresenter {
+class BeerBreweriesPresenterImpl @Inject constructor(private val getBeerBreweriesUseCase: GetBeerBreweriesUseCase,
+                                                     private val mapper: BreweryViewModelMapper):
+                                 AbsPresenter<BeerBreweriesPresenter.View>(), BeerBreweriesPresenter {
 
-  override fun onRequestBreweries(beerId: Int) {
+  override fun onRequestBreweries(beerId: String) {
     getView()?.showLoading()
-    getView()?.hideLoading()
+    getBeerBreweriesUseCase.execute(beerId, onResult = {
+      val breweries = mapper.map(it)
+      getView()?.hideLoading()
+      getView()?.renderBreweries(breweries)
+    }, onError = {
+      getView()?.hideLoading()
+      getView()?.showError()
+    })
+  }
+
+  override fun onBreweryClick(brewery: BreweryViewModel) {
+
   }
 }
