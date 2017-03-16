@@ -57,7 +57,3 @@
      - cp -r app/build/outputs/apk/* $CIRCLE_ARTIFACTS
      # copy the test results to the test results directory.
      - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
-
-   post:
-     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-     - find . -type f -regex ".*/test-results/debug/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
