@@ -22,11 +22,13 @@ package com.txusballesteros.brewerydb.data.beers.strategy
 
 import com.txusballesteros.brewerydb.data.beers.datasource.BeerBreweriesCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeerBreweriesLocalDataSource
+import com.txusballesteros.brewerydb.data.breweries.datasource.BreweriesLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BreweryDataModel
 import com.txusballesteros.brewerydb.data.strategy.LocalOrCloudStrategy
 import javax.inject.Inject
 
 class GetBeerBreweriesStrategy private constructor(private val localDataSource: BeerBreweriesLocalDataSource,
+                                                   private val breweriesLocalDataSource: BreweriesLocalDataSource,
                                                    private val cloudDataSource: BeerBreweriesCloudDataSource):
                                LocalOrCloudStrategy<String, List<BreweryDataModel>>() {
 
@@ -37,6 +39,7 @@ class GetBeerBreweriesStrategy private constructor(private val localDataSource: 
   override fun onRequestCallToCloud(params: String?): List<BreweryDataModel>? {
     val response = cloudDataSource.get(params!!)
     localDataSource.store(params, response)
+    breweriesLocalDataSource.store(response)
     return response
   }
 
@@ -45,9 +48,10 @@ class GetBeerBreweriesStrategy private constructor(private val localDataSource: 
   }
 
   class Builder @Inject constructor(private val localDataSource: BeerBreweriesLocalDataSource,
+                                    private val breweriesLocalDataSource: BreweriesLocalDataSource,
                                     private val cloudDataSource: BeerBreweriesCloudDataSource) {
     fun build(): GetBeerBreweriesStrategy {
-      return GetBeerBreweriesStrategy(localDataSource, cloudDataSource)
+      return GetBeerBreweriesStrategy(localDataSource, breweriesLocalDataSource, cloudDataSource)
     }
   }
 }
