@@ -21,6 +21,8 @@
 package com.txusballesteros.brewerydb.presentation.di
 
 import com.txusballesteros.brewerydb.presentation.beers.*
+import com.txusballesteros.brewerydb.presentation.breweries.BreweryDetailPresenter
+import com.txusballesteros.brewerydb.presentation.breweries.BreweryDetailPresenterImpl
 import com.txusballesteros.brewerydb.presentation.categories.CategoriesListPresenter
 import com.txusballesteros.brewerydb.presentation.categories.CategoriesListPresenterImpl
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPresenter
@@ -68,4 +70,7 @@ class PresentationModule {
 
   @Provides
   fun provideBeerBreweriesPresenter(presenter: BeerBreweriesPresenterImpl): BeerBreweriesPresenter = presenter
+
+  @Provides
+  fun provideBreweryDetailPresenter(presenter: BreweryDetailPresenterImpl): BreweryDetailPresenter = presenter
 }

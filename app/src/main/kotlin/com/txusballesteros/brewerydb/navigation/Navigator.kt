@@ -47,6 +47,11 @@ class Navigator @Inject constructor() {
     navigate(from, navigationCommand)
   }
 
+  fun navigateToBreweryDetail(from: Presenter.View?, breweryId: String) {
+    val navigationCommand = BreweryDetailNavigationCommand(breweryId)
+    navigate(from, navigationCommand)
+  }
+
   private fun navigate(from: Presenter.View?, command: NavigationCommand) {
     if (from is AbsFragment) {
       val intent = command.build(from.activity)

@@ -26,6 +26,7 @@ import com.txusballesteros.brewerydb.domain.usecase.di.UseCasesModule
 import com.txusballesteros.brewerydb.instrumentation.di.InstrumentationModule
 import com.txusballesteros.brewerydb.presentation.di.PresentationModule
 import com.txusballesteros.brewerydb.view.beers.*
+import com.txusballesteros.brewerydb.view.breweries.BreweryDetailFragment
 import com.txusballesteros.brewerydb.view.categories.CategoriesListFragment
 import com.txusballesteros.brewerydb.view.ingredients.FermentableDetailFragment
 import com.txusballesteros.brewerydb.view.ingredients.HopDetailFragment
@@ -56,4 +57,5 @@ interface ViewComponent {
   fun inject(view: HopDetailFragment)
   fun inject(view: FermentableDetailFragment)
   fun inject(view: YeastDetailFragment)
+  fun inject(view: BreweryDetailFragment)
 }

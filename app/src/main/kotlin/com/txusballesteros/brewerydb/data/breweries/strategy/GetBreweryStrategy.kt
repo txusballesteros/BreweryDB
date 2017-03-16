@@ -18,16 +18,22 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.data.breweries.strategy
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import com.txusballesteros.brewerydb.data.breweries.datasource.BreweriesLocalDataSource
+import com.txusballesteros.brewerydb.data.model.BreweryDataModel
+import com.txusballesteros.brewerydb.data.strategy.LocalStrategy
+import javax.inject.Inject
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
-  fun getIngredientsRepository(): IngredientsRepository
-  fun getBreweriesRepository(): BreweriesRepository
+class GetBreweryStrategy private constructor(private val localDataSource: BreweriesLocalDataSource):
+                         LocalStrategy<String, BreweryDataModel>() {
+  override fun onRequestCallToLocal(params: String?): BreweryDataModel? {
+    return localDataSource.get(params!!)
+  }
+
+  class Builder @Inject constructor(private val localDataSource: BreweriesLocalDataSource) {
+    fun build(): GetBreweryStrategy {
+       return GetBreweryStrategy(localDataSource)
+    }
+  }
 }

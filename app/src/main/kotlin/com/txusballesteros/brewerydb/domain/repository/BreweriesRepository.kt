@@ -18,16 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.domain.repository
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import com.txusballesteros.brewerydb.data.breweries.strategy.GetBreweryStrategy
+import com.txusballesteros.brewerydb.data.model.BreweryDataModelMapper
+import com.txusballesteros.brewerydb.domain.model.Brewery
+import javax.inject.Inject
+import javax.inject.Singleton
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
-  fun getIngredientsRepository(): IngredientsRepository
-  fun getBreweriesRepository(): BreweriesRepository
+@Singleton
+class BreweriesRepository @Inject constructor(private val getBreweryStrategy: GetBreweryStrategy.Builder,
+                                              private val mapper: BreweryDataModelMapper) {
+  fun get(breweryId: String, onResult: (Brewery) -> Unit) {
+    getBreweryStrategy.build().execute(breweryId, onResult = {
+      val brewery = mapper.map(it!!)
+      onResult(brewery)
+    })
+  }
 }

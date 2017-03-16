@@ -65,7 +65,7 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDowloader: 
     collapsingToolbar.title = title
   }
 
-  fun setLabel(label: String) {
+  fun setImage(label: String) {
     val imageView = getView().find<AppCompatImageView>(R.id.headerImage)
     imageDowloader.download(label, imageView)
   }

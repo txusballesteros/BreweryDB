@@ -18,16 +18,17 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.repository.di
+package com.txusballesteros.brewerydb.navigation.commands
 
-import com.txusballesteros.brewerydb.domain.repository.*
+import android.content.Context
+import android.content.Intent
+import com.txusballesteros.brewerydb.view.breweries.BreweryDetailActivity
+import org.jetbrains.anko.intentFor
 
-interface RepositoriesProvider {
-  fun getCategoriesRepository(): CategoriesRepository
-  fun getStyleRepository() : StylesRepository
-  fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
-  fun getGlasswareRepository(): GlasswareRepository
-  fun getIngredientsRepository(): IngredientsRepository
-  fun getBreweriesRepository(): BreweriesRepository
+class BreweryDetailNavigationCommand(private val breweryId: String): NavigationCommand() {
+  override fun onRequestIntent(context: Context): Intent {
+    return context.intentFor<BreweryDetailActivity>(
+        BreweryDetailActivity.EXTRA_BREWERY_ID to breweryId
+    )
+  }
 }

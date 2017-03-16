@@ -50,6 +50,8 @@
   <string name="soluble_nitrogen_ratio">Solu. Nitro. Ratio:</string>
   <string name="max_in_batch">Max In Batch:</string>
   <string name="origin">Origin:</string>
+  <string name="since">Since:</string>
+  <string name="website">Website:</string>
   <string name="attenuation_min">Attenuation Min:</string>
   <string name="attenuation_max">Attenuation Max:</string>
   <string name="type">Type:</string>
