@@ -19,37 +19,40 @@
 
  machine:
    environment:
-         _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
-         ANDROID_HOME: /usr/local/android-sdk-linux
-         GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+     _JAVA_OPTIONS: "-Xms512m -Xmx1024m"
+     ANDROID_HOME: /usr/local/android-sdk-linux
+     GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
 
  dependencies:
-     pre:
-         - echo y | android update sdk --no-ui --all --filter tools,platform-tools,android-25
-         - echo y | android update sdk --no-ui --all --filter build-tools-25.0.2
-         - echo y | android update sdk --no-ui --all --filter android-25
-         - echo y | android update sdk --no-ui --all --filter tools
-         - echo y | android update sdk --no-ui --all --filter extra-android-m2repository
-         - echo y | android update sdk --no-ui --all --filter extra-android-support
-         - echo y | android update sdk --no-ui --all --filter extra-google-google_play_services
-         - echo y | android update sdk --no-ui --all --filter extra-google-m2repository
+   pre:
+     - mkdir -p ${ANDROID_HOME}/licenses
+     - echo $ANDROID_SDK_LICENSE > ${ANDROID_HOME}/licenses/android-sdk-license
+     - echo y | android update sdk --no-ui --all --filter tools,platform-tools,android-25
+     - echo y | android update sdk --no-ui --all --filter build-tools-25.0.2
+     - echo y | android update sdk --no-ui --all --filter android-25
+     - echo y | android update sdk --no-ui --all --filter tools
+     - echo y | android update sdk --no-ui --all --filter extra-android-m2repository
+     - echo y | android update sdk --no-ui --all --filter extra-android-support
+     - echo y | android update sdk --no-ui --all --filter extra-google-google_play_services
+     - echo y | android update sdk --no-ui --all --filter extra-google-m2repository
 
-     override:
-         - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies
+   override:
+     - ANDROID_HOME=/usr/local/andro
+     - ./gradlew dependencies || true
 
  test:
-     override:
-         # start unit tests
-         - ./gradlew test
-         # start the emulator
-         - emulator -avd circleci-android24 -no-window:
-             background: true
-             parallel: true
-         # wait for it to have booted
-         - circle-android wait-for-boot
-         # run tests  against the emulator.
-         - ./gradlew connectedAndroidTest
-         # copy the build outputs to artifacts
-         - cp -r app/build/outputs/apk/* $CIRCLE_ARTIFACTS
-         # copy the test results to the test results directory.
-         - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
+   override:
+     # start unit tests
+     - ./gradlew test
+     # start the emulator
+     - emulator -avd circleci-android24 -no-window:
+         background: true
+         parallel: true
+     # wait for it to have booted
+     - circle-android wait-for-boot
+     # run tests  against the emulator.
+     - ./gradlew connectedAndroidTest
+     # copy the build outputs to artifacts
+     - cp -r app/build/outputs/apk/* $CIRCLE_ARTIFACTS
+     # copy the test results to the test results directory.
+     - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
