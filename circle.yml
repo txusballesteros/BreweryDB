@@ -25,8 +25,6 @@
 
  dependencies:
    pre:
-     - mkdir -p ${ANDROID_HOME}/licenses
-     - echo $ANDROID_SDK_LICENSE > ${ANDROID_HOME}/licenses/android-sdk-license
      - echo y | android update sdk --no-ui --all --filter tools,platform-tools,android-25
      - echo y | android update sdk --no-ui --all --filter build-tools-25.0.2
      - echo y | android update sdk --no-ui --all --filter android-25
@@ -35,10 +33,11 @@
      - echo y | android update sdk --no-ui --all --filter extra-android-support
      - echo y | android update sdk --no-ui --all --filter extra-google-google_play_services
      - echo y | android update sdk --no-ui --all --filter extra-google-m2repository
+     - mkdir $ANDROID_HOME/licenses; ls -l $ANDROID_HOME/licenses
+     - cp --force licenses/* $ANDROID_HOME/licenses; ls -l $ANDROID_HOME/licenses
 
    override:
-     - ANDROID_HOME=/usr/local/andro
-     - ./gradlew dependencies || true
+     - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies || true
 
  test:
    override:
@@ -56,3 +55,7 @@
      - cp -r app/build/outputs/apk/* $CIRCLE_ARTIFACTS
      # copy the test results to the test results directory.
      - cp -r app/build/outputs/androidTest-results/* $CIRCLE_TEST_REPORTS
+
+   post:
+     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+     - find . -type f -regex ".*/test-results/debug/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
