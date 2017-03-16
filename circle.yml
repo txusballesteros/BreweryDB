@@ -41,7 +41,7 @@
  test:
    override:
      # start lint
-     - ./gradlew lint
+     #- ./gradlew lint
      # start unit tests
      - ./gradlew test
      # start the emulator
