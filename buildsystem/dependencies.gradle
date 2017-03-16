@@ -42,7 +42,7 @@ ext {
   daggerVersion = "2.9"
   picassoVersion = "2.5.2"
   retrofitVersion = "2.1.0"
-  androidSupportVersion = "25.2.0"
+  androidSupportVersion = "25.3.0"
   junitVersion = "4.12"
   mockitoVersion = "2.7.5"
   gsonVersion = "2.8.0"
@@ -51,6 +51,7 @@ ext {
   stethoVervion = "1.4.2"
   mockitoKotlinVervion = "1.2.0"
   loadingBallsVervion = "1.1"
+  constraintLayoutVervion = "1.0.2"
 
   mobileDependencies = [
     AppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
@@ -78,5 +79,6 @@ ext {
     StethoOkHttp: "com.facebook.stetho:stetho-okhttp3:${stethoVervion}",
     MockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVervion}",
     LoadingBalls: "com.github.glomadrian:loadingballs:${loadingBallsVervion}@aar",
+    ConstraintLayout: "com.android.support.constraint:constraint-layout:${constraintLayoutVervion}"
   ]
 }
