@@ -38,7 +38,7 @@ class GetGlassByIdInteractor @Inject constructor(executor: ExecutorService,
   }
 
   override fun onExecute(onResult: (Glass) -> Unit) {
-    repository.getGlassById(glassId, {
+    repository.get(glassId, {
       onResult(it)
     })
   }

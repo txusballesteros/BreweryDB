@@ -39,7 +39,7 @@ class GetBeerIngredientsInteractor @Inject constructor(executor: ExecutorService
 
 
   override fun onExecute(onResult: (List<BeerIngredient>) -> Unit) {
-    repository.getBeerIngredients(beerId, onResult = {
+    repository.getIngredients(beerId, onResult = {
       onResult(it)
     })
   }

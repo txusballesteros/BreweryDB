@@ -31,7 +31,7 @@ class GetCategoriesInteractor @Inject constructor(executor: ExecutorService,
                               AnkoUseCase<List<Category>>(executor), GetCategoriesUseCase {
 
   override fun onExecute(onResult: (List<Category>) -> Unit) {
-    repository.getCategories {
+    repository.get {
       onResult(it)
     }
   }

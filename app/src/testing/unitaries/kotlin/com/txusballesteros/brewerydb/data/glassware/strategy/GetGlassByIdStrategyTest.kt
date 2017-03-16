@@ -25,7 +25,7 @@ import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareCloudDataSource
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareLocalDataSource
 import com.txusballesteros.brewerydb.data.model.GlassDataModel
-import junit.framework.Assert.assertNotNull
+import org.junit.Assert.assertNotNull
 import org.junit.Test
 
 class GetGlassByIdStrategyTest: UnitTest() {

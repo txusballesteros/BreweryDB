@@ -38,7 +38,7 @@ class StoreBeersQueryInteractor @Inject constructor(executor: ExecutorService,
   }
 
   override fun onExecute(onResult: (Unit) -> Unit) {
-    repository.storeQuery(query, {
+    repository.store(query, {
       onResult(Unit)
     })
   }

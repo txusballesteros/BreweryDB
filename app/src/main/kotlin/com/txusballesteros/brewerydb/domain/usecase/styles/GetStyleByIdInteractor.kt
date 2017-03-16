@@ -38,7 +38,7 @@ class GetStyleByIdInteractor @Inject constructor(executor: ExecutorService,
   }
 
   override fun onExecute(onResult: (Style) -> Unit) {
-    repository.getStyleById(styleId, {
+    repository.get(styleId, {
       onResult(it)
     })
   }

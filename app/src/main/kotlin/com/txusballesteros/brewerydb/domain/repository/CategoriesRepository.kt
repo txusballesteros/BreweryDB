@@ -20,8 +20,20 @@
  */
 package com.txusballesteros.brewerydb.domain.repository
 
+import com.txusballesteros.brewerydb.data.categories.strategy.GetCategoriesStrategy
+import com.txusballesteros.brewerydb.data.model.CategoryDataModelMapper
 import com.txusballesteros.brewerydb.domain.model.Category
+import javax.inject.Inject
+import javax.inject.Singleton
 
-interface CategoriesRepository {
-  fun getCategories(onResult: (List<Category>) -> Unit)
+@Singleton
+class CategoriesRepository @Inject constructor(private val getCategoriesStrategy: GetCategoriesStrategy.Builder,
+                                                   private val mapper: CategoryDataModelMapper) {
+
+  fun get(onResult: (List<Category>) -> Unit) {
+    getCategoriesStrategy.build().execute(onResult = {
+      val categories = mapper.map(it)
+      onResult(categories!!)
+    })
+  }
 }
