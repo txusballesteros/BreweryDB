@@ -69,7 +69,7 @@ dependencies {
   compile dependencies.CardView
   compile dependencies.Design
   compile dependencies.LoadingBalls
-  compile dependencies.ConstraintLayout
+//  compile dependencies.ConstraintLayout
   compile dependencies.KotlinStd
   compile dependencies.AnkoCommon
   compile dependencies.AnkoAppCompat
