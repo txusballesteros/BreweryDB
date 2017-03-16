@@ -31,7 +31,7 @@ class GetBeersQueryInteractor @Inject constructor(executor: ExecutorService,
                               AnkoUseCase<BeersQuery>(executor), GetBeersQueryUseCase {
 
   override fun onExecute(onResult: (BeersQuery) -> Unit) {
-    repository.getQuery {
+    repository.get {
       onResult(it)
     }
   }

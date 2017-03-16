@@ -20,8 +20,19 @@
  */
 package com.txusballesteros.brewerydb.domain.repository
 
+import com.txusballesteros.brewerydb.data.glassware.strategy.GetGlassByIdStrategy
+import com.txusballesteros.brewerydb.data.model.GlassDataModelMapper
 import com.txusballesteros.brewerydb.domain.model.Glass
+import javax.inject.Inject
+import javax.inject.Singleton
 
-interface GlasswareRepository {
-  fun getGlassById(id: Int, onResult: (Glass) -> Unit)
+@Singleton
+class GlasswareRepository @Inject constructor(private val getGlassByIdStrategy: GetGlassByIdStrategy.Builder,
+                                              private val mapper: GlassDataModelMapper) {
+  fun getGlassById(id: Int, onResult: (Glass) -> Unit) {
+    getGlassByIdStrategy.build().execute(id, onResult = {
+      val glass = mapper.map(it!!)
+      onResult(glass)
+    })
+  }
 }

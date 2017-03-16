@@ -31,7 +31,7 @@ class GetNextPageBeersInteractor @Inject constructor(executor: ExecutorService,
                                  AnkoUseCase<List<Beer>>(executor), GetNextPageBeersUseCase {
 
   override fun onExecute(onResult: (List<Beer>) -> Unit) {
-    repository.getNextPageBeers {
+    repository.getNextPage {
       onResult(it)
     }
   }

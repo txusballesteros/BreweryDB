@@ -20,10 +20,38 @@
  */
 package com.txusballesteros.brewerydb.domain.repository
 
+import com.txusballesteros.brewerydb.data.model.StyleDataModelMapper
+import com.txusballesteros.brewerydb.data.styles.strategy.GetStyleByIdStrategy
+import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesByCategoryIdStrategy
+import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesStrategy
 import com.txusballesteros.brewerydb.domain.model.Style
+import javax.inject.Inject
+import javax.inject.Singleton
 
-interface StylesRepository {
-  fun getStyles(onResult: (List<Style>) -> Unit)
-  fun getStyleById(styleId: Int, onResult: (Style) -> Unit)
-  fun getStylesByCategoryId(categoryId: Int, onResult: (List<Style>) -> Unit)
+@Singleton
+class StylesRepository @Inject constructor(private val getStylesStrategy: GetStylesStrategy.Builder,
+                                           private val getStylesBuCategoryId: GetStylesByCategoryIdStrategy.Builder,
+                                           private val getStyleByIdStrategy: GetStyleByIdStrategy.Builder,
+                                           private val styleDataMapper: StyleDataModelMapper) {
+
+  fun getStylesByCategoryId(categoryId: Int, onResult: (List<Style>) -> Unit) {
+    getStylesBuCategoryId.build().execute(categoryId, onResult = {
+      val styles = styleDataMapper.map(it)
+      onResult(styles!!)
+    })
+  }
+
+  fun getStyleById(styleId: Int, onResult: (Style) -> Unit) {
+    getStyleByIdStrategy.build().execute(styleId, onResult =  {
+      val style = styleDataMapper.map(it!!)
+      onResult(style)
+    })
+  }
+
+  fun getStyles(onResult: (List<Style>) -> Unit) {
+    getStylesStrategy.build().execute(onResult =  {
+      val styles = styleDataMapper.map(it)
+      onResult(styles!!)
+    })
+  }
 }
