@@ -36,7 +36,7 @@ class IngredientsRepository @Inject constructor(private val getHopStrategy: GetH
                                                 private val getYeastStrategy: GetYeastStrategy.Builder,
                                                 private val ingredientsMapper: IngredientDataModelMapper) {
 
-  fun getIngredient(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
+  fun get(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
     when(query.type) {
       IngredientType.HOP -> getHop(query, onResult)
       IngredientType.FERMENTABLE -> getFermentable(query, onResult)
@@ -44,21 +44,21 @@ class IngredientsRepository @Inject constructor(private val getHopStrategy: GetH
     }
   }
 
-  fun getHop(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
+  private fun getHop(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
     getHopStrategy.build().execute(query.id, onResult = {
       val ingredient = ingredientsMapper.map(it!!)
       onResult(ingredient)
     })
   }
 
-  fun getFermentable(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
+  private fun getFermentable(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
     getFermentableStrategy.build().execute(query.id, onResult = {
       val ingredient = ingredientsMapper.map(it!!)
       onResult(ingredient)
     })
   }
 
-  fun getYeast(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
+  private fun getYeast(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
     getYeastStrategy.build().execute(query.id, onResult = {
       val ingredient = ingredientsMapper.map(it!!)
       onResult(ingredient)

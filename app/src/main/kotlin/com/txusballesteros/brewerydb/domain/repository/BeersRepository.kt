@@ -54,14 +54,14 @@ class BeersRepository @Inject constructor(private val getBeersStrategy: GetBeers
     })
   }
 
-  fun getBeerById(beerId: String, onResult: (Beer) -> Unit) {
+  fun get(beerId: String, onResult: (Beer) -> Unit) {
     getBeerByIdStrategy.build().execute(beerId, onResult = {
       val beers = beersMapper.map(it!!)
       onResult(beers)
     })
   }
 
-  fun getBeers(onResult: (List<Beer>) -> Unit) {
+  fun getFirstPage(onResult: (List<Beer>) -> Unit) {
     getBeersStrategy.build().execute(onResult = {
       val beers = beersMapper.map(it!!)
       onResult(beers)

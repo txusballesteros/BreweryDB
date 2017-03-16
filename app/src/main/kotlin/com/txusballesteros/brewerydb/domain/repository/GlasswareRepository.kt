@@ -29,7 +29,7 @@ import javax.inject.Singleton
 @Singleton
 class GlasswareRepository @Inject constructor(private val getGlassByIdStrategy: GetGlassByIdStrategy.Builder,
                                               private val mapper: GlassDataModelMapper) {
-  fun getGlassById(id: Int, onResult: (Glass) -> Unit) {
+  fun get(id: Int, onResult: (Glass) -> Unit) {
     getGlassByIdStrategy.build().execute(id, onResult = {
       val glass = mapper.map(it!!)
       onResult(glass)

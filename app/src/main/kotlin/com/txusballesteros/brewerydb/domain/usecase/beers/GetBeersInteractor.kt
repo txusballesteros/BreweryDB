@@ -30,7 +30,7 @@ class GetBeersInteractor @Inject constructor(executor: ExecutorService,
                                              private val repository: BeersRepository):
                           AnkoUseCase<List<Beer>>(executor), GetBeersUseCase {
   override fun onExecute(onResult: (List<Beer>) -> Unit) {
-    repository.getBeers {
+    repository.getFirstPage {
       onResult(it)
     }
   }

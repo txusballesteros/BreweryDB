@@ -41,14 +41,14 @@ class StylesRepository @Inject constructor(private val getStylesStrategy: GetSty
     })
   }
 
-  fun getStyleById(styleId: Int, onResult: (Style) -> Unit) {
+  fun get(styleId: Int, onResult: (Style) -> Unit) {
     getStyleByIdStrategy.build().execute(styleId, onResult =  {
       val style = styleDataMapper.map(it!!)
       onResult(style)
     })
   }
 
-  fun getStyles(onResult: (List<Style>) -> Unit) {
+  fun getList(onResult: (List<Style>) -> Unit) {
     getStylesStrategy.build().execute(onResult =  {
       val styles = styleDataMapper.map(it)
       onResult(styles!!)

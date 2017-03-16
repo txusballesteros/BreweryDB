@@ -30,7 +30,7 @@ import javax.inject.Singleton
 class CategoriesRepository @Inject constructor(private val getCategoriesStrategy: GetCategoriesStrategy.Builder,
                                                    private val mapper: CategoryDataModelMapper) {
 
-  fun getCategories(onResult: (List<Category>) -> Unit) {
+  fun get(onResult: (List<Category>) -> Unit) {
     getCategoriesStrategy.build().execute(onResult = {
       val categories = mapper.map(it)
       onResult(categories!!)

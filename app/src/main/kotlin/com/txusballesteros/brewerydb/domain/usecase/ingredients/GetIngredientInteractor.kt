@@ -47,7 +47,7 @@ class GetIngredientInteractor @Inject constructor(executor: ExecutorService,
 
   override fun onExecute(onResult: (Ingredient) -> Unit) {
     val query = IngredientQuery(ingredientId, ingredientType)
-    repository.getIngredient(query, onResult = {
+    repository.get(query, onResult = {
      onResult(it)
     })
   }
