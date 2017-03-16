@@ -20,10 +20,7 @@
  */
 package com.txusballesteros.brewerydb.api.di
 
-import com.txusballesteros.brewerydb.api.beers.BeerIngredientsApi
-import com.txusballesteros.brewerydb.api.beers.BeerIngredientsRetrofitApi
-import com.txusballesteros.brewerydb.api.beers.BeersApi
-import com.txusballesteros.brewerydb.api.beers.BeersRetrofitApi
+import com.txusballesteros.brewerydb.api.beers.*
 import com.txusballesteros.brewerydb.api.categories.CategoriesApi
 import com.txusballesteros.brewerydb.api.categories.CategoriesRetrofitApi
 import com.txusballesteros.brewerydb.api.glassware.GlasswareApi
@@ -55,4 +52,7 @@ class ApiModule {
 
   @Singleton @Provides
   fun provideHopsApi(api: IngredientsRetrofitApi): IngredientsApi = api
+
+  @Singleton @Provides
+  fun provideBeerBreweriesApi(api: BeerBreweriesRetrofitApi): BeerBreweriesApi = api
 }

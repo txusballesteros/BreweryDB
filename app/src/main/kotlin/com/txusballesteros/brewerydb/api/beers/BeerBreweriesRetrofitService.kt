@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -18,18 +17,15 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
--->
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@color/white">
+ */
+package com.txusballesteros.brewerydb.api.beers
 
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/list"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      tools:listitem="@layout/item_beer_brewery"/>
+import com.txusballesteros.brewerydb.api.model.BeerBreweriesApiResponse
+import retrofit2.Call
+import retrofit2.http.GET
+import retrofit2.http.Path
 
-</RelativeLayout>
+interface BeerBreweriesRetrofitService {
+  @GET("/v2/beer/{beerId}/breweries")
+  fun getBreweries(@Path("beerId") beerId: String): Call<BeerBreweriesApiResponse>
+}

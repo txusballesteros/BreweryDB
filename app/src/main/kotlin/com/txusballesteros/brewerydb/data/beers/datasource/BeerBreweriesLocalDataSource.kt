@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -18,18 +17,12 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
--->
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:background="@color/white">
+ */
+package com.txusballesteros.brewerydb.data.beers.datasource
 
-  <android.support.v7.widget.RecyclerView
-      android:id="@+id/list"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      tools:listitem="@layout/item_beer_brewery"/>
+import com.txusballesteros.brewerydb.data.model.BreweryDataModel
 
-</RelativeLayout>
+interface BeerBreweriesLocalDataSource {
+  fun get(beerId: String): List<BreweryDataModel>
+  fun store(beerId: String, breweries: List<BreweryDataModel>)
+}

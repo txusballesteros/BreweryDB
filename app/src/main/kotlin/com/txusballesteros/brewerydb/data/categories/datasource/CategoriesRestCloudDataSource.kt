@@ -18,19 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.data.categories.datasource
 
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
+import com.txusballesteros.brewerydb.api.categories.CategoriesApi
+import com.txusballesteros.brewerydb.api.model.CategoryApiModelMapper
+import com.txusballesteros.brewerydb.data.model.CategoryDataModel
+import javax.inject.Inject
 
-interface BeerBreweriesPresenter: Presenter<BeerBreweriesPresenter.View> {
-  fun onRequestBreweries(beerId: String)
-  fun onBreweryClick(brewery: BreweryViewModel)
-
-  interface View: Presenter.View {
-    fun renderBreweries(breweries: List<BreweryViewModel>)
-    fun showLoading()
-    fun hideLoading()
-    fun showError()
+class CategoriesRestCloudDataSource @Inject constructor(private val api: CategoriesApi,
+                                                        private val categoriesApiModelMapper: CategoryApiModelMapper):
+                                    CategoriesCloudDataSource {
+  override fun getCategories(): List<CategoryDataModel> {
+    val response = api.getCategories()
+    val result = categoriesApiModelMapper.map(response.categories)
+    return result.sortedBy(CategoryDataModel::name)
   }
 }

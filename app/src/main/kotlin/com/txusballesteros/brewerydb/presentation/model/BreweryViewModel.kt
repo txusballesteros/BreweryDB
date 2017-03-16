@@ -18,20 +18,13 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.styles.datasource
+package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.api.model.StyleApiModelMapper
-import com.txusballesteros.brewerydb.api.styles.StylesApi
-import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import javax.inject.Inject
-
-class StylesCloudDataSourceImpl @Inject constructor(private val api: StylesApi,
-                                                    private val styleApiModelMapper: StyleApiModelMapper):
-                                StylesCloudDataSource {
-
-  override fun getStyles(): List<StyleDataModel> {
-    val response = api.getStyles()
-    val result = styleApiModelMapper.map(response.styles)
-    return result.sortedBy(StyleDataModel::shortName)
-  }
-}
+data class BreweryViewModel(val id: String,
+                             val name: String,
+                             val description: String?,
+                             val website: String?,
+                             val established: String?,
+                             val mailingListUrl: String?,
+                             val isOrganic: String?,
+                             val images: ImageViewModel?)

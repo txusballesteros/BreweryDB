@@ -36,7 +36,7 @@ class CategoriesCloudDataSourceTest: UnitTest() {
 
   override fun onPrepareTest() {
     api = mock()
-    dataSource = CategoriesCloudDataSourceImpl(api, CategoryApiModelMapper())
+    dataSource = CategoriesRestCloudDataSource(api, CategoryApiModelMapper())
   }
 
   @Test

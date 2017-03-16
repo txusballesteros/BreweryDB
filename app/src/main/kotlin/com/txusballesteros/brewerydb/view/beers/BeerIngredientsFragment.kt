@@ -24,16 +24,13 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
-import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.beers.BeerIngredientsPresenter
-import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
 import org.jetbrains.anko.support.v4.withArguments
-import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
@@ -50,7 +47,6 @@ class BeerIngredientsFragment: AbsFragment(), BeerIngredientsPresenter.View {
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
   @Inject lateinit var errorBehaviour: ErrorBehaviour
   @Inject lateinit var presenter: BeerIngredientsPresenter
-  @Inject lateinit var navigator: Navigator
   lateinit var adapter: BeerIngredientsAdapter
 
   override fun onRequestLayoutResourceId(): Int {

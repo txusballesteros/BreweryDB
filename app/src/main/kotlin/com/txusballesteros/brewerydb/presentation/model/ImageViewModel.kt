@@ -18,17 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.ingredients.datasource
+package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.api.ingredients.IngredientsApi
-import com.txusballesteros.brewerydb.data.model.YeastApiModelMapper
-import com.txusballesteros.brewerydb.data.model.YeastDataModel
-import javax.inject.Inject
-
-class YeastsCloudDataSourceImpl @Inject constructor(private val api: IngredientsApi,
-                                                    private val mapper: YeastApiModelMapper) : YeastsCloudDataSource {
-  override fun get(ingredientId: Int): YeastDataModel {
-    val response = api.getYeast(ingredientId)
-    return mapper.map(response)
-  }
-}
+data class ImageViewModel(val icon: String?,
+                          val medium: String?,
+                          val large: String?,
+                          val squareMedium: String?,
+                          val squareLarge: String?)

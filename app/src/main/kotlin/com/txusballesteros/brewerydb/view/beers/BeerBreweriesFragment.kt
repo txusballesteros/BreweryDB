@@ -20,12 +20,16 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
+import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.beers.BeerBreweriesPresenter
+import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
+import kotlinx.android.synthetic.main.fragment_styles_list.*
 import org.jetbrains.anko.support.v4.withArguments
 import javax.inject.Inject
 
@@ -43,6 +47,7 @@ class BeerBreweriesFragment: AbsFragment(), BeerBreweriesPresenter.View {
   @Inject lateinit var presenter: BeerBreweriesPresenter
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
   @Inject lateinit var errorBehaviour: ErrorBehaviour
+  lateinit var adapter: BeerBreweriesAdapter
 
   override fun onRequestLayoutResourceId(): Int {
     return R.layout.fragment_beer_breweries
@@ -52,12 +57,38 @@ class BeerBreweriesFragment: AbsFragment(), BeerBreweriesPresenter.View {
     viewComponent.inject(this)
   }
 
+  override fun onRequestViewBehaviours() {
+    loadingBehaviour.inject(activity)
+    errorBehaviour.inject(activity)
+  }
+
   override fun onPresenterShouldBeAttached() {
     presenter.onAttachView(this)
   }
 
   override fun onPresenterShouldBeDetached() {
     presenter.onDetachView()
+  }
+
+  override fun onViewReady(savedInstanceState: Bundle?) {
+    initializeList()
+    val beerId = getBeerId()
+    presenter.onRequestBreweries(beerId)
+  }
+
+  private fun initializeList() {
+    adapter = BeerBreweriesAdapter({
+      presenter.onBreweryClick(it)
+    })
+    list.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+    list.setHasFixedSize(true)
+    list.adapter = adapter
+  }
+
+  override fun renderBreweries(breweries: List<BreweryViewModel>) {
+    adapter.clear()
+    adapter.addAll(breweries)
+    adapter.notifyDataSetChanged()
   }
 
   override fun showLoading() {
@@ -71,5 +102,9 @@ class BeerBreweriesFragment: AbsFragment(), BeerBreweriesPresenter.View {
 
   override fun showError() {
     errorBehaviour.showError()
+  }
+
+  private fun getBeerId(): String {
+    return arguments.getString(EXTRA_BEER_ID)
   }
 }

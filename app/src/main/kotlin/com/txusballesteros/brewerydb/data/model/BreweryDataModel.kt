@@ -18,17 +18,13 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.ingredients.datasource
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.api.ingredients.IngredientsApi
-import com.txusballesteros.brewerydb.api.model.HopApiModelMapper
-import com.txusballesteros.brewerydb.data.model.HopDataModel
-import javax.inject.Inject
-
-class HopsCloudDataSourceImpl @Inject constructor(private val api: IngredientsApi,
-                                                  private val mapper: HopApiModelMapper) : HopsCloudDataSource {
-  override fun get(ingredientId: Int): HopDataModel {
-    val repsonse = api.getHop(ingredientId)
-    return mapper.map(repsonse)
-  }
-}
+data class BreweryDataModel(val id: String,
+                           val name: String,
+                           val description: String?,
+                           val website: String?,
+                           val established: String?,
+                           val mailingListUrl: String?,
+                           val isOrganic: String?,
+                           val images: ImageDataModel?)

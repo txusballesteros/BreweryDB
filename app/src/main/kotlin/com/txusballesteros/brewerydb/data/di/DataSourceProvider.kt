@@ -20,9 +20,11 @@
  */
 package com.txusballesteros.brewerydb.data.di
 
+import com.txusballesteros.brewerydb.data.beers.datasource.BeerBreweriesLocalDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeerIngredientsLocalDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryLocalDataSource
+import com.txusballesteros.brewerydb.data.breweries.datasource.BreweriesLocalDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesLocalDataSource
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareLocalDataSource
 import com.txusballesteros.brewerydb.data.ingredients.datasource.HopsLocalDataSource
@@ -36,4 +38,6 @@ interface DataSourceProvider {
   fun getGlasswareLocalDataSource(): GlasswareLocalDataSource
   fun getBeerIngredientsLocalDataSource(): BeerIngredientsLocalDataSource
   fun getHopsLocalDataSource(): HopsLocalDataSource
+  fun getBeerBreweriesLocalDataSource(): BeerBreweriesLocalDataSource
+  fun getBreweriesLocalDataSource(): BreweriesLocalDataSource
 }

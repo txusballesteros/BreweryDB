@@ -60,6 +60,10 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
+
+  lintOptions {
+    disable 'InvalidPackage'
+  }
 }
 
 dependencies {
@@ -69,6 +73,7 @@ dependencies {
   compile dependencies.CardView
   compile dependencies.Design
   compile dependencies.LoadingBalls
+//  compile dependencies.ConstraintLayout
   compile dependencies.KotlinStd
   compile dependencies.AnkoCommon
   compile dependencies.AnkoAppCompat

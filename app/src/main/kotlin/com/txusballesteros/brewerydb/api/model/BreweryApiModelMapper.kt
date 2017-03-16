@@ -20,6 +20,23 @@
  */
 package com.txusballesteros.brewerydb.api.model
 
-data class LabelApiModel(val icon: String?,
-                         val medium: String?,
-                         val large: String?)
+import com.txusballesteros.brewerydb.data.model.BreweryDataModel
+import javax.inject.Inject
+
+class BreweryApiModelMapper @Inject constructor(private val imageMapper: ImageApiModelMapper) {
+  fun map(source: BeerBreweriesApiResponse): List<BreweryDataModel>
+    = map(source.breweries)
+
+  fun map(source: List<BreweryApiModel>): List<BreweryDataModel>
+    = source.map { brewery -> map(brewery) }
+
+  fun map(source: BreweryApiModel): BreweryDataModel
+    = BreweryDataModel(source.id,
+                       source.name,
+                       source.description,
+                       source.website,
+                       source.established,
+                       source.mailingListUrl,
+                       source.isOrganic,
+                       imageMapper.map(source.images))
+}

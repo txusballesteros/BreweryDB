@@ -47,7 +47,7 @@ class StylesCloudDataSourceTest : UnitTest() {
   override fun onPrepareTest() {
     stylesApiMock = Mockito.mock(StylesApi::class.java)
     stylesApiDataMapperMock = Mockito.mock(StyleApiModelMapper::class.java)
-    dataSource = StylesCloudDataSourceImpl(stylesApiMock, stylesApiDataMapperMock)
+    dataSource = StylesRestCloudDataSource(stylesApiMock, stylesApiDataMapperMock)
   }
 
   @Test

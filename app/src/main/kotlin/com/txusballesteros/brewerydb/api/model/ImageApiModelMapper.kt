@@ -18,21 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.ingredients.datasource
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.api.ingredients.IngredientsApi
-import com.txusballesteros.brewerydb.api.model.FermentableApiModelMapper
-import com.txusballesteros.brewerydb.api.model.HopApiModelMapper
-import com.txusballesteros.brewerydb.data.model.FermentableDataModel
-import com.txusballesteros.brewerydb.data.model.HopDataModel
+import com.txusballesteros.brewerydb.data.model.ImageDataModel
 import javax.inject.Inject
 
-class FermentablesCloudDataSourceImpl @Inject constructor(private val api: IngredientsApi,
-                                                          private val mapper: FermentableApiModelMapper):
-                                      FermentablesCloudDataSource {
-
-  override fun get(ingredientId: Int): FermentableDataModel {
-    val response = api.getFermentable(ingredientId)
-    return mapper.map(response)
+class ImageApiModelMapper @Inject constructor() {
+  fun map(source: ImageApiModel?): ImageDataModel? {
+    var result: ImageDataModel? = null
+    if (source != null) {
+      result = ImageDataModel(source.icon,
+                              source.medium,
+                              source.large,
+                              source.squareMedium,
+                              source.squareLarge)
+    }
+    return result
   }
 }

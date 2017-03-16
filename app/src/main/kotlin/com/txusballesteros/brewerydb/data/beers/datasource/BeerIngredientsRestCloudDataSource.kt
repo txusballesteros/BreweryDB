@@ -18,19 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.categories.datasource
+package com.txusballesteros.brewerydb.data.beers.datasource
 
-import com.txusballesteros.brewerydb.api.categories.CategoriesApi
-import com.txusballesteros.brewerydb.api.model.CategoryApiModelMapper
-import com.txusballesteros.brewerydb.data.model.CategoryDataModel
+import com.txusballesteros.brewerydb.api.beers.BeerIngredientsApi
+import com.txusballesteros.brewerydb.api.model.BeerIngredientApiModelMapper
+import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModel
 import javax.inject.Inject
 
-class CategoriesCloudDataSourceImpl @Inject constructor(private val api: CategoriesApi,
-                                                        private val categoriesApiModelMapper: CategoryApiModelMapper):
-                                    CategoriesCloudDataSource {
-  override fun getCategories(): List<CategoryDataModel> {
-    val response = api.getCategories()
-    val result = categoriesApiModelMapper.map(response.categories)
-    return result.sortedBy(CategoryDataModel::name)
+class BeerIngredientsRestCloudDataSource @Inject constructor(private val api: BeerIngredientsApi,
+                                                             private val mapper: BeerIngredientApiModelMapper):
+                                         BeerIngredientsCloudDataSource {
+
+  override fun getIngredients(beerId: String): List<BeerIngredientDataModel> {
+    val response = api.getIngredients(beerId)
+    return mapper.map(response)
   }
 }
