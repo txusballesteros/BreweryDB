@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.view.breweries
 
 import android.os.Bundle
+import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.breweries.BreweryDetailPresenter
 import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
@@ -66,7 +67,7 @@ class BreweryDetailFragment: AbsFragment(), BreweryDetailPresenter.View {
   }
 
   override fun onRequestViewBehaviours() {
-    toolbarBehaviour.inject(activity)
+    toolbarBehaviour.inject(activity, true)
     loadingBehaviour.inject(activity)
     errorBehaviour.inject(activity)
   }
@@ -74,6 +75,19 @@ class BreweryDetailFragment: AbsFragment(), BreweryDetailPresenter.View {
   override fun onViewReady(savedInstanceState: Bundle?) {
     val breweryId = getBreweryId()
     presenter.onRequestBrewery(breweryId)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    var result = true
+    when(item!!.itemId) {
+      android.R.id.home -> closeView()
+      else -> result = super.onOptionsItemSelected(item)
+    }
+    return result
+  }
+
+  fun closeView() {
+    activity.finish()
   }
 
   private fun getBreweryId(): String {
