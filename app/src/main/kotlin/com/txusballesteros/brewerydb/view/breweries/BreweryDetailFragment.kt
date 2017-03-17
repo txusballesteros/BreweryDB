@@ -22,6 +22,7 @@ package com.txusballesteros.brewerydb.view.breweries
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.breweries.BreweryDetailPresenter
 import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
@@ -73,6 +74,7 @@ class BreweryDetailFragment: AbsFragment(), BreweryDetailPresenter.View {
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
+    website.setOnClickListener { presenter.onWebsiteClick() }
     val breweryId = getBreweryId()
     presenter.onRequestBrewery(breweryId)
   }
@@ -99,9 +101,23 @@ class BreweryDetailFragment: AbsFragment(), BreweryDetailPresenter.View {
     description.text = brewery.description
     toolbarBehaviour.setTitle(brewery.name)
     established.text = brewery.established
-    website.text = brewery.website
-    if (brewery.images != null && brewery.images.large != null) {
-      toolbarBehaviour.setImage(brewery.images.large)
+    renderWebsite(brewery)
+    renderImage(brewery)
+  }
+
+  private fun renderWebsite(brewery: BreweryViewModel) {
+    if (brewery.hasWebsite()) {
+      website.text = brewery.website
+      website.visibility = View.VISIBLE
+    } else {
+      website.visibility = View.GONE
+    }
+  }
+
+  private fun renderImage(brewery: BreweryViewModel) {
+    val image = brewery.largestImage()
+    if (image != null) {
+      toolbarBehaviour.setImage(image)
     }
   }
 

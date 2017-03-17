@@ -30,7 +30,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_margin="@dimen/padding_normal"
-      android:orientation="vertical">
+      android:orientation="vertical"
+      android:clipChildren="false">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/name"
@@ -75,35 +76,26 @@
           android:fontFamily="sans-serif"
           android:textColor="@color/gray_3"
           android:textSize="@dimen/text_size_normal"
-          tools:text="Spain"/>
+          tools:text="2016"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <include layout="@layout/include_line_decorator" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/website"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/originDivider">
-
-      <android.support.v7.widget.AppCompatTextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:fontFamily="sans-serif"
-          android:textColor="@color/gray_2"
-          android:textSize="@dimen/text_size_normal"
-          android:text="@string/website"/>
-
-      <android.support.v7.widget.AppCompatTextView
-          android:id="@+id/website"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="@dimen/padding_normal"
-          android:fontFamily="sans-serif"
-          android:textColor="@color/gray_3"
-          android:textSize="@dimen/text_size_normal"
-          tools:text="Spain"/>
-
-    </LinearLayout>
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:minHeight="50dp"
+        android:fontFamily="sans-serif"
+        android:gravity="left|center_vertical"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/text_size_normal"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:text="Spain"/>
 
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

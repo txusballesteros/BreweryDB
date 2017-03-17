@@ -21,23 +21,34 @@
 package com.txusballesteros.brewerydb.presentation.breweries
 
 import com.txusballesteros.brewerydb.domain.usecase.breweries.GetBreweryUseCase
+import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
 import com.txusballesteros.brewerydb.presentation.model.BreweryViewModelMapper
 import javax.inject.Inject
 
 class BreweryDetailPresenterImpl @Inject constructor(private val getBreweryUseCase: GetBreweryUseCase,
-                                                     private val mapper: BreweryViewModelMapper):
+                                                     private val mapper: BreweryViewModelMapper,
+                                                     private val navigator: Navigator):
                                  AbsPresenter<BreweryDetailPresenter.View>(), BreweryDetailPresenter {
+  lateinit var brewery: BreweryViewModel
 
   override fun onRequestBrewery(breweryId: String) {
     getView()?.showLoading()
     getBreweryUseCase.execute(breweryId, onResult = {
-      val brewery = mapper.map(it)
+      this.brewery = mapper.map(it)
       getView()?.hideLoading()
       getView()?.renderBrewery(brewery)
     }, onError = {
       getView()?.hideLoading()
       getView()?.showError()
     })
+  }
+
+  override fun onWebsiteClick() {
+    val website = brewery.website
+    if (website != null) {
+      navigator.navigateToUrl(getView(), website)
+    }
   }
 }

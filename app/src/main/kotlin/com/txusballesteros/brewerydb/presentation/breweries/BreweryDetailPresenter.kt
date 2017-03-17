@@ -25,6 +25,7 @@ import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
 
 interface BreweryDetailPresenter: Presenter<BreweryDetailPresenter.View> {
   fun onRequestBrewery(breweryId: String)
+  fun onWebsiteClick()
 
   interface View: Presenter.View {
     fun renderBrewery(brewery: BreweryViewModel)

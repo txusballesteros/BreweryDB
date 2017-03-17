@@ -18,23 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.navigation.commands
 
-data class ImageViewModel(val icon: String?,
-                          val medium: String?,
-                          val large: String?,
-                          val squareMedium: String?,
-                          val squareLarge: String?) {
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 
-  fun largestImage(): String? {
-    var result: String? = null
-    if (large != null) {
-      result = large
-    } else if (medium != null) {
-      result = medium
-    } else if (icon != null) {
-      result = icon
-    }
-    return result
+class UrlNavigationCommand(private val url: String): NavigationCommand() {
+  override fun onRequestIntent(context: Context): Intent {
+    val uri = Uri.parse(url)
+    return Intent(Intent.ACTION_VIEW, uri)
   }
 }
