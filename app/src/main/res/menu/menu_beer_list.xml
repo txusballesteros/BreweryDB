@@ -24,7 +24,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto">
   <item
       android:id="@+id/action_search"
-      android:icon="@drawable/ic_search_36dp"
+      android:icon="@drawable/ic_search_24dp"
       android:title="@string/search"
       app:showAsAction="ifRoom" />
   <item
