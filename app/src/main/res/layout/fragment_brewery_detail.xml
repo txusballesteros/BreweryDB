@@ -29,14 +29,15 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_margin="@dimen/padding_normal"
-      android:orientation="vertical"
-      android:clipChildren="false">
+      android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_normal"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
         android:textSize="@dimen/text_size_medium"
         android:textColor="@color/gray_2"
         android:fontFamily="sans-serif"
@@ -47,6 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_normal"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
         android:fontFamily="sans-serif"
         android:textColor="@color/gray_3"
         android:textSize="@dimen/text_size_normal"
@@ -58,6 +61,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
+        android:layout_marginBottom="@dimen/padding_big"
         android:layout_below="@+id/originDivider">
 
       <android.support.v7.widget.AppCompatTextView
@@ -80,15 +86,17 @@
 
     </LinearLayout>
 
-    <include layout="@layout/include_line_decorator" />
+    <include layout="@layout/include_item_line_decorator" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/website"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
         android:minHeight="50dp"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
         android:fontFamily="sans-serif"
         android:gravity="left|center_vertical"
         android:textColor="@color/colorPrimary"
