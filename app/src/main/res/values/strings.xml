@@ -25,6 +25,7 @@
   <string name="is_organic">Is Organic</string>
   <string name="is_not_organic">Is not Organic</string>
   <string name="beer">Beer</string>
+  <string name="search">Search</string>
   <string name="ingredients">Ingredients</string>
   <string name="breweries">Breweries</string>
   <string name="alpha_acid_min">Alpha Acid Min:</string>
@@ -60,4 +61,5 @@
   <string name="alcohol_tolerance_max">Alcohol Tlce. Max:</string>
   <string name="format">Format:</string>
   <string name="something_was_wrong">Shit!! Something was wrong…</string>
+  <string name="about">About</string>
 </resources>

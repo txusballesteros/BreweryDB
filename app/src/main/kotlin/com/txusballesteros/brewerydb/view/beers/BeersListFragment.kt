@@ -23,6 +23,8 @@ package com.txusballesteros.brewerydb.view.beers
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
+import android.view.Menu
+import android.view.MenuInflater
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.instrumentation.EndlessRecyclerViewScrollListener
@@ -72,6 +74,11 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   override fun onViewReady(savedInstanceState: Bundle?) {
     initializeList()
     presenter.onRequestBeers()
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    super.onCreateOptionsMenu(menu, inflater)
+    inflater?.inflate(R.menu.menu_beer_list, menu)
   }
 
   private fun initializeList() {
