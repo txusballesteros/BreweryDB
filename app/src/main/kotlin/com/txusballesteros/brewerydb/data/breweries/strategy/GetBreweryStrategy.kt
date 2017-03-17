@@ -18,23 +18,22 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.data.breweries.strategy
 
-data class ImageViewModel(val icon: String?,
-                          val medium: String?,
-                          val large: String?,
-                          val squareMedium: String?,
-                          val squareLarge: String?) {
+import com.txusballesteros.brewerydb.data.breweries.datasource.BreweriesLocalDataSource
+import com.txusballesteros.brewerydb.data.model.BreweryDataModel
+import com.txusballesteros.brewerydb.data.strategy.LocalStrategy
+import javax.inject.Inject
 
-  fun largestImage(): String? {
-    var result: String? = null
-    if (large != null) {
-      result = large
-    } else if (medium != null) {
-      result = medium
-    } else if (icon != null) {
-      result = icon
+class GetBreweryStrategy private constructor(private val localDataSource: BreweriesLocalDataSource):
+                         LocalStrategy<String, BreweryDataModel>() {
+  override fun onRequestCallToLocal(params: String?): BreweryDataModel? {
+    return localDataSource.get(params!!)
+  }
+
+  class Builder @Inject constructor(private val localDataSource: BreweriesLocalDataSource) {
+    fun build(): GetBreweryStrategy {
+       return GetBreweryStrategy(localDataSource)
     }
-    return result
   }
 }

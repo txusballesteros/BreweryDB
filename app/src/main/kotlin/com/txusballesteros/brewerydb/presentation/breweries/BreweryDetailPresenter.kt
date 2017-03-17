@@ -18,23 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.presentation.breweries
 
-data class ImageViewModel(val icon: String?,
-                          val medium: String?,
-                          val large: String?,
-                          val squareMedium: String?,
-                          val squareLarge: String?) {
+import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
 
-  fun largestImage(): String? {
-    var result: String? = null
-    if (large != null) {
-      result = large
-    } else if (medium != null) {
-      result = medium
-    } else if (icon != null) {
-      result = icon
-    }
-    return result
+interface BreweryDetailPresenter: Presenter<BreweryDetailPresenter.View> {
+  fun onRequestBrewery(breweryId: String)
+  fun onWebsiteClick()
+
+  interface View: Presenter.View {
+    fun renderBrewery(brewery: BreweryViewModel)
+    fun showLoading()
+    fun hideLoading()
+    fun showError()
   }
 }

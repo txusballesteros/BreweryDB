@@ -31,8 +31,8 @@ class BreweryViewModelMapper @Inject constructor(private val imageMapper: ImageV
       = BreweryViewModel(source.id,
                          source.name,
                          source.description ?: "NA",
-                         source.website,
-                         source.established,
+                         source.website ?: "NA",
+                         source.established ?: "NA",
                          source.mailingListUrl,
                          source.isOrganic,
                          imageMapper.map(source.images))

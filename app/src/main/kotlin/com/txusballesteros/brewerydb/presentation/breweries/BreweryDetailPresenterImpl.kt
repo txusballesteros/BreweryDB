@@ -18,33 +18,37 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.presentation.breweries
 
-import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerBreweriesUseCase
+import com.txusballesteros.brewerydb.domain.usecase.breweries.GetBreweryUseCase
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
 import com.txusballesteros.brewerydb.presentation.model.BreweryViewModelMapper
 import javax.inject.Inject
 
-class BeerBreweriesPresenterImpl @Inject constructor(private val getBeerBreweriesUseCase: GetBeerBreweriesUseCase,
+class BreweryDetailPresenterImpl @Inject constructor(private val getBreweryUseCase: GetBreweryUseCase,
                                                      private val mapper: BreweryViewModelMapper,
                                                      private val navigator: Navigator):
-                                 AbsPresenter<BeerBreweriesPresenter.View>(), BeerBreweriesPresenter {
+                                 AbsPresenter<BreweryDetailPresenter.View>(), BreweryDetailPresenter {
+  lateinit var brewery: BreweryViewModel
 
-  override fun onRequestBreweries(beerId: String) {
+  override fun onRequestBrewery(breweryId: String) {
     getView()?.showLoading()
-    getBeerBreweriesUseCase.execute(beerId, onResult = {
-      val breweries = mapper.map(it)
+    getBreweryUseCase.execute(breweryId, onResult = {
+      this.brewery = mapper.map(it)
       getView()?.hideLoading()
-      getView()?.renderBreweries(breweries)
+      getView()?.renderBrewery(brewery)
     }, onError = {
       getView()?.hideLoading()
       getView()?.showError()
     })
   }
 
-  override fun onBreweryClick(brewery: BreweryViewModel) {
-    navigator.navigateToBreweryDetail(getView(), brewery.id)
+  override fun onWebsiteClick() {
+    val website = brewery.website
+    if (website != null) {
+      navigator.navigateToUrl(getView(), website)
+    }
   }
 }

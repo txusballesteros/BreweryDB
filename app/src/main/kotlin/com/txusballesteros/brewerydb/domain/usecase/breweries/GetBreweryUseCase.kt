@@ -18,23 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.domain.usecase.breweries
 
-data class ImageViewModel(val icon: String?,
-                          val medium: String?,
-                          val large: String?,
-                          val squareMedium: String?,
-                          val squareLarge: String?) {
+import com.txusballesteros.brewerydb.domain.model.Brewery
+import com.txusballesteros.brewerydb.exception.ApplicationException
 
-  fun largestImage(): String? {
-    var result: String? = null
-    if (large != null) {
-      result = large
-    } else if (medium != null) {
-      result = medium
-    } else if (icon != null) {
-      result = icon
-    }
-    return result
-  }
+interface GetBreweryUseCase {
+  fun execute(breweryId: String, onResult: (Brewery) -> Unit, onError: (ApplicationException) -> Unit)
 }

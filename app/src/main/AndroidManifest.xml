@@ -40,5 +40,6 @@
     <activity android:name=".view.beers.BeersListActivity" />
     <activity android:name=".view.beers.BeerDetailActivity" />
     <activity android:name=".view.ingredients.IngredientDetailActivity" />
+    <activity android:name=".view.breweries.BreweryDetailActivity" />
   </application>
 </manifest>

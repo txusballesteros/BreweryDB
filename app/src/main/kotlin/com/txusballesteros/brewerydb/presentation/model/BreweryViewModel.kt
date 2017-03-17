@@ -27,4 +27,11 @@ data class BreweryViewModel(val id: String,
                              val established: String?,
                              val mailingListUrl: String?,
                              val isOrganic: String?,
-                             val images: ImageViewModel?)
+                             val images: ImageViewModel?) {
+
+  fun largestImage(): String?
+    = images?.largestImage()
+
+  fun hasWebsite(): Boolean
+    = website != null && !website.trim().isEmpty()
+}

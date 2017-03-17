@@ -18,23 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.domain.repository
 
-data class ImageViewModel(val icon: String?,
-                          val medium: String?,
-                          val large: String?,
-                          val squareMedium: String?,
-                          val squareLarge: String?) {
+import com.txusballesteros.brewerydb.data.breweries.strategy.GetBreweryStrategy
+import com.txusballesteros.brewerydb.data.model.BreweryDataModelMapper
+import com.txusballesteros.brewerydb.domain.model.Brewery
+import javax.inject.Inject
+import javax.inject.Singleton
 
-  fun largestImage(): String? {
-    var result: String? = null
-    if (large != null) {
-      result = large
-    } else if (medium != null) {
-      result = medium
-    } else if (icon != null) {
-      result = icon
-    }
-    return result
+@Singleton
+class BreweriesRepository @Inject constructor(private val getBreweryStrategy: GetBreweryStrategy.Builder,
+                                              private val mapper: BreweryDataModelMapper) {
+  fun get(breweryId: String, onResult: (Brewery) -> Unit) {
+    getBreweryStrategy.build().execute(breweryId, onResult = {
+      val brewery = mapper.map(it!!)
+      onResult(brewery)
+    })
   }
 }
