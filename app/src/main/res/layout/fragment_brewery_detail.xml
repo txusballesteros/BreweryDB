@@ -92,7 +92,7 @@
         android:id="@+id/website"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:minHeight="50dp"
+        android:minHeight="60dp"
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         android:foreground="?attr/selectableItemBackground"
