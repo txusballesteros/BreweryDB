@@ -25,6 +25,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Menu
 import android.view.MenuInflater
+import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.instrumentation.EndlessRecyclerViewScrollListener
@@ -40,7 +41,8 @@ import javax.inject.Inject
 
 class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   companion object {
-    fun newInstance() = BeersListFragment()
+    fun newInstance(): BeersListFragment
+        = BeersListFragment()
   }
 
   @Inject lateinit var presenter: BeersListPresenter
@@ -79,6 +81,15 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
     super.onCreateOptionsMenu(menu, inflater)
     inflater?.inflate(R.menu.menu_beer_list, menu)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    var result = true
+    when(item?.itemId) {
+      R.id.action_search -> presenter.onSearchClick()
+      else -> result = super.onOptionsItemSelected(item)
+    }
+    return result
   }
 
   private fun initializeList() {

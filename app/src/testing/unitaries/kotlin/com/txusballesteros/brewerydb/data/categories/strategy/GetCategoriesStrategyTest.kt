@@ -48,7 +48,7 @@ class GetCategoriesStrategyTest: UnitTest() {
 
   @Test
   fun shouldGetFromCloud() {
-    whenever(localDataSource.getCategories()).thenReturn(null)
+    whenever(localDataSource.getList()).thenReturn(null)
     whenever(cloudDataSource.getCategories()).thenReturn(categoriesList)
 
     strategy.execute(onResult =  {
@@ -61,7 +61,7 @@ class GetCategoriesStrategyTest: UnitTest() {
 
   @Test
   fun shouldGetFromLocal() {
-    whenever(localDataSource.getCategories()).thenReturn(categoriesList)
+    whenever(localDataSource.getList()).thenReturn(categoriesList)
 
     strategy.execute(onResult =  {
         Assert.assertNotNull(it)

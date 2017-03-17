@@ -20,17 +20,17 @@
  */
 package com.txusballesteros.brewerydb.data.categories.datasource
 
-import com.txusballesteros.brewerydb.data.AbsInMemoryDataSource
 import com.txusballesteros.brewerydb.data.model.CategoryDataModel
 import javax.inject.Inject
 
-class CategoriesInMemoryLocalDataSource @Inject constructor(): AbsInMemoryDataSource<CategoryDataModel>(),
-                                                               CategoriesLocalDataSource {
+class CategoriesInMemoryLocalDataSource @Inject constructor(): CategoriesLocalDataSource {
+  private val cache: MutableMap<Int, CategoryDataModel> = HashMap()
+
   override fun store(categories: List<CategoryDataModel>) {
-    addAll(categories)
+    categories.map { cache.put(it.id, it) }
   }
 
-  override fun getCategories(): List<CategoryDataModel> {
-    return getAll()
+  override fun getList(): List<CategoryDataModel> {
+    return ArrayList<CategoryDataModel>(cache.values)
   }
 }

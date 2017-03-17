@@ -31,7 +31,7 @@ class GetCategoriesStrategy private constructor(private val localDataSource: Cat
                             LocalOrCloudStrategy<Void, List<CategoryDataModel>>() {
 
   override fun onRequestCallToLocal(params: Void?): List<CategoryDataModel>? {
-    return localDataSource.getCategories()
+    return localDataSource.getList()
   }
 
   override fun onRequestCallToCloud(params: Void?): List<CategoryDataModel>? {

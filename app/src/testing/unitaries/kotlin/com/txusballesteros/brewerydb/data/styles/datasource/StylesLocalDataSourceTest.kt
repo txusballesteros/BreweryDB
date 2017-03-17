@@ -60,7 +60,7 @@ class StylesLocalDataSourceTest : UnitTest() {
   @Test
   fun shouldStoreStyles() {
     dataSource.store(stylesList)
-    val result = dataSource.getStyles()
+    val result = dataSource.getList()
     Assert.assertEquals(stylesList.size, result.size)
   }
 }

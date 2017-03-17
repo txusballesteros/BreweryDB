@@ -57,6 +57,11 @@ class Navigator @Inject constructor() {
     navigate(from, navigationCommand)
   }
 
+  fun navigateToSearch(from: Presenter.View?) {
+    val navigationCommand = SearchNavigationCommand()
+    navigate(from, navigationCommand)
+  }
+
   private fun navigate(from: Presenter.View?, command: NavigationCommand) {
     if (from is AbsFragment) {
       val intent = command.build(from.activity)

@@ -18,27 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data
+package com.txusballesteros.brewerydb.navigation.commands
 
-import com.txusballesteros.brewerydb.data.model.DataModel
-import java.util.*
+import android.content.Context
+import android.content.Intent
+import com.txusballesteros.brewerydb.view.search.SearchActivity
+import org.jetbrains.anko.intentFor
 
-abstract class AbsInMemoryDataSource<T : DataModel> {
-  val cache: MutableMap<Int, T> = HashMap()
-
-  fun add(value: T) {
-    cache.put(value.id, value)
-  }
-
-  fun addAll(values: List<T>) {
-    values.forEach { value -> cache.put(value.id, value) }
-  }
-
-  fun getAll(): List<T> {
-    return ArrayList(cache.values)
-  }
-
-  fun getById(id: Int): T? {
-    return cache[id]
+class SearchNavigationCommand: NavigationCommand() {
+  override fun onRequestIntent(context: Context): Intent {
+    return context.intentFor<SearchActivity>()
   }
 }

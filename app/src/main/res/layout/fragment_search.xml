@@ -1,4 +1,5 @@
-/*
+<?xml version="1.0" encoding="utf-8"?>
+<!--
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -17,18 +18,12 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
- */
-package com.txusballesteros.brewerydb.navigation.commands
+-->
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/colorPrimary">
 
-import android.content.Context
-import android.content.Intent
-import com.txusballesteros.brewerydb.view.styles.StylesListActivity
-import org.jetbrains.anko.intentFor
-
-class StylesListNavigationCommand constructor(val categoryId: Int): NavigationCommand() {
-  override fun onRequestIntent(context: Context): Intent {
-    return context.intentFor<StylesListActivity>(
-        StylesListActivity.EXTRA_CATEGORY_ID to categoryId
-    )
-  }
-}
+</LinearLayout>

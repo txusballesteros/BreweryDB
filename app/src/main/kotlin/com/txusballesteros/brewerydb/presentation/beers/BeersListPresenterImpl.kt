@@ -33,7 +33,6 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
                                                  private val mapper: BeerViewModelMapper,
                                                  private val navigator: Navigator):
                               AbsPresenter<BeersListPresenter.View>(), BeersListPresenter {
-
   override fun onRequestBeers() {
     getView()?.showLoading()
     getBeersUseCase.execute(onResult = {
@@ -55,5 +54,9 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
 
   override fun onBeerClick(beer: BeerViewModel) {
     navigator.navigateToBeerDetail(getView(), beer.id)
+  }
+
+  override fun onSearchClick() {
+    navigator.navigateToSearch(getView())
   }
 }

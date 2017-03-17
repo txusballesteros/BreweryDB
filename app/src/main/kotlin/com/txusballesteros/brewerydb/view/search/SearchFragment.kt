@@ -18,17 +18,26 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.navigation.commands
+package com.txusballesteros.brewerydb.view.search
 
-import android.content.Context
-import android.content.Intent
-import com.txusballesteros.brewerydb.view.styles.StylesListActivity
-import org.jetbrains.anko.intentFor
+import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.di.ViewComponent
 
-class StylesListNavigationCommand constructor(val categoryId: Int): NavigationCommand() {
-  override fun onRequestIntent(context: Context): Intent {
-    return context.intentFor<StylesListActivity>(
-        StylesListActivity.EXTRA_CATEGORY_ID to categoryId
-    )
+class SearchFragment: AbsFragment() {
+  companion object {
+    fun newInstance(): SearchFragment
+      = SearchFragment()
+  }
+
+  override fun onRequestLayoutResourceId(): Int
+    = R.layout.fragment_search
+
+  override fun onPresenterShouldBeAttached() { }
+
+  override fun onPresenterShouldBeDetached() { }
+
+  override fun onRequestInjection(viewComponent: ViewComponent) {
+    viewComponent.inject(this)
   }
 }

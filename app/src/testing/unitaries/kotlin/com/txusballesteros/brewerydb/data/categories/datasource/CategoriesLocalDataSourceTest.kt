@@ -41,7 +41,7 @@ class CategoriesLocalDataSourceTest: UnitTest() {
   fun shouldGetCategories() {
     dataSource.store(categoriesList)
 
-    val result = dataSource.getCategories()
+    val result = dataSource.getList()
 
     Assert.assertFalse(result.isEmpty())
     Assert.assertEquals(2, result.size)
@@ -53,7 +53,7 @@ class CategoriesLocalDataSourceTest: UnitTest() {
   fun shouldStoreCategories() {
     dataSource.store(categoriesList)
 
-    val result = dataSource.getCategories()
+    val result = dataSource.getList()
     Assert.assertEquals(categoriesList.size, result.size)
   }
 }

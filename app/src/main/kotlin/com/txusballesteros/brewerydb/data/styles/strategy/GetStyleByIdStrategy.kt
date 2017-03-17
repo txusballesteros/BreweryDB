@@ -30,7 +30,7 @@ import javax.inject.Inject
 class GetStyleByIdStrategy private constructor(private val localDataSource: StylesLocalDataSource):
                            LocalStrategy<Int, StyleDataModel>() {
   override fun onRequestCallToLocal(params: Int?): StyleDataModel? {
-    return localDataSource.getStyleById(params!!)
+    return localDataSource.get(params!!)
   }
 
   class Builder @Inject constructor(val localDataSource: StylesLocalDataSource) {
