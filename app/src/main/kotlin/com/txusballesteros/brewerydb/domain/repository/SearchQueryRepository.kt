@@ -20,8 +20,8 @@
  */
 package com.txusballesteros.brewerydb.domain.repository
 
-import com.txusballesteros.brewerydb.data.beers.strategy.GetSearchQueryStrategy
-import com.txusballesteros.brewerydb.data.beers.strategy.StoreSearchQueryStrategy
+import com.txusballesteros.brewerydb.data.search.strategy.GetSearchQueryStrategy
+import com.txusballesteros.brewerydb.data.search.strategy.StoreSearchQueryStrategy
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModelMapper
 import com.txusballesteros.brewerydb.domain.model.SearchQuery
 import javax.inject.Inject

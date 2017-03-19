@@ -18,19 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.beers.datasource
+package com.txusballesteros.brewerydb.data.search.datasource
 
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
-import javax.inject.Inject
 
-class SearchQueryInMemoryLocalDataSource @Inject constructor(): SearchQueryLocalDataSource {
-  private var query: SearchQueryDataModel = SearchQueryDataModel(null)
-
-  override fun getQuery(): SearchQueryDataModel {
-    return query
-  }
-
-  override fun storeQuery(query: SearchQueryDataModel) {
-    this.query = query
-  }
+interface SearchQueryLocalDataSource {
+  fun storeQuery(query: SearchQueryDataModel)
+  fun getQuery(): SearchQueryDataModel
 }

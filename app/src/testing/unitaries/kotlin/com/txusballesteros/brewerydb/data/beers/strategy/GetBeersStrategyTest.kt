@@ -24,7 +24,7 @@ import com.nhaarman.mockito_kotlin.*
 import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
-import com.txusballesteros.brewerydb.data.beers.datasource.SearchQueryLocalDataSource
+import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 import org.junit.Assert

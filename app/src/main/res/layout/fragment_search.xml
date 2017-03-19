@@ -51,7 +51,6 @@
           android:textColor="@color/gray_2"
           android:textColorHint="@color/gray_4"
           android:fontFamily="sans-serif"
-          android:cursorVisible="false"
           android:hint="@string/which_beer_are_you_want"
           android:background="@drawable/keyword_box" />
 

@@ -32,6 +32,8 @@ import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareInMemory
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareLocalDataSource
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareRestCloudDataSource
 import com.txusballesteros.brewerydb.data.ingredients.datasource.*
+import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryInMemoryLocalDataSource
+import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesInMemoryLocalDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource

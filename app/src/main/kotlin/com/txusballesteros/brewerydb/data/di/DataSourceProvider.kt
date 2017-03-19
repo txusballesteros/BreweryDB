@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.data.di
 import com.txusballesteros.brewerydb.data.beers.datasource.BeerBreweriesLocalDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeerIngredientsLocalDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
-import com.txusballesteros.brewerydb.data.beers.datasource.SearchQueryLocalDataSource
+import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.breweries.datasource.BreweriesLocalDataSource
 import com.txusballesteros.brewerydb.data.categories.datasource.CategoriesLocalDataSource
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareLocalDataSource
