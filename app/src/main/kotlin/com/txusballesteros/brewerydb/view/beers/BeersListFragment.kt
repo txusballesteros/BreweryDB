@@ -32,10 +32,12 @@ import com.txusballesteros.brewerydb.instrumentation.EndlessRecyclerViewScrollLi
 import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 import com.txusballesteros.brewerydb.presentation.beers.BeersListPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
+import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
@@ -48,6 +50,7 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   @Inject lateinit var presenter: BeersListPresenter
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
+  @Inject lateinit var errorBehaviour: ErrorBehaviour
   @Inject lateinit var imageDownloader: ImageDownloader
   lateinit var adapter: BeerListAdapter
   lateinit var endlessScrollListener: EndlessRecyclerViewScrollListener
@@ -71,6 +74,7 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   override fun onRequestViewBehaviours() {
     toolbarBehaviour.inject(activity)
     loadingBehaviour.inject(activity)
+    errorBehaviour.inject(activity)
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
@@ -110,12 +114,17 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
     list.setHasFixedSize(true)
   }
 
+  override fun clearList() {
+    adapter.clear()
+  }
+
   override fun renderBeers(beers: List<BeerViewModel>) {
     adapter.addAll(beers)
     adapter.notifyDataSetChanged()
   }
 
   override fun showLoading() {
+    errorBehaviour.hideError()
     loadingBehaviour.showLoading()
   }
 
@@ -124,6 +133,12 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   }
 
   override fun renderError() {
-    toast("Upps!!!")
+    errorBehaviour.showError()
+  }
+
+  override fun onSearchQueryChange() {
+    context.runOnUiThread {
+      presenter.onRequestBeers()
+    }
   }
 }

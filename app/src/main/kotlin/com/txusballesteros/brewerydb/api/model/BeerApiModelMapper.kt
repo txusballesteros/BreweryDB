@@ -27,10 +27,15 @@ class BeerApiModelMapper @Inject constructor() {
   fun map(source: BeersListApiResponse)
       = map(source.beers)
 
-  fun map(source: List<BeerApiModel>)
-      = source.map { beer -> map(beer) }
+  fun map(source: List<BeerApiModel>?): List<BeerDataModel> {
+    var result: List<BeerDataModel> = ArrayList()
+    if (source != null) {
+      result = source.map { beer -> map(beer) }
+    }
+    return result
+  }
 
-  fun map(source: BeerApiModel)
+  fun map(source: BeerApiModel): BeerDataModel
       = BeerDataModel(source.id,
                       source.name,
                       source.displayName,
@@ -45,7 +50,7 @@ class BeerApiModelMapper @Inject constructor() {
                       source.servingTemperature,
                       source.servingTemperatureDisplay)
 
-  fun map(source: LabelApiModel?)
+  fun map(source: LabelApiModel?): BeerDataModel.LabelDataModel
       = BeerDataModel.LabelDataModel(source?.icon,
                                      source?.medium,
                                      source?.large)

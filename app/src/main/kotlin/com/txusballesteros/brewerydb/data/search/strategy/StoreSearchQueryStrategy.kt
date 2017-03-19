@@ -20,19 +20,28 @@
  */
 package com.txusballesteros.brewerydb.data.search.strategy
 
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
 import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 import com.txusballesteros.brewerydb.data.strategy.LocalStrategy
 import javax.inject.Inject
 
-class StoreSearchQueryStrategy private constructor(private val localDataSource: SearchQueryLocalDataSource):
+class StoreSearchQueryStrategy private constructor(private val localDataSource: SearchQueryLocalDataSource,
+                                                   private val beersLocalDataSource: BeersLocalDataSource,
+                                                   private val beersCloudDataSource: BeersCloudDataSource):
                                       LocalStrategy<SearchQueryDataModel, Void>() {
+
   override fun onRequestCallToLocal(params: SearchQueryDataModel?): Void? {
     localDataSource.storeQuery(params!!)
+    beersLocalDataSource.flush()
+    beersCloudDataSource.flush()
     return null
   }
 
-  class Builder @Inject constructor(private val localDataSource: SearchQueryLocalDataSource) {
-    fun build() = StoreSearchQueryStrategy(localDataSource)
+  class Builder @Inject constructor(private val localDataSource: SearchQueryLocalDataSource,
+                                    private val beersLocalDataSource: BeersLocalDataSource,
+                                    private val beersCloudDataSource: BeersCloudDataSource) {
+    fun build() = StoreSearchQueryStrategy(localDataSource, beersLocalDataSource, beersCloudDataSource)
   }
 }

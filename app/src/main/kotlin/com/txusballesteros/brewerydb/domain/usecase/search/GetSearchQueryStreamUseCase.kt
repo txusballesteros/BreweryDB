@@ -18,23 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.domain.usecase.search
 
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.domain.observer.Observer
 
-interface BeersListPresenter: Presenter<BeersListPresenter.View> {
-  fun onRequestBeers()
-  fun onBeerClick(beer: BeerViewModel)
-  fun onRequestNextPage()
-  fun onSearchClick()
-
-  interface View : Presenter.View {
-    fun onSearchQueryChange()
-    fun showLoading()
-    fun hideLoading()
-    fun clearList()
-    fun renderBeers(beers: List<BeerViewModel>)
-    fun renderError()
-  }
+interface GetSearchQueryStreamUseCase {
+  fun execute(onResult: (Observer) -> Unit)
 }

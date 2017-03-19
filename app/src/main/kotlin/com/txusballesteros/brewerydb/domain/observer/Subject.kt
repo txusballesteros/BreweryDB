@@ -18,23 +18,30 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.domain.observer
 
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
+class Subject {
+  private val observers: MutableList<Observer> = ArrayList()
 
-interface BeersListPresenter: Presenter<BeersListPresenter.View> {
-  fun onRequestBeers()
-  fun onBeerClick(beer: BeerViewModel)
-  fun onRequestNextPage()
-  fun onSearchClick()
+  fun subscribe(observer: Observer) {
+    observers.add(observer)
+  }
 
-  interface View : Presenter.View {
-    fun onSearchQueryChange()
-    fun showLoading()
-    fun hideLoading()
-    fun clearList()
-    fun renderBeers(beers: List<BeerViewModel>)
-    fun renderError()
+  fun unsubscribe(observer: Observer) {
+    observers.remove(observer)
+  }
+
+  fun hasObservers(): Boolean {
+    return !observers.isEmpty()
+  }
+
+  fun asObserver(): Observer {
+    return Observer(this)
+  }
+
+  fun notifyOnNext() {
+    if (hasObservers()) {
+      observers.forEach { it.onNext() }
+    }
   }
 }

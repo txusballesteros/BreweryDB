@@ -24,6 +24,8 @@ import com.txusballesteros.brewerydb.data.search.strategy.GetSearchQueryStrategy
 import com.txusballesteros.brewerydb.data.search.strategy.StoreSearchQueryStrategy
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModelMapper
 import com.txusballesteros.brewerydb.domain.model.SearchQuery
+import com.txusballesteros.brewerydb.domain.observer.Observer
+import com.txusballesteros.brewerydb.domain.observer.Subject
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,6 +33,8 @@ import javax.inject.Singleton
 class SearchQueryRepository @Inject constructor(private val getSearchQueryStrategy: GetSearchQueryStrategy.Builder,
                                                 private val storeSearchQueryStrategy: StoreSearchQueryStrategy.Builder,
                                                 private val mapper: SearchQueryDataModelMapper) {
+  private val subject: Subject = Subject()
+
   fun get(onResult: (SearchQuery) -> Unit) {
     getSearchQueryStrategy.build().execute(onResult = {
       val query = mapper.map(it!!)
@@ -38,9 +42,14 @@ class SearchQueryRepository @Inject constructor(private val getSearchQueryStrate
     })
   }
 
+  fun subscribe(): Observer {
+    return subject.asObserver()
+  }
+
   fun store(query: SearchQuery, onResult: () -> Unit) {
     val dataQuery = mapper.map(query)
     storeSearchQueryStrategy.build().execute(dataQuery, onResult = {
+      subject.notifyOnNext()
       onResult()
     })
   }

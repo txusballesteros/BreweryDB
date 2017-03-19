@@ -29,10 +29,7 @@ import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdIntera
 import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.ingredients.GetIngredientInteractor
 import com.txusballesteros.brewerydb.domain.usecase.ingredients.GetIngredientUseCase
-import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryInteractor
-import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryUseCase
-import com.txusballesteros.brewerydb.domain.usecase.search.StoreSearchQueryInteractor
-import com.txusballesteros.brewerydb.domain.usecase.search.StoreSearchQueryUseCase
+import com.txusballesteros.brewerydb.domain.usecase.search.*
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdInteractor
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesInteractor
@@ -80,4 +77,7 @@ class UseCasesModule {
 
   @Provides
   fun provideStoreSearchQueryUseCase(useCase: StoreSearchQueryInteractor): StoreSearchQueryUseCase = useCase
+
+  @Provides
+  fun provideGetSearchQueryStreamUseCase(useCase: GetSearchQueryStreamInteractor): GetSearchQueryStreamUseCase = useCase
 }

@@ -22,21 +22,43 @@ package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.data.model.BeerViewModelMapper
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
+import com.txusballesteros.brewerydb.domain.observer.Observer
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetNextPageBeersUseCase
+import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryStreamUseCase
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import javax.inject.Inject
 
 class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: GetBeersUseCase,
                                                  private val getNextPageBeersUseCase: GetNextPageBeersUseCase,
+                                                 private val getSearchQueryStreamUseCase: GetSearchQueryStreamUseCase,
                                                  private val mapper: BeerViewModelMapper,
                                                  private val navigator: Navigator):
                               AbsPresenter<BeersListPresenter.View>(), BeersListPresenter {
+
+  private lateinit var searchQueryObserver: Observer
+
+  override fun onAttachView(view: BeersListPresenter.View) {
+    super.onAttachView(view)
+    getSearchQueryStreamUseCase.execute {
+      this.searchQueryObserver = it
+      this.searchQueryObserver.subscribe {
+        getView()?.onSearchQueryChange()
+      }
+    }
+  }
+
+  override fun onDetachView() {
+    super.onDetachView()
+    searchQueryObserver.unsubscribe()
+  }
+
   override fun onRequestBeers() {
     getView()?.showLoading()
     getBeersUseCase.execute(onResult = {
       val beersList = mapper.map(it)
+      getView()?.clearList()
       getView()?.renderBeers(beersList)
       getView()?.hideLoading()
     }, onError = {
