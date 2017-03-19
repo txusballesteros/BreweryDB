@@ -30,7 +30,6 @@ interface BeersListPresenter: Presenter<BeersListPresenter.View> {
   fun onSearchClick()
 
   interface View : Presenter.View {
-    fun onSearchQueryChange()
     fun showLoading()
     fun hideLoading()
     fun clearList()

@@ -135,10 +135,4 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   override fun renderError() {
     errorBehaviour.showError()
   }
-
-  override fun onSearchQueryChange() {
-    context.runOnUiThread {
-      presenter.onRequestBeers()
-    }
-  }
 }

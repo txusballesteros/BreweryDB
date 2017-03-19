@@ -20,7 +20,9 @@
  */
 package com.txusballesteros.brewerydb.domain.observer
 
-class Subject {
+import com.txusballesteros.brewerydb.threading.MainThreadExecutor
+
+class Subject(private val executor: MainThreadExecutor) {
   private val observers: MutableList<Observer> = ArrayList()
 
   fun subscribe(observer: Observer) {
@@ -41,7 +43,9 @@ class Subject {
 
   fun notifyOnNext() {
     if (hasObservers()) {
-      observers.forEach { it.onNext() }
+      executor.execute(Runnable {
+        observers.forEach { it.onNext() }
+      })
     }
   }
 }

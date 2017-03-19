@@ -18,23 +18,8 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.threading
 
-import com.txusballesteros.brewerydb.threading.MainThreadExecutor
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import com.txusballesteros.brewerydb.threading.UIThreadExecutor
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
-
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService
-    = ThreadExecutorPoolFactory().get()
-
-  @Singleton @Provides
-  fun provideMainThreadExecutor(executor: UIThreadExecutor): MainThreadExecutor
-    = executor
+interface MainThreadExecutor {
+  fun execute(runnable: Runnable)
 }

@@ -18,23 +18,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.threading.di
+package com.txusballesteros.brewerydb.threading
 
-import com.txusballesteros.brewerydb.threading.MainThreadExecutor
-import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
-import com.txusballesteros.brewerydb.threading.UIThreadExecutor
-import dagger.Module
-import dagger.Provides
-import java.util.concurrent.ExecutorService
-import javax.inject.Singleton
+import android.os.Handler
+import android.os.Looper
+import javax.inject.Inject
 
-@Module
-class ThreadingModule {
-  @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService
-    = ThreadExecutorPoolFactory().get()
+class UIThreadExecutor @Inject constructor(): MainThreadExecutor {
+  private val handler: Handler = Handler(Looper.getMainLooper())
 
-  @Singleton @Provides
-  fun provideMainThreadExecutor(executor: UIThreadExecutor): MainThreadExecutor
-    = executor
+  override fun execute(runnable: Runnable) {
+    handler.post(runnable)
+  }
 }

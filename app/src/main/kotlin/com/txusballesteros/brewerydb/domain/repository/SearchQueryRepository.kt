@@ -26,14 +26,17 @@ import com.txusballesteros.brewerydb.data.model.SearchQueryDataModelMapper
 import com.txusballesteros.brewerydb.domain.model.SearchQuery
 import com.txusballesteros.brewerydb.domain.observer.Observer
 import com.txusballesteros.brewerydb.domain.observer.Subject
+import com.txusballesteros.brewerydb.threading.MainThreadExecutor
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class SearchQueryRepository @Inject constructor(private val getSearchQueryStrategy: GetSearchQueryStrategy.Builder,
                                                 private val storeSearchQueryStrategy: StoreSearchQueryStrategy.Builder,
+                                                private val mainThreadExecutor: MainThreadExecutor,
                                                 private val mapper: SearchQueryDataModelMapper) {
-  private val subject: Subject = Subject()
+
+  private val subject: Subject = Subject(mainThreadExecutor)
 
   fun get(onResult: (SearchQuery) -> Unit) {
     getSearchQueryStrategy.build().execute(onResult = {

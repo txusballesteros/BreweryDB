@@ -44,7 +44,7 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
     getSearchQueryStreamUseCase.execute {
       this.searchQueryObserver = it
       this.searchQueryObserver.subscribe {
-        getView()?.onSearchQueryChange()
+        onRequestBeers()
       }
     }
   }
