@@ -18,8 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.domain.usecase.search
 
-data class BeersQueryApiModel constructor(val styleId: Int,
-                                          val withLabels: String = "Y",
-                                          val status: String = "verified")
+import com.txusballesteros.brewerydb.domain.model.SearchQuery
+import com.txusballesteros.brewerydb.domain.repository.SearchQueryRepository
+import com.txusballesteros.brewerydb.domain.usecase.AnkoUseCase
+import java.util.concurrent.ExecutorService
+import javax.inject.Inject
+
+class GetSearchQueryInteractor @Inject constructor(executor: ExecutorService,
+                                                   private val repository: SearchQueryRepository):
+                              AnkoUseCase<SearchQuery>(executor), GetSearchQueryUseCase {
+
+  override fun onExecute(onResult: (SearchQuery) -> Unit) {
+    repository.get {
+      onResult(it)
+    }
+  }
+}

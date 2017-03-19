@@ -27,16 +27,6 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 import javax.inject.Inject
 
 class Navigator @Inject constructor() {
-  fun navigateToStylesList(from: Presenter.View?, categoryId: Int) {
-    val navigationCommand = StylesListNavigationCommand(categoryId)
-    navigate(from, navigationCommand)
-  }
-
-  fun navigateToBeersList(from: Presenter.View?) {
-    val navigationCommand = BeersListNavigationCommand()
-    navigate(from, navigationCommand)
-  }
-
   fun navigateToBeerDetail(from: Presenter.View?, beerId: String) {
     val navigationCommand = BeerDetailNavigationCommand(beerId)
     navigate(from, navigationCommand)

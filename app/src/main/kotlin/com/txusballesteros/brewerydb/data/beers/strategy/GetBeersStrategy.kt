@@ -22,12 +22,12 @@ package com.txusballesteros.brewerydb.data.beers.strategy
 
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
-import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryLocalDataSource
+import com.txusballesteros.brewerydb.data.beers.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.strategy.LocalOrCloudStrategy
 import javax.inject.Inject
 
-class GetBeersStrategy private constructor(private val queryLocalDataSource: BeersQueryLocalDataSource,
+class GetBeersStrategy private constructor(private val queryLocalDataSource: SearchQueryLocalDataSource,
                                            private val localDataSource: BeersLocalDataSource,
                                            private val cloudDataSource: BeersCloudDataSource):
                        LocalOrCloudStrategy<Void, List<BeerDataModel>>() {
@@ -47,7 +47,7 @@ class GetBeersStrategy private constructor(private val queryLocalDataSource: Bee
     return result != null && !result.isEmpty()
   }
 
-  class Builder @Inject constructor(private val queryLocalDataSource: BeersQueryLocalDataSource,
+  class Builder @Inject constructor(private val queryLocalDataSource: SearchQueryLocalDataSource,
                                     private val localDataSource: BeersLocalDataSource,
                                     private val cloudDataSource: BeersCloudDataSource) {
     fun build() = GetBeersStrategy(queryLocalDataSource, localDataSource, cloudDataSource)

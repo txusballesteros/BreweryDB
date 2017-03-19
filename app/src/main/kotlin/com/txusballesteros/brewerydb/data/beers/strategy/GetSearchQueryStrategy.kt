@@ -18,11 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.beers.datasource
+package com.txusballesteros.brewerydb.data.beers.strategy
 
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
+import com.txusballesteros.brewerydb.data.beers.datasource.SearchQueryLocalDataSource
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
+import com.txusballesteros.brewerydb.data.strategy.LocalStrategy
+import javax.inject.Inject
 
-interface BeersQueryLocalDataSource {
-  fun storeQuery(query: BeersQueryDataModel)
-  fun getQuery(): BeersQueryDataModel
+class GetSearchQueryStrategy private constructor(private val localDataSource: SearchQueryLocalDataSource):
+                                      LocalStrategy<Void, SearchQueryDataModel>() {
+  override fun onRequestCallToLocal(params: Void?): SearchQueryDataModel? {
+    return localDataSource.getQuery()
+  }
+
+  class Builder @Inject constructor(private val localDataSource: SearchQueryLocalDataSource){
+    fun build() = GetSearchQueryStrategy(localDataSource)
+  }
 }

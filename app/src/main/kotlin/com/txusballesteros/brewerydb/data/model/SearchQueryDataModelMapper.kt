@@ -18,20 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.styles
+package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
+import com.txusballesteros.brewerydb.domain.model.SearchQuery
+import javax.inject.Inject
 
-interface StylesListPresenter : Presenter<StylesListPresenter.View> {
-  fun onRequestStyles()
-  fun onStyleClick(style: StyleViewModel)
+class SearchQueryDataModelMapper @Inject constructor() {
+  fun map(source: SearchQueryDataModel): SearchQuery
+    = SearchQuery(source.keyword)
 
-  interface View : Presenter.View {
-    fun getCategoryId() : Int
-    fun renderStyles(styles: List<StyleViewModel>)
-    fun renderError()
-    fun showLoading()
-    fun hideLoading()
-  }
+  fun map(source: SearchQuery): SearchQueryDataModel
+    = SearchQueryDataModel(source.keyword)
 }

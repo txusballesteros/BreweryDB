@@ -18,22 +18,8 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.styles
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.view.AbsActivity
-import com.txusballesteros.brewerydb.view.AbsFragment
-
-class StylesListActivity: AbsActivity() {
-  companion object {
-    val EXTRA_CATEGORY_ID: String = "extra:categoryId"
-  }
-
-  override fun onRequestFragment(): AbsFragment {
-    val categoryId = getCategoryId()
-    return StylesListFragment.newInstance(categoryId)
-  }
-
-  fun getCategoryId(): Int {
-    return intent.extras.getInt(EXTRA_CATEGORY_ID)
-  }
-}
+data class SearchQueryApiModel constructor(val keyword: String?,
+                                           val withLabels: String = "Y",
+                                           val status: String = "verified")

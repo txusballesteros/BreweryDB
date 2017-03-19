@@ -18,6 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.model
+package com.txusballesteros.brewerydb.api.model
 
-data class BeersQueryDataModel constructor(val styleId: Int)
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
+import javax.inject.Inject
+
+class SearchQueryApiModelMapper @Inject constructor() {
+  fun map(source: SearchQueryDataModel)
+      = SearchQueryApiModel(mapKeyword(source.keyword))
+
+  private fun mapKeyword(source: String?): String? {
+    var result: String? = null
+    if (source != null) {
+      result = "*$source*"
+    }
+    return result
+  }
+}

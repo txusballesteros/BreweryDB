@@ -18,12 +18,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.usecase.beers
+package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.domain.model.BeersQuery
-import com.txusballesteros.brewerydb.domain.usecase.UseCase
-import com.txusballesteros.brewerydb.exception.ApplicationException
+import com.txusballesteros.brewerydb.domain.model.SearchQuery
+import javax.inject.Inject
 
-interface StoreBeersQueryUseCase: UseCase<Unit> {
-  fun execute(query: BeersQuery, onResult: (Unit) -> Unit, onError: (ApplicationException) -> Unit = { })
+class SearchQueryViewModelMapper @Inject constructor() {
+  fun map(source: SearchQuery): SearchQueryViewModel
+    = SearchQueryViewModel(source.keyword)
 }

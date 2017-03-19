@@ -18,21 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.usecase.beers
+package com.txusballesteros.brewerydb.data.beers.strategy
 
-import com.txusballesteros.brewerydb.domain.model.BeersQuery
-import com.txusballesteros.brewerydb.domain.repository.BeersQueryRepository
-import com.txusballesteros.brewerydb.domain.usecase.AnkoUseCase
-import java.util.concurrent.ExecutorService
+import com.txusballesteros.brewerydb.data.beers.datasource.SearchQueryLocalDataSource
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
+import com.txusballesteros.brewerydb.data.strategy.LocalStrategy
 import javax.inject.Inject
 
-class GetBeersQueryInteractor @Inject constructor(executor: ExecutorService,
-                                                  private val repository: BeersQueryRepository):
-                              AnkoUseCase<BeersQuery>(executor), GetBeersQueryUseCase {
+class StoreSearchQueryStrategy private constructor(private val localDataSource: SearchQueryLocalDataSource):
+                                      LocalStrategy<SearchQueryDataModel, Void>() {
+  override fun onRequestCallToLocal(params: SearchQueryDataModel?): Void? {
+    localDataSource.storeQuery(params!!)
+    return null
+  }
 
-  override fun onExecute(onResult: (BeersQuery) -> Unit) {
-    repository.get {
-      onResult(it)
-    }
+  class Builder @Inject constructor(private val localDataSource: SearchQueryLocalDataSource) {
+    fun build() = StoreSearchQueryStrategy(localDataSource)
   }
 }

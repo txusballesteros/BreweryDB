@@ -18,13 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.categories
+package com.txusballesteros.brewerydb.domain.usecase.search
 
-import com.txusballesteros.brewerydb.view.AbsActivity
-import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.domain.model.SearchQuery
 
-class CategoriesListActivity : AbsActivity() {
-  override fun onRequestFragment(): AbsFragment {
-    return CategoriesListFragment.newInstance()
-  }
+interface StoreSearchQueryUseCase {
+  fun execute(query: SearchQuery, onResult: (Unit) -> Unit)
 }

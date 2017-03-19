@@ -22,11 +22,11 @@ package com.txusballesteros.brewerydb.api.beers
 
 import com.txusballesteros.brewerydb.api.model.BeerApiResponse
 import com.txusballesteros.brewerydb.api.model.BeersListApiResponse
-import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
+import com.txusballesteros.brewerydb.api.model.SearchQueryApiModel
 
 interface BeersApi {
   fun flush()
-  fun getBeers(query: BeersQueryApiModel): BeersListApiResponse
-  fun getNextPageBeers(query: BeersQueryApiModel): BeersListApiResponse
+  fun getBeers(query: SearchQueryApiModel): BeersListApiResponse
+  fun getNextPageBeers(query: SearchQueryApiModel): BeersListApiResponse
   fun getBeerById(beerId: String): BeerApiResponse
 }

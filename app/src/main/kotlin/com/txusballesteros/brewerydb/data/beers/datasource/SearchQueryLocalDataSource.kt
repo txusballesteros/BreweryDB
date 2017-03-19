@@ -18,9 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.usecase.beers
+package com.txusballesteros.brewerydb.data.beers.datasource
 
-import com.txusballesteros.brewerydb.domain.model.BeersQuery
-import com.txusballesteros.brewerydb.domain.usecase.UseCase
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 
-interface GetBeersQueryUseCase: UseCase<BeersQuery>
+interface SearchQueryLocalDataSource {
+  fun storeQuery(query: SearchQueryDataModel)
+  fun getQuery(): SearchQueryDataModel
+}

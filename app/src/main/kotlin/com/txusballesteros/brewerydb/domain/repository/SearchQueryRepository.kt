@@ -20,27 +20,27 @@
  */
 package com.txusballesteros.brewerydb.domain.repository
 
-import com.txusballesteros.brewerydb.data.beers.strategy.GetBeersQueryStrategy
-import com.txusballesteros.brewerydb.data.beers.strategy.StoreBeersQueryStrategy
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModelMapper
-import com.txusballesteros.brewerydb.domain.model.BeersQuery
+import com.txusballesteros.brewerydb.data.beers.strategy.GetSearchQueryStrategy
+import com.txusballesteros.brewerydb.data.beers.strategy.StoreSearchQueryStrategy
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModelMapper
+import com.txusballesteros.brewerydb.domain.model.SearchQuery
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BeersQueryRepository @Inject constructor(private val getBeersQueryStrategy: GetBeersQueryStrategy.Builder,
-                           private val storeBeersQueryStrategy: StoreBeersQueryStrategy.Builder,
-                           private val mapper: BeersQueryDataModelMapper) {
-  fun get(onResult: (BeersQuery) -> Unit) {
-    getBeersQueryStrategy.build().execute(onResult = {
+class SearchQueryRepository @Inject constructor(private val getSearchQueryStrategy: GetSearchQueryStrategy.Builder,
+                                                private val storeSearchQueryStrategy: StoreSearchQueryStrategy.Builder,
+                                                private val mapper: SearchQueryDataModelMapper) {
+  fun get(onResult: (SearchQuery) -> Unit) {
+    getSearchQueryStrategy.build().execute(onResult = {
       val query = mapper.map(it!!)
       onResult(query)
     })
   }
 
-  fun store(query: BeersQuery, onResult: () -> Unit) {
+  fun store(query: SearchQuery, onResult: () -> Unit) {
     val dataQuery = mapper.map(query)
-    storeBeersQueryStrategy.build().execute(dataQuery, onResult = {
+    storeSearchQueryStrategy.build().execute(dataQuery, onResult = {
       onResult()
     })
   }

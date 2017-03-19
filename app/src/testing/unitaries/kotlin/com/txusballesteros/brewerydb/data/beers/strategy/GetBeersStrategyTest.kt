@@ -24,9 +24,9 @@ import com.nhaarman.mockito_kotlin.*
 import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
-import com.txusballesteros.brewerydb.data.beers.datasource.BeersQueryLocalDataSource
+import com.txusballesteros.brewerydb.data.beers.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 import org.junit.Assert
 import org.junit.Test
 import java.util.*
@@ -48,17 +48,17 @@ class GetBeersStrategyTest: UnitTest() {
     private val STYLE_ID = 2
   }
 
-  lateinit var queryLocalDataSource: BeersQueryLocalDataSource
+  lateinit var queryLocalDataSource: SearchQueryLocalDataSource
   lateinit var localDataSource: BeersLocalDataSource
   lateinit var cloudDataSource: BeersCloudDataSource
-  lateinit var query: BeersQueryDataModel
+  lateinit var query: SearchQueryDataModel
   lateinit var strategy: GetBeersStrategy
 
   override fun onPrepareTest() {
     localDataSource = mock()
     cloudDataSource = mock()
     queryLocalDataSource = mock()
-    query = BeersQueryDataModel(1)
+    query = SearchQueryDataModel(null)
     strategy = GetBeersStrategy.Builder(queryLocalDataSource, localDataSource, cloudDataSource).build()
   }
 

@@ -18,16 +18,19 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.navigation.commands
+package com.txusballesteros.brewerydb.data.beers.datasource
 
-import android.content.Context
-import android.content.Intent
-import com.txusballesteros.brewerydb.view.beers.BeersListActivity
-import com.txusballesteros.brewerydb.view.styles.StylesListActivity
-import org.jetbrains.anko.intentFor
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
+import javax.inject.Inject
 
-class BeersListNavigationCommand: NavigationCommand() {
-  override fun onRequestIntent(context: Context): Intent {
-    return context.intentFor<BeersListActivity>()
+class SearchQueryInMemoryLocalDataSource @Inject constructor(): SearchQueryLocalDataSource {
+  private var query: SearchQueryDataModel = SearchQueryDataModel(null)
+
+  override fun getQuery(): SearchQueryDataModel {
+    return query
+  }
+
+  override fun storeQuery(query: SearchQueryDataModel) {
+    this.query = query
   }
 }

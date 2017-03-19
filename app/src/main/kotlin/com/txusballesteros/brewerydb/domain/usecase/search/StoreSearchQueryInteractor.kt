@@ -18,27 +18,27 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.usecase.beers
+package com.txusballesteros.brewerydb.domain.usecase.search
 
-import com.txusballesteros.brewerydb.domain.model.BeersQuery
-import com.txusballesteros.brewerydb.domain.repository.BeersQueryRepository
+import com.txusballesteros.brewerydb.domain.model.SearchQuery
+import com.txusballesteros.brewerydb.domain.repository.SearchQueryRepository
 import com.txusballesteros.brewerydb.domain.usecase.AnkoUseCase
-import com.txusballesteros.brewerydb.exception.ApplicationException
 import java.util.concurrent.ExecutorService
 import javax.inject.Inject
 
-class StoreBeersQueryInteractor @Inject constructor(executor: ExecutorService,
-                                                    private val repository: BeersQueryRepository):
-                                AnkoUseCase<Unit>(executor), StoreBeersQueryUseCase {
-  lateinit var query: BeersQuery
+class StoreSearchQueryInteractor @Inject constructor(executor: ExecutorService,
+                                                     private val repository: SearchQueryRepository):
+                                 AnkoUseCase<Unit>(executor), StoreSearchQueryUseCase {
 
-  override fun execute(query: BeersQuery, onResult: (Unit) -> Unit, onError: (ApplicationException) -> Unit) {
+  lateinit var query: SearchQuery
+
+  override fun execute(query: SearchQuery, onResult: (Unit) -> Unit) {
     this.query = query
-    super.execute(onResult, onError)
+    super.execute(onResult = onResult, onError = { })
   }
 
   override fun onExecute(onResult: (Unit) -> Unit) {
-    repository.store(query, {
+    repository.store(query, onResult = {
       onResult(Unit)
     })
   }

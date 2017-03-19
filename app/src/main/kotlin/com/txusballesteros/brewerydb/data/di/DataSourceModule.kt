@@ -61,7 +61,7 @@ class DataSourceModule {
   fun provideBeersLocalDataSource(dataSource: BeersInMemoryLocalDataSource): BeersLocalDataSource = dataSource
 
   @Singleton @Provides
-  fun provideBeersQueryLocalDataSource(dataSource: BeersQueryInMemoryLocalDataSource): BeersQueryLocalDataSource = dataSource
+  fun provideBeersQueryLocalDataSource(dataSource: SearchQueryInMemoryLocalDataSource): SearchQueryLocalDataSource = dataSource
 
   @Provides
   fun provideGlasswareCloudDataSource(dataSourceRest: GlasswareRestCloudDataSource): GlasswareCloudDataSource = dataSourceRest

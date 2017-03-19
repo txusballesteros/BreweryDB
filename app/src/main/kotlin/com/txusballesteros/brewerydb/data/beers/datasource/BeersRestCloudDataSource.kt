@@ -22,14 +22,14 @@ package com.txusballesteros.brewerydb.data.beers.datasource
 
 import com.txusballesteros.brewerydb.api.beers.BeersApi
 import com.txusballesteros.brewerydb.api.model.BeerApiModelMapper
-import com.txusballesteros.brewerydb.api.model.BeersQueryApiModelMapper
+import com.txusballesteros.brewerydb.api.model.SearchQueryApiModelMapper
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 import javax.inject.Inject
 
 class BeersRestCloudDataSource @Inject constructor(private val api: BeersApi,
                                                    private val mapper: BeerApiModelMapper,
-                                                   private val queryMapper: BeersQueryApiModelMapper) : BeersCloudDataSource {
+                                                   private val queryMapper: SearchQueryApiModelMapper) : BeersCloudDataSource {
   override fun flush() {
     api.flush()
   }
@@ -39,13 +39,13 @@ class BeersRestCloudDataSource @Inject constructor(private val api: BeersApi,
     return mapper.map(response.beer)
   }
 
-  override fun getBeers(query: BeersQueryDataModel): List<BeerDataModel> {
+  override fun getBeers(query: SearchQueryDataModel): List<BeerDataModel> {
     val apiQuery = queryMapper.map(query)
     val response = api.getBeers(apiQuery)
     return mapper.map(response)
   }
 
-  override fun getNextPageBeers(query: BeersQueryDataModel): List<BeerDataModel> {
+  override fun getNextPageBeers(query: SearchQueryDataModel): List<BeerDataModel> {
     val apiQuery = queryMapper.map(query)
     val response = api.getNextPageBeers(apiQuery)
     return mapper.map(response)

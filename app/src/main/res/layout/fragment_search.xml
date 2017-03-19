@@ -19,11 +19,55 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<LinearLayout
+<RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="@color/colorPrimary">
 
-</LinearLayout>
+  <android.support.v4.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@+id/search"
+      android:layout_alignParentTop="true"
+      android:paddingTop="@dimen/padding_normal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_normal">
+
+      <android.support.v7.widget.AppCompatEditText
+          android:id="@+id/keyword"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:inputType="textNoSuggestions|textFilter"
+          android:maxLines="1"
+          android:maxLength="100"
+          android:textSize="@dimen/text_size_medium"
+          android:paddingLeft="@dimen/padding_big"
+          android:paddingRight="@dimen/padding_big"
+          android:textColor="@color/gray_2"
+          android:textColorHint="@color/gray_4"
+          android:fontFamily="sans-serif"
+          android:cursorVisible="false"
+          android:hint="@string/which_beer_are_you_want"
+          android:background="@drawable/keyword_box" />
+
+    </LinearLayout>
+  </android.support.v4.widget.NestedScrollView>
+
+  <android.support.v7.widget.AppCompatButton
+      style="?attr/borderlessButtonStyle"
+      android:id="@+id/search"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_alignParentBottom="true"
+      android:textColor="@color/colorPrimaryDark"
+      android:textSize="@dimen/text_size_medium"
+      android:textStyle="bold"
+      android:fontFamily="sans-serif"
+      android:text="@string/search" />
+
+</RelativeLayout>

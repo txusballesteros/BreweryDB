@@ -18,12 +18,9 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.domain.usecase.search
 
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.domain.model.SearchQuery
+import com.txusballesteros.brewerydb.domain.usecase.UseCase
 
-class BeersQueryApiModelMapper @Inject constructor() {
-  fun map(source: BeersQueryDataModel)
-      = BeersQueryApiModel(source.styleId)
-}
+interface GetSearchQueryUseCase: UseCase<SearchQuery>

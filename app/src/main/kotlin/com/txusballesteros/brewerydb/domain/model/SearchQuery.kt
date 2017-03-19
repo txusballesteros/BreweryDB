@@ -18,17 +18,6 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.categories
+package com.txusballesteros.brewerydb.domain.model
 
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.CategoryViewModel
-
-interface CategoriesListPresenter: Presenter<CategoriesListPresenter.View> {
-  fun onRequestCategories()
-  fun onCategoryClick(category: CategoryViewModel)
-
-  interface View: Presenter.View {
-    fun renderCategories(categories: List<CategoryViewModel>)
-    fun renderError()
-  }
-}
+data class SearchQuery(val keyword: String?)

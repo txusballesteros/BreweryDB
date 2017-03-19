@@ -20,24 +20,61 @@
  */
 package com.txusballesteros.brewerydb.view.search
 
+import android.os.Bundle
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
+import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.di.ViewComponent
+import kotlinx.android.synthetic.main.fragment_search.*
+import javax.inject.Inject
 
-class SearchFragment: AbsFragment() {
+class SearchFragment: AbsFragment(), SearchPresenter.View {
   companion object {
-    fun newInstance(): SearchFragment
-      = SearchFragment()
+    fun newInstance(): SearchFragment {
+      return SearchFragment()
+    }
   }
+
+  @Inject lateinit var presenter: SearchPresenter
 
   override fun onRequestLayoutResourceId(): Int
     = R.layout.fragment_search
 
-  override fun onPresenterShouldBeAttached() { }
+  override fun onPresenterShouldBeAttached() {
+    presenter.onAttachView(this)
+  }
 
-  override fun onPresenterShouldBeDetached() { }
+  override fun onPresenterShouldBeDetached() {
+    presenter.onDetachView()
+  }
 
   override fun onRequestInjection(viewComponent: ViewComponent) {
     viewComponent.inject(this)
+  }
+
+  override fun onViewReady(savedInstanceState: Bundle?) {
+    search.setOnClickListener { presenter.onSearch() }
+    if (savedInstanceState == null) {
+      presenter.onRequestFilters()
+    }
+  }
+
+  override fun getKeyword(): String? {
+    var keyword: String? = keyword.text.toString().trim()
+    if (keyword != null && keyword.isEmpty()) {
+      keyword = null
+    }
+    return keyword
+  }
+
+  override fun renderFilters(filter: SearchQueryViewModel) {
+    if (filter.keyword != null) {
+      keyword.setText(filter.keyword)
+    }
+  }
+
+  override fun closeView() {
+    activity.finish()
   }
 }

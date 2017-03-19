@@ -21,11 +21,11 @@
 package com.txusballesteros.brewerydb.data.beers.datasource
 
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 
 interface BeersCloudDataSource {
   fun flush()
   fun getBeerById(beerId: String): BeerDataModel
-  fun getBeers(query: BeersQueryDataModel): List<BeerDataModel>
-  fun getNextPageBeers(query: BeersQueryDataModel): List<BeerDataModel>
+  fun getBeers(query: SearchQueryDataModel): List<BeerDataModel>
+  fun getNextPageBeers(query: SearchQueryDataModel): List<BeerDataModel>
 }

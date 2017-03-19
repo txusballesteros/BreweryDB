@@ -20,10 +20,4 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.domain.model.BeersQuery
-import javax.inject.Inject
-
-class BeersQueryDataModelMapper @Inject constructor() {
-  fun map(source: BeersQuery) = BeersQueryDataModel(source.styleId)
-  fun map(source: BeersQueryDataModel) = BeersQuery(source.styleId)
-}
+data class SearchQueryDataModel(val keyword: String?)
