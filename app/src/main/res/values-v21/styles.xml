@@ -26,4 +26,14 @@
     <item name="android:foreground">?android:attr/selectableItemBackgroundBorderless</item>
     <item name="android:clickable">true</item>
   </style>
+
+  <style name="aboutSection">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:background">@color/white</item>
+    <item name="android:foreground">?attr/selectableItemBackground</item>
+    <item name="android:clickable">true</item>
+    <item name="android:layout_marginTop">@dimen/padding_big</item>
+    <item name="android:elevation">@dimen/elevation</item>
+  </style>
 </resources>

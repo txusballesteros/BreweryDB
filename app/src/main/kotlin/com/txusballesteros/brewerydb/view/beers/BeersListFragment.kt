@@ -91,6 +91,7 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
     var result = true
     when(item?.itemId) {
       R.id.action_search -> presenter.onSearchClick()
+      R.id.action_about -> presenter.onAboutClick()
       else -> result = super.onOptionsItemSelected(item)
     }
     return result

@@ -36,6 +36,7 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity android:name=".view.about.AboutActivity" />
     <activity android:name=".view.beers.BeerDetailActivity" />
     <activity android:name=".view.ingredients.IngredientDetailActivity" />
     <activity android:name=".view.breweries.BreweryDetailActivity" />
