@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -18,7 +19,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-  <solid android:color="@color/colorPrimary" />
-  <corners android:radius="25dp" />
-</shape>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+      android:id="@+id/action_done"
+      android:icon="@drawable/ic_done_24dp"
+      android:title="@string/done"
+      app:showAsAction="ifRoom" />
+</menu>

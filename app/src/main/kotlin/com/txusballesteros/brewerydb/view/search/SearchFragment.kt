@@ -22,10 +22,14 @@ package com.txusballesteros.brewerydb.view.search
 
 import android.os.Bundle
 import android.support.v7.widget.AppCompatEditText
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
 import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
@@ -37,6 +41,7 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
     }
   }
 
+  @Inject lateinit var toolbarBehaviour: ToolbarBehaviour
   @Inject lateinit var presenter: SearchPresenter
 
   override fun onRequestLayoutResourceId(): Int
@@ -54,11 +59,28 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
     viewComponent.inject(this)
   }
 
+  override fun onRequestViewBehaviours() {
+    toolbarBehaviour.inject(activity, true)
+  }
+
   override fun onViewReady(savedInstanceState: Bundle?) {
-    search.setOnClickListener { presenter.onSearch() }
     if (savedInstanceState == null) {
       presenter.onRequestFilters()
     }
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    inflater?.inflate(R.menu.menu_search, menu)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    var result = true
+    when(item?.itemId) {
+      android.R.id.home -> closeView()
+      R.id.action_done -> presenter.onSearch()
+      else -> result = super.onOptionsItemSelected(item)
+    }
+    return result
   }
 
   override fun getKeyword(): String? {
