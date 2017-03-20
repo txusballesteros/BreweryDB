@@ -20,28 +20,28 @@
  */
 package com.txusballesteros.brewerydb.data.styles.datasource
 
-import com.txusballesteros.brewerydb.data.AbsInMemoryDataSource
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import java.util.*
+import kotlin.collections.ArrayList
 import javax.inject.Inject
 
-class StylesInMemoryLocalDataSource @Inject constructor(): AbsInMemoryDataSource<StyleDataModel>(), StylesLocalDataSource {
+class StylesInMemoryLocalDataSource @Inject constructor(): StylesLocalDataSource {
+  private val cache: MutableMap<Int, StyleDataModel> = HashMap()
 
   override fun getStylesByCategoryId(categoryId: Int): List<StyleDataModel> {
     val result: MutableList<StyleDataModel> = ArrayList()
-    getAll().filterTo(result) { it.categoryId == categoryId }
+    cache.values.filterTo(result) { it.categoryId == categoryId }
     return result.sortedBy { it.shortName }
   }
 
-  override fun getStyleById(styleId: Int): StyleDataModel? {
-    return getById(styleId)
+  override fun get(styleId: Int): StyleDataModel? {
+    return cache[styleId]
   }
 
-  override fun getStyles(): List<StyleDataModel> {
-    return getAll()
+  override fun getList(): List<StyleDataModel> {
+    return ArrayList<StyleDataModel>(cache.values)
   }
 
   override fun store(styles: List<StyleDataModel>) {
-    addAll(styles)
+    styles.map { cache.put(it.id, it) }
   }
 }

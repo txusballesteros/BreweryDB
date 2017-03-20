@@ -27,10 +27,12 @@ interface BeersListPresenter: Presenter<BeersListPresenter.View> {
   fun onRequestBeers()
   fun onBeerClick(beer: BeerViewModel)
   fun onRequestNextPage()
+  fun onSearchClick()
 
   interface View : Presenter.View {
     fun showLoading()
     fun hideLoading()
+    fun clearList()
     fun renderBeers(beers: List<BeerViewModel>)
     fun renderError()
   }

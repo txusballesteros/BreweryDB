@@ -63,7 +63,12 @@ class BeerListAdapter(private val listener: OnBeerClickListener,
 
     fun render(beer: BeerViewModel, listener: OnBeerClickListener) {
       displayNameView.text = beer.displayName
-      descriptionView.text = beer.description
+      if (beer.description != null) {
+        descriptionView.visibility = View.VISIBLE
+        descriptionView.text = beer.description
+      } else {
+        descriptionView.visibility = View.GONE
+      }
       itemView.setOnClickListener { listener.onBeerClick(beer) }
       renderLabel(beer)
     }

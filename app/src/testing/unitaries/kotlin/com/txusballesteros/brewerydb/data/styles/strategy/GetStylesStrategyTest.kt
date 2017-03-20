@@ -54,7 +54,7 @@ class GetStylesStrategyTest : UnitTest() {
 
   @Test
   fun shouldGetStylesFromCloud() {
-    doReturn(null).`when`(localDataSource).getStyles()
+    doReturn(null).`when`(localDataSource).getList()
     doReturn(stylesList).`when`(cloudDataSource).getStyles()
 
     strategy.execute(onResult =  {
@@ -67,7 +67,7 @@ class GetStylesStrategyTest : UnitTest() {
 
   @Test
   fun shouldGetStylesFromLocal() {
-    doReturn(stylesList).`when`(localDataSource).getStyles()
+    doReturn(stylesList).`when`(localDataSource).getList()
     doReturn(null).`when`(cloudDataSource).getStyles()
 
     strategy.execute(onResult =  {

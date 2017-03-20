@@ -29,6 +29,7 @@ import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdIntera
 import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.ingredients.GetIngredientInteractor
 import com.txusballesteros.brewerydb.domain.usecase.ingredients.GetIngredientUseCase
+import com.txusballesteros.brewerydb.domain.usecase.search.*
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdInteractor
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesInteractor
@@ -51,10 +52,7 @@ class UseCasesModule {
   fun provideGetBeersUseCase(useCase: GetBeersInteractor): GetBeersUseCase = useCase
 
   @Provides
-  fun provideStoreBeersQueryUseCase(useCase: StoreBeersQueryInteractor): StoreBeersQueryUseCase = useCase
-
-  @Provides
-  fun provideGetBeersQueryUseCase(useCase: GetBeersQueryInteractor): GetBeersQueryUseCase = useCase
+  fun provideGetBeersQueryUseCase(useCase: GetSearchQueryInteractor): GetSearchQueryUseCase = useCase
 
   @Provides
   fun provideGetNextPageBeersUseCase(useCase: GetNextPageBeersInteractor): GetNextPageBeersUseCase = useCase
@@ -76,4 +74,10 @@ class UseCasesModule {
 
   @Provides
   fun provideGetBreweryUseCase(useCase: GetBreweryInteractor): GetBreweryUseCase = useCase
+
+  @Provides
+  fun provideStoreSearchQueryUseCase(useCase: StoreSearchQueryInteractor): StoreSearchQueryUseCase = useCase
+
+  @Provides
+  fun provideGetSearchQueryStreamUseCase(useCase: GetSearchQueryStreamInteractor): GetSearchQueryStreamUseCase = useCase
 }

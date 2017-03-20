@@ -26,7 +26,7 @@ interface RepositoriesProvider {
   fun getCategoriesRepository(): CategoriesRepository
   fun getStyleRepository() : StylesRepository
   fun getBeersRepository(): BeersRepository
-  fun getBeersQueryRepository(): BeersQueryRepository
+  fun getSearchQueryRepository(): SearchQueryRepository
   fun getGlasswareRepository(): GlasswareRepository
   fun getIngredientsRepository(): IngredientsRepository
   fun getBreweriesRepository(): BreweriesRepository

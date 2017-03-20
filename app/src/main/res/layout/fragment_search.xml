@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright Txus Ballesteros 2017 (@txusballesteros)
+ *
+ * This file is part of Foobar.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+-->
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/colorPrimary">
+
+  <android.support.v4.widget.NestedScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@+id/search"
+      android:layout_alignParentTop="true"
+      android:paddingTop="@dimen/padding_normal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_normal">
+
+      <android.support.v7.widget.AppCompatEditText
+          android:id="@+id/keyword"
+          android:layout_width="match_parent"
+          android:layout_height="50dp"
+          android:inputType="textNoSuggestions|textFilter"
+          android:maxLines="1"
+          android:maxLength="100"
+          android:textSize="@dimen/text_size_medium"
+          android:paddingLeft="@dimen/padding_big"
+          android:paddingRight="@dimen/padding_big"
+          android:textColor="@color/gray_2"
+          android:textColorHint="@color/gray_4"
+          android:fontFamily="sans-serif"
+          android:hint="@string/which_beer_are_you_want"
+          android:background="@drawable/keyword_box" />
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:layout_margin="@dimen/padding_big"
+          android:background="@color/colorPrimaryDark"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:text="Is Organic:"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/isOrganic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+      </LinearLayout>
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:layout_margin="@dimen/padding_big"
+          android:background="@color/colorPrimaryDark"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/text_size_normal"
+          android:textColor="@color/colorPrimaryDark"
+          android:fontFamily="sans-serif"
+          android:textStyle="bold"
+          android:text="@string/alcohol_by_volume"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/abvMin"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:inputType="number"
+            android:gravity="right"
+            android:maxLength="3"
+            android:hint="@string/min" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/abvMax"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:inputType="number"
+            android:gravity="right"
+            android:maxLength="3"
+            android:hint="@string/max" />
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:layout_margin="@dimen/padding_big"
+          android:background="@color/colorPrimaryDark"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/text_size_normal"
+          android:textColor="@color/colorPrimaryDark"
+          android:fontFamily="sans-serif"
+          android:textStyle="bold"
+          android:text="IBU (International Bitterness Units):"/>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ibuMin"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:inputType="number"
+            android:gravity="right"
+            android:maxLength="3"
+            android:hint="@string/min" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ibuMax"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_normal"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:inputType="number"
+            android:gravity="right"
+            android:maxLength="3"
+            android:hint="@string/max" />
+
+      </LinearLayout>
+
+      <View
+          android:layout_width="match_parent"
+          android:layout_height="0.5dp"
+          android:layout_margin="@dimen/padding_big"
+          android:background="@color/colorPrimaryDark"/>
+
+    </LinearLayout>
+  </android.support.v4.widget.NestedScrollView>
+
+  <android.support.v7.widget.AppCompatButton
+      style="?attr/borderlessButtonStyle"
+      android:id="@+id/search"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_alignParentBottom="true"
+      android:textColor="@color/colorPrimaryDark"
+      android:textSize="@dimen/text_size_medium"
+      android:textStyle="bold"
+      android:fontFamily="sans-serif"
+      android:text="@string/search" />
+
+</RelativeLayout>

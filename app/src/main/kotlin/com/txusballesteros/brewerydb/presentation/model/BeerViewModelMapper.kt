@@ -32,7 +32,7 @@ class BeerViewModelMapper @Inject constructor() {
       = BeerViewModel(source.id,
                       source.name,
                       source.displayName ?: "NA",
-                      source.description ?: "NA",
+                      source.description,
                       source.styleId,
                       source.abv,
                       source.ibu,

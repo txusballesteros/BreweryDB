@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.domain.model
 data class BeerViewModel(val id: String,
                 val name: String?,
                 val displayName: String = "NA",
-                val description: String = "NA",
+                val description: String?,
                 val styleId: Int?,
                 val abv: String?,
                 val ibu: String?,

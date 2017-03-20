@@ -27,12 +27,11 @@ import com.txusballesteros.brewerydb.instrumentation.di.InstrumentationModule
 import com.txusballesteros.brewerydb.presentation.di.PresentationModule
 import com.txusballesteros.brewerydb.view.beers.*
 import com.txusballesteros.brewerydb.view.breweries.BreweryDetailFragment
-import com.txusballesteros.brewerydb.view.categories.CategoriesListFragment
 import com.txusballesteros.brewerydb.view.ingredients.FermentableDetailFragment
 import com.txusballesteros.brewerydb.view.ingredients.HopDetailFragment
 import com.txusballesteros.brewerydb.view.ingredients.IngredientDetailControllerFragment
 import com.txusballesteros.brewerydb.view.ingredients.YeastDetailFragment
-import com.txusballesteros.brewerydb.view.styles.StylesListFragment
+import com.txusballesteros.brewerydb.view.search.SearchFragment
 import dagger.Component
 
 @PerView
@@ -44,8 +43,6 @@ import dagger.Component
                UseCasesModule::class
            ))
 interface ViewComponent {
-  fun inject(view: CategoriesListFragment)
-  fun inject(view: StylesListFragment)
   fun inject(view: BeersListFragment)
   fun inject(view: BeerDetailFragment)
   fun inject(view: BeerIbuFragment)
@@ -58,4 +55,5 @@ interface ViewComponent {
   fun inject(view: FermentableDetailFragment)
   fun inject(view: YeastDetailFragment)
   fun inject(view: BreweryDetailFragment)
+  fun inject(view: SearchFragment)
 }

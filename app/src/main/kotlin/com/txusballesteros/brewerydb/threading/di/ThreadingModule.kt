@@ -20,7 +20,9 @@
  */
 package com.txusballesteros.brewerydb.threading.di
 
+import com.txusballesteros.brewerydb.threading.MainThreadExecutor
 import com.txusballesteros.brewerydb.threading.ThreadExecutorPoolFactory
+import com.txusballesteros.brewerydb.threading.UIThreadExecutor
 import dagger.Module
 import dagger.Provides
 import java.util.concurrent.ExecutorService
@@ -29,7 +31,10 @@ import javax.inject.Singleton
 @Module
 class ThreadingModule {
   @Singleton @Provides
-  fun provideThreadPoolExecutor() : ExecutorService {
-    return ThreadExecutorPoolFactory().get()
-  }
+  fun provideThreadPoolExecutor() : ExecutorService
+    = ThreadExecutorPoolFactory().get()
+
+  @Singleton @Provides
+  fun provideMainThreadExecutor(executor: UIThreadExecutor): MainThreadExecutor
+    = executor
 }

@@ -23,27 +23,34 @@ package com.txusballesteros.brewerydb.view.beers
 import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.instrumentation.EndlessRecyclerViewScrollListener
 import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 import com.txusballesteros.brewerydb.presentation.beers.BeersListPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
+import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_styles_list.*
+import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   companion object {
-    fun newInstance() = BeersListFragment()
+    fun newInstance(): BeersListFragment
+        = BeersListFragment()
   }
 
   @Inject lateinit var presenter: BeersListPresenter
   @Inject lateinit var toolbarBehaviour : ToolbarBehaviour
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
+  @Inject lateinit var errorBehaviour: ErrorBehaviour
   @Inject lateinit var imageDownloader: ImageDownloader
   lateinit var adapter: BeerListAdapter
   lateinit var endlessScrollListener: EndlessRecyclerViewScrollListener
@@ -67,11 +74,26 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   override fun onRequestViewBehaviours() {
     toolbarBehaviour.inject(activity)
     loadingBehaviour.inject(activity)
+    errorBehaviour.inject(activity)
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
     initializeList()
     presenter.onRequestBeers()
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    super.onCreateOptionsMenu(menu, inflater)
+    inflater?.inflate(R.menu.menu_beer_list, menu)
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    var result = true
+    when(item?.itemId) {
+      R.id.action_search -> presenter.onSearchClick()
+      else -> result = super.onOptionsItemSelected(item)
+    }
+    return result
   }
 
   private fun initializeList() {
@@ -92,12 +114,17 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
     list.setHasFixedSize(true)
   }
 
+  override fun clearList() {
+    adapter.clear()
+  }
+
   override fun renderBeers(beers: List<BeerViewModel>) {
     adapter.addAll(beers)
     adapter.notifyDataSetChanged()
   }
 
   override fun showLoading() {
+    errorBehaviour.hideError()
     loadingBehaviour.showLoading()
   }
 
@@ -106,6 +133,6 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   }
 
   override fun renderError() {
-    toast("Upps!!!")
+    errorBehaviour.showError()
   }
 }

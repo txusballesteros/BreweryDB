@@ -27,15 +27,24 @@ import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSourc
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
 import javax.inject.Inject
 
-class GetStyleByIdStrategy private constructor(private val localDataSource: StylesLocalDataSource):
-                           LocalStrategy<Int, StyleDataModel>() {
+class GetStyleByIdStrategy private constructor(private val localDataSource: StylesLocalDataSource,
+                                               private val cloudDataSource: StylesCloudDataSource):
+                           LocalOrCloudStrategy<Int, StyleDataModel>() {
+
   override fun onRequestCallToLocal(params: Int?): StyleDataModel? {
-    return localDataSource.getStyleById(params!!)
+    return localDataSource.get(params!!)
   }
 
-  class Builder @Inject constructor(val localDataSource: StylesLocalDataSource) {
+  override fun onRequestCallToCloud(params: Int?): StyleDataModel? {
+    val response = cloudDataSource.getStyles()
+    localDataSource.store(response)
+    return localDataSource.get(params!!)
+  }
+
+  class Builder @Inject constructor(private val localDataSource: StylesLocalDataSource,
+                                    private val cloudDataSource: StylesCloudDataSource) {
     fun build() : GetStyleByIdStrategy {
-      return GetStyleByIdStrategy(localDataSource)
+      return GetStyleByIdStrategy(localDataSource, cloudDataSource)
     }
   }
 }

@@ -27,7 +27,7 @@ import com.nhaarman.mockito_kotlin.whenever
 import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.api.beers.BeersApi
 import com.txusballesteros.brewerydb.api.model.*
-import com.txusballesteros.brewerydb.data.model.BeersQueryDataModel
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 import org.junit.Assert
 import org.junit.Test
 import java.util.*
@@ -48,7 +48,7 @@ class BeersCloudDataSourceTest: UnitTest() {
     private val BEER_LABEL = LabelApiModel("icon", "medium", "large")
     private val STYLE_ID = 2
     private val CURRENT_PAGE = 2
-    private val QUERY = BeersQueryDataModel(STYLE_ID)
+    private val QUERY = SearchQueryDataModel(null)
   }
 
   lateinit var api: BeersApi
@@ -56,7 +56,7 @@ class BeersCloudDataSourceTest: UnitTest() {
 
   override fun onPrepareTest() {
     api = mock()
-    dataSource = BeersRestCloudDataSource(api, BeerApiModelMapper(), BeersQueryApiModelMapper())
+    dataSource = BeersRestCloudDataSource(api, BeerApiModelMapper(), SearchQueryApiModelMapper())
   }
 
   @Test

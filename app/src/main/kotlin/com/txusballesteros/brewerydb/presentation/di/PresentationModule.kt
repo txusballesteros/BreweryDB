@@ -23,25 +23,17 @@ package com.txusballesteros.brewerydb.presentation.di
 import com.txusballesteros.brewerydb.presentation.beers.*
 import com.txusballesteros.brewerydb.presentation.breweries.BreweryDetailPresenter
 import com.txusballesteros.brewerydb.presentation.breweries.BreweryDetailPresenterImpl
-import com.txusballesteros.brewerydb.presentation.categories.CategoriesListPresenter
-import com.txusballesteros.brewerydb.presentation.categories.CategoriesListPresenterImpl
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPresenter
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPresenterImpl
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailControllerPresenter
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailControllerPresenterImpl
-import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenter
-import com.txusballesteros.brewerydb.presentation.styles.StylesListPresenterImpl
+import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
+import com.txusballesteros.brewerydb.presentation.search.SearchPresenterImpl
 import dagger.Module
 import dagger.Provides
 
 @Module
 class PresentationModule {
-  @Provides
-  fun provideCategoriesListPresenter(presenter: CategoriesListPresenterImpl): CategoriesListPresenter = presenter
-
-  @Provides
-  fun provideStylesListPresenter(presenter: StylesListPresenterImpl): StylesListPresenter = presenter
-
   @Provides
   fun provideBeersListPresenter(presenter: BeersListPresenterImpl): BeersListPresenter = presenter
 
@@ -73,4 +65,7 @@ class PresentationModule {
 
   @Provides
   fun provideBreweryDetailPresenter(presenter: BreweryDetailPresenterImpl): BreweryDetailPresenter = presenter
+
+  @Provides
+  fun provideSearchPresenter(presenter: SearchPresenterImpl): SearchPresenter = presenter
 }

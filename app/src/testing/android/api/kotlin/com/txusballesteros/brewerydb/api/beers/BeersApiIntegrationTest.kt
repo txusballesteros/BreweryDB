@@ -21,14 +21,13 @@
 package com.txusballesteros.brewerydb.api.beers
 
 import com.txusballesteros.brewerydb.api.ApiIntegrationTest
-import com.txusballesteros.brewerydb.api.model.BeersQueryApiModel
+import com.txusballesteros.brewerydb.api.model.SearchQueryApiModel
 import org.junit.Assert
 import org.junit.Test
 import retrofit2.Retrofit
 
 class BeersApiIntegrationTest: ApiIntegrationTest() {
   companion object {
-    private val STYLE_ID = 1
     private val BEER_ID = "2NLrMo"
   }
 
@@ -37,16 +36,6 @@ class BeersApiIntegrationTest: ApiIntegrationTest() {
   override fun onPrepareTest(retrofit: Retrofit) {
     val service = retrofit.create(BeersRetrofitService::class.java)
     this.api = BeersRetrofitApi(service)
-  }
-
-  @Test
-  fun shouldGetBeers() {
-    val query = BeersQueryApiModel(STYLE_ID)
-
-    val response = api.getBeers(query)
-
-    Assert.assertEquals(STATUS_SUCCESS, response.status)
-    Assert.assertFalse(response.beers.isEmpty())
   }
 
   @Test

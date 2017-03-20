@@ -32,6 +32,8 @@ import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareInMemory
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareLocalDataSource
 import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareRestCloudDataSource
 import com.txusballesteros.brewerydb.data.ingredients.datasource.*
+import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryInMemoryLocalDataSource
+import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesInMemoryLocalDataSource
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesLocalDataSource
@@ -61,7 +63,7 @@ class DataSourceModule {
   fun provideBeersLocalDataSource(dataSource: BeersInMemoryLocalDataSource): BeersLocalDataSource = dataSource
 
   @Singleton @Provides
-  fun provideBeersQueryLocalDataSource(dataSource: BeersQueryInMemoryLocalDataSource): BeersQueryLocalDataSource = dataSource
+  fun provideBeersQueryLocalDataSource(dataSource: SearchQueryInMemoryLocalDataSource): SearchQueryLocalDataSource = dataSource
 
   @Provides
   fun provideGlasswareCloudDataSource(dataSourceRest: GlasswareRestCloudDataSource): GlasswareCloudDataSource = dataSourceRest

@@ -23,6 +23,6 @@ package com.txusballesteros.brewerydb.data.categories.datasource
 import com.txusballesteros.brewerydb.data.model.CategoryDataModel
 
 interface CategoriesLocalDataSource {
-  fun getCategories() : List<CategoryDataModel>
+  fun getList(): List<CategoryDataModel>
   fun store(categories: List<CategoryDataModel>)
 }
