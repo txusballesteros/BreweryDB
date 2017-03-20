@@ -18,20 +18,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.model
+package com.txusballesteros.brewerydb.domain.reactive.di
 
-import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.domain.reactive.Subject
+import com.txusballesteros.brewerydb.threading.MainThreadExecutor
+import dagger.Module
+import dagger.Provides
 
-class SearchQueryApiModelMapper @Inject constructor() {
-  fun map(source: SearchQueryDataModel)
-      = SearchQueryApiModel(mapKeyword(source.keyword))
-
-  private fun mapKeyword(source: String?): String? {
-    var result: String? = null
-    if (source != null) {
-      result = "$source*"
-    }
-    return result
-  }
+@Module
+class ReactiveModule {
+  @Provides
+  fun provideSubject(executor: MainThreadExecutor): Subject
+    = Subject(executor)
 }

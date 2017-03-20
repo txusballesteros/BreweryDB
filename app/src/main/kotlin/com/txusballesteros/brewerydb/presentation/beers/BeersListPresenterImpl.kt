@@ -22,7 +22,7 @@ package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.data.model.BeerViewModelMapper
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.domain.observer.Observer
+import com.txusballesteros.brewerydb.domain.reactive.Observer
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetNextPageBeersUseCase
 import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryStreamUseCase

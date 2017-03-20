@@ -20,7 +20,7 @@
  */
 package com.txusballesteros.brewerydb.domain.usecase.search
 
-import com.txusballesteros.brewerydb.domain.observer.Observer
+import com.txusballesteros.brewerydb.domain.reactive.Observer
 
 interface GetSearchQueryStreamUseCase {
   fun execute(onResult: (Observer) -> Unit)

@@ -20,7 +20,7 @@
  */
 package com.txusballesteros.brewerydb.domain.usecase.search
 
-import com.txusballesteros.brewerydb.domain.observer.Observer
+import com.txusballesteros.brewerydb.domain.reactive.Observer
 import com.txusballesteros.brewerydb.domain.repository.SearchQueryRepository
 import com.txusballesteros.brewerydb.domain.usecase.AnkoUseCase
 import java.util.concurrent.ExecutorService

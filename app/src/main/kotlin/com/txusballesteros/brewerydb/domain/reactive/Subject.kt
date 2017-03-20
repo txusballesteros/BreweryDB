@@ -18,17 +18,34 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.observer
+package com.txusballesteros.brewerydb.domain.reactive
 
-class Observer(private val subject: Subject) {
-  lateinit var onNext: () -> Unit
+import com.txusballesteros.brewerydb.threading.MainThreadExecutor
 
-  fun subscribe(onNext: () -> Unit) {
-    this.onNext = onNext
-    subject.subscribe(this)
+class Subject(private val executor: MainThreadExecutor) {
+  private val observers: MutableList<Observer> = ArrayList()
+
+  fun subscribe(observer: Observer) {
+    observers.add(observer)
   }
 
-  fun unsubscribe() {
-    subject.unsubscribe(this)
+  fun unsubscribe(observer: Observer) {
+    observers.remove(observer)
+  }
+
+  fun hasObservers(): Boolean {
+    return !observers.isEmpty()
+  }
+
+  fun asObserver(): Observer {
+    return Observer(this)
+  }
+
+  fun onNext() {
+    if (hasObservers()) {
+      executor.execute(Runnable {
+        observers.forEach { it.onNext() }
+      })
+    }
   }
 }
