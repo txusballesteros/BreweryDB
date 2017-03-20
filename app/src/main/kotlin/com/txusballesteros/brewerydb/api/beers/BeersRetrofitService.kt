@@ -30,6 +30,11 @@ import retrofit2.http.Query
 interface BeersRetrofitService {
   @GET("/v2/beers")
   fun getBeers(@Query("name") keyword: String?,
+               @Query("abv") abv: String?,
+               @Query("ibu") ibu: String?,
+               @Query("isOrganic") isOrganic: String?,
+               @Query("breweryId") breweryId: String?,
+               @Query("styleId") styleId: Int?,
                @Query("hasLabels") withLabels: String,
                @Query("status") status: String,
                @Query("p") page: Int): Call<BeersListApiResponse>

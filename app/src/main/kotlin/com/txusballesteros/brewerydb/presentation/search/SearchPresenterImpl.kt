@@ -34,7 +34,17 @@ class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCas
 
   override fun onSearch() {
     val keyword = getView()?.getKeyword()
-    val query = SearchQuery(keyword)
+    val isOrganic = getView()?.getIsOrganic()
+    val abvMin = getView()?.getAbvMin()
+    val abvMax = getView()?.getAbvMax()
+    val ibuMin = getView()?.getIbuMin()
+    val ibuMax = getView()?.getIbuMax()
+    val query = SearchQuery(keyword,
+                            abvMin,
+                            abvMax,
+                            ibuMin,
+                            ibuMax,
+                            isOrganic)
     storeSearchQueryUseCase.execute(query, onResult = {
       getView()?.closeView()
     })

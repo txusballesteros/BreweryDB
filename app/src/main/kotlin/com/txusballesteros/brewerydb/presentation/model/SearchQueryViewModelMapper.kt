@@ -25,5 +25,12 @@ import javax.inject.Inject
 
 class SearchQueryViewModelMapper @Inject constructor() {
   fun map(source: SearchQuery): SearchQueryViewModel
-    = SearchQueryViewModel(source.keyword)
+      = SearchQueryViewModel(source.keyword,
+                             source.abvMin,
+                             source.abvMax,
+                             source.ibuMin,
+                             source.ibuMax,
+                             source.isOrganic,
+                             source.breweryId,
+                             source.styleId)
 }

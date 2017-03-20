@@ -20,4 +20,11 @@
  */
 package com.txusballesteros.brewerydb.domain.model
 
-data class SearchQuery(val keyword: String?)
+data class SearchQuery(val keyword: String? = null,
+                       val abvMin: Int? = null,
+                       val abvMax: Int? = null,
+                       val ibuMin: Int? = null,
+                       val ibuMax: Int? = null,
+                       val isOrganic: Boolean? = null,
+                       val breweryId: String? = null,
+                       val styleId: Int? = null)

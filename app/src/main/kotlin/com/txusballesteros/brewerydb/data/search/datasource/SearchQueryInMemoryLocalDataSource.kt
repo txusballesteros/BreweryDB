@@ -24,7 +24,7 @@ import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 import javax.inject.Inject
 
 class SearchQueryInMemoryLocalDataSource @Inject constructor(): SearchQueryLocalDataSource {
-  private var query: SearchQueryDataModel = SearchQueryDataModel(null)
+  private var query: SearchQueryDataModel = SearchQueryDataModel()
 
   override fun getQuery(): SearchQueryDataModel {
     return query

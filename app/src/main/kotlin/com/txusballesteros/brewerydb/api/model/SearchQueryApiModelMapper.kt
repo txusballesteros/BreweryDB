@@ -25,7 +25,36 @@ import javax.inject.Inject
 
 class SearchQueryApiModelMapper @Inject constructor() {
   fun map(source: SearchQueryDataModel)
-      = SearchQueryApiModel(mapKeyword(source.keyword))
+      = SearchQueryApiModel(mapKeyword(source.keyword),
+                            mapRange(source.abvMin, source.abvMax),
+                            mapRange(source.ibuMin, source.ibuMax),
+                            mapBoolean(source.isOrganic),
+                            source.breweryId,
+                            source.styleId)
+
+  private fun mapRange(sourceMin: Int?, sourceMax: Int?): String? {
+    var result: String? = null
+    if (sourceMin != null && sourceMax != null) {
+      result = "$sourceMin,$sourceMax"
+    } else if (sourceMin != null && sourceMax == null) {
+      result = "+$sourceMin"
+    } else if (sourceMin == null && sourceMax != null) {
+      result = "-$sourceMax"
+    }
+    return result
+  }
+
+  private fun mapBoolean(source: Boolean?): String? {
+    var result: String? = null
+    if (source != null) {
+      if (source) {
+        result = "Y"
+      } else {
+        result = "N"
+      }
+    }
+    return result
+  }
 
   private fun mapKeyword(source: String?): String? {
     var result: String? = null

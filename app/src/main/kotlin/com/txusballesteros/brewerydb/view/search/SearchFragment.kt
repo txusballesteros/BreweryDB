@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.view.search
 
 import android.os.Bundle
+import android.support.v7.widget.AppCompatEditText
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
 import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
@@ -68,10 +69,42 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
     return keyword
   }
 
-  override fun renderFilters(filter: SearchQueryViewModel) {
-    if (filter.keyword != null) {
-      keyword.setText(filter.keyword)
+  override fun getIsOrganic(): Boolean {
+    return isOrganic.isChecked
+  }
+
+  override fun getAbvMin(): Int? {
+    return getRangeValue(abvMin)
+  }
+
+  override fun getAbvMax(): Int? {
+    return getRangeValue(abvMax)
+  }
+
+  override fun getIbuMin(): Int? {
+    return getRangeValue(ibuMin)
+  }
+
+  override fun getIbuMax(): Int? {
+    return getRangeValue(ibuMax)
+  }
+
+  private fun getRangeValue(view: AppCompatEditText): Int? {
+    var result: Int? = null
+    var value: String = view.text.trim().toString()
+    if (!value.isEmpty()) {
+      result = value.toInt()
     }
+    return result
+  }
+
+  override fun renderFilters(filter: SearchQueryViewModel) {
+    keyword.setText(filter.keyword ?: "")
+    isOrganic.isChecked = filter.isOrganic ?: false
+    abvMin.setText(filter.abvMin?.toString() ?: "")
+    abvMax.setText(filter.abvMax?.toString() ?: "")
+    ibuMin.setText(filter.ibuMin?.toString() ?: "")
+    ibuMax.setText(filter.ibuMax?.toString() ?: "")
   }
 
   override fun closeView() {

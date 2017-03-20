@@ -20,4 +20,11 @@
  */
 package com.txusballesteros.brewerydb.presentation.model
 
-data class SearchQueryViewModel(val keyword: String? = null)
+data class SearchQueryViewModel(val keyword: String?,
+                                val abvMin: Int?,
+                                val abvMax: Int?,
+                                val ibuMin: Int?,
+                                val ibuMax: Int?,
+                                val isOrganic: Boolean?,
+                                val breweryId: String?,
+                                val styleId: Int?)

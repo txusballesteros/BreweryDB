@@ -25,8 +25,22 @@ import javax.inject.Inject
 
 class SearchQueryDataModelMapper @Inject constructor() {
   fun map(source: SearchQueryDataModel): SearchQuery
-    = SearchQuery(source.keyword)
+    = SearchQuery(source.keyword,
+                  source.abvMin,
+                  source.abvMax,
+                  source.ibuMin,
+                  source.ibuMax,
+                  source.isOrganic,
+                  source.breweryId,
+                  source.styleId)
 
   fun map(source: SearchQuery): SearchQueryDataModel
-    = SearchQueryDataModel(source.keyword)
+    = SearchQueryDataModel(source.keyword,
+                           source.abvMin,
+                           source.abvMax,
+                           source.ibuMin,
+                           source.ibuMax,
+                           source.isOrganic,
+                           source.breweryId,
+                           source.styleId)
 }

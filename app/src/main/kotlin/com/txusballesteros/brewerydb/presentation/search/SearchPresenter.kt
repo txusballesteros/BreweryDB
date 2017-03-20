@@ -30,6 +30,11 @@ interface SearchPresenter: Presenter<SearchPresenter.View> {
   interface View: Presenter.View {
     fun renderFilters(filter: SearchQueryViewModel)
     fun getKeyword(): String?
+    fun getIsOrganic(): Boolean
+    fun getAbvMin(): Int?
+    fun getAbvMax(): Int?
+    fun getIbuMin(): Int?
+    fun getIbuMax(): Int?
     fun closeView()
   }
 }
