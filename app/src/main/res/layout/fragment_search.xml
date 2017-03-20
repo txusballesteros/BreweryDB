@@ -21,10 +21,9 @@
 -->
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:background="@color/colorPrimaryLight">
+  android:background="@color/colorPrimary">
 
   <android.support.v4.widget.NestedScrollView
       android:layout_width="match_parent"
@@ -59,7 +58,7 @@
           android:layout_width="match_parent"
           android:layout_height="0.5dp"
           android:layout_margin="@dimen/padding_big"
-          android:background="@color/colorPrimary"/>
+          android:background="@color/colorPrimaryDark"/>
 
       <LinearLayout
           android:layout_width="match_parent"
@@ -86,7 +85,7 @@
           android:layout_width="match_parent"
           android:layout_height="0.5dp"
           android:layout_margin="@dimen/padding_big"
-          android:background="@color/colorPrimary"/>
+          android:background="@color/colorPrimaryDark"/>
 
       <android.support.v7.widget.AppCompatTextView
           android:layout_width="wrap_content"
@@ -102,42 +101,29 @@
           android:layout_height="wrap_content"
           android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorPrimary"
-            android:fontFamily="sans-serif"
-            android:text="@string/min"/>
-
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/abvMin"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
             android:inputType="number"
             android:gravity="right"
-            tools:text="10" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginLeft="@dimen/padding_x_big"
-            android:fontFamily="sans-serif"
-            android:text="@string/max"/>
+            android:maxLength="3"
+            android:hint="@string/min" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/abvMax"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
             android:inputType="number"
             android:gravity="right"
-            tools:text="30" />
+            android:maxLength="3"
+            android:hint="@string/max" />
 
       </LinearLayout>
 
@@ -145,7 +131,7 @@
           android:layout_width="match_parent"
           android:layout_height="0.5dp"
           android:layout_margin="@dimen/padding_big"
-          android:background="@color/colorPrimary"/>
+          android:background="@color/colorPrimaryDark"/>
 
       <android.support.v7.widget.AppCompatTextView
           android:layout_width="wrap_content"
@@ -161,42 +147,29 @@
           android:layout_height="wrap_content"
           android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorPrimary"
-            android:fontFamily="sans-serif"
-            android:text="@string/min"/>
-
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/ibuMin"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
             android:inputType="number"
             android:gravity="right"
-            tools:text="10" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_small"
-            android:textColor="@color/colorPrimary"
-            android:layout_marginLeft="@dimen/padding_x_big"
-            android:fontFamily="sans-serif"
-            android:text="@string/max"/>
+            android:maxLength="3"
+            android:hint="@string/min" />
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/ibuMax"
-            android:layout_width="60dp"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_normal"
             android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
             android:inputType="number"
             android:gravity="right"
-            tools:text="30" />
+            android:maxLength="3"
+            android:hint="@string/max" />
 
       </LinearLayout>
 
@@ -204,7 +177,7 @@
           android:layout_width="match_parent"
           android:layout_height="0.5dp"
           android:layout_margin="@dimen/padding_big"
-          android:background="@color/colorPrimary"/>
+          android:background="@color/colorPrimaryDark"/>
 
     </LinearLayout>
   </android.support.v4.widget.NestedScrollView>

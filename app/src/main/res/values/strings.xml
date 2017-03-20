@@ -64,6 +64,6 @@
   <string name="about">About</string>
   <string name="which_beer_are_you_want">Which beer are you want?</string>
   <string name="alcohol_by_volume">ABV (Alcohol by Volume):</string>
-  <string name="min">Min:</string>
-  <string name="max">Max:</string>
+  <string name="min">Min</string>
+  <string name="max">Max</string>
 </resources>
