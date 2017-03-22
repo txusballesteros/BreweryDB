@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+/*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -17,22 +17,16 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
--->
-<resources>
-  <dimen name="activity_horizontal_margin">16dp</dimen>
-  <dimen name="activity_vertical_margin">16dp</dimen>
-  <dimen name="vertical_margin">4dp</dimen>
-  <dimen name="horizontal_margin">8dp</dimen>
-  <dimen name="padding_small">4dp</dimen>
-  <dimen name="padding_normal">8dp</dimen>
-  <dimen name="padding_big">16dp</dimen>
-  <dimen name="padding_x_big">24dp</dimen>
-  <dimen name="label_small">80dp</dimen>
-  <dimen name="toolbar_image_height">200dp</dimen>
-  <dimen name="elevation">1dp</dimen>
+ */
+package com.txusballesteros.brewerydb.navigation.commands
 
-  <dimen name="text_size_small">12sp</dimen>
-  <dimen name="text_size_normal">16sp</dimen>
-  <dimen name="text_size_medium">20sp</dimen>
-  <dimen name="text_size_big">26sp</dimen>
-</resources>
+import android.content.Context
+import android.content.Intent
+import com.txusballesteros.brewerydb.view.about.AboutActivity
+import org.jetbrains.anko.intentFor
+
+class AboutNavigationCommand: NavigationCommand() {
+  override fun onRequestIntent(context: Context): Intent {
+    return context.intentFor<AboutActivity>()
+  }
+}

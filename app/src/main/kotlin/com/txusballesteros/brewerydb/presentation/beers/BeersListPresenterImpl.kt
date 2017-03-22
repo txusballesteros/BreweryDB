@@ -81,4 +81,8 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
   override fun onSearchClick() {
     navigator.navigateToSearch(getView())
   }
+
+  override fun onAboutClick() {
+    navigator.navigateToAbout(getView())
+  }
 }

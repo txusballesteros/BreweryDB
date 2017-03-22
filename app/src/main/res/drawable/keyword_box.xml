@@ -19,6 +19,6 @@
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-  <solid android:color="@color/white" />
+  <solid android:color="@color/colorPrimary" />
   <corners android:radius="25dp" />
 </shape>

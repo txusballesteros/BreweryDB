@@ -33,7 +33,7 @@
      - echo y | android update sdk --no-ui --all --filter extra-android-support
      - echo y | android update sdk --no-ui --all --filter extra-google-google_play_services
      - echo y | android update sdk --no-ui --all --filter extra-google-m2repository
-     - echo y | android update sdk --no-ui --all --filter extra-m2repository
+     - echo y | $ANDROID_HOME/tools/bin/sdkmanager "extras;m2repository;com;android;support;constraint;constraint-layout-solver;1.0.2"
 
    override:
      - ANDROID_HOME=/usr/local/android-sdk-linux ./gradlew dependencies || true

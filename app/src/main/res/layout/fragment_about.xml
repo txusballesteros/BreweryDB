@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright Txus Ballesteros 2017 (@txusballesteros)
+ *
+ * This file is part of Foobar.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+-->
+<android.support.v4.widget.NestedScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/gray_5">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+    <RelativeLayout style="@style/aboutSection"
+        android:padding="@dimen/padding_big"
+        android:layout_marginTop="0dp">
+
+      <android.support.v7.widget.AppCompatImageView
+          android:id="@+id/icon"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginRight="@dimen/padding_big"
+          app:srcCompat="@mipmap/ic_launcher" />
+
+      <android.support.v7.widget.AppCompatTextView
+          android:id="@+id/appName"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/text_size_medium"
+          android:textColor="@color/colorPrimary"
+          android:layout_toRightOf="@+id/icon"
+          android:layout_marginTop="@dimen/padding_small"
+          android:fontFamily="sans-serif"
+          android:text="@string/app_name" />
+
+      <android.support.v7.widget.AppCompatTextView
+          android:id="@+id/version"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_toRightOf="@+id/icon"
+          android:layout_below="@+id/appName"
+          android:textSize="@dimen/text_size_small"
+          android:textColor="@color/gray_1"
+          android:fontFamily="sans-serif-thin"
+          tools:text="v1.0.0" />
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/aboutSection"
+      android:id="@+id/kotlin">
+
+      <android.support.v7.widget.AppCompatImageView
+          android:id="@+id/kotlinLogo"
+          android:layout_width="100dp"
+          android:layout_height="100dp"
+          app:srcCompat="@drawable/kotlin" />
+
+      <android.support.v7.widget.AppCompatTextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_toRightOf="@+id/kotlinLogo"
+          android:layout_centerVertical="true"
+          android:fontFamily="sans-serif-thin"
+          android:textSize="@dimen/text_size_normal"
+          android:textColor="@color/gray_2"
+          android:text="Powered by Kotlin"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/aboutSection"
+        android:orientation="vertical">
+
+      <android.support.v7.widget.AppCompatTextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:textSize="@dimen/text_size_normal"
+          android:textColor="@color/colorPrimary"
+          android:fontFamily="sans-serif"
+          android:paddingTop="@dimen/padding_big"
+          android:paddingLeft="@dimen/padding_big"
+          android:text="Open Source Libraries" />
+
+      <include layout="@layout/include_line_decorator" />
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Google Support AppCompat"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Google Support RecyclerView"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Google Support CardView"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Google Support Design"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Kotlin Std"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Anko Common"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Anko AppCompat"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Anko RecyclerView"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Anko CardView"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Anko Design"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Google Dagger 2"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Retrofit"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Picaso"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Gson"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Gson Converter"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Facebook Stetho"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Mockito Kotlin"/>
+
+      <android.support.v7.widget.AppCompatTextView
+          style="@style/libraryItem"
+          android:text="Loading Balls" />
+
+    </LinearLayout>
+  </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

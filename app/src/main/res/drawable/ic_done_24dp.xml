@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<!--
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -18,21 +18,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<resources>
-  <dimen name="activity_horizontal_margin">16dp</dimen>
-  <dimen name="activity_vertical_margin">16dp</dimen>
-  <dimen name="vertical_margin">4dp</dimen>
-  <dimen name="horizontal_margin">8dp</dimen>
-  <dimen name="padding_small">4dp</dimen>
-  <dimen name="padding_normal">8dp</dimen>
-  <dimen name="padding_big">16dp</dimen>
-  <dimen name="padding_x_big">24dp</dimen>
-  <dimen name="label_small">80dp</dimen>
-  <dimen name="toolbar_image_height">200dp</dimen>
-  <dimen name="elevation">1dp</dimen>
-
-  <dimen name="text_size_small">12sp</dimen>
-  <dimen name="text_size_normal">16sp</dimen>
-  <dimen name="text_size_medium">20sp</dimen>
-  <dimen name="text_size_big">26sp</dimen>
-</resources>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="24dp"
+        android:height="24dp"
+        android:viewportWidth="24.0"
+        android:viewportHeight="24.0">
+    <path
+        android:fillColor="@color/white"
+        android:pathData="M9,16.2L4.8,12l-1.4,1.4L9,19 21,7l-1.4,-1.4L9,16.2z"/>
+</vector>
