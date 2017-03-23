@@ -24,9 +24,9 @@ import com.txusballesteros.brewerydb.domain.model.Category
 import javax.inject.Inject
 
 class CategoryViewModelMapper @Inject constructor() {
-  fun map(source: List<Category>)
+  fun map(source: List<Category>): List<CategoryViewModel>
       = source.map { category -> map(category) }
 
-  fun map(source: Category)
+  fun map(source: Category): CategoryViewModel
       = CategoryViewModel(source.id, source.name)
 }

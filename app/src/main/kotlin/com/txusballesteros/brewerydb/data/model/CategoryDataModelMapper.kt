@@ -24,9 +24,9 @@ import com.txusballesteros.brewerydb.domain.model.Category
 import javax.inject.Inject
 
 class CategoryDataModelMapper @Inject constructor() {
-  fun map(source: List<CategoryDataModel>?)
+  fun map(source: List<CategoryDataModel>?): List<Category>?
       = source?.map { style -> map(style) }
 
-  fun map(source: CategoryDataModel)
+  fun map(source: CategoryDataModel): Category
       = Category(source.id, source.name)
 }

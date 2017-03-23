@@ -30,14 +30,13 @@ import javax.inject.Inject
 class IngredientViewModelMapper @Inject constructor(private val hopMapper: HopViewModelMapper,
                                                     private val fermentableMapper: FermentableViewModelMapper,
                                                     private val yeastViewModelMapper: YeastViewModelMapper) {
-  fun map(source: Ingredient): IngredientViewModel? {
-    val result: IngredientViewModel?
-    when(source.type) {
-      IngredientType.HOP -> result = hopMapper.map(source as Hop)
-      IngredientType.FERMENTABLE -> result = fermentableMapper.map(source as Fermentable)
-      IngredientType.YEAST -> result = yeastViewModelMapper.map(source as Yeast)
-      else -> result = null
-    }
-    return result
-  }
+  fun map(source: Ingredient): IngredientViewModel?
+    = source.let {
+        when(it.type) {
+          IngredientType.HOP -> hopMapper.map(source as Hop)
+          IngredientType.FERMENTABLE -> fermentableMapper.map(source as Fermentable)
+          IngredientType.YEAST -> yeastViewModelMapper.map(source as Yeast)
+          else -> null
+        }
+      }
 }

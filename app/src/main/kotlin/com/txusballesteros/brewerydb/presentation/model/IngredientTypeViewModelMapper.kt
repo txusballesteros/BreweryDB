@@ -24,25 +24,23 @@ import com.txusballesteros.brewerydb.domain.model.IngredientType
 import javax.inject.Inject
 
 class IngredientTypeViewModelMapper @Inject constructor() {
-  fun map(source: IngredientType): IngredientTypeViewModel {
-    val result: IngredientTypeViewModel
-    when(source) {
-      IngredientType.HOP -> result = IngredientTypeViewModel.HOP
-      IngredientType.YEAST -> result = IngredientTypeViewModel.YEAST
-      IngredientType.FERMENTABLE -> result = IngredientTypeViewModel.FERMENTABLE
-      IngredientType.UNKNOWN -> result = IngredientTypeViewModel.UNKNOWN
-    }
-    return result
-  }
+  fun map(source: IngredientType): IngredientTypeViewModel
+    = source.let {
+        when(it) {
+          IngredientType.HOP -> IngredientTypeViewModel.HOP
+          IngredientType.YEAST ->  IngredientTypeViewModel.YEAST
+          IngredientType.FERMENTABLE ->  IngredientTypeViewModel.FERMENTABLE
+          IngredientType.UNKNOWN ->  IngredientTypeViewModel.UNKNOWN
+        }
+      }
 
-  fun map(source: IngredientTypeViewModel): IngredientType {
-    val result: IngredientType
-    when(source) {
-      IngredientTypeViewModel.HOP -> result = IngredientType.HOP
-      IngredientTypeViewModel.YEAST -> result = IngredientType.YEAST
-      IngredientTypeViewModel.FERMENTABLE -> result = IngredientType.FERMENTABLE
-      IngredientTypeViewModel.UNKNOWN -> result = IngredientType.UNKNOWN
-    }
-    return result
-  }
+  fun map(source: IngredientTypeViewModel): IngredientType
+      = source.let {
+          when(it) {
+            IngredientTypeViewModel.HOP -> IngredientType.HOP
+            IngredientTypeViewModel.YEAST ->  IngredientType.YEAST
+            IngredientTypeViewModel.FERMENTABLE ->  IngredientType.FERMENTABLE
+            IngredientTypeViewModel.UNKNOWN ->  IngredientType.UNKNOWN
+          }
+        }
 }

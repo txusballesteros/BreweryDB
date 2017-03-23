@@ -25,10 +25,10 @@ import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import javax.inject.Inject
 
 class BeerViewModelMapper @Inject constructor() {
-  fun map(source: List<Beer>)
+  fun map(source: List<Beer>): List<BeerViewModel>
       = source.map { beer -> map(beer) }
 
-  fun map(source: Beer)
+  fun map(source: Beer): BeerViewModel
       = BeerViewModel(source.id,
                       source.name,
                       source.displayName ?: "NA",
@@ -43,16 +43,13 @@ class BeerViewModelMapper @Inject constructor() {
                       source.servingTemperature,
                       source.servingTemperatureDisplay ?: "NA")
 
-  fun map(source: Beer.Label?)
+  fun map(source: Beer.Label?): BeerViewModel.LabelViewModel
       = BeerViewModel.LabelViewModel(source?.icon,
                                      source?.medium,
                                      source?.large)
 
-  fun mapIsOrganic(isOrganic: String?): Boolean {
-    var result = false
-    if (isOrganic != null && isOrganic == "Y") {
-      result = true
-    }
-    return result
-  }
+  fun mapIsOrganic(isOrganic: String?): Boolean
+    = isOrganic?.let {
+        isOrganic == "Y"
+      } ?: false
 }

@@ -24,15 +24,12 @@ import com.txusballesteros.brewerydb.data.model.ImageDataModel
 import javax.inject.Inject
 
 class ImageApiModelMapper @Inject constructor() {
-  fun map(source: ImageApiModel?): ImageDataModel? {
-    var result: ImageDataModel? = null
-    if (source != null) {
-      result = ImageDataModel(source.icon,
-                              source.medium,
-                              source.large,
-                              source.squareMedium,
-                              source.squareLarge)
-    }
-    return result
-  }
+  fun map(source: ImageApiModel?): ImageDataModel?
+    = source?.let {
+        ImageDataModel(it.icon,
+                       it.medium,
+                       it.large,
+                       it.squareMedium,
+                       it.squareLarge)
+      }
 }

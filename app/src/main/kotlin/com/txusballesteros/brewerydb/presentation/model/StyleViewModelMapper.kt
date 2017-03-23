@@ -24,10 +24,10 @@ import com.txusballesteros.brewerydb.domain.model.Style
 import javax.inject.Inject
 
 class StyleViewModelMapper @Inject constructor() {
-  fun map(source: List<Style>)
+  fun map(source: List<Style>): List<StyleViewModel>
       = source.map { style -> map(style) }
 
-  fun map(source: Style)
+  fun map(source: Style): StyleViewModel
       = StyleViewModel(source.id, source.categoryId,
                        source.name, source.shortName, source.description,
                        source.ibuMin, source.ibuMax, source.abvMin,

@@ -20,5 +20,5 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-data class CategoryDataModel(override val id: Int,
-                             val name: String): DataModel
+data class CategoryDataModel(val id: Int,
+                             val name: String)

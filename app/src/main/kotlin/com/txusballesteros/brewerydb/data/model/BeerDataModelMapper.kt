@@ -24,10 +24,10 @@ import com.txusballesteros.brewerydb.domain.model.Beer
 import javax.inject.Inject
 
 class BeerDataModelMapper @Inject constructor() {
-  fun map(source: List<BeerDataModel>)
+  fun map(source: List<BeerDataModel>): List<Beer>
       = source.map { beer -> map(beer) }
 
-  fun map(source: BeerDataModel)
+  fun map(source: BeerDataModel): Beer
       = Beer(source.id,
              source.name,
              source.displayName,
@@ -42,7 +42,7 @@ class BeerDataModelMapper @Inject constructor() {
              source.servingTemperature,
              source.servingTemperatureDisplay)
 
-  fun map(source: BeerDataModel.LabelDataModel?)
+  fun map(source: BeerDataModel.LabelDataModel?): Beer.Label
       = Beer.Label(source?.icon,
                    source?.medium,
                    source?.large)
