@@ -70,11 +70,17 @@ class BreweryDetailFragment: AbsFragment(), BreweryDetailPresenter.View {
   override fun onRequestViewBehaviours() {
     toolbarBehaviour.inject(activity, true)
     loadingBehaviour.inject(activity)
-    errorBehaviour.inject(activity)
+    errorBehaviour.inject(activity, {
+      requestBreweries()
+    })
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
     website.setOnClickListener { presenter.onWebsiteClick() }
+    requestBreweries()
+  }
+
+  private fun requestBreweries() {
     val breweryId = getBreweryId()
     presenter.onRequestBrewery(breweryId)
   }

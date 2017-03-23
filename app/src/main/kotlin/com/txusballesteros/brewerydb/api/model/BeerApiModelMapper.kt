@@ -30,7 +30,7 @@ class BeerApiModelMapper @Inject constructor() {
   fun map(source: List<BeerApiModel>?): List<BeerDataModel>
     = source?.let {
         it.map { beer -> map(beer) }
-      } ?: ArrayList()
+      } ?: emptyList()
 
   fun map(source: BeerApiModel): BeerDataModel
       = BeerDataModel(source.id,

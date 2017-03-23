@@ -46,7 +46,7 @@ class SearchQueryApiModelMapper @Inject constructor() {
 
   private fun mapBoolean(source: Boolean?): String?
     = source?.let {
-        if (source) { "Y" } else { "N" }
+        if (source) "Y" else "N"
       }
 
   private fun mapKeyword(source: String?): String?

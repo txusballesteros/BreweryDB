@@ -68,7 +68,9 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   override fun onRequestViewBehaviours() {
     loadingBehaviour.inject(activity)
-    errorBehaviour.inject(activity)
+    errorBehaviour.inject(activity, {
+      requestBeer()
+    })
   }
 
   override fun onComposeView() {
@@ -105,6 +107,10 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
+    requestBeer()
+  }
+
+  private fun requestBeer() {
     val beerId = getBeerId()
     presenter.onRequestBeer(beerId)
   }

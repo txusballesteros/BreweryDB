@@ -31,7 +31,7 @@ class BeerIngredientApiModelMapper @Inject constructor(private val typeMapper: I
   fun map(source: List<BeerIngredientApiModel>?): List<BeerIngredientDataModel>
     = source?.let {
       it.map { ingredient -> map(ingredient) }
-    } ?: ArrayList()
+    } ?: emptyList()
 
   fun map(source: BeerIngredientApiModel): BeerIngredientDataModel
     = BeerIngredientDataModel(source.id,
