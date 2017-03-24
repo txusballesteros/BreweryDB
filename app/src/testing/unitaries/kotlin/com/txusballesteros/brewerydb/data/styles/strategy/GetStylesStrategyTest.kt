@@ -20,6 +20,7 @@
  */
 package com.txusballesteros.brewerydb.data.styles.strategy
 
+import com.nhaarman.mockito_kotlin.whenever
 import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
 import com.txusballesteros.brewerydb.data.styles.datasource.StylesCloudDataSource
@@ -54,8 +55,10 @@ class GetStylesStrategyTest : UnitTest() {
 
   @Test
   fun shouldGetStylesFromCloud() {
-    doReturn(null).`when`(localDataSource).getList()
-    doReturn(stylesList).`when`(cloudDataSource).getStyles()
+    whenever(localDataSource.getList())
+        .thenReturn(null)
+        .thenReturn(stylesList)
+    whenever(cloudDataSource.getStyles()).thenReturn(stylesList)
 
     strategy.execute(onResult =  {
       Assert.assertNotNull(it)
@@ -67,8 +70,8 @@ class GetStylesStrategyTest : UnitTest() {
 
   @Test
   fun shouldGetStylesFromLocal() {
-    doReturn(stylesList).`when`(localDataSource).getList()
-    doReturn(null).`when`(cloudDataSource).getStyles()
+    whenever(localDataSource.getList()).thenReturn(stylesList)
+    whenever(cloudDataSource.getStyles()).thenReturn(null)
 
     strategy.execute(onResult =  {
       Assert.assertNotNull(it)
