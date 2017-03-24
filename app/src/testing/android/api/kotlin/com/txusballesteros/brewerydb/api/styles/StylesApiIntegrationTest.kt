@@ -41,6 +41,5 @@ class StylesApiIntegrationTest : ApiIntegrationTest() {
     val response = api.getStyles()
 
     Assert.assertEquals(STATUS_SUCCESS, response.status)
-    Assert.assertFalse(response.styles.isEmpty())
   }
 }

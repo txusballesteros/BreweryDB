@@ -35,4 +35,7 @@
   <dimen name="text_size_normal">16sp</dimen>
   <dimen name="text_size_medium">20sp</dimen>
   <dimen name="text_size_big">26sp</dimen>
+
+  <dimen name="button_rounded">50dp</dimen>
+  <dimen name="button_rounded_radius">25dp</dimen>
 </resources>

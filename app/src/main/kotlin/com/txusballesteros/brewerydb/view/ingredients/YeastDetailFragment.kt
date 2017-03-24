@@ -67,10 +67,16 @@ class YeastDetailFragment: AbsFragment(), IngredientDetailPresenter.View {
 
   override fun onComposeView() {
     loadingBehaviour.inject(activity)
-    errorBehaviour.inject(activity)
+    errorBehaviour.inject(activity, {
+      requestIngredient()
+    })
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
+    requestIngredient()
+  }
+
+  private fun requestIngredient() {
     val ingredientId = getIngredientId()
     presenter.onRequestIngredient(ingredientId, IngredientTypeViewModel.YEAST)
   }

@@ -24,7 +24,7 @@ import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 import javax.inject.Inject
 
 class SearchQueryApiModelMapper @Inject constructor() {
-  fun map(source: SearchQueryDataModel)
+  fun map(source: SearchQueryDataModel): SearchQueryApiModel
       = SearchQueryApiModel(mapKeyword(source.keyword),
                             mapRange(source.abvMin, source.abvMax),
                             mapRange(source.ibuMin, source.ibuMax),
@@ -44,23 +44,13 @@ class SearchQueryApiModelMapper @Inject constructor() {
     return result
   }
 
-  private fun mapBoolean(source: Boolean?): String? {
-    var result: String? = null
-    if (source != null) {
-      if (source) {
-        result = "Y"
-      } else {
-        result = "N"
+  private fun mapBoolean(source: Boolean?): String?
+    = source?.let {
+        if (source) "Y" else "N"
       }
-    }
-    return result
-  }
 
-  private fun mapKeyword(source: String?): String? {
-    var result: String? = null
-    if (source != null) {
-      result = "$source*"
-    }
-    return result
-  }
+  private fun mapKeyword(source: String?): String?
+    = source?.let {
+        "$source*"
+      }
 }

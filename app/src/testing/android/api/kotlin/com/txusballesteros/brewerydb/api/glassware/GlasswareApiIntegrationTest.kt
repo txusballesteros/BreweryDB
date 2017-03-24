@@ -38,6 +38,5 @@ class GlasswareApiIntegrationTest: ApiIntegrationTest() {
     val response = api.getGlasses()
 
     Assert.assertEquals(STATUS_SUCCESS, response.status)
-    Assert.assertFalse(response.glasses.isEmpty())
   }
 }

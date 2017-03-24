@@ -1,4 +1,4 @@
-/*
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -17,9 +17,12 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
- */
-package com.txusballesteros.brewerydb.data.model
-
-interface DataModel {
-  val id: Int
-}
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+  <padding android:left="@dimen/button_rounded_radius"
+           android:right="@dimen/button_rounded_radius" />
+  <corners android:radius="@dimen/button_rounded_radius" />
+  <solid android:color="@color/colorPrimary" />
+  <stroke android:color="@color/gray_3"
+          android:width="0.5dp" />
+</shape>

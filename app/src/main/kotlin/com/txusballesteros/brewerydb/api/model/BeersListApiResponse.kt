@@ -22,7 +22,7 @@ package com.txusballesteros.brewerydb.api.model
 
 import com.google.gson.annotations.SerializedName
 
-class BeersListApiResponse(@SerializedName("data") val beers: List<BeerApiModel>,
+class BeersListApiResponse(@SerializedName("data") val beers: List<BeerApiModel>?,
                            val message: String,
                            val status: String,
                            val currentPage: Int,

@@ -24,15 +24,12 @@ import com.txusballesteros.brewerydb.domain.model.Country
 import javax.inject.Inject
 
 class CountryDataModelMapper @Inject constructor() {
-  fun map(source: CountryDataModel?): Country? {
-    var result: Country? = null
-    if (source != null) {
-       result = Country(source.isoCode,
-                   source.displayName,
-                   source.name,
-                   source.isoThree,
-                   source.numberCode)
-    }
-    return result
-  }
+  fun map(source: CountryDataModel?): Country?
+    = source?.let {
+        Country(it.isoCode,
+                it.displayName,
+                it.name,
+                it.isoThree,
+                it.numberCode)
+      }
 }

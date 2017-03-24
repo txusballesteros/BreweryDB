@@ -24,15 +24,12 @@ import com.txusballesteros.brewerydb.domain.model.Image
 import javax.inject.Inject
 
 class ImageViewModelMapper @Inject constructor() {
-  fun map(source: Image?): ImageViewModel? {
-    var result: ImageViewModel? = null
-    if (source != null) {
-      result = ImageViewModel(source.icon,
-                              source.medium,
-                              source.large,
-                              source.squareMedium,
-                              source.squareLarge)
-    }
-    return result
-  }
+  fun map(source: Image?): ImageViewModel?
+    = source?.let {
+        ImageViewModel(it.icon,
+                       it.medium,
+                       it.large,
+                       it.squareMedium,
+                       it.squareLarge)
+      }
 }

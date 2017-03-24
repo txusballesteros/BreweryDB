@@ -24,17 +24,6 @@ import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import javax.inject.Inject
 
 class BeerApiModelMapper @Inject constructor() {
-  fun map(source: BeersListApiResponse)
-      = map(source.beers)
-
-  fun map(source: List<BeerApiModel>?): List<BeerDataModel> {
-    var result: List<BeerDataModel> = ArrayList()
-    if (source != null) {
-      result = source.map { beer -> map(beer) }
-    }
-    return result
-  }
-
   fun map(source: BeerApiModel): BeerDataModel
       = BeerDataModel(source.id,
                       source.name,

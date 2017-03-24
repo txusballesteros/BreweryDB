@@ -22,7 +22,6 @@ package com.txusballesteros.brewerydb.api.beers
 
 import com.txusballesteros.brewerydb.api.ApiIntegrationTest
 import junit.framework.Assert.assertEquals
-import junit.framework.Assert.assertFalse
 import org.junit.Test
 import retrofit2.Retrofit
 
@@ -43,6 +42,5 @@ class BeerIngredientsApiIntegrationTest : ApiIntegrationTest() {
     val response = api.getIngredients(BEER_ID)
 
     assertEquals(STATUS_SUCCESS, response.status)
-    assertFalse(response.ingredients.isEmpty())
   }
 }

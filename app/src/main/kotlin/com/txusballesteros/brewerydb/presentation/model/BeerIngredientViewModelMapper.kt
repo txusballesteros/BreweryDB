@@ -24,9 +24,6 @@ import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModelM
 import javax.inject.Inject
 
 class BeerIngredientViewModelMapper @Inject constructor(private val typeMapper: IngredientTypeViewModelMapper) {
-  fun map(source: List<BeerIngredient>): List<BeerIngredientViewModel>
-    = source.map { ingredient -> map(ingredient) }
-
   fun map(source: BeerIngredient): BeerIngredientViewModel
     = BeerIngredientViewModel(source.id,
                               source.name,

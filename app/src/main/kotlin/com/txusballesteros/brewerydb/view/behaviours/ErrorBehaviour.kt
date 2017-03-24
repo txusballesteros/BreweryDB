@@ -22,6 +22,7 @@ package com.txusballesteros.brewerydb.view.behaviours
 
 import android.app.Activity
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.AppCompatButton
 import android.view.View
 import com.txusballesteros.brewerydb.R
 import org.jetbrains.anko.find
@@ -30,9 +31,11 @@ import javax.inject.Inject
 class ErrorBehaviour @Inject constructor(): Behaviour() {
   private lateinit var contentHolder: View
   private lateinit var errorHolder: View
-  private lateinit var activity : AppCompatActivity
+  private lateinit var activity: AppCompatActivity
+  private lateinit  var onRetry: () -> Unit
 
-  override fun inject(activity: Activity) {
+  fun inject(activity: Activity, onRetry: () -> Unit) {
+    this.onRetry = onRetry
     if (activity is AppCompatActivity) {
       this.activity = activity
     }
@@ -61,5 +64,6 @@ class ErrorBehaviour @Inject constructor(): Behaviour() {
   override fun onBehaviorReady(view: View) {
     this.errorHolder = activity.find<View>(R.id.errorHolder)
     this.contentHolder = activity.find<View>(R.id.content_place_holder)
+    view.find<AppCompatButton>(R.id.retry).setOnClickListener { onRetry() }
   }
 }

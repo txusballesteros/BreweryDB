@@ -25,18 +25,6 @@ import com.txusballesteros.brewerydb.data.model.IngredientTypeDataModelMapper
 import javax.inject.Inject
 
 class BeerIngredientApiModelMapper @Inject constructor(private val typeMapper: IngredientTypeDataModelMapper) {
-  fun map(source: BeerIngredientsApiResponse): List<BeerIngredientDataModel>
-    = map(source.ingredients)
-
-  fun map(source: List<BeerIngredientApiModel>?): List<BeerIngredientDataModel> {
-    var result: List<BeerIngredientDataModel> = ArrayList()
-    if (source != null) {
-      result = source.map { ingredient -> map(ingredient) }
-    }
-    return result
-  }
-
-
   fun map(source: BeerIngredientApiModel): BeerIngredientDataModel
     = BeerIngredientDataModel(source.id,
                               source.name,

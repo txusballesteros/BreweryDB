@@ -1,4 +1,4 @@
-/*
+<?xml version="1.0" encoding="utf-8"?><!--
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -17,20 +17,8 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
- */
-package com.txusballesteros.brewerydb.presentation.model
-
-import com.txusballesteros.brewerydb.domain.model.Brewery
-import javax.inject.Inject
-
-class BreweryViewModelMapper @Inject constructor(private val imageMapper: ImageViewModelMapper) {
-  fun map(source: Brewery): BreweryViewModel
-      = BreweryViewModel(source.id,
-                         source.name,
-                         source.description ?: "NA",
-                         source.website ?: "NA",
-                         source.established ?: "NA",
-                         source.mailingListUrl,
-                         source.isOrganic,
-                         imageMapper.map(source.images))
-}
+-->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+  <item android:state_enabled="true" android:state_pressed="false" android:color="@color/colorPrimary" />
+  <item android:state_enabled="true" android:state_pressed="true" android:color="@color/white" />
+</selector>

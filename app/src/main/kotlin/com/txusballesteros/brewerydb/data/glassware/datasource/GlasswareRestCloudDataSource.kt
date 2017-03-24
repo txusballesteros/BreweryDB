@@ -23,12 +23,13 @@ package com.txusballesteros.brewerydb.data.glassware.datasource
 import com.txusballesteros.brewerydb.api.glassware.GlasswareApi
 import com.txusballesteros.brewerydb.api.model.GlassApiModelMapper
 import com.txusballesteros.brewerydb.data.model.GlassDataModel
+import com.txusballesteros.brewerydb.extensions.secureMap
 import javax.inject.Inject
 
 class GlasswareRestCloudDataSource @Inject constructor(private val api: GlasswareApi,
                                                        private val mapper: GlassApiModelMapper): GlasswareCloudDataSource {
   override fun getGlassware(): List<GlassDataModel> {
     val response = api.getGlasses()
-    return mapper.map(response)
+    return response.glasses.secureMap { glass -> mapper.map(glass) }
   }
 }

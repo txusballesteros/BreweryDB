@@ -74,11 +74,17 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   override fun onRequestViewBehaviours() {
     toolbarBehaviour.inject(activity)
     loadingBehaviour.inject(activity)
-    errorBehaviour.inject(activity)
+    errorBehaviour.inject(activity, {
+      requestBeers()
+    })
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
     initializeList()
+    requestBeers()
+  }
+
+  private fun requestBeers() {
     presenter.onRequestBeers()
   }
 

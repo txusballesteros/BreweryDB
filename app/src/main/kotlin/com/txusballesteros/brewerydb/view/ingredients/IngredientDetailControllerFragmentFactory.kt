@@ -30,11 +30,12 @@ class IngredientDetailControllerFragmentFactory @Inject constructor() {
   fun getFragment(fragmentManager: FragmentManager,
                                   ingredientId: Int,
                                   ingredientType: IngredientTypeViewModel): AbsFragment? {
-    var result: AbsFragment? = null
+    var result: AbsFragment?
     when(ingredientType) {
       IngredientTypeViewModel.HOP -> result = getHopDetailFragment(fragmentManager, ingredientId)
       IngredientTypeViewModel.FERMENTABLE -> result = getFermentableDetailFragment(fragmentManager, ingredientId)
       IngredientTypeViewModel.YEAST -> result = getYeastDetailFragment(fragmentManager, ingredientId)
+      else -> result = null
     }
     return result
   }

@@ -20,7 +20,7 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-data class StyleDataModel(override val id: Int,
+data class StyleDataModel(val id: Int,
                           val categoryId: Int,
                           val name: String,
                           val shortName: String,
@@ -34,4 +34,4 @@ data class StyleDataModel(override val id: Int,
                           val ogMin: String = "",
                           val ogMax: String = "",
                           val fgMin: String = "",
-                          val fgMax: String = ""): DataModel
+                          val fgMax: String = "")
