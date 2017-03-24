@@ -20,10 +20,14 @@
  */
 package com.txusballesteros.brewerydb.view.search
 
+import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.view.AbsActivity
 import com.txusballesteros.brewerydb.view.AbsFragment
 
 class SearchActivity: AbsActivity() {
   override fun onRequestFragment(): AbsFragment
     = SearchFragment.newInstance()
+
+  override fun onRequestLayoutResourceId(): Int
+    = R.layout.activity_basic_layout
 }

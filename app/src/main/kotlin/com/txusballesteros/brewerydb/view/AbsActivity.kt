@@ -27,7 +27,8 @@ import com.txusballesteros.brewerydb.R
 abstract class AbsActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_base_layout)
+    val layoutResourceId = onRequestLayoutResourceId()
+    setContentView(layoutResourceId)
     if (savedInstanceState == null) {
       addFragment()
     }
@@ -38,6 +39,10 @@ abstract class AbsActivity : AppCompatActivity() {
     supportFragmentManager.beginTransaction()
         .add(R.id.content_place_holder, fragment)
         .commit()
+  }
+
+  open protected fun onRequestLayoutResourceId(): Int {
+    return R.layout.activity_coordinated_layout
   }
 
   abstract fun onRequestFragment() : AbsFragment
