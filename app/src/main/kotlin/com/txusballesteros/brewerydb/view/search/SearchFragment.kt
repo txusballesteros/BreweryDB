@@ -30,6 +30,7 @@ import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.navigation.RequestCodes
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
@@ -83,9 +84,7 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
-    if (savedInstanceState == null) {
-      presenter.onRequestFilters()
-    }
+    presenter.onRequestFilters()
     style.setOnClickListener { presenter.onStyleSelectorClick() }
   }
 
@@ -151,6 +150,11 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
     abvMax.setText(filter.abvMax?.toString() ?: "")
     ibuMin.setText(filter.ibuMin?.toString() ?: "")
     ibuMax.setText(filter.ibuMax?.toString() ?: "")
+  }
+
+  override fun renderStyle(style: StyleViewModel) {
+    this.styleId = style.id
+    this.style.text = style.name
   }
 
   override fun closeView() {

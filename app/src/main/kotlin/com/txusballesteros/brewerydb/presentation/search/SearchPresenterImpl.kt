@@ -23,14 +23,19 @@ package com.txusballesteros.brewerydb.presentation.search
 import com.txusballesteros.brewerydb.domain.model.SearchQuery
 import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryUseCase
 import com.txusballesteros.brewerydb.domain.usecase.search.StoreSearchQueryUseCase
+import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdUseCase
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModelMapper
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModelMapper
 import javax.inject.Inject
 
 class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCase: StoreSearchQueryUseCase,
                                               private val getSearchQueryUseCase: GetSearchQueryUseCase,
+                                              private val getStyleByIdUseCase: GetStyleByIdUseCase,
                                               private val mapper: SearchQueryViewModelMapper,
+                                              private val styleMapper: StyleViewModelMapper,
                                               private val navigator: Navigator):
                           AbsPresenter<SearchPresenter.View>(), SearchPresenter {
 
@@ -59,7 +64,17 @@ class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCas
     getSearchQueryUseCase.execute(onResult = {
       val query = mapper.map(it)
       getView()?.renderFilters(query)
+      requestStyle(query)
     })
+  }
+
+  private fun requestStyle(query: SearchQueryViewModel) {
+    query.styleId?.let {
+      getStyleByIdUseCase.execute(query.styleId, onResult = {
+        val style = styleMapper.map(it)
+        getView()?.renderStyle(style)
+      })
+    }
   }
 
   override fun onStyleSelectorClick() {

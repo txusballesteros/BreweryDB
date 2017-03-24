@@ -22,6 +22,7 @@ package com.txusballesteros.brewerydb.presentation.search
 
 import com.txusballesteros.brewerydb.presentation.Presenter
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 
 interface SearchPresenter: Presenter<SearchPresenter.View> {
   fun onRequestFilters()
@@ -30,6 +31,7 @@ interface SearchPresenter: Presenter<SearchPresenter.View> {
 
   interface View: Presenter.View {
     fun renderFilters(filter: SearchQueryViewModel)
+    fun renderStyle(style: StyleViewModel)
     fun getKeyword(): String?
     fun getIsOrganic(): Boolean
     fun getAbvMin(): Int?
