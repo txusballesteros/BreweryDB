@@ -41,6 +41,7 @@ class IngredientsRepository @Inject constructor(private val getHopStrategy: GetH
       IngredientType.HOP -> getHop(query, onResult)
       IngredientType.FERMENTABLE -> getFermentable(query, onResult)
       IngredientType.YEAST -> getYeast(query, onResult)
+      else -> { }
     }
   }
 

@@ -25,9 +25,6 @@ import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import javax.inject.Inject
 
 class BeerViewModelMapper @Inject constructor() {
-  fun map(source: List<Beer>): List<BeerViewModel>
-      = source.map { beer -> map(beer) }
-
   fun map(source: Beer): BeerViewModel
       = BeerViewModel(source.id,
                       source.name,

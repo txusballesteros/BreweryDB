@@ -22,6 +22,6 @@ package com.txusballesteros.brewerydb.api.model
 
 import com.google.gson.annotations.SerializedName
 
-class GlasswareApiResponse(@SerializedName("data") val glasses: List<GlassApiModel>,
+class GlasswareApiResponse(@SerializedName("data") val glasses: List<GlassApiModel>?,
                            val message: String,
                            val status: String)

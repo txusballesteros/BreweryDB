@@ -18,19 +18,8 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.extensions
 
-import com.txusballesteros.brewerydb.domain.model.Brewery
-import javax.inject.Inject
+fun <A, B> List<A>?.secureMap(block: (A) -> B): List<B> = this?.let { map(block) } ?: emptyList()
 
-class BreweryViewModelMapper @Inject constructor(private val imageMapper: ImageViewModelMapper) {
-  fun map(source: Brewery): BreweryViewModel
-      = BreweryViewModel(source.id,
-                         source.name,
-                         source.description ?: "NA",
-                         source.website ?: "NA",
-                         source.established ?: "NA",
-                         source.mailingListUrl,
-                         source.isOrganic,
-                         imageMapper.map(source.images))
-}
+

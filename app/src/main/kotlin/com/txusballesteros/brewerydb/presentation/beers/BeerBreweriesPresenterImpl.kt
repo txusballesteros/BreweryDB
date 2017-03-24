@@ -35,7 +35,7 @@ class BeerBreweriesPresenterImpl @Inject constructor(private val getBeerBrewerie
   override fun onRequestBreweries(beerId: String) {
     getView()?.showLoading()
     getBeerBreweriesUseCase.execute(beerId, onResult = {
-      val breweries = mapper.map(it)
+      val breweries = it.map { brewery -> mapper.map(brewery) }
       getView()?.hideLoading()
       getView()?.renderBreweries(breweries)
     }, onError = {

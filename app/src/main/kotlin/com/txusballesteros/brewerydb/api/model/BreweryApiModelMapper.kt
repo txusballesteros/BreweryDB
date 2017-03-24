@@ -24,12 +24,6 @@ import com.txusballesteros.brewerydb.data.model.BreweryDataModel
 import javax.inject.Inject
 
 class BreweryApiModelMapper @Inject constructor(private val imageMapper: ImageApiModelMapper) {
-  fun map(source: BeerBreweriesApiResponse): List<BreweryDataModel>
-    = map(source.breweries)
-
-  fun map(source: List<BreweryApiModel>): List<BreweryDataModel>
-    = source.map { brewery -> map(brewery) }
-
   fun map(source: BreweryApiModel): BreweryDataModel
     = BreweryDataModel(source.id,
                        source.name,

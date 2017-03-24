@@ -23,9 +23,6 @@ package com.txusballesteros.brewerydb.data.model
 import javax.inject.Inject
 
 class BeerIngredientDataModelMapper @Inject constructor(private val typeMapper: IngredientTypeDataModelMapper) {
-  fun map(source: List<BeerIngredientDataModel>): List<BeerIngredient>
-    = source.map { ingredient -> map(ingredient) }
-
   fun map(source: BeerIngredientDataModel): BeerIngredient
     = BeerIngredient(source.id,
                      source.name,

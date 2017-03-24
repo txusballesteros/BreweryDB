@@ -22,6 +22,6 @@ package com.txusballesteros.brewerydb.api.model
 
 import com.google.gson.annotations.SerializedName
 
-class BeerBreweriesApiResponse(@SerializedName("data") val breweries: List<BreweryApiModel>,
+class BeerBreweriesApiResponse(@SerializedName("data") val breweries: List<BreweryApiModel>?,
                                val message: String,
                                val status: String)

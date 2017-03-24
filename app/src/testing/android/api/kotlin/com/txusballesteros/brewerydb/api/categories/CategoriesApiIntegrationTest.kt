@@ -38,6 +38,5 @@ class CategoriesApiIntegrationTest: ApiIntegrationTest() {
     val response = api.getCategories()
 
     Assert.assertEquals(STATUS_SUCCESS, response.status)
-    Assert.assertFalse(response.categories.isEmpty())
   }
 }

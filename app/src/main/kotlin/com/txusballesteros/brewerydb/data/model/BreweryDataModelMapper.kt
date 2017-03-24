@@ -24,9 +24,6 @@ import com.txusballesteros.brewerydb.domain.model.Brewery
 import javax.inject.Inject
 
 class BreweryDataModelMapper @Inject constructor(private val imageMapper: ImageDataModelMapper) {
-  fun map(source: List<BreweryDataModel>): List<Brewery>
-    = source.map { brewery -> map(brewery) }
-
   fun map(source: BreweryDataModel): Brewery
     = Brewery(source.id,
               source.name,

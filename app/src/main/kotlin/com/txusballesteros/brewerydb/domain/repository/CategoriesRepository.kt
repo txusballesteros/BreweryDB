@@ -23,6 +23,7 @@ package com.txusballesteros.brewerydb.domain.repository
 import com.txusballesteros.brewerydb.data.categories.strategy.GetCategoriesStrategy
 import com.txusballesteros.brewerydb.data.model.CategoryDataModelMapper
 import com.txusballesteros.brewerydb.domain.model.Category
+import com.txusballesteros.brewerydb.extensions.secureMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -32,8 +33,8 @@ class CategoriesRepository @Inject constructor(private val getCategoriesStrategy
 
   fun get(onResult: (List<Category>) -> Unit) {
     getCategoriesStrategy.build().execute(onResult = {
-      val categories = mapper.map(it)
-      onResult(categories!!)
+      val categories = it.secureMap { category -> mapper.map(category) }
+      onResult(categories)
     })
   }
 }

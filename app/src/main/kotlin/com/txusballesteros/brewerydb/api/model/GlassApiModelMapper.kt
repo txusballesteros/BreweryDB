@@ -24,13 +24,6 @@ import com.txusballesteros.brewerydb.data.model.GlassDataModel
 import javax.inject.Inject
 
 class GlassApiModelMapper @Inject constructor() {
-  fun map(source: GlasswareApiResponse): List<GlassDataModel>
-    = map(source.glasses)
-
-  fun map(source: List<GlassApiModel>): List<GlassDataModel>
-    = source.map { glass -> map(glass) }
-
-
   fun map(source: GlassApiModel): GlassDataModel
     = GlassDataModel(source.id, source.name)
 }

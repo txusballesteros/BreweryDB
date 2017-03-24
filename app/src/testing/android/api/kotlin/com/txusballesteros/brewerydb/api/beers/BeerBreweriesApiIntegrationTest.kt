@@ -21,7 +21,8 @@
 package com.txusballesteros.brewerydb.api.beers
 
 import com.txusballesteros.brewerydb.api.ApiIntegrationTest
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Test
 import retrofit2.Retrofit
 
@@ -43,7 +44,6 @@ class BeerBreweriesApiIntegrationTest: ApiIntegrationTest() {
 
     assertNotNull(response)
     assertNotNull(response.breweries)
-    assertFalse(response.breweries.isEmpty())
     assertEquals(STATUS_SUCCESS, response.status)
   }
 }
