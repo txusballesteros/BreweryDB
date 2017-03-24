@@ -68,9 +68,9 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
   }
 
   override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-    if (requestCode == Activity.RESULT_OK) {
+    if (resultCode == Activity.RESULT_OK) {
       when(requestCode) {
-        RequestCodes.STYLE_SELECTOR -> extractStyleFromIntent(data!!)
+        RequestCodes.STYLE_SELECTOR -> extractStyleFromIntent(data)
       }
     }
   }
