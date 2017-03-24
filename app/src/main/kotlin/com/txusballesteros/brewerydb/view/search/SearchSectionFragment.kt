@@ -18,13 +18,11 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.view.search
 
-data class SearchQueryViewModel(val keyword: String? = null,
-                                val abvMin: Int? = null,
-                                val abvMax: Int? = null,
-                                val ibuMin: Int? = null,
-                                val ibuMax: Int? = null,
-                                val isOrganic: Boolean? = null,
-                                val breweryId: String? = null,
-                                val styleId: Int? = null)
+import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
+import com.txusballesteros.brewerydb.view.AbsFragment
+
+abstract class SearchSectionFragment: AbsFragment() {
+  abstract fun getQuery(source: SearchQueryViewModel): SearchQueryViewModel
+}

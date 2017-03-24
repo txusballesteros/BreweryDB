@@ -30,26 +30,12 @@
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="vertical"
-      android:layout_marginTop="@dimen/padding_normal">
+      android:orientation="vertical">
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/keyword"
+    <FrameLayout
+        android:id="@+id/keywordSearchHolder"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:inputType="textNoSuggestions|textFilter"
-        android:maxLines="1"
-        android:maxLength="100"
-        android:textSize="@dimen/text_size_medium"
-        android:paddingLeft="@dimen/padding_big"
-        android:paddingRight="@dimen/padding_big"
-        android:layout_marginLeft="@dimen/padding_normal"
-        android:layout_marginRight="@dimen/padding_normal"
-        android:textColor="@color/colorPrimaryLight"
-        android:textColorHint="@color/colorPrimaryDark"
-        android:fontFamily="sans-serif"
-        android:hint="@string/which_beer_are_you_want"
-        android:background="@drawable/keyword_box" />
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"

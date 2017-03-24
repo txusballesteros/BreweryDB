@@ -23,14 +23,12 @@ package com.txusballesteros.brewerydb.view.search
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.AppCompatEditText
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.navigation.RequestCodes
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
@@ -47,6 +45,7 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
 
   @Inject lateinit var toolbarBehaviour: ToolbarBehaviour
   @Inject lateinit var presenter: SearchPresenter
+  @Inject lateinit var sectionsFragmentFactory: SearchSectionFragmentFactory
   private var styleId: Int? = null
 
   override fun onRequestLayoutResourceId(): Int
@@ -84,8 +83,23 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
-    presenter.onRequestFilters()
+    if (savedInstanceState == null) {
+      compose()
+    }
     style.setOnClickListener { presenter.onStyleSelectorClick() }
+  }
+
+  private fun compose() {
+    val keywordFragment = sectionsFragmentFactory.getKeywordSection(childFragmentManager)
+    addSection(keywordFragment, R.id.keywordSearchHolder)
+  }
+
+  private fun addSection(section: SearchSectionFragment, searchHolder: Int) {
+    val tag = section::class.java.name
+    childFragmentManager
+        .beginTransaction()
+        .replace(searchHolder, section, tag)
+        .commitAllowingStateLoss()
   }
 
   override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -102,59 +116,14 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
     return result
   }
 
-  override fun getKeyword(): String? {
-    var keyword: String? = keyword.text.toString().trim()
-    if (keyword != null && keyword.isEmpty()) {
-      keyword = null
-    }
-    return keyword
-  }
-
-  override fun getIsOrganic(): Boolean {
-    return isOrganic.isChecked
-  }
-
-  override fun getAbvMin(): Int? {
-    return getRangeValue(abvMin)
-  }
-
-  override fun getAbvMax(): Int? {
-    return getRangeValue(abvMax)
-  }
-
-  override fun getIbuMin(): Int? {
-    return getRangeValue(ibuMin)
-  }
-
-  override fun getIbuMax(): Int? {
-    return getRangeValue(ibuMax)
-  }
-
-  override fun getStyleId(): Int? {
-    return styleId
-  }
-
-  private fun getRangeValue(view: AppCompatEditText): Int? {
-    var result: Int? = null
-    var value: String = view.text.trim().toString()
-    if (!value.isEmpty()) {
-      result = value.toInt()
+  override fun getQuery(): SearchQueryViewModel {
+    var result: SearchQueryViewModel = SearchQueryViewModel()
+    childFragmentManager.fragments.forEach {
+      if (it is SearchSectionFragment) {
+        result = it.getQuery(result)
+      }
     }
     return result
-  }
-
-  override fun renderFilters(filter: SearchQueryViewModel) {
-    keyword.setText(filter.keyword ?: "")
-    isOrganic.isChecked = filter.isOrganic ?: false
-    abvMin.setText(filter.abvMin?.toString() ?: "")
-    abvMax.setText(filter.abvMax?.toString() ?: "")
-    ibuMin.setText(filter.ibuMin?.toString() ?: "")
-    ibuMax.setText(filter.ibuMax?.toString() ?: "")
-  }
-
-  override fun renderStyle(style: StyleViewModel) {
-    this.styleId = style.id
-    this.style.text = style.name
   }
 
   override fun closeView() {

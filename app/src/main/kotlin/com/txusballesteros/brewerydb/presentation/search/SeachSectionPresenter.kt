@@ -18,13 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.presentation.search
 
-data class SearchQueryViewModel(val keyword: String? = null,
-                                val abvMin: Int? = null,
-                                val abvMax: Int? = null,
-                                val ibuMin: Int? = null,
-                                val ibuMax: Int? = null,
-                                val isOrganic: Boolean? = null,
-                                val breweryId: String? = null,
-                                val styleId: Int? = null)
+import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
+
+interface SeachSectionPresenter: Presenter<SeachSectionPresenter.View> {
+  fun onRequestSearchQuery()
+
+  interface View: Presenter.View {
+    fun renderSearchQuery(query: SearchQueryViewModel)
+  }
+}

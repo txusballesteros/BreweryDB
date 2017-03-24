@@ -27,10 +27,7 @@ import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPr
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailPresenterImpl
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailControllerPresenter
 import com.txusballesteros.brewerydb.presentation.ingredients.IngredientDetailControllerPresenterImpl
-import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
-import com.txusballesteros.brewerydb.presentation.search.SearchPresenterImpl
-import com.txusballesteros.brewerydb.presentation.search.StyleListSelectorPresenter
-import com.txusballesteros.brewerydb.presentation.search.StyleListSelectorPresenterImpl
+import com.txusballesteros.brewerydb.presentation.search.*
 import dagger.Module
 import dagger.Provides
 
@@ -73,4 +70,7 @@ class PresentationModule {
 
   @Provides
   fun provideStyleListSelectorPresenter(presenter: StyleListSelectorPresenterImpl): StyleListSelectorPresenter = presenter
+
+  @Provides
+  fun provideSeachSectionPresenter(presenter: SeachSectionPresenterImpl): SeachSectionPresenter = presenter
 }

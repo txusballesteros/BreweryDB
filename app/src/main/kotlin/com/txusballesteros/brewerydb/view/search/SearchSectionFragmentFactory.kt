@@ -18,13 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.model
+package com.txusballesteros.brewerydb.view.search
 
-data class SearchQueryViewModel(val keyword: String? = null,
-                                val abvMin: Int? = null,
-                                val abvMax: Int? = null,
-                                val ibuMin: Int? = null,
-                                val ibuMax: Int? = null,
-                                val isOrganic: Boolean? = null,
-                                val breweryId: String? = null,
-                                val styleId: Int? = null)
+import android.support.v4.app.FragmentManager
+import javax.inject.Inject
+
+class SearchSectionFragmentFactory @Inject constructor() {
+  fun getKeywordSection(fragmentManager: FragmentManager): SearchSectionFragment {
+    val tag = KeywordSearchSectionFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: KeywordSearchSectionFragment.newInstance()
+    return fragment as SearchSectionFragment
+  }
+}

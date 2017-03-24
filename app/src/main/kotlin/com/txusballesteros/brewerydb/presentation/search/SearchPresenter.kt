@@ -25,20 +25,11 @@ import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 
 interface SearchPresenter: Presenter<SearchPresenter.View> {
-  fun onRequestFilters()
   fun onSearch()
   fun onStyleSelectorClick()
 
   interface View: Presenter.View {
-    fun renderFilters(filter: SearchQueryViewModel)
-    fun renderStyle(style: StyleViewModel)
-    fun getKeyword(): String?
-    fun getIsOrganic(): Boolean
-    fun getAbvMin(): Int?
-    fun getAbvMax(): Int?
-    fun getIbuMin(): Int?
-    fun getIbuMax(): Int?
-    fun getStyleId(): Int?
+    fun getQuery(): SearchQueryViewModel
     fun closeView()
   }
 }

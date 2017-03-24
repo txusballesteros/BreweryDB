@@ -32,6 +32,7 @@ import com.txusballesteros.brewerydb.view.ingredients.FermentableDetailFragment
 import com.txusballesteros.brewerydb.view.ingredients.HopDetailFragment
 import com.txusballesteros.brewerydb.view.ingredients.IngredientDetailControllerFragment
 import com.txusballesteros.brewerydb.view.ingredients.YeastDetailFragment
+import com.txusballesteros.brewerydb.view.search.KeywordSearchSectionFragment
 import com.txusballesteros.brewerydb.view.search.SearchFragment
 import com.txusballesteros.brewerydb.view.search.StyleListSelectorFragment
 import dagger.Component
@@ -60,4 +61,5 @@ interface ViewComponent {
   fun inject(view: SearchFragment)
   fun inject(view: AboutFragment)
   fun inject(view: StyleListSelectorFragment)
+  fun inject(view: KeywordSearchSectionFragment)
 }
