@@ -20,12 +20,15 @@
  */
 package com.txusballesteros.brewerydb.view.search
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.AppCompatEditText
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.navigation.RequestCodes
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
 import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
@@ -43,6 +46,7 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
 
   @Inject lateinit var toolbarBehaviour: ToolbarBehaviour
   @Inject lateinit var presenter: SearchPresenter
+  private var styleId: Int? = null
 
   override fun onRequestLayoutResourceId(): Int
     = R.layout.fragment_search
@@ -63,10 +67,26 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
     toolbarBehaviour.inject(activity, true)
   }
 
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    if (requestCode == Activity.RESULT_OK) {
+      when(requestCode) {
+        RequestCodes.STYLE_SELECTOR -> extractStyleFromIntent(data!!)
+      }
+    }
+  }
+
+  fun extractStyleFromIntent(data: Intent?) {
+    data?.let {
+      styleId = data.extras.getInt(StyleListSelectorFragment.EXTRA_STYLE_ID)
+      style.text = data.extras.getString(StyleListSelectorFragment.EXTRA_STYLE_NAME)
+    }
+  }
+
   override fun onViewReady(savedInstanceState: Bundle?) {
     if (savedInstanceState == null) {
       presenter.onRequestFilters()
     }
+    style.setOnClickListener { presenter.onStyleSelectorClick() }
   }
 
   override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -109,6 +129,10 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
 
   override fun getIbuMax(): Int? {
     return getRangeValue(ibuMax)
+  }
+
+  override fun getStyleId(): Int? {
+    return styleId
   }
 
   private fun getRangeValue(view: AppCompatEditText): Int? {

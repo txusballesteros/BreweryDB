@@ -48,16 +48,6 @@ class StylesLocalDataSourceTest : UnitTest() {
   }
 
   @Test
-  fun shouldGetStyles() {
-    dataSource.store(stylesList)
-
-    val result = dataSource.getStylesByCategoryId(CATEGORY_A)
-
-    Assert.assertFalse(result.isEmpty())
-    Assert.assertEquals(CATEGORY_A, result.first().categoryId)
-  }
-
-  @Test
   fun shouldStoreStyles() {
     dataSource.store(stylesList)
     val result = dataSource.getList()

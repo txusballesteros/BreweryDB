@@ -18,25 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.styles.datasource
+package com.txusballesteros.brewerydb.presentation.search
 
-import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import kotlin.collections.ArrayList
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 
-class StylesInMemoryLocalDataSource @Inject constructor(): StylesLocalDataSource {
-  private val cache: MutableMap<Int, StyleDataModel> = HashMap()
+interface StyleListSelectorPresenter: Presenter<StyleListSelectorPresenter.View> {
+  fun onRequestStyles()
+  fun onStyleSelected(style: StyleViewModel)
 
-  override fun get(styleId: Int): StyleDataModel? {
-    return cache[styleId]
-  }
-
-  override fun getList(): List<StyleDataModel> {
-    val sortedList = cache.values.sortedBy { it.name }
-    return ArrayList<StyleDataModel>(sortedList)
-  }
-
-  override fun store(styles: List<StyleDataModel>) {
-    styles.map { cache.put(it.id, it) }
+  interface View: Presenter.View {
+    fun renderStyles(styles: List<StyleViewModel>)
+    fun showLoading()
+    fun hideLoading()
+    fun showError()
+    fun closeViewWithResult(style: StyleViewModel)
   }
 }

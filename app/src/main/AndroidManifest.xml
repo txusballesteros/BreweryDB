@@ -42,5 +42,6 @@
     <activity android:name=".view.breweries.BreweryDetailActivity" />
     <activity android:name=".view.search.SearchActivity"
               android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+    <activity android:name=".view.search.StyleSelectorActivity" />
   </application>
 </manifest>

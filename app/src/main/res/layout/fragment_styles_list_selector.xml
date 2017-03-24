@@ -19,28 +19,16 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="50dp"
-    android:orientation="vertical"
-    android:gravity="left|center_vertical"
-    android:foreground="?attr/selectableItemBackground">
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
 
-  <android.support.v7.widget.AppCompatTextView
-      android:id="@+id/name"
+  <android.support.v7.widget.RecyclerView
+      android:id="@+id/list"
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:textSize="20sp"
-      android:layout_marginTop="@dimen/padding_normal"
-      android:layout_marginLeft="@dimen/padding_normal"
-      android:layout_marginRight="@dimen/padding_normal"
-      android:fontFamily="sans-serif"
-      android:textStyle="bold"
-      android:maxLines="1"
-      android:ellipsize="end"
-      tools:text="Short Name"/>
+      android:layout_height="match_parent"
+      tools:listitem="@layout/item_style"/>
 
-</LinearLayout>
+</FrameLayout>

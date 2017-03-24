@@ -24,6 +24,12 @@ import android.content.Context
 import android.content.Intent
 
 abstract class NavigationCommand {
+  var requestCode: Int = 0
+    protected set(value) { field = value }
+
+  var navigateForResult: Boolean = false
+    protected set(value) { field = value }
+
   fun build(context: Context): Intent {
     return onRequestIntent(context)
   }

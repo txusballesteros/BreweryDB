@@ -23,13 +23,15 @@ package com.txusballesteros.brewerydb.presentation.search
 import com.txusballesteros.brewerydb.domain.model.SearchQuery
 import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryUseCase
 import com.txusballesteros.brewerydb.domain.usecase.search.StoreSearchQueryUseCase
+import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModelMapper
 import javax.inject.Inject
 
 class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCase: StoreSearchQueryUseCase,
                                               private val getSearchQueryUseCase: GetSearchQueryUseCase,
-                                              private val mapper: SearchQueryViewModelMapper):
+                                              private val mapper: SearchQueryViewModelMapper,
+                                              private val navigator: Navigator):
                           AbsPresenter<SearchPresenter.View>(), SearchPresenter {
 
   override fun onSearch() {
@@ -39,12 +41,15 @@ class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCas
     val abvMax = getView()?.getAbvMax()
     val ibuMin = getView()?.getIbuMin()
     val ibuMax = getView()?.getIbuMax()
+    val style = getView()?.getStyleId()
     val query = SearchQuery(keyword,
                             abvMin,
                             abvMax,
                             ibuMin,
                             ibuMax,
-                            isOrganic)
+                            isOrganic,
+                            null,
+                            style)
     storeSearchQueryUseCase.execute(query, onResult = {
       getView()?.closeView()
     })
@@ -55,5 +60,9 @@ class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCas
       val query = mapper.map(it)
       getView()?.renderFilters(query)
     })
+  }
+
+  override fun onStyleSelectorClick() {
+    navigator.navigateToStyleSelector(getView())
   }
 }

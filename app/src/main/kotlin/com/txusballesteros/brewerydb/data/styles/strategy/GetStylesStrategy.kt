@@ -37,7 +37,7 @@ class GetStylesStrategy constructor(val localDataSource: StylesLocalDataSource,
   override fun onRequestCallToCloud(params: Void?): List<StyleDataModel>? {
     val response = cloudDataSource.getStyles()
     localDataSource.store(response)
-    return response
+    return localDataSource.getList()
   }
 
   override fun isValid(result: List<StyleDataModel>?): Boolean {

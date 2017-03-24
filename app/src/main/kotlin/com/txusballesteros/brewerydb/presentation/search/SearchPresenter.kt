@@ -26,6 +26,7 @@ import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
 interface SearchPresenter: Presenter<SearchPresenter.View> {
   fun onRequestFilters()
   fun onSearch()
+  fun onStyleSelectorClick()
 
   interface View: Presenter.View {
     fun renderFilters(filter: SearchQueryViewModel)
@@ -35,6 +36,7 @@ interface SearchPresenter: Presenter<SearchPresenter.View> {
     fun getAbvMax(): Int?
     fun getIbuMin(): Int?
     fun getIbuMax(): Int?
+    fun getStyleId(): Int?
     fun closeView()
   }
 }

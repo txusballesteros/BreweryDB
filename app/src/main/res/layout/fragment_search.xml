@@ -31,7 +31,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:padding="@dimen/padding_normal">
+      android:layout_marginTop="@dimen/padding_normal">
 
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/keyword"
@@ -43,18 +43,28 @@
         android:textSize="@dimen/text_size_medium"
         android:paddingLeft="@dimen/padding_big"
         android:paddingRight="@dimen/padding_big"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
         android:textColor="@color/colorPrimaryLight"
         android:textColorHint="@color/colorPrimaryDark"
         android:fontFamily="sans-serif"
         android:hint="@string/which_beer_are_you_want"
         android:background="@drawable/keyword_box" />
 
-    <include layout="@layout/include_line_decorator" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/padding_big"
+        android:layout_marginRight="@dimen/padding_big"
+        android:layout_marginTop="@dimen/padding_big"
+        android:background="@color/gray_4"
+        android:layout_height="0.5dp" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/style"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
         android:minHeight="40dp"
         android:foreground="?attr/selectableItemBackground"
         android:clickable="true"
@@ -64,13 +74,19 @@
         android:gravity="left|center_vertical"
         android:text="@string/style"/>
 
-    <include layout="@layout/include_line_decorator" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/padding_big"
+        android:layout_marginRight="@dimen/padding_big"
+        android:background="@color/gray_4"
+        android:layout_height="0.5dp" />
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/brewery"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="40dp"
+        android:layout_height="60dp"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
         android:foreground="?attr/selectableItemBackground"
         android:clickable="true"
         android:textSize="@dimen/text_size_normal"
@@ -79,11 +95,19 @@
         android:gravity="left|center_vertical"
         android:text="@string/brewery"/>
 
-    <include layout="@layout/include_line_decorator" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/padding_big"
+        android:layout_marginRight="@dimen/padding_big"
+        android:layout_marginBottom="@dimen/padding_big"
+        android:background="@color/gray_4"
+        android:layout_height="0.5dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
         android:orientation="horizontal">
 
       <android.support.v7.widget.AppCompatTextView
@@ -109,12 +133,14 @@
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_normal"
         android:textColor="@color/gray_2"
+        android:layout_marginLeft="@dimen/padding_normal"
         android:fontFamily="sans-serif"
         android:text="@string/abv"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_normal"
         android:textSize="@dimen/text_size_normal"
         android:textColor="@color/gray_3"
         android:fontFamily="sans-serif"
@@ -123,6 +149,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
         android:orientation="horizontal">
 
       <android.support.v7.widget.AppCompatEditText
@@ -165,6 +193,7 @@
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_normal"
         android:textSize="@dimen/text_size_normal"
         android:textColor="@color/gray_2"
         android:fontFamily="sans-serif"
@@ -173,6 +202,7 @@
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_normal"
         android:textSize="@dimen/text_size_normal"
         android:textColor="@color/gray_3"
         android:fontFamily="sans-serif"
@@ -181,6 +211,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/padding_normal"
+        android:layout_marginRight="@dimen/padding_normal"
         android:orientation="horizontal">
 
       <android.support.v7.widget.AppCompatEditText

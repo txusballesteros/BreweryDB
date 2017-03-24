@@ -22,7 +22,6 @@ package com.txusballesteros.brewerydb.domain.repository
 
 import com.txusballesteros.brewerydb.data.model.StyleDataModelMapper
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStyleByIdStrategy
-import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesByCategoryIdStrategy
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesStrategy
 import com.txusballesteros.brewerydb.domain.model.Style
 import com.txusballesteros.brewerydb.extensions.secureMap
@@ -31,16 +30,8 @@ import javax.inject.Singleton
 
 @Singleton
 class StylesRepository @Inject constructor(private val getStylesStrategy: GetStylesStrategy.Builder,
-                                           private val getStylesBuCategoryId: GetStylesByCategoryIdStrategy.Builder,
                                            private val getStyleByIdStrategy: GetStyleByIdStrategy.Builder,
                                            private val mapper: StyleDataModelMapper) {
-
-  fun getStylesByCategoryId(categoryId: Int, onResult: (List<Style>) -> Unit) {
-    getStylesBuCategoryId.build().execute(categoryId, onResult = {
-      val styles = it.secureMap { style -> mapper.map(style) }
-      onResult(styles)
-    })
-  }
 
   fun get(styleId: Int, onResult: (Style) -> Unit) {
     getStyleByIdStrategy.build().execute(styleId, onResult =  {

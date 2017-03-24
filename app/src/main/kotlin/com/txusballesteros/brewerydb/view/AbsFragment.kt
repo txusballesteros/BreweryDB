@@ -61,7 +61,8 @@ abstract class AbsFragment : Fragment() {
 
   private fun onRequestInjection() {
     val applicationComponent = getApplicationComponent()
-    val viewComponent = DaggerViewComponent.builder().applicationComponent(applicationComponent)
+    val viewComponent = DaggerViewComponent.builder()
+                              .applicationComponent(applicationComponent)
                               .build()
     onRequestInjection(viewComponent)
   }
