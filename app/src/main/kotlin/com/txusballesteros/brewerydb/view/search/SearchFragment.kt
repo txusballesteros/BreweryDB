@@ -46,7 +46,6 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
   @Inject lateinit var toolbarBehaviour: ToolbarBehaviour
   @Inject lateinit var presenter: SearchPresenter
   @Inject lateinit var sectionsFragmentFactory: SearchSectionFragmentFactory
-  private var styleId: Int? = null
 
   override fun onRequestLayoutResourceId(): Int
     = R.layout.fragment_search
@@ -66,32 +65,18 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
   override fun onRequestViewBehaviours() {
     toolbarBehaviour.inject(activity, true)
   }
-
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-    if (resultCode == Activity.RESULT_OK) {
-      when(requestCode) {
-        RequestCodes.STYLE_SELECTOR -> extractStyleFromIntent(data)
-      }
-    }
-  }
-
-  fun extractStyleFromIntent(data: Intent?) {
-    data?.let {
-      styleId = data.extras.getInt(StyleListSelectorFragment.EXTRA_STYLE_ID)
-      style.text = data.extras.getString(StyleListSelectorFragment.EXTRA_STYLE_NAME)
-    }
-  }
-
+  
   override fun onViewReady(savedInstanceState: Bundle?) {
     if (savedInstanceState == null) {
-      compose()
+      composeView()
     }
-    style.setOnClickListener { presenter.onStyleSelectorClick() }
   }
 
-  private fun compose() {
+  private fun composeView() {
     val keywordFragment = sectionsFragmentFactory.getKeywordSection(childFragmentManager)
+    val styleFragment = sectionsFragmentFactory.getStyleSection(childFragmentManager)
     addSection(keywordFragment, R.id.keywordSearchHolder)
+    addSection(styleFragment, R.id.styleSearchHolder)
   }
 
   private fun addSection(section: SearchSectionFragment, searchHolder: Int) {

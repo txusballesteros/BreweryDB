@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+  <android.support.v7.widget.AppCompatTextView
+      android:id="@+id/style"
+      android:layout_width="match_parent"
+      android:layout_height="60dp"
+      android:paddingLeft="@dimen/padding_normal"
+      android:paddingRight="@dimen/padding_normal"
+      android:minHeight="40dp"
+      android:foreground="?attr/selectableItemBackground"
+      android:clickable="true"
+      android:textSize="@dimen/text_size_normal"
+      android:textColor="@color/gray_2"
+      android:fontFamily="sans-serif"
+      android:gravity="left|center_vertical"
+      android:text="@string/style"/>
+
+</FrameLayout>

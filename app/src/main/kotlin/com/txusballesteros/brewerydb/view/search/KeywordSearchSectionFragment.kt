@@ -30,9 +30,9 @@ import javax.inject.Inject
 
 class KeywordSearchSectionFragment : SearchSectionFragment(), SeachSectionPresenter.View {
   companion object {
-    fun newInstance(): KeywordSearchSectionFragment
-      = KeywordSearchSectionFragment()
+    fun newInstance() = KeywordSearchSectionFragment()
   }
+
   @Inject lateinit var presenter: SeachSectionPresenter
 
   override fun onRequestLayoutResourceId(): Int
@@ -54,8 +54,14 @@ class KeywordSearchSectionFragment : SearchSectionFragment(), SeachSectionPresen
   }
 
   override fun getQuery(source: SearchQueryViewModel): SearchQueryViewModel {
-    var value: String = keyword.text.toString().trim()
-    return source.copy( keyword = value )
+    val value: String = keyword.text.toString().trim()
+    val result: SearchQueryViewModel
+    if (!value.isEmpty()) {
+      result = source.copy( keyword = value )
+    } else {
+      result = source
+    }
+    return result
   }
 
   override fun renderSearchQuery(query: SearchQueryViewModel) {

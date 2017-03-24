@@ -28,8 +28,7 @@ import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModelMapp
 import javax.inject.Inject
 
 class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCase: StoreSearchQueryUseCase,
-                                              private val mapper: SearchQueryViewModelMapper,
-                                              private val navigator: Navigator):
+                                              private val mapper: SearchQueryViewModelMapper):
                           AbsPresenter<SearchPresenter.View>(), SearchPresenter {
 
   override fun onSearch() {
@@ -38,9 +37,5 @@ class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCas
     storeSearchQueryUseCase.execute(query, onResult = {
       getView()?.closeView()
     })
-  }
-
-  override fun onStyleSelectorClick() {
-    navigator.navigateToStyleSelector(getView())
   }
 }

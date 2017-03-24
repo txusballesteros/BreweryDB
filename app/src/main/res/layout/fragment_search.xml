@@ -45,20 +45,10 @@
         android:background="@color/gray_4"
         android:layout_height="0.5dp" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/style"
+    <FrameLayout
+        android:id="@+id/styleSearchHolder"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:paddingLeft="@dimen/padding_normal"
-        android:paddingRight="@dimen/padding_normal"
-        android:minHeight="40dp"
-        android:foreground="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:textSize="@dimen/text_size_normal"
-        android:textColor="@color/gray_2"
-        android:fontFamily="sans-serif"
-        android:gravity="left|center_vertical"
-        android:text="@string/style"/>
+        android:layout_height="wrap_content" />
 
     <View
         android:layout_width="match_parent"

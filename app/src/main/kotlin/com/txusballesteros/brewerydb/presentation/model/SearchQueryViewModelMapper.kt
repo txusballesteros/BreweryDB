@@ -32,7 +32,8 @@ class SearchQueryViewModelMapper @Inject constructor() {
                     source.ibuMax,
                     source.isOrganic,
                     source.breweryId,
-                    source.styleId)
+                    source.styleId,
+                    source.styleName)
 
   fun map(source: SearchQuery): SearchQueryViewModel
       = SearchQueryViewModel(source.keyword,
@@ -42,5 +43,6 @@ class SearchQueryViewModelMapper @Inject constructor() {
                              source.ibuMax,
                              source.isOrganic,
                              source.breweryId,
-                             source.styleId)
+                             source.styleId,
+                             source.styleName)
 }

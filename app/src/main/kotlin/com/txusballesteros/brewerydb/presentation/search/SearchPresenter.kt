@@ -26,7 +26,6 @@ import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 
 interface SearchPresenter: Presenter<SearchPresenter.View> {
   fun onSearch()
-  fun onStyleSelectorClick()
 
   interface View: Presenter.View {
     fun getQuery(): SearchQueryViewModel
