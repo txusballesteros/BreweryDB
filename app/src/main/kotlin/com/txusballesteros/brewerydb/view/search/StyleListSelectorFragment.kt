@@ -77,11 +77,11 @@ class StyleListSelectorFragment: AbsFragment(), StyleListSelectorPresenter.View 
     }
 
   override fun closeViewWithResult(style: StyleViewModel) {
-    val data = Intent()
-    data.putExtra(EXTRA_STYLE_ID, style.id)
-    data.putExtra(EXTRA_STYLE_NAME, style.name)
-    activity.setResult(Activity.RESULT_OK, data)
-    activity.finish()
+    intent(EXTRA_STYLE_ID to style.id,
+           EXTRA_STYLE_NAME to style.name).let {
+      activity.setResult(Activity.RESULT_OK, it)
+      activity.finish()
+    }
   }
 
   private fun closeView() {

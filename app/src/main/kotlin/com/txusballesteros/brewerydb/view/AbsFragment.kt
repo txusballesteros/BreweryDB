@@ -20,6 +20,7 @@
  */
 package com.txusballesteros.brewerydb.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -29,6 +30,7 @@ import com.txusballesteros.brewerydb.Application
 import com.txusballesteros.brewerydb.di.ApplicationComponent
 import com.txusballesteros.brewerydb.view.di.DaggerViewComponent
 import com.txusballesteros.brewerydb.view.di.ViewComponent
+import org.jetbrains.anko.bundleOf
 
 abstract class AbsFragment : Fragment() {
   override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -79,6 +81,10 @@ abstract class AbsFragment : Fragment() {
   protected fun consume(function: () -> Any): Boolean {
     function()
     return true
+  }
+
+  protected fun intent(vararg params: Pair<String, Any>): Intent {
+    return Intent().putExtras(bundleOf(*params))
   }
 
   open fun onComposeView() { }
