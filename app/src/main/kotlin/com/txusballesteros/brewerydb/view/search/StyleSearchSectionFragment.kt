@@ -74,8 +74,12 @@ class StyleSearchSectionFragment: SearchSectionFragment(), SeachSectionPresenter
   override fun onViewStateRestored(savedInstanceState: Bundle?) {
     super.onViewStateRestored(savedInstanceState)
     savedInstanceState?.apply {
-      val id = savedInstanceState.getInt(EXTRA_STYLE_ID)
-      val name = savedInstanceState.getString(EXTRA_STYLE_NAME).let { it } ?: getString(R.string.style)
+      var id: Int? = null
+      var name: String? = null
+      if (savedInstanceState.containsKey(EXTRA_STYLE_ID)) {
+        id = savedInstanceState.getInt(EXTRA_STYLE_ID)
+        name = savedInstanceState.getString(EXTRA_STYLE_NAME).let { it } ?: getString(R.string.style)
+      }
       renderStyle(id, name)
     }
   }
@@ -111,7 +115,9 @@ class StyleSearchSectionFragment: SearchSectionFragment(), SeachSectionPresenter
 
   private fun renderStyle(id: Int?, name: String?) {
     styleId = id
-    style.text = name ?: ""
-    style.visibility = name?.let { View.VISIBLE } ?: View.GONE
+    styleId?.apply {
+      style.text = name ?: ""
+      style.visibility = name?.let { View.VISIBLE } ?: View.GONE
+    }
   }
 }
