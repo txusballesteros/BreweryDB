@@ -23,6 +23,7 @@ package com.txusballesteros.brewerydb.view.search
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.navigation.RequestCodes
@@ -60,11 +61,11 @@ class StyleSearchSectionFragment: SearchSectionFragment(), SeachSectionPresenter
     if (savedInstanceState == null) {
       presenter.onRequestSearchQuery()
     }
-    style.setOnClickListener { navigator.navigateToStyleSelector(this) }
+    rootView.setOnClickListener { navigator.navigateToStyleSelector(this) }
   }
 
   override fun onSaveInstanceState(outState: Bundle?) {
-    if (styleId != null) {
+    styleId?.apply {
       outState?.putInt(EXTRA_STYLE_ID, styleId as Int)
       outState?.putString(EXTRA_STYLE_NAME, style.text as String)
     }
@@ -72,9 +73,10 @@ class StyleSearchSectionFragment: SearchSectionFragment(), SeachSectionPresenter
 
   override fun onViewStateRestored(savedInstanceState: Bundle?) {
     super.onViewStateRestored(savedInstanceState)
-    savedInstanceState?.let {
-      styleId = savedInstanceState.getInt(EXTRA_STYLE_ID)
-      style.text = savedInstanceState.getString(EXTRA_STYLE_NAME)
+    savedInstanceState?.apply {
+      val id = savedInstanceState.getInt(EXTRA_STYLE_ID)
+      val name = savedInstanceState.getString(EXTRA_STYLE_NAME).let { it } ?: getString(R.string.style)
+      renderStyle(id, name)
     }
   }
 
@@ -87,22 +89,29 @@ class StyleSearchSectionFragment: SearchSectionFragment(), SeachSectionPresenter
   }
 
   fun extractStyleFromIntent(data: Intent?) {
-    data?.let {
-      styleId = data.extras.getInt(StyleListSelectorFragment.EXTRA_STYLE_ID)
-      style.text = data.extras.getString(StyleListSelectorFragment.EXTRA_STYLE_NAME)
+    data?.apply {
+      val id = data.extras.getInt(StyleListSelectorFragment.EXTRA_STYLE_ID)
+      val name = data.extras.getString(StyleListSelectorFragment.EXTRA_STYLE_NAME)
+      renderStyle(id, name)
     }
   }
 
   override fun getQuery(source: SearchQueryViewModel): SearchQueryViewModel {
     return styleId?.let {
-      source.copy(styleId = styleId, styleName = style.text.toString())
+      source.copy(
+        styleId = styleId,
+        styleName = style.text.toString()
+      )
     } ?: source
   }
 
   override fun renderSearchQuery(query: SearchQueryViewModel) {
-    query.styleId?.let {
-      styleId = query.styleId
-      style.text = query.styleName
-    }
+    renderStyle(query.styleId, query.styleName)
+  }
+
+  private fun renderStyle(id: Int?, name: String?) {
+    styleId = id
+    style.text = name ?: ""
+    style.visibility = name?.let { View.VISIBLE } ?: View.GONE
   }
 }

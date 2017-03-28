@@ -1,22 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
+    android:id="@+id/rootView"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:minHeight="60dp"
+    android:padding="@dimen/padding_normal"
+    android:gravity="left|center_vertical"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:orientation="vertical">
 
   <android.support.v7.widget.AppCompatTextView
-      android:id="@+id/style"
+      style="@style/Text"
       android:layout_width="match_parent"
-      android:layout_height="60dp"
-      android:paddingLeft="@dimen/padding_normal"
-      android:paddingRight="@dimen/padding_normal"
-      android:minHeight="40dp"
-      android:foreground="?attr/selectableItemBackground"
-      android:clickable="true"
-      android:textSize="@dimen/text_size_normal"
-      android:textColor="@color/gray_2"
-      android:fontFamily="sans-serif"
+      android:layout_height="wrap_content"
       android:gravity="left|center_vertical"
       android:text="@string/style"/>
 
-</FrameLayout>
+  <android.support.v7.widget.AppCompatTextView
+      style="@style/Text.Branded"
+      android:id="@+id/style"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/padding_normal"
+      android:textSize="@dimen/text_size_medium"
+      android:maxLines="2"
+      android:ellipsize="end"
+      android:gravity="left|center_vertical"
+      android:visibility="gone"
+      tools:text="Style Name"
+      tools:visibility="visible"/>
+
+</LinearLayout>
