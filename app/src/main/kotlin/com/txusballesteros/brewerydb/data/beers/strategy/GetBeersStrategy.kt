@@ -22,8 +22,8 @@ package com.txusballesteros.brewerydb.data.beers.strategy
 
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
-import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
+import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.strategy.LocalOrCloudStrategy
 import javax.inject.Inject
 
@@ -33,14 +33,14 @@ class GetBeersStrategy private constructor(private val queryLocalDataSource: Sea
                        LocalOrCloudStrategy<Void, List<BeerDataModel>>() {
 
   override fun onRequestCallToLocal(params: Void?): List<BeerDataModel>? {
-    return localDataSource.getBeers()
+    return localDataSource.getList()
   }
 
   override fun onRequestCallToCloud(params: Void?): List<BeerDataModel>? {
     val query = queryLocalDataSource.getQuery()
     val response = cloudDataSource.getBeers(query)
     localDataSource.store(response)
-    return response
+    return response.sortedBy { it.name }
   }
 
   override fun isValid(result: List<BeerDataModel>?): Boolean {
