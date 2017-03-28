@@ -31,6 +31,8 @@ import javax.inject.Inject
 class ToolbarBehaviour @Inject constructor() : Behaviour() {
   private lateinit var activity: AppCompatActivity
   private var enableBack: Boolean = false
+  var title: String = "Brewery DB"
+  var subtitle: String? = null
 
   override fun inject(activity: Activity) {
     this.inject(activity, false)
@@ -58,8 +60,8 @@ class ToolbarBehaviour @Inject constructor() : Behaviour() {
 
   override fun onBehaviorReady(view: View) {
     val toolbar = view.find<Toolbar>(R.id.toolbar)
-    toolbar.title = "Brewery DB"
-    toolbar.subtitle = "The final beer directory..."
+    toolbar.title = title
+    toolbar.subtitle = subtitle
     activity.setSupportActionBar(toolbar)
     activity.supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
     activity.supportActionBar?.setHomeButtonEnabled(enableBack)

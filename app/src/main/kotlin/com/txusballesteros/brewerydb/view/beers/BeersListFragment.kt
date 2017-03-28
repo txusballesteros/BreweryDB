@@ -72,6 +72,8 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   }
 
   override fun onRequestViewBehaviours() {
+    toolbarBehaviour.title = getString(R.string.app_name)
+    toolbarBehaviour.subtitle = getString(R.string.app_subtitle)
     toolbarBehaviour.inject(activity)
     loadingBehaviour.inject(activity)
     errorBehaviour.inject(activity, {

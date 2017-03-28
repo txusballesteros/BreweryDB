@@ -58,6 +58,7 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
   }
 
   override fun onRequestViewBehaviours() {
+    toolbarBehaviour.title = getString(R.string.search)
     toolbarBehaviour.inject(activity, true)
   }
   

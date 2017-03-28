@@ -65,6 +65,7 @@ class IngredientDetailControllerFragment: AbsFragment(), IngredientDetailControl
   }
 
   override fun onRequestViewBehaviours() {
+    toolbarBehaviour.title = getString(R.string.ingredients)
     toolbarBehaviour.inject(activity, true)
   }
 

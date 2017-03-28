@@ -20,6 +20,7 @@
 -->
 <resources>
   <string name="app_name">Brewery DB</string>
+  <string name="app_subtitle">The final beers directory…</string>
   <string name="abv_pattern">ABV: %.1f</string>
   <string name="ibu_pattern">IBU: %.1f</string>
   <string name="is_organic">Is Organic</string>
