@@ -57,8 +57,8 @@ class AbvSearchSectionFragment: SearchSectionFragment(), SeachSectionPresenter.V
   }
 
   override fun renderSearchQuery(query: SearchQueryViewModel) {
-    query.abvMin?.let { abvMin.setText(query.abvMin.toString()) }
-    query.abvMax?.let { abvMax.setText(query.abvMax.toString()) }
+    query.abvMin?.let { abvMin.setText(it.toString()) }
+    query.abvMax?.let { abvMax.setText(it.toString()) }
   }
 
   override fun getQuery(source: SearchQueryViewModel): SearchQueryViewModel {

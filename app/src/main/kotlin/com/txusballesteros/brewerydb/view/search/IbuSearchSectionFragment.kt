@@ -57,8 +57,8 @@ class IbuSearchSectionFragment: SearchSectionFragment(), SeachSectionPresenter.V
   }
 
   override fun renderSearchQuery(query: SearchQueryViewModel) {
-    query.ibuMin?.let { ibuMin.setText(query.abvMin.toString()) }
-    query.ibuMax?.let { ibuMax.setText(query.abvMax.toString()) }
+    query.ibuMin?.let { ibuMin.setText(it.toString()) }
+    query.ibuMax?.let { ibuMax.setText(it.toString()) }
   }
 
   override fun getQuery(source: SearchQueryViewModel): SearchQueryViewModel {
