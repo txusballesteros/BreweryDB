@@ -23,6 +23,6 @@
            android:right="@dimen/button_rounded_radius" />
   <corners android:radius="@dimen/button_rounded_radius" />
   <solid android:color="@color/colorPrimary" />
-  <stroke android:color="@color/gray_3"
-          android:width="1dp" />
+  <stroke android:color="@color/colorPrimaryLight"
+          android:width="1.5dp" />
 </shape>

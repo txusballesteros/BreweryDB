@@ -86,12 +86,10 @@ class BreweryDetailFragment: AbsFragment(), BreweryDetailPresenter.View {
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    var result = true
-    when(item!!.itemId) {
-      android.R.id.home -> closeView()
-      else -> result = super.onOptionsItemSelected(item)
+    return when(item!!.itemId) {
+      android.R.id.home -> consume { closeView() }
+      else -> super.onOptionsItemSelected(item)
     }
-    return result
   }
 
   fun closeView() {

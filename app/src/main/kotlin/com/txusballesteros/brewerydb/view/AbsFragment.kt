@@ -78,8 +78,8 @@ abstract class AbsFragment : Fragment() {
     return application.applicationComponent
   }
 
-  protected fun consume(function: () -> Any): Boolean {
-    function()
+  protected fun consume(block: () -> Any): Boolean {
+    block()
     return true
   }
 

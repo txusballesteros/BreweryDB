@@ -21,8 +21,6 @@
 package com.txusballesteros.brewerydb.view.search
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
@@ -30,6 +28,7 @@ import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
+import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
 class SearchFragment: AbsFragment(), SearchPresenter.View {
@@ -66,6 +65,7 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
     if (savedInstanceState == null) {
       composeView()
     }
+    search.setOnClickListener { presenter.onSearch() }
   }
 
   private fun composeView() {
@@ -89,18 +89,11 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
         .commitAllowingStateLoss()
   }
 
-  override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-    inflater?.inflate(R.menu.menu_search, menu)
-  }
-
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    var result = true
-    when(item?.itemId) {
-      android.R.id.home -> closeView()
-      R.id.action_done -> presenter.onSearch()
-      else -> result = super.onOptionsItemSelected(item)
+    return when(item?.itemId) {
+      android.R.id.home -> consume { closeView() }
+      else -> super.onOptionsItemSelected(item)
     }
-    return result
   }
 
   override fun getQuery(): SearchQueryViewModel {
