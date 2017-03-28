@@ -73,4 +73,5 @@
   <string name="style">Style</string>
   <string name="brewery">Brewery</string>
   <string name="try_again">Try Again</string>
+  <string name="field_separator">-</string>
 </resources>

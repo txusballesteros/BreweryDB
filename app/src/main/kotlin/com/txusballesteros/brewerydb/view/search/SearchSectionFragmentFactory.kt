@@ -35,4 +35,10 @@ class SearchSectionFragmentFactory @Inject constructor() {
     val fragment = fragmentManager.findFragmentByTag(tag) ?: StyleSearchSectionFragment.newInstance()
     return fragment as SearchSectionFragment
   }
+
+  fun getAbvSection(fragmentManager: FragmentManager): SearchSectionFragment {
+    val tag = AbvSearchSectionFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: AbvSearchSectionFragment.newInstance()
+    return fragment as SearchSectionFragment
+  }
 }

@@ -104,67 +104,10 @@
 
     <include layout="@layout/include_line_decorator" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_normal"
-        android:textColor="@color/gray_2"
-        android:layout_marginLeft="@dimen/padding_normal"
-        android:fontFamily="sans-serif"
-        android:text="@string/abv"/>
-
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/padding_normal"
-        android:textSize="@dimen/text_size_normal"
-        android:textColor="@color/gray_3"
-        android:fontFamily="sans-serif"
-        android:text="@string/alcohol_by_volume"/>
-
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/abvSearchHolder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/padding_normal"
-        android:layout_marginRight="@dimen/padding_normal"
-        android:orientation="horizontal">
-
-      <android.support.v7.widget.AppCompatEditText
-          android:id="@+id/abvMin"
-          android:layout_width="80dp"
-          android:layout_height="wrap_content"
-          android:textSize="@dimen/text_size_normal"
-          android:textColor="@color/colorPrimaryDark"
-          android:textColorHint="@color/gray_3"
-          android:inputType="number"
-          android:gravity="right"
-          android:maxLength="3"
-          android:hint="@string/min" />
-
-      <android.support.v7.widget.AppCompatTextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textSize="@dimen/text_size_normal"
-          android:textColor="@color/colorPrimaryDark"
-          android:layout_marginLeft="@dimen/padding_normal"
-          android:layout_marginRight="@dimen/padding_normal"
-          android:text="-" />
-
-      <android.support.v7.widget.AppCompatEditText
-          android:id="@+id/abvMax"
-          android:layout_width="80dp"
-          android:layout_height="wrap_content"
-          android:textSize="@dimen/text_size_normal"
-          android:textColor="@color/colorPrimaryDark"
-          android:textColorHint="@color/gray_3"
-          android:inputType="number"
-          android:gravity="right"
-          android:maxLength="3"
-          android:hint="@string/max" />
-
-    </LinearLayout>
-
-    <include layout="@layout/include_line_decorator" />
+        android:layout_height="wrap_content" />
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="wrap_content"

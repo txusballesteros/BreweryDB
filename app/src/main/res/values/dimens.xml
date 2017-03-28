@@ -38,4 +38,6 @@
 
   <dimen name="button_rounded">50dp</dimen>
   <dimen name="button_rounded_radius">25dp</dimen>
+  <dimen name="input_rounded">40dp</dimen>
+  <dimen name="input_rounded_radius">20dp</dimen>
 </resources>

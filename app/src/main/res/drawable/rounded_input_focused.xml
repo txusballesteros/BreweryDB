@@ -19,10 +19,9 @@
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-  <padding android:left="@dimen/button_rounded_radius"
-           android:right="@dimen/button_rounded_radius" />
-  <corners android:radius="@dimen/button_rounded_radius" />
-  <solid android:color="@color/colorPrimary" />
-  <stroke android:color="@color/gray_3"
-          android:width="1dp" />
+  <padding android:left="@dimen/input_rounded_radius"
+           android:right="@dimen/input_rounded_radius" />
+  <corners android:radius="@dimen/input_rounded_radius" />
+  <stroke android:color="@color/colorPrimaryLight"
+          android:width="0.5dp" />
 </shape>

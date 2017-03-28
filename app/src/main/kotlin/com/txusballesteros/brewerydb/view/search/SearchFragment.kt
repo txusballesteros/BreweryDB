@@ -20,20 +20,16 @@
  */
 package com.txusballesteros.brewerydb.view.search
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.navigation.RequestCodes
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
 import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import kotlinx.android.synthetic.main.fragment_search.*
 import javax.inject.Inject
 
 class SearchFragment: AbsFragment(), SearchPresenter.View {
@@ -75,8 +71,10 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
   private fun composeView() {
     val keywordFragment = sectionsFragmentFactory.getKeywordSection(childFragmentManager)
     val styleFragment = sectionsFragmentFactory.getStyleSection(childFragmentManager)
+    val abvFragment = sectionsFragmentFactory.getAbvSection(childFragmentManager)
     addSection(keywordFragment, R.id.keywordSearchHolder)
     addSection(styleFragment, R.id.styleSearchHolder)
+    addSection(abvFragment, R.id.abvSearchHolder)
   }
 
   private fun addSection(section: SearchSectionFragment, searchHolder: Int) {
