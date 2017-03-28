@@ -26,6 +26,6 @@ interface BeersLocalDataSource {
   fun flush()
   fun store(beers: List<BeerDataModel>)
   fun store(beer: BeerDataModel)
-  fun getBeers(): List<BeerDataModel>
-  fun getBeerById(beerId: String): BeerDataModel?
+  fun getList(): List<BeerDataModel>
+  fun get(beerId: String): BeerDataModel?
 }

@@ -36,7 +36,7 @@ import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import kotlinx.android.synthetic.main.fragment_styles_list.*
+import kotlinx.android.synthetic.main.fragment_beers_list.*
 import org.jetbrains.anko.runOnUiThread
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
@@ -72,6 +72,8 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
   }
 
   override fun onRequestViewBehaviours() {
+    toolbarBehaviour.title = getString(R.string.app_name)
+    toolbarBehaviour.subtitle = getString(R.string.app_subtitle)
     toolbarBehaviour.inject(activity)
     loadingBehaviour.inject(activity)
     errorBehaviour.inject(activity, {

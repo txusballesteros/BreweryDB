@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+  <android.support.v7.widget.AppCompatEditText
+      style="@style/Input"
+      android:id="@+id/keyword"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/button_rounded"
+      android:inputType="textNoSuggestions|textFilter"
+      android:maxLines="1"
+      android:maxLength="100"
+      android:textSize="@dimen/text_size_medium"
+      android:paddingLeft="@dimen/padding_big"
+      android:paddingRight="@dimen/padding_big"
+      android:layout_margin="@dimen/padding_normal"
+      android:background="@drawable/keyword_box"
+      android:hint="@string/which_beer_are_you_want"
+      tools:text="Android Beer"/>
+
+</FrameLayout>

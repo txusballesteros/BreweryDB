@@ -67,7 +67,7 @@ class BeersLocalDataSourceTest: UnitTest() {
                             BEER_SERVING_TEMP_DISPLAY))
 
     dataSource.store(beers)
-    val result = dataSource.getBeers()
+    val result = dataSource.getList()
 
     Assert.assertFalse(result.isEmpty())
     Assert.assertEquals(BEER_ID, result.first().id)
@@ -103,7 +103,7 @@ class BeersLocalDataSourceTest: UnitTest() {
                             BEER_SERVING_TEMP_DISPLAY))
 
     dataSource.store(beers)
-    val result = dataSource.getBeers()
+    val result = dataSource.getList()
 
     Assert.assertFalse(result.isEmpty())
     Assert.assertEquals(BEER_ID, result.first().id)
@@ -127,7 +127,7 @@ class BeersLocalDataSourceTest: UnitTest() {
                             BEER_SERVING_TEMP_DISPLAY))
 
     dataSource.store(beers)
-    val result = dataSource.getBeerById(BEER_ID)
+    val result = dataSource.get(BEER_ID)
 
     Assert.assertNotNull(result)
     Assert.assertEquals(BEER_ID, result!!.id)

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright Txus Ballesteros 2017 (@txusballesteros)
+ *
+ * This file is part of Foobar.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+-->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <FrameLayout
+      android:id="@+id/toolbarHub"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      tools:layout_height="60dp"
+      tools:background="@color/colorPrimary">
+
+    <ViewStub
+        android:id="@+id/toolbar_place_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_scrollFlags="scroll|enterAlways" />
+
+  </FrameLayout>
+
+  <FrameLayout
+      android:id="@+id/loadingHub"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/toolbarHub"
+      android:layout_above="@+id/bottomNavigationHolder">
+
+    <ViewStub
+        android:id="@+id/loading_place_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+  </FrameLayout>
+
+  <FrameLayout
+      android:id="@+id/errorHub"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/toolbarHub"
+      android:layout_above="@+id/bottomNavigationHolder">
+
+    <ViewStub
+        android:id="@+id/error_place_holder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+  </FrameLayout>
+
+  <FrameLayout
+      android:id="@+id/content_place_holder"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_below="@+id/toolbarHub"
+      android:layout_above="@+id/bottomNavigationHolder" />
+
+  <FrameLayout
+      android:id="@+id/bottomNavigationHolder"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      tools:layout_height="60dp"
+      tools:background="@color/colorPrimary">
+
+      <ViewStub
+          android:id="@+id/bottom_navigation_place_holder"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent" />
+
+  </FrameLayout>
+</RelativeLayout>

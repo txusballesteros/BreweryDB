@@ -31,7 +31,7 @@ class GetBeerByIdStrategy private constructor(private val localDataSource: Beers
                           LocalOrCloudStrategy<String, BeerDataModel>() {
 
   override fun onRequestCallToLocal(params: String?): BeerDataModel? {
-    return localDataSource.getBeerById(params!!)
+    return localDataSource.get(params!!)
   }
 
   override fun onRequestCallToCloud(params: String?): BeerDataModel? {

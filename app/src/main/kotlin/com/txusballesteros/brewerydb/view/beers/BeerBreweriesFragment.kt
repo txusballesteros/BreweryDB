@@ -29,7 +29,7 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import kotlinx.android.synthetic.main.fragment_styles_list.*
+import kotlinx.android.synthetic.main.fragment_beer_breweries.*
 import org.jetbrains.anko.support.v4.withArguments
 import javax.inject.Inject
 

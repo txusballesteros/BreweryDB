@@ -40,7 +40,7 @@
     <activity android:name=".view.beers.BeerDetailActivity" />
     <activity android:name=".view.ingredients.IngredientDetailActivity" />
     <activity android:name=".view.breweries.BreweryDetailActivity" />
-    <activity android:name=".view.search.SearchActivity"
-              android:windowSoftInputMode="stateAlwaysVisible|adjustResize" />
+    <activity android:name=".view.search.SearchActivity" />
+    <activity android:name=".view.search.StyleSelectorActivity" />
   </application>
 </manifest>

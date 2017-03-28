@@ -41,11 +41,11 @@ class BeersInMemoryLocalDataSource @Inject constructor(): BeersLocalDataSource {
     cache.put(beer.id, beer)
   }
 
-  override fun getBeers(): List<BeerDataModel> {
-    return cache.values.toList()
+  override fun getList(): List<BeerDataModel> {
+    return cache.values.toList().sortedBy { it.name }
   }
 
-  override fun getBeerById(beerId: String): BeerDataModel? {
+  override fun get(beerId: String): BeerDataModel? {
     return cache[beerId]
   }
 }

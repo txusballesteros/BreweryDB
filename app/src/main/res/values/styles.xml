@@ -57,6 +57,16 @@
     <item name="android:paddingLeft">@dimen/padding_big</item>
   </style>
 
+  <style name="Text">
+    <item name="android:textSize">@dimen/text_size_normal</item>
+    <item name="android:textColor">@color/gray_2</item>
+    <item name="android:fontFamily">sans-serif</item>
+  </style>
+
+  <style name="Text.Branded">
+    <item name="android:textColor">@color/colorPrimary</item>
+  </style>
+
   <style name="Button" parent="Widget.AppCompat.Button.Borderless">
     <item name="android:fontFamily">sans-serif</item>
     <item name="android:textSize">@dimen/text_size_normal</item>
@@ -68,5 +78,19 @@
     <item name="android:background">@drawable/rounded_button</item>
     <item name="android:textColor">@color/rounded_button</item>
     <item name="android:textAllCaps">false</item>
+  </style>
+
+  <style name="Input">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:fontFamily">sans-serif</item>
+    <item name="android:textSize">@dimen/text_size_normal</item>
+    <item name="android:textColor">@color/colorPrimary</item>
+    <item name="android:textColorHint">@color/gray_3</item>
+  </style>
+
+  <style name="Input.Rounded">
+    <item name="android:layout_height">@dimen/input_rounded</item>
+    <item name="android:background">@drawable/rounded_input</item>
   </style>
 </resources>

@@ -52,6 +52,11 @@ class Navigator @Inject constructor() {
     navigate(from, navigationCommand)
   }
 
+  fun navigateToStyleSelector(from: Presenter.View?) {
+    val navigationCommand = StyleSelectorNavigationCommand()
+    navigate(from, navigationCommand)
+  }
+
   fun navigateToAbout(from: Presenter.View?) {
     val navigationCommand = AboutNavigationCommand()
     navigate(from, navigationCommand)
@@ -60,7 +65,11 @@ class Navigator @Inject constructor() {
   private fun navigate(from: Presenter.View?, command: NavigationCommand) {
     if (from is AbsFragment) {
       val intent = command.build(from.activity)
-      from.startActivity(intent)
+      if (command.navigateForResult) {
+        from.startActivityForResult(intent, command.requestCode)
+      } else {
+        from.startActivity(intent)
+      }
     }
   }
 }

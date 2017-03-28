@@ -21,9 +21,6 @@
 package com.txusballesteros.brewerydb.view.search
 
 import android.os.Bundle
-import android.support.v7.widget.AppCompatEditText
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
@@ -43,6 +40,7 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
 
   @Inject lateinit var toolbarBehaviour: ToolbarBehaviour
   @Inject lateinit var presenter: SearchPresenter
+  @Inject lateinit var sectionsFragmentFactory: SearchSectionFragmentFactory
 
   override fun onRequestLayoutResourceId(): Int
     = R.layout.fragment_search
@@ -60,73 +58,53 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
   }
 
   override fun onRequestViewBehaviours() {
+    toolbarBehaviour.title = getString(R.string.search)
     toolbarBehaviour.inject(activity, true)
   }
-
+  
   override fun onViewReady(savedInstanceState: Bundle?) {
     if (savedInstanceState == null) {
-      presenter.onRequestFilters()
+      composeView()
     }
+    search.setOnClickListener { presenter.onSearch() }
   }
 
-  override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-    inflater?.inflate(R.menu.menu_search, menu)
+  private fun composeView() {
+    val keywordFragment = sectionsFragmentFactory.getKeywordSection(childFragmentManager)
+    val styleFragment = sectionsFragmentFactory.getStyleSection(childFragmentManager)
+    val abvFragment = sectionsFragmentFactory.getAbvSection(childFragmentManager)
+    val ibuFragment = sectionsFragmentFactory.getIbuSection(childFragmentManager)
+    val isOrganicFragment = sectionsFragmentFactory.getIsOrganicSection(childFragmentManager)
+    addSection(keywordFragment, R.id.keywordSearchHolder)
+    addSection(styleFragment, R.id.styleSearchHolder)
+    addSection(abvFragment, R.id.abvSearchHolder)
+    addSection(ibuFragment, R.id.ibuSearchHolder)
+    addSection(isOrganicFragment, R.id.isOrganicSearchHolder)
+  }
+
+  private fun addSection(section: SearchSectionFragment, searchHolder: Int) {
+    val tag = section::class.java.name
+    childFragmentManager
+        .beginTransaction()
+        .replace(searchHolder, section, tag)
+        .commitAllowingStateLoss()
   }
 
   override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    var result = true
-    when(item?.itemId) {
-      android.R.id.home -> closeView()
-      R.id.action_done -> presenter.onSearch()
-      else -> result = super.onOptionsItemSelected(item)
+    return when(item?.itemId) {
+      android.R.id.home -> consume { closeView() }
+      else -> super.onOptionsItemSelected(item)
+    }
+  }
+
+  override fun getQuery(): SearchQueryViewModel {
+    var result: SearchQueryViewModel = SearchQueryViewModel()
+    childFragmentManager.fragments.forEach {
+      if (it is SearchSectionFragment) {
+        result = it.getQuery(result)
+      }
     }
     return result
-  }
-
-  override fun getKeyword(): String? {
-    var keyword: String? = keyword.text.toString().trim()
-    if (keyword != null && keyword.isEmpty()) {
-      keyword = null
-    }
-    return keyword
-  }
-
-  override fun getIsOrganic(): Boolean {
-    return isOrganic.isChecked
-  }
-
-  override fun getAbvMin(): Int? {
-    return getRangeValue(abvMin)
-  }
-
-  override fun getAbvMax(): Int? {
-    return getRangeValue(abvMax)
-  }
-
-  override fun getIbuMin(): Int? {
-    return getRangeValue(ibuMin)
-  }
-
-  override fun getIbuMax(): Int? {
-    return getRangeValue(ibuMax)
-  }
-
-  private fun getRangeValue(view: AppCompatEditText): Int? {
-    var result: Int? = null
-    var value: String = view.text.trim().toString()
-    if (!value.isEmpty()) {
-      result = value.toInt()
-    }
-    return result
-  }
-
-  override fun renderFilters(filter: SearchQueryViewModel) {
-    keyword.setText(filter.keyword ?: "")
-    isOrganic.isChecked = filter.isOrganic ?: false
-    abvMin.setText(filter.abvMin?.toString() ?: "")
-    abvMax.setText(filter.abvMax?.toString() ?: "")
-    ibuMin.setText(filter.ibuMin?.toString() ?: "")
-    ibuMax.setText(filter.ibuMax?.toString() ?: "")
   }
 
   override fun closeView() {

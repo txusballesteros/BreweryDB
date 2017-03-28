@@ -30,16 +30,8 @@ import javax.inject.Inject
 class GetStylesInteractor @Inject constructor(executor: ExecutorService,
                                               private val repository: StylesRepository):
                           AnkoUseCase<List<Style>>(executor), GetStylesUseCase {
-  private var categoryId = 0
-
-  override fun execute(categoryId: Int, onResult: (List<Style>) -> Unit, onError: (ApplicationException) -> Unit) {
-    this.categoryId = categoryId
-    super.execute(onResult, onError)
-  }
 
   override fun onExecute(onResult: (List<Style>) -> Unit) {
-    repository.getStylesByCategoryId(categoryId, {
-      onResult(it)
-    })
+    repository.getList { onResult(it) }
   }
 }

@@ -24,6 +24,4 @@ import com.txusballesteros.brewerydb.domain.model.Style
 import com.txusballesteros.brewerydb.domain.usecase.UseCase
 import com.txusballesteros.brewerydb.exception.ApplicationException
 
-interface GetStylesUseCase: UseCase<List<Style>> {
-  fun execute(categoryId: Int, onResult: (List<Style>) -> Unit, onError: (ApplicationException) -> Unit = { })
-}
+interface GetStylesUseCase: UseCase<List<Style>>

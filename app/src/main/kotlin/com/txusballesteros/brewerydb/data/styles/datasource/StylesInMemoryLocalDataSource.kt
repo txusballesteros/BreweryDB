@@ -27,18 +27,13 @@ import javax.inject.Inject
 class StylesInMemoryLocalDataSource @Inject constructor(): StylesLocalDataSource {
   private val cache: MutableMap<Int, StyleDataModel> = HashMap()
 
-  override fun getStylesByCategoryId(categoryId: Int): List<StyleDataModel> {
-    val result: MutableList<StyleDataModel> = ArrayList()
-    cache.values.filterTo(result) { it.categoryId == categoryId }
-    return result.sortedBy { it.shortName }
-  }
-
   override fun get(styleId: Int): StyleDataModel? {
     return cache[styleId]
   }
 
   override fun getList(): List<StyleDataModel> {
-    return ArrayList<StyleDataModel>(cache.values)
+    val sortedList = cache.values.sortedBy { it.name }
+    return ArrayList<StyleDataModel>(sortedList)
   }
 
   override fun store(styles: List<StyleDataModel>) {

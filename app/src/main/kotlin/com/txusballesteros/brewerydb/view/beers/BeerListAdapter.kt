@@ -29,6 +29,7 @@ import android.view.ViewGroup
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
+import org.jetbrains.anko.find
 import java.util.*
 
 class BeerListAdapter(private val listener: OnBeerClickListener,
@@ -42,9 +43,10 @@ class BeerListAdapter(private val listener: OnBeerClickListener,
   fun addAll(beers: List<BeerViewModel>) {
     cache.addAll(beers)
   }
+
   override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-    val style = cache[position]
-    holder?.render(style, listener)
+    val beer = cache[position]
+    holder?.render(beer, listener)
   }
 
   override fun getItemCount(): Int {
@@ -57,9 +59,9 @@ class BeerListAdapter(private val listener: OnBeerClickListener,
   }
 
   class ViewHolder(view: View, private val imageDownloader: ImageDownloader) : RecyclerView.ViewHolder(view) {
-    private val labelView = view.findViewById(R.id.label) as AppCompatImageView
-    private val displayNameView = view.findViewById(R.id.displayName) as AppCompatTextView
-    private val descriptionView = view.findViewById(R.id.description) as AppCompatTextView
+    private val labelView = view.find<AppCompatImageView>(R.id.label)
+    private val displayNameView = view.find<AppCompatTextView>(R.id.displayName)
+    private val descriptionView = view.find<AppCompatTextView>(R.id.description)
 
     fun render(beer: BeerViewModel, listener: OnBeerClickListener) {
       displayNameView.text = beer.displayName

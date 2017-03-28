@@ -27,4 +27,5 @@ data class SearchQueryDataModel(val keyword: String? = null,
                                 val ibuMax: Int? = null,
                                 val isOrganic: Boolean? = null,
                                 val breweryId: String? = null,
-                                val styleId: Int? = null)
+                                val styleId: Int? = null,
+                                val styleName: String? = null)
