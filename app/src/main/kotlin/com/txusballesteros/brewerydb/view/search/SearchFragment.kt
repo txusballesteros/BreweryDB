@@ -72,9 +72,13 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
     val keywordFragment = sectionsFragmentFactory.getKeywordSection(childFragmentManager)
     val styleFragment = sectionsFragmentFactory.getStyleSection(childFragmentManager)
     val abvFragment = sectionsFragmentFactory.getAbvSection(childFragmentManager)
+    val ibuFragment = sectionsFragmentFactory.getIbuSection(childFragmentManager)
+    val isOrganicFragment = sectionsFragmentFactory.getIsOrganicSection(childFragmentManager)
     addSection(keywordFragment, R.id.keywordSearchHolder)
     addSection(styleFragment, R.id.styleSearchHolder)
     addSection(abvFragment, R.id.abvSearchHolder)
+    addSection(ibuFragment, R.id.ibuSearchHolder)
+    addSection(isOrganicFragment, R.id.isOrganicSearchHolder)
   }
 
   private fun addSection(section: SearchSectionFragment, searchHolder: Int) {

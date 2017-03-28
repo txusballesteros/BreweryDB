@@ -18,7 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:state_enabled="true" android:state_focused="false" android:drawable="@drawable/keyword_box_normal" />
-  <item android:state_enabled="true" android:state_focused="true" android:drawable="@drawable/keyword_box_focused" />
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+  <padding android:left="@dimen/button_rounded_radius"
+           android:right="@dimen/button_rounded_radius" />
+  <corners android:radius="@dimen/button_rounded_radius" />
+  <stroke android:color="@color/gray_3"
+          android:width="0.5dp" />
+</shape>

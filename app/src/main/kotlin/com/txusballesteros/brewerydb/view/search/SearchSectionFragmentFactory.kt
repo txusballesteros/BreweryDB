@@ -41,4 +41,16 @@ class SearchSectionFragmentFactory @Inject constructor() {
     val fragment = fragmentManager.findFragmentByTag(tag) ?: AbvSearchSectionFragment.newInstance()
     return fragment as SearchSectionFragment
   }
+
+  fun getIbuSection(fragmentManager: FragmentManager): SearchSectionFragment {
+    val tag = IbuSearchSectionFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: IbuSearchSectionFragment.newInstance()
+    return fragment as SearchSectionFragment
+  }
+
+  fun getIsOrganicSection(fragmentManager: FragmentManager): SearchSectionFragment {
+    val tag = IsOrganicSearchSectionFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: IsOrganicSearchSectionFragment.newInstance()
+    return fragment as SearchSectionFragment
+  }
 }

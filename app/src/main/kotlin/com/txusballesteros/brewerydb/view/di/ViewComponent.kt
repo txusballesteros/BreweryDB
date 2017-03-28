@@ -62,4 +62,6 @@ interface ViewComponent {
   fun inject(view: KeywordSearchSectionFragment)
   fun inject(view: StyleSearchSectionFragment)
   fun inject(view: AbvSearchSectionFragment)
+  fun inject(view: IbuSearchSectionFragment)
+  fun inject(view: IsOrganicSearchSectionFragment)
 }

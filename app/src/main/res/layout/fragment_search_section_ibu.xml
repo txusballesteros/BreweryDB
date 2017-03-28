@@ -32,7 +32,7 @@
       android:textColor="@color/gray_2"
       android:layout_marginLeft="@dimen/padding_normal"
       android:fontFamily="sans-serif"
-      android:text="@string/abv"/>
+      android:text="@string/ibu"/>
 
   <android.support.v7.widget.AppCompatTextView
       android:layout_width="wrap_content"
@@ -41,7 +41,7 @@
       android:textSize="@dimen/text_size_normal"
       android:textColor="@color/gray_3"
       android:fontFamily="sans-serif"
-      android:text="@string/alcohol_by_volume"/>
+      android:text="@string/international_bitterness_units"/>
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -53,7 +53,7 @@
 
     <android.support.v7.widget.AppCompatEditText
         style="@style/Input.Rounded"
-        android:id="@+id/abvMin"
+        android:id="@+id/ibuMin"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:inputType="number"
@@ -73,7 +73,7 @@
 
     <android.support.v7.widget.AppCompatEditText
         style="@style/Input.Rounded"
-        android:id="@+id/abvMax"
+        android:id="@+id/ibuMax"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:inputType="number"
