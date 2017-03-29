@@ -26,4 +26,13 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 class StyleSelectorActivity: AbsActivity() {
   override fun onRequestFragment(): AbsFragment
     = StyleListSelectorFragment.newInstance()
+
+  override fun onBackPressed() {
+    getStyleListSelectorFragment()?.onBackPressed() ?: super.onBackPressed()
+  }
+
+  private fun getStyleListSelectorFragment(): StyleListSelectorFragment? {
+    val tag = StyleListSelectorFragment::class.java.name
+    return supportFragmentManager.findFragmentByTag(tag) as? StyleListSelectorFragment
+  }
 }

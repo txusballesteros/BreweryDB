@@ -61,7 +61,7 @@ class StyleSearchSectionFragment: SearchSectionFragment(), SeachSectionPresenter
     if (savedInstanceState == null) {
       presenter.onRequestSearchQuery()
     }
-    rootView.setOnClickListener { navigator.navigateToStyleSelector(this) }
+    styleSelector.setOnClickListener { navigator.navigateToStyleSelector(this) }
   }
 
   override fun onSaveInstanceState(outState: Bundle?) {

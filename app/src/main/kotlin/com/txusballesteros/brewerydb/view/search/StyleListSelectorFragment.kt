@@ -85,7 +85,14 @@ class StyleListSelectorFragment: AbsFragment(), StyleListSelectorPresenter.View 
   }
 
   private fun closeView() {
-    activity.finish()
+    intent().let {
+      activity.setResult(Activity.RESULT_CANCELED, it)
+      activity.finish()
+    }
+  }
+
+  fun onBackPressed() {
+    closeView()
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {

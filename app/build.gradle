@@ -42,7 +42,8 @@ android {
   sourceSets {
     main.java.srcDirs += "src/main/kotlin"
     test.java.srcDirs += "src/testing/unitaries/kotlin"
-    androidTest.java.srcDirs += "src/testing/android/api/kotlin"
+    androidTest.java.srcDirs += "src/testing/instrumentation/api/kotlin"
+    androidTest.java.srcDirs += "src/testing/instrumentation/aceptance/kotlin"
   }
 
   testOptions {
@@ -100,6 +101,7 @@ dependencies {
   androidTestCompile dependencies.SupportAnnotation
   androidTestCompile dependencies.TestRunner
   androidTestCompile dependencies.TestRules
+  androidTestCompile dependencies.EspressoCore
   androidTestCompile dependencies.Retrofit
   androidTestCompile dependencies.Gson
   androidTestCompile dependencies.GsonConverter

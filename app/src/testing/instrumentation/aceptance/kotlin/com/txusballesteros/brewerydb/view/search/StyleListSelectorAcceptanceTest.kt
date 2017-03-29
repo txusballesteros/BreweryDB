@@ -1,3 +1,4 @@
+package com.txusballesteros.brewerydb.view.search
 /*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
@@ -18,31 +19,22 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.beers
-
-import com.txusballesteros.brewerydb.api.ApiIntegrationTest
-import org.junit.Assert.*
+import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.action.ViewActions.click
+import android.support.test.espresso.action.ViewActions.pressBack
+import android.support.test.espresso.matcher.ViewMatchers.*
+import android.support.test.rule.ActivityTestRule
+import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.view.AcceptanceTest
+import org.junit.Rule
 import org.junit.Test
-import retrofit2.Retrofit
 
-class BeerBreweriesApiIntegrationTest: ApiIntegrationTest() {
-  companion object {
-    val BEER_ID = "KE3f43"
-  }
-
-  lateinit var api: BeerBreweriesApi
-
-  override fun onPrepareTest(retrofit: Retrofit) {
-    val service = retrofit.create(BeerBreweriesRetrofitService::class.java)
-    api = BeerBreweriesRetrofitApi(service)
-  }
+class StyleListSelectorAcceptanceTest: AcceptanceTest() {
+  @get:Rule val testRule = ActivityTestRule<SearchActivity>(SearchActivity::class.java)
 
   @Test
-  fun shouldGetBeerBreweries() {
-    val response = api.getBreweries(BEER_ID)
-
-    assertNotNull(response)
-    assertNotNull(response.breweries)
-    assertEquals(STATUS_SUCCESS, response.status)
+  fun shouldNavigateToBack() {
+    onView(withId(R.id.styleSelector)).perform(click())
+    onView(isRoot()).perform(pressBack())
   }
 }

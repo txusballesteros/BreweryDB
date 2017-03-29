@@ -1,3 +1,11 @@
+package com.txusballesteros.brewerydb.view
+
+import android.support.test.filters.LargeTest
+import org.junit.runner.RunWith
+import android.support.test.runner.AndroidJUnit4
+
+
+
 /*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
@@ -18,25 +26,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.api.categories
 
-import com.txusballesteros.brewerydb.api.ApiIntegrationTest
-import org.junit.Assert
-import org.junit.Test
-import retrofit2.Retrofit
-
-class CategoriesApiIntegrationTest: ApiIntegrationTest() {
-  lateinit var api : CategoriesApi
-
-  override fun onPrepareTest(retrofit: Retrofit) {
-    val service = retrofit.create(CategoriesRetrofitService::class.java)
-    this.api = CategoriesRetrofitApi(service)
-  }
-
-  @Test
-  fun shouldGetCategories() {
-    val response = api.getCategories()
-
-    Assert.assertEquals(STATUS_SUCCESS, response.status)
-  }
-}
+@LargeTest
+@RunWith(AndroidJUnit4::class)
+abstract class AcceptanceTest

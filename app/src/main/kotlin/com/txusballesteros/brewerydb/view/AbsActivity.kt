@@ -36,8 +36,9 @@ abstract class AbsActivity : AppCompatActivity() {
 
   fun addFragment() {
     val fragment = onRequestFragment()
+    val tag = fragment.javaClass.name
     supportFragmentManager.beginTransaction()
-        .add(R.id.content_place_holder, fragment)
+        .add(R.id.content_place_holder, fragment, tag)
         .commit()
   }
 
