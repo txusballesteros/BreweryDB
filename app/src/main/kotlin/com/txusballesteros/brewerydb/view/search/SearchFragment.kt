@@ -21,6 +21,8 @@
 package com.txusballesteros.brewerydb.view.search
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
@@ -69,6 +71,20 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
     search.setOnClickListener { presenter.onSearch() }
   }
 
+  override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    inflater?.let {
+       it.inflate(R.menu.menu_search, menu)
+    }
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    return when(item?.itemId) {
+      android.R.id.home -> consume { closeView() }
+      R.id.action_clear -> consume { presenter.onClearFilters() }
+      else -> super.onOptionsItemSelected(item)
+    }
+  }
+
   private fun composeView() {
     val keywordFragment = sectionsFragmentFactory.getKeywordSection(childFragmentManager)
     val styleFragment = sectionsFragmentFactory.getStyleSection(childFragmentManager)
@@ -88,13 +104,6 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
         .beginTransaction()
         .replace(searchHolder, section, tag)
         .commitAllowingStateLoss()
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-    return when(item?.itemId) {
-      android.R.id.home -> consume { closeView() }
-      else -> super.onOptionsItemSelected(item)
-    }
   }
 
   override fun getQuery(): SearchQueryViewModel {

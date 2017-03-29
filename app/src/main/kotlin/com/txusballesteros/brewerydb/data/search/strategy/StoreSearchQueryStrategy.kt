@@ -33,7 +33,7 @@ class StoreSearchQueryStrategy private constructor(private val localDataSource: 
                                       LocalStrategy<SearchQueryDataModel, Void>() {
 
   override fun onRequestCallToLocal(params: SearchQueryDataModel?): Void? {
-    localDataSource.storeQuery(params!!)
+    localDataSource.store(params!!)
     beersLocalDataSource.flush()
     beersCloudDataSource.flush()
     return null

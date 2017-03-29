@@ -37,7 +37,7 @@ class GetBeersStrategy private constructor(private val queryLocalDataSource: Sea
   }
 
   override fun onRequestCallToCloud(params: Void?): List<BeerDataModel>? {
-    val query = queryLocalDataSource.getQuery()
+    val query = queryLocalDataSource.get()
     val response = cloudDataSource.getBeers(query)
     localDataSource.store(response)
     return response.sortedBy { it.name }

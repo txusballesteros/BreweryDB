@@ -18,17 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.search
+package com.txusballesteros.brewerydb.data.search.strategy
 
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
+import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
+import com.txusballesteros.brewerydb.data.strategy.LocalStrategy
+import javax.inject.Inject
 
-interface SearchPresenter: Presenter<SearchPresenter.View> {
-  fun onSearch()
-  fun onClearFilters()
+class ClearSearchQueryStrategy private constructor(private val localDataSource: SearchQueryLocalDataSource):
+                                      LocalStrategy<Void, SearchQueryDataModel>() {
+  override fun onRequestCallToLocal(params: Void?): SearchQueryDataModel? {
+    localDataSource.clear()
+    return localDataSource.get()
+  }
 
-  interface View: Presenter.View {
-    fun getQuery(): SearchQueryViewModel
-    fun closeView()
+  class Builder @Inject constructor(private val localDataSource: SearchQueryLocalDataSource){
+    fun build() = ClearSearchQueryStrategy(localDataSource)
   }
 }

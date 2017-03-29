@@ -18,17 +18,8 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.search
+package com.txusballesteros.brewerydb.domain.usecase.search
 
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
-
-interface SearchPresenter: Presenter<SearchPresenter.View> {
-  fun onSearch()
-  fun onClearFilters()
-
-  interface View: Presenter.View {
-    fun getQuery(): SearchQueryViewModel
-    fun closeView()
-  }
+interface ClearSearchQueryUseCase {
+  fun execute(onSuccess: () -> Unit)
 }

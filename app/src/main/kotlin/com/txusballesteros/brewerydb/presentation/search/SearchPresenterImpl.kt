@@ -20,14 +20,15 @@
  */
 package com.txusballesteros.brewerydb.presentation.search
 
+import com.txusballesteros.brewerydb.domain.usecase.search.ClearSearchQueryUseCase
 import com.txusballesteros.brewerydb.domain.usecase.search.StoreSearchQueryUseCase
-import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModelMapper
 import javax.inject.Inject
 
 class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCase: StoreSearchQueryUseCase,
+                                              private val clearSearchQueryUseCase: ClearSearchQueryUseCase,
                                               private val mapper: SearchQueryViewModelMapper):
                           AbsPresenter<SearchPresenter.View>(), SearchPresenter {
 
@@ -37,5 +38,11 @@ class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCas
     storeSearchQueryUseCase.execute(query, onResult = {
       getView()?.closeView()
     })
+  }
+
+  override fun onClearFilters() {
+    clearSearchQueryUseCase.execute {
+      getView()?.closeView()
+    }
   }
 }

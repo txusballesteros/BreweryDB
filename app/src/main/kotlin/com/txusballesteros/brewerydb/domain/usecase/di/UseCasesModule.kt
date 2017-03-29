@@ -80,4 +80,7 @@ class UseCasesModule {
 
   @Provides
   fun provideGetSearchQueryStreamUseCase(useCase: GetSearchQueryStreamInteractor): GetSearchQueryStreamUseCase = useCase
+
+  @Provides
+  fun provideClearSearchQueryUseCase(useCase: ClearSearchQueryInteractor): ClearSearchQueryUseCase = useCase
 }
