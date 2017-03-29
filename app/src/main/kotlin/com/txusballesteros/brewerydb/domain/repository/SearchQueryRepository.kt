@@ -49,10 +49,10 @@ class SearchQueryRepository @Inject constructor(private val getSearchQueryStrate
   }
 
   fun clear(onSuccess: () -> Unit) {
-    clearSearchQueryStrategy.build().execute {
+    clearSearchQueryStrategy.build().execute(onResult = {
       subject.onNext()
       onSuccess()
-    }
+    })
   }
 
   fun store(query: SearchQuery, onResult: () -> Unit) {
