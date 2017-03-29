@@ -26,11 +26,15 @@ import javax.inject.Inject
 class SearchQueryInMemoryLocalDataSource @Inject constructor(): SearchQueryLocalDataSource {
   private var query: SearchQueryDataModel = SearchQueryDataModel()
 
-  override fun getQuery(): SearchQueryDataModel {
+  override fun get(): SearchQueryDataModel {
     return query
   }
 
-  override fun storeQuery(query: SearchQueryDataModel) {
+  override fun store(query: SearchQueryDataModel) {
     this.query = query
+  }
+
+  override fun clear() {
+    this.query = SearchQueryDataModel()
   }
 }

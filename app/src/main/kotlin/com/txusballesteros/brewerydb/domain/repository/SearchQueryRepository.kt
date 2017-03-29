@@ -20,19 +20,20 @@
  */
 package com.txusballesteros.brewerydb.domain.repository
 
+import com.txusballesteros.brewerydb.data.model.SearchQueryDataModelMapper
+import com.txusballesteros.brewerydb.data.search.strategy.ClearSearchQueryStrategy
 import com.txusballesteros.brewerydb.data.search.strategy.GetSearchQueryStrategy
 import com.txusballesteros.brewerydb.data.search.strategy.StoreSearchQueryStrategy
-import com.txusballesteros.brewerydb.data.model.SearchQueryDataModelMapper
 import com.txusballesteros.brewerydb.domain.model.SearchQuery
 import com.txusballesteros.brewerydb.domain.reactive.Observer
 import com.txusballesteros.brewerydb.domain.reactive.Subject
-import com.txusballesteros.brewerydb.threading.MainThreadExecutor
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class SearchQueryRepository @Inject constructor(private val getSearchQueryStrategy: GetSearchQueryStrategy.Builder,
                                                 private val storeSearchQueryStrategy: StoreSearchQueryStrategy.Builder,
+                                                private val clearSearchQueryStrategy: ClearSearchQueryStrategy.Builder,
                                                 private val subject: Subject,
                                                 private val mapper: SearchQueryDataModelMapper) {
 
@@ -45,6 +46,13 @@ class SearchQueryRepository @Inject constructor(private val getSearchQueryStrate
 
   fun subscribe(): Observer {
     return subject.asObserver()
+  }
+
+  fun clear(onSuccess: () -> Unit) {
+    clearSearchQueryStrategy.build().execute(onResult = {
+      subject.onNext()
+      onSuccess()
+    })
   }
 
   fun store(query: SearchQuery, onResult: () -> Unit) {

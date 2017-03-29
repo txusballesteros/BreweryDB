@@ -23,6 +23,7 @@ package com.txusballesteros.brewerydb.data.search.datasource
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 
 interface SearchQueryLocalDataSource {
-  fun storeQuery(query: SearchQueryDataModel)
-  fun getQuery(): SearchQueryDataModel
+  fun store(query: SearchQueryDataModel)
+  fun get(): SearchQueryDataModel
+  fun clear()
 }

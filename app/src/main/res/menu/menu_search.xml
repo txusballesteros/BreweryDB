@@ -1,4 +1,5 @@
-/*
+<?xml version="1.0" encoding="utf-8"?>
+<!--
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -17,18 +18,13 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
- */
-package com.txusballesteros.brewerydb.presentation.search
-
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
-
-interface SearchPresenter: Presenter<SearchPresenter.View> {
-  fun onSearch()
-  fun onClearFilters()
-
-  interface View: Presenter.View {
-    fun getQuery(): SearchQueryViewModel
-    fun closeView()
-  }
-}
+-->
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+      android:id="@+id/action_clear"
+      android:icon="@drawable/ic_close_24dp"
+      android:title="@string/clear_filters"
+      app:showAsAction="ifRoom" />
+</menu>

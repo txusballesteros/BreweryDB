@@ -55,7 +55,7 @@ class RestModule {
   fun provideHttpClient(interceptor: Interceptor) : OkHttpClient {
     return OkHttpClient.Builder()
               .addInterceptor(interceptor)
-              .addInterceptor(StethoInterceptor())
+              .addNetworkInterceptor(StethoInterceptor())
               .build()
   }
 

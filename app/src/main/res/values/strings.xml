@@ -27,6 +27,7 @@
   <string name="is_not_organic">Is not Organic</string>
   <string name="beer">Beer</string>
   <string name="search">Search</string>
+  <string name="clear_filters">Clear Filters</string>
   <string name="done">Done</string>
   <string name="ingredients">Ingredients</string>
   <string name="breweries">Breweries</string>

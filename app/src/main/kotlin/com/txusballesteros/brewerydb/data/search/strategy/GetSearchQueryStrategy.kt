@@ -28,7 +28,7 @@ import javax.inject.Inject
 class GetSearchQueryStrategy private constructor(private val localDataSource: SearchQueryLocalDataSource):
                                       LocalStrategy<Void, SearchQueryDataModel>() {
   override fun onRequestCallToLocal(params: Void?): SearchQueryDataModel? {
-    return localDataSource.getQuery()
+    return localDataSource.get()
   }
 
   class Builder @Inject constructor(private val localDataSource: SearchQueryLocalDataSource){

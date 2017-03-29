@@ -18,17 +18,13 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.search
+package com.txusballesteros.brewerydb.domain.usecase.search
 
-import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
+import com.txusballesteros.brewerydb.domain.repository.SearchQueryRepository
+import javax.inject.Inject
 
-interface SearchPresenter: Presenter<SearchPresenter.View> {
-  fun onSearch()
-  fun onClearFilters()
-
-  interface View: Presenter.View {
-    fun getQuery(): SearchQueryViewModel
-    fun closeView()
+class ClearSearchQueryInteractor @Inject constructor(private var repository: SearchQueryRepository): ClearSearchQueryUseCase {
+  override fun execute(onSuccess: () -> Unit) {
+    repository.clear { onSuccess() }
   }
 }
