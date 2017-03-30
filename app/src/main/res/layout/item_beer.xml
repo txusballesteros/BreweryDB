@@ -43,20 +43,20 @@
         android:layout_gravity="center_horizontal" />
 
     <android.support.v7.widget.AppCompatTextView
+        style="@style/Text"
         android:id="@+id/displayName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_normal"
         android:layout_marginLeft="@dimen/padding_normal"
         android:layout_marginRight="@dimen/padding_normal"
-        android:fontFamily="sans-serif"
         android:textSize="@dimen/text_size_medium"
-        android:textColor="@color/gray_2"
         android:maxLines="1"
         android:ellipsize="end"
         tools:text="Short Name"/>
 
     <android.support.v7.widget.AppCompatTextView
+        style="@style/Text.Light"
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,8 +64,6 @@
         android:layout_marginRight="@dimen/padding_normal"
         android:layout_marginTop="@dimen/padding_normal"
         android:fontFamily="sans-serif"
-        android:textColor="@color/gray_3"
-        android:textSize="@dimen/text_size_normal"
         android:maxLines="3"
         android:ellipsize="end"
         tools:text="Description..."/>

@@ -32,23 +32,20 @@
     android:padding="@dimen/padding_normal">
 
     <android.support.v7.widget.AppCompatTextView
+        style="@style/Text.Branded"
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_medium"
-        android:textColor="@color/gray_2"
-        android:fontFamily="sans-serif"
         tools:text="Fermentable Name"/>
 
     <android.support.v7.widget.AppCompatTextView
+        style="@style/Text"
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_normal"
         android:layout_below="@+id/name"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/gray_3"
-        android:textSize="@dimen/text_size_normal"
         tools:text="Description..."/>
 
     <FrameLayout
@@ -69,21 +66,17 @@
         android:layout_below="@+id/originDivider">
 
       <android.support.v7.widget.AppCompatTextView
+          style="@style/Text"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:fontFamily="sans-serif"
-          android:textColor="@color/gray_2"
-          android:textSize="@dimen/text_size_normal"
           android:text="@string/origin"/>
 
       <android.support.v7.widget.AppCompatTextView
+          style="@style/Text.Light"
           android:id="@+id/country"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:layout_marginLeft="@dimen/padding_normal"
-          android:fontFamily="sans-serif"
-          android:textColor="@color/gray_3"
-          android:textSize="@dimen/text_size_normal"
           tools:text="Spain"/>
 
     </LinearLayout>
@@ -106,150 +99,118 @@
 
       <TableRow android:paddingBottom="@dimen/padding_normal">
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
             android:text="@string/moisture_content" />
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text.Light"
             android:id="@+id/moistureContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
             tools:text="55.6"/>
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
             android:text="@string/coarse_fine_difference"/>
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text.Light"
             android:id="@+id/coarseFineDifference"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
             tools:text="55.6"/>
       </TableRow>
       <TableRow android:paddingBottom="@dimen/padding_normal">
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
             android:text="@string/diastatic_power" />
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text.Light"
             android:id="@+id/diastaticPower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
             tools:text="55.6"/>
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
             android:text="@string/dry_yield"/>
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text.Light"
             android:id="@+id/dryYield"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
             tools:text="55.6"/>
       </TableRow>
       <TableRow android:paddingBottom="@dimen/padding_normal">
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
             android:text="@string/potential" />
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text.Light"
             android:id="@+id/potential"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
             tools:text="55.6"/>
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
             android:text="@string/protein"/>
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text.Light"
             android:id="@+id/protein"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
             tools:text="55.6"/>
       </TableRow>
       <TableRow android:paddingBottom="@dimen/padding_normal">
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
             android:text="@string/soluble_nitrogen_ratio" />
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text.Light"
             android:id="@+id/solubleNitrogenRatio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
             tools:text="55.6"/>
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_2"
-            android:fontFamily="sans-serif"
             android:text="@string/max_in_batch"/>
 
         <android.support.v7.widget.AppCompatTextView
+            style="@style/Text.Light"
             android:id="@+id/maxInBatch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/padding_normal"
-            android:textSize="@dimen/text_size_normal"
-            android:textColor="@color/gray_3"
-            android:fontFamily="sans-serif"
             tools:text="55.6"/>
       </TableRow>
     </TableLayout>
