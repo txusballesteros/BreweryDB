@@ -40,14 +40,12 @@
       app:showReferenceBackground="true" />
 
   <android.support.v7.widget.AppCompatTextView
+      style="@style/Text.Light"
       android:id="@+id/ibuTitle"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_alignParentBottom="true"
-      android:fontFamily="sans-serif"
-      android:textColor="@color/gray_3"
       android:gravity="center"
-      android:textSize="@dimen/text_size_normal"
       tools:text="ABV: 4.5"/>
 
 </RelativeLayout>

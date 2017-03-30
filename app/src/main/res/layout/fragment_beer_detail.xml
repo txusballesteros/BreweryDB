@@ -34,22 +34,19 @@
       android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatTextView
+        style="@style/Text.Branded"
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_medium"
-        android:textColor="@color/gray_2"
-        android:fontFamily="sans-serif"
         tools:text="Beer Name"/>
 
     <android.support.v7.widget.AppCompatTextView
+        style="@style/Text"
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding_normal"
-        android:fontFamily="sans-serif"
-        android:textColor="@color/gray_3"
-        android:textSize="@dimen/text_size_normal"
         tools:text="Description..."/>
 
     <include layout="@layout/include_line_decorator" />
@@ -68,14 +65,12 @@
           app:srcCompat="@drawable/ic_glass_mug" />
 
       <android.support.v7.widget.AppCompatTextView
+          style="Text.Light"
           android:id="@+id/glass"
           android:layout_weight="1"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginLeft="@dimen/padding_small"
-          android:fontFamily="sans-serif"
-          android:textColor="@color/gray_3"
-          android:textSize="@dimen/text_size_normal"
           android:maxLines="1"
           android:ellipsize="end"
           tools:text="Pilsner"/>
@@ -96,14 +91,12 @@
           app:srcCompat="@drawable/ic_thermometer" />
 
       <android.support.v7.widget.AppCompatTextView
+          style="Text.Light"
           android:id="@+id/temperature"
           android:layout_weight="1"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginLeft="@dimen/padding_small"
-          android:fontFamily="sans-serif"
-          android:textColor="@color/gray_3"
-          android:textSize="@dimen/text_size_normal"
           android:maxLines="1"
           android:ellipsize="end"
           android:text="5 ºC"/>
@@ -124,14 +117,12 @@
           app:srcCompat="@drawable/ic_tree" />
 
       <android.support.v7.widget.AppCompatTextView
+          style="Text.Light"
           android:id="@+id/organic"
           android:layout_weight="1"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginLeft="@dimen/padding_small"
-          android:fontFamily="sans-serif"
-          android:textColor="@color/gray_3"
-          android:textSize="@dimen/text_size_normal"
           android:maxLines="1"
           android:ellipsize="end"
           android:text="Is Organic"/>

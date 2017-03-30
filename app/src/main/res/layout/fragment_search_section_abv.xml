@@ -26,21 +26,17 @@
   android:orientation="vertical">
 
   <android.support.v7.widget.AppCompatTextView
+      style="@style/Text"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:textSize="@dimen/text_size_normal"
-      android:textColor="@color/gray_2"
       android:layout_marginLeft="@dimen/padding_normal"
-      android:fontFamily="sans-serif"
       android:text="@string/abv"/>
 
   <android.support.v7.widget.AppCompatTextView
+      style="@style/Text.Light"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginLeft="@dimen/padding_normal"
-      android:textSize="@dimen/text_size_normal"
-      android:textColor="@color/gray_3"
-      android:fontFamily="sans-serif"
       android:text="@string/alcohol_by_volume"/>
 
   <LinearLayout
@@ -63,6 +59,7 @@
         android:hint="@string/min" />
 
     <android.support.v7.widget.AppCompatTextView
+        style="@style/Text.Branded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_normal"
