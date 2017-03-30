@@ -21,7 +21,6 @@
 package com.txusballesteros.brewerydb.view.search
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
@@ -63,6 +62,7 @@ class StyleListSelectorFragment: AbsFragment(), StyleListSelectorPresenter.View 
     = viewComponent.inject(this)
 
   override fun onRequestViewBehaviours() {
+    toolbarBehaviour.title = getString(R.string.styles)
     toolbarBehaviour.inject(activity, true)
     loadingBehaviour.inject(activity)
     errorBehaviour.inject(activity, onRetry = {

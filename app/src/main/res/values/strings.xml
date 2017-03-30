@@ -73,6 +73,7 @@
   <string name="international_bitterness_units">International Bitterness Units</string>
   <string name="abv">ABV:</string>
   <string name="style">Style</string>
+  <string name="styles">Styles</string>
   <string name="brewery">Brewery</string>
   <string name="try_again">Try Again</string>
   <string name="field_separator">-</string>
