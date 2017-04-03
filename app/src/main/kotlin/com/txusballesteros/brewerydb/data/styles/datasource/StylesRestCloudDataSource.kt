@@ -23,7 +23,6 @@ package com.txusballesteros.brewerydb.data.styles.datasource
 import com.txusballesteros.brewerydb.api.model.StyleApiModelMapper
 import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
-import com.txusballesteros.brewerydb.extensions.secureMap
 import javax.inject.Inject
 
 class StylesRestCloudDataSource @Inject constructor(private val api: StylesApi,
@@ -32,7 +31,7 @@ class StylesRestCloudDataSource @Inject constructor(private val api: StylesApi,
 
   override fun getStyles(): List<StyleDataModel> {
     val response = api.getStyles()
-    val result = response.styles.secureMap { style -> mapper.map(style) }
+    val result = response.styles.orEmpty().map { style -> mapper.map(style) }
     return result.sortedBy(StyleDataModel::shortName)
   }
 }

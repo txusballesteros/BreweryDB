@@ -25,7 +25,6 @@ import com.txusballesteros.brewerydb.api.model.BeerApiModelMapper
 import com.txusballesteros.brewerydb.api.model.SearchQueryApiModelMapper
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
-import com.txusballesteros.brewerydb.extensions.secureMap
 import javax.inject.Inject
 
 class BeersRestCloudDataSource @Inject constructor(private val api: BeersApi,
@@ -43,12 +42,12 @@ class BeersRestCloudDataSource @Inject constructor(private val api: BeersApi,
   override fun getBeers(query: SearchQueryDataModel): List<BeerDataModel> {
     val apiQuery = queryMapper.map(query)
     val response = api.getBeers(apiQuery)
-    return response.beers.secureMap { beer -> mapper.map(beer) }
+    return response.beers.orEmpty().map { beer -> mapper.map(beer) }
   }
 
   override fun getNextPageBeers(query: SearchQueryDataModel): List<BeerDataModel> {
     val apiQuery = queryMapper.map(query)
     val response = api.getNextPageBeers(apiQuery)
-    return response.beers.secureMap { beer -> mapper.map(beer) }
+    return response.beers.orEmpty().map { beer -> mapper.map(beer) }
   }
 }
