@@ -25,4 +25,5 @@
   <corners android:radius="@dimen/button_rounded_radius" />
   <stroke android:color="@color/colorPrimaryLight"
           android:width="1.5dp" />
+  <solid android:color="@color/white" />
 </shape>
