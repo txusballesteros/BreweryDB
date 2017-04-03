@@ -24,7 +24,6 @@ import com.txusballesteros.brewerydb.data.model.StyleDataModelMapper
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStyleByIdStrategy
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesStrategy
 import com.txusballesteros.brewerydb.domain.model.Style
-import com.txusballesteros.brewerydb.extensions.secureMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -42,7 +41,7 @@ class StylesRepository @Inject constructor(private val getStylesStrategy: GetSty
 
   fun getList(onResult: (List<Style>) -> Unit) {
     getStylesStrategy.build().execute(onResult =  {
-      val styles = it.secureMap { style -> mapper.map(style) }
+      val styles = it.orEmpty().map { style -> mapper.map(style) }
       onResult(styles)
     })
   }

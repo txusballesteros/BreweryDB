@@ -23,7 +23,6 @@ package com.txusballesteros.brewerydb.data.beers.datasource
 import com.txusballesteros.brewerydb.api.beers.BeerIngredientsApi
 import com.txusballesteros.brewerydb.api.model.BeerIngredientApiModelMapper
 import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModel
-import com.txusballesteros.brewerydb.extensions.secureMap
 import javax.inject.Inject
 
 class BeerIngredientsRestCloudDataSource @Inject constructor(private val api: BeerIngredientsApi,
@@ -32,6 +31,6 @@ class BeerIngredientsRestCloudDataSource @Inject constructor(private val api: Be
 
   override fun getIngredients(beerId: String): List<BeerIngredientDataModel> {
     val response = api.getIngredients(beerId)
-    return response.ingredients.secureMap { ingredient -> mapper.map(ingredient) }
+    return response.ingredients.orEmpty().map { ingredient -> mapper.map(ingredient) }
   }
 }

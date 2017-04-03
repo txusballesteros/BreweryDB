@@ -1,3 +1,11 @@
+package com.txusballesteros.brewerydb.view
+
+import android.support.test.filters.LargeTest
+import org.junit.runner.RunWith
+import android.support.test.runner.AndroidJUnit4
+
+
+
 /*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
@@ -18,8 +26,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.extensions
 
-fun <A, B> List<A>?.secureMap(block: (A) -> B): List<B> = this?.let { map(block) } ?: emptyList()
-
-
+@LargeTest
+@RunWith(AndroidJUnit4::class)
+abstract class AcceptanceTest

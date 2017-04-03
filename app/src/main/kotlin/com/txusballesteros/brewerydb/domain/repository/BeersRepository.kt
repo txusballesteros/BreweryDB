@@ -27,7 +27,6 @@ import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModelMapper
 import com.txusballesteros.brewerydb.data.model.BreweryDataModelMapper
 import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.model.Brewery
-import com.txusballesteros.brewerydb.extensions.secureMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -43,14 +42,14 @@ class BeersRepository @Inject constructor(private val getBeersStrategy: GetBeers
 
   fun getBreweries(beerId: String, onResult: (List<Brewery>) -> Unit) {
     getBeerBreweriesStrategy.build().execute(beerId, onResult = {
-      val breweries = it.secureMap { brewery -> breweryMapper.map(brewery) }
+      val breweries = it.orEmpty().map { brewery -> breweryMapper.map(brewery) }
       onResult(breweries)
     })
   }
 
   fun getIngredients(beerId: String, onResult: (List<BeerIngredient>) -> Unit) {
     getBeerIngredientsStrategy.build().execute(beerId, onResult = {
-      val ingredients = it.secureMap { ingredient -> ingredientsMapper.map(ingredient) }
+      val ingredients = it.orEmpty().map { ingredient -> ingredientsMapper.map(ingredient) }
       onResult(ingredients)
     })
   }
@@ -64,14 +63,14 @@ class BeersRepository @Inject constructor(private val getBeersStrategy: GetBeers
 
   fun getFirstPage(onResult: (List<Beer>) -> Unit) {
     getBeersStrategy.build().execute(onResult = {
-      val beers = it.secureMap { beer ->  beersMapper.map(beer) }
+      val beers = it.orEmpty().map { beer ->  beersMapper.map(beer) }
       onResult(beers)
     })
   }
 
   fun getNextPage(onResult: (List<Beer>) -> Unit) {
     getNextPageBeersStrategy.build().execute(onResult = {
-      val beers = it.secureMap { beer ->  beersMapper.map(beer) }
+      val beers = it.orEmpty().map { beer ->  beersMapper.map(beer) }
       onResult(beers)
     })
   }
