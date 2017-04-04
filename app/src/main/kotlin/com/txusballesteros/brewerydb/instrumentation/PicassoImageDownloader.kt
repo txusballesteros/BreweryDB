@@ -21,13 +21,30 @@
 package com.txusballesteros.brewerydb.instrumentation
 
 import android.widget.ImageView
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import javax.inject.Inject
 
 class PicassoImageDownloader @Inject constructor(): ImageDownloader {
-  override fun download(url: String, view: ImageView) {
+  override fun download(thumbnail: String?, imageUrl: String, view: ImageView) {
+    if (thumbnail != null) {
+      Picasso.with(view.context)
+          .load(thumbnail)
+          .into(view, object: Callback {
+            override fun onSuccess() {
+              download(imageUrl, view)
+            }
+
+            override fun onError() { }
+          })
+    } else {
+      download(imageUrl, view)
+    }
+  }
+
+  private fun download(imageUrl: String, view: ImageView) {
     Picasso.with(view.context)
-        .load(url)
+        .load(imageUrl)
         .into(view)
   }
 }

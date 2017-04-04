@@ -129,7 +129,8 @@ class BeerDetailComposerFragment : AbsFragment(), BeerDetailControllerPresenter.
 
   private fun renderLabel(beer: BeerViewModel) {
     if (beer.label != null && beer.label.large != null) {
-      toolbarBehaviour.setImage(beer.label.large)
+      toolbarBehaviour.setImage(thumbnail = beer.label.medium,
+                                image =  beer.label.large)
     }
   }
 

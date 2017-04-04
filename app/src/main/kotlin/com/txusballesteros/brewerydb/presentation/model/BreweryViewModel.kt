@@ -29,6 +29,9 @@ data class BreweryViewModel(val id: String,
                              val isOrganic: String?,
                              val images: ImageViewModel?) {
 
+  fun thumbnailImage(): String?
+    = images?.medium
+
   fun largestImage(): String?
     = images?.largestImage()
 

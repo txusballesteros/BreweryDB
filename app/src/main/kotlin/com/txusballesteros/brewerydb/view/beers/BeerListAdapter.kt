@@ -78,7 +78,7 @@ class BeerListAdapter(private val listener: OnBeerClickListener,
     fun renderLabel(beer: BeerViewModel) {
       if (beer.label != null && beer.label.medium != null) {
         labelView.visibility = View.VISIBLE
-        imageDownloader.download(beer.label.medium, labelView)
+        imageDownloader.download(imageUrl = beer.label.medium, view = labelView)
       } else {
         labelView.visibility = View.GONE
       }

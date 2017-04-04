@@ -23,5 +23,5 @@ package com.txusballesteros.brewerydb.instrumentation
 import android.widget.ImageView
 
 interface ImageDownloader {
-  fun download(url: String, view: ImageView)
+  fun download(thumbnail: String? = null, imageUrl: String, view: ImageView)
 }
