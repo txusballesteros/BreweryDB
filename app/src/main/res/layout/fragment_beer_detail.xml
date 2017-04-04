@@ -54,86 +54,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_normal"
-        android:orientation="horizontal">
-
-      <android.support.v7.widget.AppCompatImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="@dimen/padding_small"
-          android:tint="@color/gray_2"
-          app:srcCompat="@drawable/ic_glass_mug" />
-
-      <android.support.v7.widget.AppCompatTextView
-          style="Text.Light"
-          android:id="@+id/glass"
-          android:layout_weight="1"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="@dimen/padding_small"
-          android:maxLines="1"
-          android:ellipsize="end"
-          tools:text="Pilsner"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_normal"
-        android:orientation="horizontal">
-
-      <android.support.v7.widget.AppCompatImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="@dimen/padding_small"
-          android:tint="@color/gray_2"
-          app:srcCompat="@drawable/ic_thermometer" />
-
-      <android.support.v7.widget.AppCompatTextView
-          style="Text.Light"
-          android:id="@+id/temperature"
-          android:layout_weight="1"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="@dimen/padding_small"
-          android:maxLines="1"
-          android:ellipsize="end"
-          android:text="5 ºC"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_normal"
-        android:orientation="horizontal">
-
-      <android.support.v7.widget.AppCompatImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:tint="@color/gray_2"
-          android:layout_marginLeft="@dimen/padding_small"
-          app:srcCompat="@drawable/ic_tree" />
-
-      <android.support.v7.widget.AppCompatTextView
-          style="Text.Light"
-          android:id="@+id/organic"
-          android:layout_weight="1"
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="@dimen/padding_small"
-          android:maxLines="1"
-          android:ellipsize="end"
-          android:text="Is Organic"/>
-
-    </LinearLayout>
-
-    <include layout="@layout/include_line_decorator" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/padding_small"
         android:layout_marginRight="@dimen/padding_small"
         android:orientation="horizontal">
@@ -154,5 +74,8 @@
 
     <include layout="@layout/include_line_decorator" />
 
+    <include layout="@layout/include_beer_detail_extra_info" />
+
+    <include layout="@layout/include_line_decorator" />
   </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -22,10 +22,7 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
   <View
       android:layout_width="match_parent"
-      android:layout_marginLeft="@dimen/padding_big"
-      android:layout_marginRight="@dimen/padding_big"
-      android:layout_marginTop="@dimen/padding_big"
-      android:layout_marginBottom="@dimen/padding_big"
+      android:layout_margin="@dimen/padding_big"
       android:background="@color/gray_4"
       android:layout_height="0.5dp" />
 </merge>

@@ -24,14 +24,12 @@ import android.os.Bundle
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailPresenter
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
-import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour_Factory
-import com.txusballesteros.brewerydb.view.behaviours.ToolbarWithImageBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_beer_detail.*
+import kotlinx.android.synthetic.main.include_beer_detail_extra_info.*
 import org.jetbrains.anko.support.v4.withArguments
 import javax.inject.Inject
 
