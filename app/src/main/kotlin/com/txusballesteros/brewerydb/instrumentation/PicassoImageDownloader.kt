@@ -32,7 +32,6 @@ class PicassoImageDownloader @Inject constructor(): ImageDownloader {
     if (thumbnail != null) {
       getPicasso(view)
           .load(thumbnail)
-          .placeholder(view.drawable)
           .into(view, object: Callback {
             override fun onSuccess() {
               download(imageUrl, view)
@@ -48,6 +47,7 @@ class PicassoImageDownloader @Inject constructor(): ImageDownloader {
   private fun download(imageUrl: String, view: ImageView) {
     getPicasso(view)
         .load(imageUrl)
+        .placeholder(view.drawable)
         .into(view)
   }
 
