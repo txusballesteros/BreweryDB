@@ -63,7 +63,7 @@ class BeerIbuFragment: AbsFragment(), BeerIbuPresenter.View {
     presenter.onRequestIbu(beerId)
   }
 
-  override fun renderIbu(min: Float, max: Float, value: Float) {
+  override fun renderIbu(value: Float) {
     ibu.text = getString(R.string.ibu_pattern, value)
   }
 

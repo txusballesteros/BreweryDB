@@ -22,6 +22,7 @@ package com.txusballesteros.brewerydb.navigation
 
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.app.Fragment
 import android.view.View
 import com.txusballesteros.brewerydb.navigation.commands.*
 import com.txusballesteros.brewerydb.presentation.Presenter
@@ -66,7 +67,7 @@ class Navigator @Inject constructor() {
   }
 
   private fun navigate(navigationContext: NavigationContext, command: NavigationCommand) {
-    val options = prepateSharedElement(navigationContext)
+    val options = prepareSharedElement(navigationContext)
     navigate(navigationContext.from, command, options)
   }
 
@@ -81,13 +82,14 @@ class Navigator @Inject constructor() {
     }
   }
 
-  private fun prepateSharedElement(navigationContext: NavigationContext): Bundle? {
+  private fun prepareSharedElement(navigationContext: NavigationContext): Bundle? {
     var result: Bundle? = null
-    if (navigationContext.from is AbsFragment) {
+    if (navigationContext.from is Fragment) {
       val sharedElement = navigationContext.sharedElement
       result = sharedElement?.let {
-        val transitionElement = android.support.v4.util.Pair<View, String>(sharedElement.first, sharedElement.second)
-         ActivityOptionsCompat.makeSceneTransitionAnimation(navigationContext.from.activity, transitionElement).toBundle()
+        ActivityOptionsCompat.makeSceneTransitionAnimation(navigationContext.from.activity,
+                                                           sharedElement.first,
+                                                           sharedElement.second).toBundle()
       }
     }
     return result
