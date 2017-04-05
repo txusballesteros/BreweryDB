@@ -20,6 +20,7 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
@@ -83,7 +84,11 @@ class BeerTabsComposerFragment : AbsFragment(), BeerDetailControllerPresenter.Vi
   }
 
   private fun closeView() {
-    activity.finish()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      activity.finishAfterTransition()
+    } else {
+      activity.finish()
+    }
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {

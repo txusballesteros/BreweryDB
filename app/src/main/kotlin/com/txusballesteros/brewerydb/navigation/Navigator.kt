@@ -20,6 +20,9 @@
  */
 package com.txusballesteros.brewerydb.navigation
 
+import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
+import android.view.View
 import com.txusballesteros.brewerydb.navigation.commands.*
 import com.txusballesteros.brewerydb.presentation.Presenter
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
@@ -27,7 +30,7 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 import javax.inject.Inject
 
 class Navigator @Inject constructor() {
-  fun navigateToBeerDetail(from: Presenter.View?, beerId: String) {
+  fun navigateToBeerDetail(from: NavigationContext, beerId: String) {
     val navigationCommand = BeerDetailNavigationCommand(beerId)
     navigate(from, navigationCommand)
   }
@@ -62,14 +65,31 @@ class Navigator @Inject constructor() {
     navigate(from, navigationCommand)
   }
 
-  private fun navigate(from: Presenter.View?, command: NavigationCommand) {
+  private fun navigate(navigationContext: NavigationContext, command: NavigationCommand) {
+    val options = prepateSharedElement(navigationContext)
+    navigate(navigationContext.from, command, options)
+  }
+
+  private fun navigate(from: Presenter.View?, command: NavigationCommand, options: Bundle? = null) {
     if (from is AbsFragment) {
       val intent = command.build(from.activity)
       if (command.navigateForResult) {
-        from.startActivityForResult(intent, command.requestCode)
+        from.startActivityForResult(intent, command.requestCode, options)
       } else {
-        from.startActivity(intent)
+        from.startActivity(intent, options)
       }
     }
+  }
+
+  private fun prepateSharedElement(navigationContext: NavigationContext): Bundle? {
+    var result: Bundle? = null
+    if (navigationContext.from is AbsFragment) {
+      val sharedElement = navigationContext.sharedElement
+      result = sharedElement?.let {
+        val transitionElement = android.support.v4.util.Pair<View, String>(sharedElement.first, sharedElement.second)
+         ActivityOptionsCompat.makeSceneTransitionAnimation(navigationContext.from.activity, transitionElement).toBundle()
+      }
+    }
+    return result
   }
 }

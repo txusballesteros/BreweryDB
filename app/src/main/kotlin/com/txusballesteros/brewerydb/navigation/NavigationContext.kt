@@ -18,23 +18,23 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.navigation
 
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
+import android.view.View
 import com.txusballesteros.brewerydb.presentation.Presenter
 
-interface BeersListPresenter: Presenter<BeersListPresenter.View> {
-  fun onRequestBeers()
-  fun onBeerClick(beer: BeerViewModel, view: android.view.View)
-  fun onRequestNextPage()
-  fun onSearchClick()
-  fun onAboutClick()
+class NavigationContext private constructor(val from: Presenter.View?) {
+  companion object {
+    fun from(from: Presenter.View?): NavigationContext {
+      return NavigationContext(from)
+    }
+  }
 
-  interface View : Presenter.View {
-    fun showLoading()
-    fun hideLoading()
-    fun clearList()
-    fun renderBeers(beers: List<BeerViewModel>)
-    fun renderError()
+  var sharedElement: Pair<View, String>? = null
+    private set
+
+  fun withSharedElement(element: Pair<View, String>): NavigationContext {
+    this.sharedElement = element
+    return this
   }
 }

@@ -32,7 +32,7 @@ import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 import org.jetbrains.anko.find
 import java.util.*
 
-class BeerListAdapter(private val listener: OnBeerClickListener,
+class BeerListAdapter(private val onBeerClick: (BeerViewModel, View) -> Unit,
                       private val imageDownloader: ImageDownloader) : RecyclerView.Adapter<BeerListAdapter.ViewHolder>() {
   private val cache: MutableList<BeerViewModel> = ArrayList()
 
@@ -46,7 +46,7 @@ class BeerListAdapter(private val listener: OnBeerClickListener,
 
   override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
     val beer = cache[position]
-    holder?.render(beer, listener)
+    holder?.render(beer, onBeerClick)
   }
 
   override fun getItemCount(): Int {
@@ -63,7 +63,7 @@ class BeerListAdapter(private val listener: OnBeerClickListener,
     private val displayNameView = view.find<AppCompatTextView>(R.id.displayName)
     private val descriptionView = view.find<AppCompatTextView>(R.id.description)
 
-    fun render(beer: BeerViewModel, listener: OnBeerClickListener) {
+    fun render(beer: BeerViewModel, onBeerClick: (BeerViewModel, View) -> Unit) {
       displayNameView.text = beer.displayName
       if (beer.description != null) {
         descriptionView.visibility = View.VISIBLE
@@ -71,7 +71,7 @@ class BeerListAdapter(private val listener: OnBeerClickListener,
       } else {
         descriptionView.visibility = View.GONE
       }
-      itemView.setOnClickListener { listener.onBeerClick(beer) }
+      itemView.setOnClickListener { onBeerClick(beer, labelView) }
       renderLabel(beer)
     }
 
@@ -83,9 +83,5 @@ class BeerListAdapter(private val listener: OnBeerClickListener,
         labelView.visibility = View.GONE
       }
     }
-  }
-
-  interface OnBeerClickListener {
-    fun onBeerClick(beer: BeerViewModel)
   }
 }
