@@ -38,6 +38,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = arrayOf(
+        ApplicationModule::class,
         InstrumentationModule::class,
         ThreadingModule::class,
         DataSourceModule::class,
@@ -46,7 +47,7 @@ import javax.inject.Singleton
         RestModule::class,
         ReactiveModule::class
 ))
-interface ApplicationComponent: InstrumentationProvider, RepositoriesProvider,
+interface ApplicationComponent: ApplicationProvider, InstrumentationProvider, RepositoriesProvider,
                                 ThreadingProvider, DataSourceProvider, ApiProvider {
   fun inject(application: Application)
 }

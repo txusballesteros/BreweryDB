@@ -18,31 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb
+package com.txusballesteros.brewerydb.di
 
 import android.app.Application
-import com.facebook.stetho.Stetho
-import com.txusballesteros.brewerydb.di.ApplicationComponent
-import com.txusballesteros.brewerydb.di.ApplicationModule
-import com.txusballesteros.brewerydb.di.DaggerApplicationComponent
+import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
 
-class Application : Application() {
-  lateinit var applicationComponent : ApplicationComponent
-              private set
-
-  override fun onCreate() {
-    super.onCreate()
-    initializeDependencyInjections()
-    initializeStetho()
-  }
-
-  fun initializeDependencyInjections() {
-    this.applicationComponent = DaggerApplicationComponent.builder()
-                                        .applicationModule(ApplicationModule(this))
-                                        .build()
-  }
-
-  fun initializeStetho() {
-    Stetho.initializeWithDefaults(this)
-  }
+@Module
+class ApplicationModule(private val application: Application) {
+  @Singleton @Provides
+  fun provideApplication(): Application = application
 }
