@@ -24,6 +24,7 @@ import android.widget.ImageView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.LruCache
 import com.squareup.picasso.Picasso
+import com.txusballesteros.brewerydb.BuildConfig
 import javax.inject.Inject
 
 class PicassoImageDownloader @Inject constructor(): ImageDownloader {
@@ -52,10 +53,12 @@ class PicassoImageDownloader @Inject constructor(): ImageDownloader {
 
   private fun getPicasso(view: ImageView): Picasso {
     val context = view.context
-    return Picasso.Builder(context)
-        .indicatorsEnabled(true)
-        .memoryCache(LruCache(context))
-        .loggingEnabled(true)
-        .build()
+    val builder = Picasso.Builder(context)
+    builder.memoryCache(LruCache(context))
+    builder.loggingEnabled(true)
+    if (BuildConfig.DEBUG) {
+      builder.indicatorsEnabled(true)
+    }
+    return builder.build()
   }
 }
