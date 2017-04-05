@@ -45,6 +45,7 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   @Inject lateinit var presenter: BeerDetailPresenter
+  @Inject lateinit var fragmentFactory: BeerDetailFragmentFactory
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
   @Inject lateinit var errorBehaviour: ErrorBehaviour
 
@@ -72,28 +73,11 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   override fun onComposeView() {
-    val abvFragment = getAbvFragment()
-    val ibuFragment = getIbuFragment()
+    val beerId =  getBeerId()
+    val abvFragment = fragmentFactory.getAbvFragment(childFragmentManager, beerId)
+    val ibuFragment = fragmentFactory.getIbuFragment(childFragmentManager, beerId)
     addFragment(R.id.abvPlaceHolder, abvFragment)
     addFragment(R.id.ibuPlaceHolder, ibuFragment)
-  }
-
-  private fun getAbvFragment(): BeerAbvFragment {
-    val tag = BeerAbvFragment::class.java.name
-    var fragment = childFragmentManager.findFragmentByTag(tag) as BeerAbvFragment?
-    if (fragment == null) {
-      fragment = BeerAbvFragment.newInstance(getBeerId())
-    }
-    return fragment
-  }
-
-  private fun getIbuFragment(): BeerIbuFragment {
-    val tag = BeerIbuFragment::class.java.name
-    var fragment = childFragmentManager.findFragmentByTag(tag) as BeerIbuFragment?
-    if (fragment == null) {
-      fragment = BeerIbuFragment.newInstance(getBeerId())
-    }
-    return fragment
   }
 
   private fun addFragment(containerView: Int, fragment: AbsFragment) {

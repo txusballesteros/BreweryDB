@@ -29,22 +29,21 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.BottomNavigationBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarWithImageBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import kotlinx.android.synthetic.main.fragment_beer_detail_controller.*
 import org.jetbrains.anko.support.v4.withArguments
 import javax.inject.Inject
 
-class BeerDetailComposerFragment : AbsFragment(), BeerDetailControllerPresenter.View {
+class BeerTabsComposerFragment : AbsFragment(), BeerDetailControllerPresenter.View {
   companion object {
     val EXTRA_BEER_ID = "extra:beerId"
 
-    fun newInstance(beerId: String): BeerDetailComposerFragment {
-      return BeerDetailComposerFragment().withArguments(
+    fun newInstance(beerId: String): BeerTabsComposerFragment {
+      return BeerTabsComposerFragment().withArguments(
           EXTRA_BEER_ID to beerId
       )
     }
   }
 
-  @Inject lateinit var fragmentFactory: BeerDetailComposerFactory
+  @Inject lateinit var fragmentFragmentFactory: BeerTabsComposerFragmentFactory
   @Inject lateinit var toolbarBehaviour : ToolbarWithImageBehaviour
   @Inject lateinit var bottomNavigationBehaviour: BottomNavigationBehaviour
   @Inject lateinit var presenter: BeerDetailControllerPresenter
@@ -94,19 +93,19 @@ class BeerDetailComposerFragment : AbsFragment(), BeerDetailControllerPresenter.
 
   override fun showBeerDetail() {
     val beerId = getBeerId()
-    val fragment = fragmentFactory.getBeerDetailFragment(childFragmentManager, beerId)
+    val fragment = fragmentFragmentFactory.getBeerDetailFragment(childFragmentManager, beerId)
     addFragment(fragment)
   }
 
   override fun showBeerIngredients() {
     val beerId = getBeerId()
-    val fragment = fragmentFactory.getBeerIngredientsFragment(childFragmentManager, beerId)
+    val fragment = fragmentFragmentFactory.getBeerIngredientsFragment(childFragmentManager, beerId)
     addFragment(fragment)
   }
 
   override fun showBeerBreweries() {
     val beerId = getBeerId()
-    val fragment = fragmentFactory.getBeerBreweriesFragment(childFragmentManager, beerId)
+    val fragment = fragmentFragmentFactory.getBeerBreweriesFragment(childFragmentManager, beerId)
     addFragment(fragment)
   }
 

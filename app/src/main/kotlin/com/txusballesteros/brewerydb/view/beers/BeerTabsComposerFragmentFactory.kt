@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.view.beers
 import android.support.v4.app.FragmentManager
 import javax.inject.Inject
 
-class BeerDetailComposerFactory @Inject constructor() {
+class BeerTabsComposerFragmentFactory @Inject constructor() {
   fun getBeerDetailFragment(fragmentManager: FragmentManager, beerId: String ): BeerDetailFragment {
     val tag = BeerDetailFragment::class.java.name
     val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerDetailFragment.newInstance(beerId)

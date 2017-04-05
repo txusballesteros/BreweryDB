@@ -48,7 +48,9 @@ abstract class AbsFragment : Fragment() {
     onRequestInjection()
     onRequestViewBehaviours()
     onPresenterShouldBeAttached()
-    onComposeView()
+    if (savedInstanceState == null) {
+      onComposeView()
+    }
     onViewReady(savedInstanceState)
   }
 

@@ -18,36 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-apply from: 'buildsystem/dependencies.gradle'
+package com.txusballesteros.brewerydb.view.beers
 
-buildscript {
-  repositories {
-    jcenter()
+import android.support.v4.app.FragmentManager
+import javax.inject.Inject
+
+class BeerDetailFragmentFactory @Inject constructor() {
+  fun getAbvFragment(fragmentManager: FragmentManager, beerId: String ): BeerAbvFragment {
+    val tag = BeerAbvFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerAbvFragment.newInstance(beerId)
+    return fragment as BeerAbvFragment
   }
 
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.3.1'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.1"
+  fun getIbuFragment(fragmentManager: FragmentManager, beerId: String ): BeerIbuFragment {
+    val tag = BeerIbuFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerIbuFragment.newInstance(beerId)
+    return fragment as BeerIbuFragment
   }
-}
-
-subprojects {
-  configurations.all {
-    resolutionStrategy {
-      forcedModules = [
-          "org.jetbrains.kotlin:kotlin-stdlib:1.1.1",
-          "org.jetbrains.kotlin:kotlin-reflect:1.1.1"
-      ]
-    }
-  }
-}
-
-allprojects {
-  repositories {
-    jcenter()
-  }
-}
-
-task clean(type: Delete) {
-  delete rootProject.buildDir
 }
