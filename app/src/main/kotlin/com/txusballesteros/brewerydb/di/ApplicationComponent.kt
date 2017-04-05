@@ -29,6 +29,8 @@ import com.txusballesteros.brewerydb.data.di.DataSourceModule
 import com.txusballesteros.brewerydb.data.di.DataSourceProvider
 import com.txusballesteros.brewerydb.domain.reactive.di.ReactiveModule
 import com.txusballesteros.brewerydb.domain.repository.di.RepositoriesProvider
+import com.txusballesteros.brewerydb.instrumentation.di.InstrumentationModule
+import com.txusballesteros.brewerydb.instrumentation.di.InstrumentationProvider
 import com.txusballesteros.brewerydb.threading.di.ThreadingModule
 import com.txusballesteros.brewerydb.threading.di.ThreadingProvider
 import dagger.Component
@@ -36,6 +38,7 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = arrayOf(
+        InstrumentationModule::class,
         ThreadingModule::class,
         DataSourceModule::class,
         ApiModule::class,
@@ -43,6 +46,7 @@ import javax.inject.Singleton
         RestModule::class,
         ReactiveModule::class
 ))
-interface ApplicationComponent : RepositoriesProvider, ThreadingProvider, DataSourceProvider, ApiProvider {
+interface ApplicationComponent: InstrumentationProvider, RepositoriesProvider,
+                                ThreadingProvider, DataSourceProvider, ApiProvider {
   fun inject(application: Application)
 }

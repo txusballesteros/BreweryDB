@@ -23,7 +23,6 @@ package com.txusballesteros.brewerydb.view.di
 import com.txusballesteros.brewerydb.di.ApplicationComponent
 import com.txusballesteros.brewerydb.di.scopes.PerView
 import com.txusballesteros.brewerydb.domain.usecase.di.UseCasesModule
-import com.txusballesteros.brewerydb.instrumentation.di.InstrumentationModule
 import com.txusballesteros.brewerydb.presentation.di.PresentationModule
 import com.txusballesteros.brewerydb.view.about.AboutFragment
 import com.txusballesteros.brewerydb.view.beers.*
@@ -39,7 +38,6 @@ import dagger.Component
 @Component(dependencies = arrayOf(
                ApplicationComponent::class),
            modules = arrayOf(
-               InstrumentationModule::class,
                PresentationModule::class,
                UseCasesModule::class
            ))

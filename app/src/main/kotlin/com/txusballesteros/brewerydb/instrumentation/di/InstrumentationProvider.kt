@@ -21,13 +21,7 @@
 package com.txusballesteros.brewerydb.instrumentation.di
 
 import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
-import com.txusballesteros.brewerydb.instrumentation.PicassoImageDownloader
-import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
 
-@Module
-class InstrumentationModule {
-  @Singleton @Provides
-  fun provideImageDownloader(imageDownloader: PicassoImageDownloader): ImageDownloader = imageDownloader
+interface InstrumentationProvider {
+  fun getImageDownloader(): ImageDownloader
 }
