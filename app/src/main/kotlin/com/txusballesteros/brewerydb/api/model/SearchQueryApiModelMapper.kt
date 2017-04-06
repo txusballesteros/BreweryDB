@@ -51,6 +51,6 @@ class SearchQueryApiModelMapper @Inject constructor() {
 
   private fun mapKeyword(source: String?): String?
     = source?.let {
-        "$source*"
+        "*$source*"
       }
 }
