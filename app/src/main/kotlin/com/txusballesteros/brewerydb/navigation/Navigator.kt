@@ -20,12 +20,12 @@
  */
 package com.txusballesteros.brewerydb.navigation
 
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
-import android.support.v4.app.Fragment
+import android.support.v4.util.Pair
 import android.view.View
 import com.txusballesteros.brewerydb.navigation.commands.*
-import com.txusballesteros.brewerydb.presentation.Presenter
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import javax.inject.Inject
@@ -36,42 +36,39 @@ class Navigator @Inject constructor() {
     navigate(from, navigationCommand)
   }
 
-  fun navigateToIngredientDetail(from: Presenter.View?, ingredientId: Int, ingredientType: IngredientTypeViewModel) {
+  fun navigateToIngredientDetail(from: NavigationContext, ingredientId: Int, ingredientType: IngredientTypeViewModel) {
     val navigationCommand = IngredientDetailNavigationCommand(ingredientId, ingredientType)
     navigate(from, navigationCommand)
   }
 
-  fun navigateToBreweryDetail(from: Presenter.View?, breweryId: String) {
+  fun navigateToBreweryDetail(from: NavigationContext, breweryId: String) {
     val navigationCommand = BreweryDetailNavigationCommand(breweryId)
     navigate(from, navigationCommand)
   }
 
-  fun navigateToUrl(from: Presenter.View?, url: String) {
+  fun navigateToUrl(from: NavigationContext, url: String) {
     val navigationCommand = UrlNavigationCommand(url)
     navigate(from, navigationCommand)
   }
 
-  fun navigateToSearch(from: Presenter.View?) {
+  fun navigateToSearch(from: NavigationContext) {
     val navigationCommand = SearchNavigationCommand()
     navigate(from, navigationCommand)
   }
 
-  fun navigateToStyleSelector(from: Presenter.View?) {
+  fun navigateToStyleSelector(from: NavigationContext) {
     val navigationCommand = StyleSelectorNavigationCommand()
     navigate(from, navigationCommand)
   }
 
-  fun navigateToAbout(from: Presenter.View?) {
+  fun navigateToAbout(from: NavigationContext) {
     val navigationCommand = AboutNavigationCommand()
     navigate(from, navigationCommand)
   }
 
   private fun navigate(navigationContext: NavigationContext, command: NavigationCommand) {
     val options = prepareSharedElement(navigationContext)
-    navigate(navigationContext.from, command, options)
-  }
-
-  private fun navigate(from: Presenter.View?, command: NavigationCommand, options: Bundle? = null) {
+    val from = navigationContext.from
     if (from is AbsFragment) {
       val intent = command.build(from.activity)
       if (command.navigateForResult) {
@@ -84,12 +81,12 @@ class Navigator @Inject constructor() {
 
   private fun prepareSharedElement(navigationContext: NavigationContext): Bundle? {
     var result: Bundle? = null
-    if (navigationContext.from is Fragment) {
-      val sharedElement = navigationContext.sharedElement
-      result = sharedElement?.let {
-        ActivityOptionsCompat.makeSceneTransitionAnimation(navigationContext.from.activity,
-                                                           sharedElement.first,
-                                                           sharedElement.second).toBundle()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      val activity = navigationContext.activity
+      result = activity?.let {
+          val sharedElements = navigationContext.sharedElements.orEmpty()
+                                      .map { Pair<View, String>(it, it.transitionName) }.toTypedArray()
+          ActivityOptionsCompat.makeSceneTransitionAnimation(activity, *sharedElements).toBundle()
       }
     }
     return result

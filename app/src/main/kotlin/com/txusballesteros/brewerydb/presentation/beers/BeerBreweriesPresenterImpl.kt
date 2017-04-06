@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerBreweriesUseCase
+import com.txusballesteros.brewerydb.navigation.NavigationContext
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
@@ -45,6 +46,6 @@ class BeerBreweriesPresenterImpl @Inject constructor(private val getBeerBrewerie
   }
 
   override fun onBreweryClick(brewery: BreweryViewModel) {
-    navigator.navigateToBreweryDetail(getView(), brewery.id)
+    navigator.navigateToBreweryDetail(NavigationContext.from(getView()), brewery.id)
   }
 }

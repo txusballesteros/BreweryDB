@@ -25,6 +25,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.navigation.NavigationContext
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.navigation.RequestCodes
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
@@ -61,7 +62,7 @@ class StyleSearchSectionFragment: SearchSectionFragment(), SeachSectionPresenter
     if (savedInstanceState == null) {
       presenter.onRequestSearchQuery()
     }
-    styleSelector.setOnClickListener { navigator.navigateToStyleSelector(this) }
+    styleSelector.setOnClickListener { navigator.navigateToStyleSelector(NavigationContext.from(this)) }
   }
 
   override fun onSaveInstanceState(outState: Bundle?) {

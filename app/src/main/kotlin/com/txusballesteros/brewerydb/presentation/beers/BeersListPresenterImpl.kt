@@ -77,17 +77,15 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
 
   override fun onBeerClick(beer: BeerViewModel, view: android.view.View) {
     val navigationContext = NavigationContext.from(getView())
-        .withSharedElement(
-            view to "transition:MainImage"
-        )
+                                             .withSharedElements(view)
     navigator.navigateToBeerDetail(navigationContext, beer.id)
   }
 
   override fun onSearchClick() {
-    navigator.navigateToSearch(getView())
+    navigator.navigateToSearch(NavigationContext.from(getView()))
   }
 
   override fun onAboutClick() {
-    navigator.navigateToAbout(getView())
+    navigator.navigateToAbout(NavigationContext.from(getView()))
   }
 }

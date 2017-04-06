@@ -23,6 +23,7 @@ package com.txusballesteros.brewerydb.presentation.beers
 import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
 import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModelMapper
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerIngredientsUseCase
+import com.txusballesteros.brewerydb.navigation.NavigationContext
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
@@ -49,7 +50,7 @@ class BeerIngredientsPresenterImpl @Inject constructor(private val getBeerIngred
 
   override fun onIngredientClick(ingredient: BeerIngredientViewModel) {
     if (ingredient.type != IngredientTypeViewModel.UNKNOWN) {
-      navigator.navigateToIngredientDetail(getView(), ingredient.id, ingredient.type)
+      navigator.navigateToIngredientDetail(NavigationContext.from(getView()), ingredient.id, ingredient.type)
     }
   }
 }

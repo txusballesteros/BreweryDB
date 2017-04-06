@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.view.beers
 
 import android.os.Bundle
+import android.view.View
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailPresenter
@@ -103,9 +104,16 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   override fun renderBeer(beer: BeerViewModel) {
     name.text = beer.name
-    description.text = beer.description
-    temperature.text = beer.servingTemperatureDisplay
+    renderServingTemperature(beer)
+    renderDescription(beer)
     renderIsOrganic(beer)
+  }
+
+  private fun renderDescription(beer: BeerViewModel) {
+    description.visibility = beer.description?.let {
+      description.text = it
+      View.VISIBLE
+    } ?: View.GONE
   }
 
   override fun renderGlass(glassName: String) {
@@ -114,6 +122,10 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   override fun renderEmptyGlass() {
     glass.text = "NA"
+  }
+
+  private fun renderServingTemperature(beer: BeerViewModel) {
+    temperature.text = beer.servingTemperatureDisplay
   }
 
   private fun renderIsOrganic(beer: BeerViewModel) {

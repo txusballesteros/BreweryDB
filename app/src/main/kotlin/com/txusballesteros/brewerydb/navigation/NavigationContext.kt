@@ -20,8 +20,10 @@
  */
 package com.txusballesteros.brewerydb.navigation
 
+import android.app.Activity
 import android.view.View
 import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.view.AbsFragment
 
 class NavigationContext private constructor(val from: Presenter.View?) {
   companion object {
@@ -30,11 +32,22 @@ class NavigationContext private constructor(val from: Presenter.View?) {
     }
   }
 
-  var sharedElement: Pair<View, String>? = null
+  val activity: Activity?
+    get() {
+      var result: Activity? = null
+      from?.apply {
+        if (from is AbsFragment) {
+          result = from.activity
+        }
+      }
+      return result
+    }
+
+  var sharedElements: List<View>? = null
     private set
 
-  fun withSharedElement(element: Pair<View, String>): NavigationContext {
-    this.sharedElement = element
+  fun withSharedElements(vararg element: View): NavigationContext {
+    this.sharedElements = listOf(*element)
     return this
   }
 }
