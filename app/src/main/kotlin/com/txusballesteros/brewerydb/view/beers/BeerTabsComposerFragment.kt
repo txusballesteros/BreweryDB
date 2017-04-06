@@ -20,6 +20,7 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
@@ -29,22 +30,21 @@ import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.BottomNavigationBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarWithImageBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
-import kotlinx.android.synthetic.main.fragment_beer_detail_controller.*
 import org.jetbrains.anko.support.v4.withArguments
 import javax.inject.Inject
 
-class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter.View {
+class BeerTabsComposerFragment : AbsFragment(), BeerDetailControllerPresenter.View {
   companion object {
     val EXTRA_BEER_ID = "extra:beerId"
 
-    fun newInstance(beerId: String): BeerDetailControllerFragment {
-      return BeerDetailControllerFragment().withArguments(
+    fun newInstance(beerId: String): BeerTabsComposerFragment {
+      return BeerTabsComposerFragment().withArguments(
           EXTRA_BEER_ID to beerId
       )
     }
   }
 
-  @Inject lateinit var fragmentFactory: BeerDetailControllerFragmentFactory
+  @Inject lateinit var fragmentFragmentFactory: BeerTabsComposerFragmentFactory
   @Inject lateinit var toolbarBehaviour : ToolbarWithImageBehaviour
   @Inject lateinit var bottomNavigationBehaviour: BottomNavigationBehaviour
   @Inject lateinit var presenter: BeerDetailControllerPresenter
@@ -84,7 +84,11 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
   }
 
   private fun closeView() {
-    activity.finish()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+      activity.finishAfterTransition()
+    } else {
+      activity.finish()
+    }
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
@@ -94,19 +98,19 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
 
   override fun showBeerDetail() {
     val beerId = getBeerId()
-    val fragment = fragmentFactory.getBeerDetailFragment(childFragmentManager, beerId)
+    val fragment = fragmentFragmentFactory.getBeerDetailFragment(childFragmentManager, beerId)
     addFragment(fragment)
   }
 
   override fun showBeerIngredients() {
     val beerId = getBeerId()
-    val fragment = fragmentFactory.getBeerIngredientsFragment(childFragmentManager, beerId)
+    val fragment = fragmentFragmentFactory.getBeerIngredientsFragment(childFragmentManager, beerId)
     addFragment(fragment)
   }
 
   override fun showBeerBreweries() {
     val beerId = getBeerId()
-    val fragment = fragmentFactory.getBeerBreweriesFragment(childFragmentManager, beerId)
+    val fragment = fragmentFragmentFactory.getBeerBreweriesFragment(childFragmentManager, beerId)
     addFragment(fragment)
   }
 
@@ -129,7 +133,8 @@ class BeerDetailControllerFragment: AbsFragment(), BeerDetailControllerPresenter
 
   private fun renderLabel(beer: BeerViewModel) {
     if (beer.label != null && beer.label.large != null) {
-      toolbarBehaviour.setImage(beer.label.large)
+      toolbarBehaviour.setImage(thumbnail = beer.label.medium,
+                                image =  beer.label.large)
     }
   }
 

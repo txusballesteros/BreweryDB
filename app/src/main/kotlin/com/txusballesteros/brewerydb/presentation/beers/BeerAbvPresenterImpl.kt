@@ -20,14 +20,11 @@
  */
 package com.txusballesteros.brewerydb.presentation.beers
 
-import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
-import com.txusballesteros.brewerydb.domain.usecase.styles.GetStyleByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import javax.inject.Inject
 
-class BeerAbvPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase,
-                                               private val getStyleByIdUseCase: GetStyleByIdUseCase):
+class BeerAbvPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase):
                            AbsPresenter<BeerAbvPresenter.View>(), BeerAbvPresenter {
   companion object {
     val UNKNOWN_ABV = 0f
@@ -35,19 +32,9 @@ class BeerAbvPresenterImpl @Inject constructor(private val getBeerByIdUseCase: G
 
   override fun onRequestAbv(beerId: String) {
     getBeerByIdUseCase.execute(beerId, onResult = {
-      getStyle(it)
+      val value = string2float(it.abv)
+      getView()?.renderAbv(value)
     })
-  }
-
-  private fun getStyle(beer: Beer) {
-    if (beer.styleId != null) {
-      getStyleByIdUseCase.execute(beer.styleId, onResult = {
-        val min = string2float(it.abvMin)
-        val max = string2float(it.abvMax)
-        val value = string2float(beer.abv)
-        getView()?.renderAbv(min, max, value)
-      })
-    }
   }
 
   private fun string2float(value: String?): Float {

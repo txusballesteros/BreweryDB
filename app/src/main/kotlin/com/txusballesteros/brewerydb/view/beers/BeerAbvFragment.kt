@@ -63,12 +63,8 @@ class BeerAbvFragment: AbsFragment(), BeerAbvPresenter.View {
     presenter.onRequestAbv(beerId)
   }
 
-  override fun renderAbv(min: Float, max: Float, value: Float) {
-    abvTitle.text = getString(R.string.abv_pattern, value)
-    abv.minimumReferenceValue = min
-    abv.maximumReferenceValue = max
-    abv.value = value
-    abv.invalidate()
+  override fun renderAbv(value: Float) {
+    abv.text = getString(R.string.abv_pattern, value)
   }
 
   private fun getBeerId(): String {

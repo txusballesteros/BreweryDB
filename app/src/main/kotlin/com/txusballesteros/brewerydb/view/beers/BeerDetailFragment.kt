@@ -21,17 +21,16 @@
 package com.txusballesteros.brewerydb.view.beers
 
 import android.os.Bundle
+import android.view.View
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailPresenter
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
-import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour_Factory
-import com.txusballesteros.brewerydb.view.behaviours.ToolbarWithImageBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_beer_detail.*
+import kotlinx.android.synthetic.main.include_beer_detail_extra_info.*
 import org.jetbrains.anko.support.v4.withArguments
 import javax.inject.Inject
 
@@ -47,6 +46,7 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   @Inject lateinit var presenter: BeerDetailPresenter
+  @Inject lateinit var fragmentFactory: BeerDetailFragmentFactory
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
   @Inject lateinit var errorBehaviour: ErrorBehaviour
 
@@ -74,28 +74,11 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   override fun onComposeView() {
-    val abvFragment = getAbvFragment()
-    val ibuFragment = getIbuFragment()
+    val beerId =  getBeerId()
+    val abvFragment = fragmentFactory.getAbvFragment(childFragmentManager, beerId)
+    val ibuFragment = fragmentFactory.getIbuFragment(childFragmentManager, beerId)
     addFragment(R.id.abvPlaceHolder, abvFragment)
     addFragment(R.id.ibuPlaceHolder, ibuFragment)
-  }
-
-  private fun getAbvFragment(): BeerAbvFragment {
-    val tag = BeerAbvFragment::class.java.name
-    var fragment = childFragmentManager.findFragmentByTag(tag) as BeerAbvFragment?
-    if (fragment == null) {
-      fragment = BeerAbvFragment.newInstance(getBeerId())
-    }
-    return fragment
-  }
-
-  private fun getIbuFragment(): BeerIbuFragment {
-    val tag = BeerIbuFragment::class.java.name
-    var fragment = childFragmentManager.findFragmentByTag(tag) as BeerIbuFragment?
-    if (fragment == null) {
-      fragment = BeerIbuFragment.newInstance(getBeerId())
-    }
-    return fragment
   }
 
   private fun addFragment(containerView: Int, fragment: AbsFragment) {
@@ -121,9 +104,16 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   override fun renderBeer(beer: BeerViewModel) {
     name.text = beer.name
-    description.text = beer.description
-    temperature.text = beer.servingTemperatureDisplay
+    renderServingTemperature(beer)
+    renderDescription(beer)
     renderIsOrganic(beer)
+  }
+
+  private fun renderDescription(beer: BeerViewModel) {
+    description.visibility = beer.description?.let {
+      description.text = it
+      View.VISIBLE
+    } ?: View.GONE
   }
 
   override fun renderGlass(glassName: String) {
@@ -132,6 +122,10 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   override fun renderEmptyGlass() {
     glass.text = "NA"
+  }
+
+  private fun renderServingTemperature(beer: BeerViewModel) {
+    temperature.text = beer.servingTemperatureDisplay
   }
 
   private fun renderIsOrganic(beer: BeerViewModel) {

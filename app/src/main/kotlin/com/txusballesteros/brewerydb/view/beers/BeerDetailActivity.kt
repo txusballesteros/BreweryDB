@@ -41,7 +41,7 @@ class BeerDetailActivity: AbsActivity() {
 
   override fun onRequestFragment(): AbsFragment {
     val beerId = getBeerId()
-    return BeerDetailControllerFragment.newInstance(beerId)
+    return BeerTabsComposerFragment.newInstance(beerId)
   }
 
   fun getBeerId(): String {

@@ -1,4 +1,5 @@
-/*
+<?xml version="1.0" encoding="utf-8"?>
+<!--
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -17,24 +18,7 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
- */
-package com.txusballesteros.brewerydb.presentation.beers
-
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
-
-interface BeersListPresenter: Presenter<BeersListPresenter.View> {
-  fun onRequestBeers()
-  fun onBeerClick(beer: BeerViewModel, view: android.view.View)
-  fun onRequestNextPage()
-  fun onSearchClick()
-  fun onAboutClick()
-
-  interface View : Presenter.View {
-    fun showLoading()
-    fun hideLoading()
-    fun clearList()
-    fun renderBeers(beers: List<BeerViewModel>)
-    fun renderError()
-  }
-}
+-->
+<resources>
+  <string name="MainImageTransition">transition:MainImage</string>
+</resources>

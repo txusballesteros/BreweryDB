@@ -24,9 +24,10 @@ import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 import com.txusballesteros.brewerydb.instrumentation.PicassoImageDownloader
 import dagger.Module
 import dagger.Provides
+import javax.inject.Singleton
 
 @Module
 class InstrumentationModule {
-  @Provides
+  @Singleton @Provides
   fun provideImageDownloader(imageDownloader: PicassoImageDownloader): ImageDownloader = imageDownloader
 }

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ * Copyright Txus Ballesteros 2017 (@txusballesteros)
+ *
+ * This file is part of Foobar.
+ *
+ * Foobar is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Foobar is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
+-->
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+
+  <android.support.constraint.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingTop="@dimen/padding_normal"
+      android:paddingBottom="@dimen/padding_normal"
+      android:animateLayoutChanges="false">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:tint="@color/gray_2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/appCompatImageView4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_glass_mug" />
+
+    <android.support.v7.widget.AppCompatTextView
+        style="@style/Text.Light"
+        android:id="@+id/glass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="@+id/appCompatImageView3"
+        app:layout_constraintRight_toLeftOf="@+id/appCompatImageView4"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView3"
+        tools:text="Pilsner" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:tint="@color/gray_2"
+        app:srcCompat="@drawable/ic_thermometer"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="0dp"
+        app:layout_constraintRight_toLeftOf="@+id/appCompatImageView6"
+        app:layout_constraintLeft_toRightOf="@+id/appCompatImageView3" />
+
+    <android.support.v7.widget.AppCompatTextView
+        style="@style/Text.Light"
+        android:id="@+id/temperature"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="5 ºC"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="@+id/appCompatImageView4"
+        app:layout_constraintRight_toLeftOf="@+id/appCompatImageView6"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView4" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:tint="@color/gray_2"
+        app:layout_constraintLeft_toRightOf="@+id/appCompatImageView4"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_tree" />
+
+    <android.support.v7.widget.AppCompatTextView
+        style="@style/Text.Light"
+        android:id="@+id/organic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Is Organic"
+        android:textAlignment="center"
+        app:layout_constraintLeft_toLeftOf="@+id/appCompatImageView6"
+        app:layout_constraintRight_toRightOf="@+id/appCompatImageView6"
+        app:layout_constraintTop_toBottomOf="@+id/appCompatImageView6" />
+
+  </android.support.constraint.ConstraintLayout>
+</merge>

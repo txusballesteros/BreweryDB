@@ -18,23 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.instrumentation.di
 
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
+import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 
-interface BeersListPresenter: Presenter<BeersListPresenter.View> {
-  fun onRequestBeers()
-  fun onBeerClick(beer: BeerViewModel, view: android.view.View)
-  fun onRequestNextPage()
-  fun onSearchClick()
-  fun onAboutClick()
-
-  interface View : Presenter.View {
-    fun showLoading()
-    fun hideLoading()
-    fun clearList()
-    fun renderBeers(beers: List<BeerViewModel>)
-    fun renderError()
-  }
+interface InstrumentationProvider {
+  fun getImageDownloader(): ImageDownloader
 }

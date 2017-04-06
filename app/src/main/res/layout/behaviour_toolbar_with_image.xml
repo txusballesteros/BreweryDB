@@ -39,7 +39,8 @@
       android:layout_height="@dimen/toolbar_image_height"
       android:scaleType="centerCrop"
       app:layout_collapseMode="parallax"
-      android:fitsSystemWindows="true"/>
+      android:fitsSystemWindows="true"
+      android:transitionName="@string/MainImageTransition" />
 
   <android.support.v7.widget.Toolbar
       android:id="@+id/toolbar"

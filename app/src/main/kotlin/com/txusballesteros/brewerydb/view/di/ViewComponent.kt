@@ -23,7 +23,6 @@ package com.txusballesteros.brewerydb.view.di
 import com.txusballesteros.brewerydb.di.ApplicationComponent
 import com.txusballesteros.brewerydb.di.scopes.PerView
 import com.txusballesteros.brewerydb.domain.usecase.di.UseCasesModule
-import com.txusballesteros.brewerydb.instrumentation.di.InstrumentationModule
 import com.txusballesteros.brewerydb.presentation.di.PresentationModule
 import com.txusballesteros.brewerydb.view.about.AboutFragment
 import com.txusballesteros.brewerydb.view.beers.*
@@ -39,7 +38,6 @@ import dagger.Component
 @Component(dependencies = arrayOf(
                ApplicationComponent::class),
            modules = arrayOf(
-               InstrumentationModule::class,
                PresentationModule::class,
                UseCasesModule::class
            ))
@@ -48,7 +46,7 @@ interface ViewComponent {
   fun inject(view: BeerDetailFragment)
   fun inject(view: BeerIbuFragment)
   fun inject(view: BeerAbvFragment)
-  fun inject(view: BeerDetailControllerFragment)
+  fun inject(view: BeerTabsComposerFragment)
   fun inject(view: BeerIngredientsFragment)
   fun inject(view: BeerBreweriesFragment)
   fun inject(view: IngredientDetailControllerFragment)

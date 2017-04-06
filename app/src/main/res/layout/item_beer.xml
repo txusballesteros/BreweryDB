@@ -40,7 +40,8 @@
         android:layout_width="@dimen/label_small"
         android:layout_height="@dimen/label_small"
         android:scaleType="centerCrop"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:transitionName="@string/MainImageTransition" />
 
     <android.support.v7.widget.AppCompatTextView
         style="@style/Text"

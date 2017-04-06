@@ -26,6 +26,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.instrumentation.EndlessRecyclerViewScrollListener
@@ -112,10 +113,8 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
         presenter.onRequestNextPage()
       }
     }
-    adapter = BeerListAdapter(object: BeerListAdapter.OnBeerClickListener {
-      override fun onBeerClick(beer: BeerViewModel) {
-        presenter.onBeerClick(beer)
-      }
+    adapter = BeerListAdapter({
+      beer, view -> presenter.onBeerClick(beer, view)
     }, imageDownloader)
     list.addOnScrollListener(endlessScrollListener)
     list.layoutManager = layoutManager

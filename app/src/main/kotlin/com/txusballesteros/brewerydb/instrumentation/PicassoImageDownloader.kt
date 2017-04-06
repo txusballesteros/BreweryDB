@@ -20,14 +20,57 @@
  */
 package com.txusballesteros.brewerydb.instrumentation
 
+import android.app.Application
+import android.content.Context
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import com.squareup.picasso.Callback
+import com.squareup.picasso.LruCache
 import com.squareup.picasso.Picasso
+import com.txusballesteros.brewerydb.BuildConfig
 import javax.inject.Inject
 
-class PicassoImageDownloader @Inject constructor(): ImageDownloader {
-  override fun download(url: String, view: ImageView) {
-    Picasso.with(view.context)
-        .load(url)
-        .into(view)
+class PicassoImageDownloader @Inject constructor(application: Application): ImageDownloader {
+  val picasso: Picasso
+
+  init {
+    picasso = getPicasso(application)
+  }
+
+  private fun getPicasso(context: Context): Picasso {
+    val builder = Picasso.Builder(context)
+    builder.memoryCache(LruCache(context))
+    builder.loggingEnabled(true)
+    if (BuildConfig.DEBUG) {
+      builder.indicatorsEnabled(true)
+    }
+    return builder.build()
+  }
+
+  override fun download(thumbnail: String?, imageUrl: String, view: ImageView) {
+    if (thumbnail != null) {
+      picasso
+          .load(thumbnail)
+          .into(view, object: Callback {
+            override fun onSuccess() {
+              downloadWithPlaceholder(view.drawable, imageUrl, view)
+            }
+
+            override fun onError() { }
+          })
+    } else {
+      download(imageUrl, view)
+    }
+  }
+
+  private fun download(imageUrl: String, view: ImageView) {
+    picasso.load(imageUrl)
+           .into(view)
+  }
+
+  private fun downloadWithPlaceholder(placeholder: Drawable, imageUrl: String, view: ImageView) {
+    picasso.load(imageUrl)
+           .placeholder(placeholder)
+           .into(view)
   }
 }

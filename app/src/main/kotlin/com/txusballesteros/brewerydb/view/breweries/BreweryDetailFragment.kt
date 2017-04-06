@@ -121,7 +121,7 @@ class BreweryDetailFragment: AbsFragment(), BreweryDetailPresenter.View {
   private fun renderImage(brewery: BreweryViewModel) {
     val image = brewery.largestImage()
     if (image != null) {
-      toolbarBehaviour.setImage(image)
+      toolbarBehaviour.setImage(thumbnail = brewery.thumbnailImage(), image = image)
     }
   }
 

@@ -26,6 +26,6 @@ interface BeerIbuPresenter: Presenter<BeerIbuPresenter.View> {
   fun onRequestIbu(beerId: String)
 
   interface View: Presenter.View {
-    fun renderIbu(min: Float, max: Float, value: Float)
+    fun renderIbu(value: Float)
   }
 }

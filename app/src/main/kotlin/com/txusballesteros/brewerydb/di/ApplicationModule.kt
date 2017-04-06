@@ -18,23 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.di
 
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
+import android.app.Application
+import dagger.Module
+import dagger.Provides
+import javax.inject.Singleton
 
-interface BeersListPresenter: Presenter<BeersListPresenter.View> {
-  fun onRequestBeers()
-  fun onBeerClick(beer: BeerViewModel, view: android.view.View)
-  fun onRequestNextPage()
-  fun onSearchClick()
-  fun onAboutClick()
-
-  interface View : Presenter.View {
-    fun showLoading()
-    fun hideLoading()
-    fun clearList()
-    fun renderBeers(beers: List<BeerViewModel>)
-    fun renderError()
-  }
+@Module
+class ApplicationModule(private val application: Application) {
+  @Singleton @Provides
+  fun provideApplication(): Application = application
 }

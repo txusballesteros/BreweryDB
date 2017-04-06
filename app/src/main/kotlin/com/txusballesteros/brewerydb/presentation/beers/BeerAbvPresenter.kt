@@ -26,6 +26,6 @@ interface BeerAbvPresenter: Presenter<BeerAbvPresenter.View> {
   fun onRequestAbv(beerId: String)
 
   interface View: Presenter.View {
-    fun renderAbv(min: Float, max: Float, value: Float)
+    fun renderAbv(value: Float)
   }
 }

@@ -18,23 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.presentation.beers
+package com.txusballesteros.brewerydb.view.beers
 
-import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.presentation.Presenter
+import android.support.v4.app.FragmentManager
+import javax.inject.Inject
 
-interface BeersListPresenter: Presenter<BeersListPresenter.View> {
-  fun onRequestBeers()
-  fun onBeerClick(beer: BeerViewModel, view: android.view.View)
-  fun onRequestNextPage()
-  fun onSearchClick()
-  fun onAboutClick()
+class BeerDetailFragmentFactory @Inject constructor() {
+  fun getAbvFragment(fragmentManager: FragmentManager, beerId: String ): BeerAbvFragment {
+    val tag = BeerAbvFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerAbvFragment.newInstance(beerId)
+    return fragment as BeerAbvFragment
+  }
 
-  interface View : Presenter.View {
-    fun showLoading()
-    fun hideLoading()
-    fun clearList()
-    fun renderBeers(beers: List<BeerViewModel>)
-    fun renderError()
+  fun getIbuFragment(fragmentManager: FragmentManager, beerId: String ): BeerIbuFragment {
+    val tag = BeerIbuFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerIbuFragment.newInstance(beerId)
+    return fragment as BeerIbuFragment
   }
 }

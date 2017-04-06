@@ -26,6 +26,7 @@ import com.txusballesteros.brewerydb.domain.reactive.Observer
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetNextPageBeersUseCase
 import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryStreamUseCase
+import com.txusballesteros.brewerydb.navigation.NavigationContext
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import javax.inject.Inject
@@ -74,15 +75,17 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
     })
   }
 
-  override fun onBeerClick(beer: BeerViewModel) {
-    navigator.navigateToBeerDetail(getView(), beer.id)
+  override fun onBeerClick(beer: BeerViewModel, view: android.view.View) {
+    val navigationContext = NavigationContext.from(getView())
+                                             .withSharedElements(view)
+    navigator.navigateToBeerDetail(navigationContext, beer.id)
   }
 
   override fun onSearchClick() {
-    navigator.navigateToSearch(getView())
+    navigator.navigateToSearch(NavigationContext.from(getView()))
   }
 
   override fun onAboutClick() {
-    navigator.navigateToAbout(getView())
+    navigator.navigateToAbout(NavigationContext.from(getView()))
   }
 }
