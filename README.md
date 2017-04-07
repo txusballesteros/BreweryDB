@@ -3,6 +3,8 @@ BreweryDB
 
 ![](https://circleci.com/gh/txusballesteros/BreweryDB.svg?&style=shield&circle-token=e2c21e95bb6a281fbffba33d6d8ea78a76df2795) [![codebeat badge](https://codebeat.co/badges/6289c38d-888a-452a-b4b8-d9e14902e1d5)](https://codebeat.co/a/txus-ballesteros/projects/github-com-txusballesteros-brewerydb-master)
 
+![](art/app_icon/app_icon_512.png)
+
 ## License
 
 Copyright Txus Ballesteros 2017 ([@txusballesteros](https://es.linkedin.com/in/txusballesteros))
