@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.extesion
 import android.support.v7.widget.RecyclerView
 import android.view.View
 
-fun RecyclerView.withEmptyView(view: View) {
+fun RecyclerView.setEmptyView(view: View) {
   val recyclerView = this
   adapter?.apply {
     val observer = object: RecyclerView.AdapterDataObserver() {

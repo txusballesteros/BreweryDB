@@ -20,10 +20,11 @@
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
 <FrameLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   xmlns:app="http://schemas.android.com/apk/res-auto">
 
    <android.support.v7.widget.RecyclerView
       android:id="@+id/list"
@@ -31,4 +32,30 @@
       android:layout_height="match_parent"
       tools:listitem="@layout/item_beer_ingredient"/>
 
+  <LinearLayout
+      android:id="@+id/emptyView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:gravity="center"
+      android:visibility="gone"
+      tools:visibility="visible">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:tint="@color/gray_4"
+        app:srcCompat="@drawable/ic_spa_100dp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        style="@style/Text.Thin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_medium"
+        android:layout_margin="@dimen/padding_x_big"
+        android:gravity="center"
+        android:text="@string/beer_ingredients_empty_message" />
+
+  </LinearLayout>
 </FrameLayout>
