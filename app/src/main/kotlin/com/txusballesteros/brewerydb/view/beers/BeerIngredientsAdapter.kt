@@ -20,14 +20,13 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
-import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
-import org.jetbrains.anko.find
+import com.txusballesteros.brewerydb.extesion.inflate
+import kotlinx.android.synthetic.main.item_beer_ingredient.view.*
 import java.util.*
 
 class BeerIngredientsAdapter(private val onIngredientClick: (BeerIngredientViewModel) -> Unit):
@@ -42,27 +41,17 @@ class BeerIngredientsAdapter(private val onIngredientClick: (BeerIngredientViewM
     cache.addAll(styles)
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-    val holderView = LayoutInflater.from(parent!!.context).inflate(R.layout.item_beer_ingredient, parent, false)
-    return ViewHolder(holderView, onIngredientClick)
-  }
-
   override fun getItemCount(): Int = cache.size
 
-  override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
+    = ViewHolder(parent.inflate(R.layout.item_beer_ingredient))
+
+  override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.itemView) {
     val ingredient = cache[position]
-    holder?.render(ingredient)
+    name.text = ingredient.name
+    category.text = ingredient.categoryDisplay
+    setOnClickListener { onIngredientClick(ingredient) }
   }
 
-  class ViewHolder(view: View, private val onIngredientClick: (BeerIngredientViewModel) -> Unit): RecyclerView.ViewHolder(view) {
-    val rootView = view.find<View>(R.id.root)
-    val nameView = view.find<AppCompatTextView>(R.id.name)
-    val categoryView = view.find<AppCompatTextView>(R.id.category)
-
-    fun render(ingredient: BeerIngredientViewModel) {
-      nameView.text = ingredient.name
-      categoryView.text = ingredient.categoryDisplay
-      rootView.setOnClickListener { onIngredientClick(ingredient) }
-    }
-  }
+  class ViewHolder(view: View): RecyclerView.ViewHolder(view)
 }

@@ -20,14 +20,13 @@
  */
 package com.txusballesteros.brewerydb.view.search
 
-import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.extesion.inflate
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.item_style.view.*
 import java.util.*
 
 class StyleListAdapter(private val onStyleSelected: (StyleViewModel) -> Unit): RecyclerView.Adapter<StyleListAdapter.ViewHolder>() {
@@ -41,31 +40,16 @@ class StyleListAdapter(private val onStyleSelected: (StyleViewModel) -> Unit): R
     cache.addAll(styles)
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-    val holderView = LayoutInflater.from(parent!!.context).inflate(R.layout.item_style, parent, false)
-    return ViewHolder(holderView, {
-      onStyleSelected(it)
-    })
-  }
+  override fun getItemCount(): Int = cache.size
 
-  override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
+    = ViewHolder(parent.inflate(R.layout.item_style))
+
+  override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.itemView) {
     val style = cache[position]
-    holder?.render(style)
+    text.text = style.name
+    setOnClickListener { onStyleSelected(style) }
   }
 
-  override fun getItemCount(): Int {
-    return cache.size
-  }
-
-  class ViewHolder(view: View, private val onStyleSelected: (StyleViewModel) -> Unit): RecyclerView.ViewHolder(view) {
-    val rootView = view.find<View>(R.id.root)
-    private val textView = view.find<AppCompatTextView>(R.id.text)
-
-    fun render(style: StyleViewModel) {
-      textView.text = style.name
-      rootView.setOnClickListener {
-        onStyleSelected(style)
-      }
-    }
-  }
+  class ViewHolder(view: View): RecyclerView.ViewHolder(view)
 }

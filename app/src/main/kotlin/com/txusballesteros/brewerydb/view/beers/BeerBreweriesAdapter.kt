@@ -20,14 +20,13 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
-import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.extesion.inflate
 import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.item_beer_brewery.view.*
 import java.util.*
 
 class BeerBreweriesAdapter(private val onBreweryClick: (BreweryViewModel) -> Unit):
@@ -42,27 +41,17 @@ class BeerBreweriesAdapter(private val onBreweryClick: (BreweryViewModel) -> Uni
     cache.addAll(breweries)
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-    val holderView = LayoutInflater.from(parent!!.context).inflate(R.layout.item_beer_brewery, parent, false)
-    return ViewHolder(holderView, onBreweryClick)
-  }
-
   override fun getItemCount(): Int = cache.size
 
-  override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
+      = ViewHolder(parent.inflate(R.layout.item_beer_brewery))
+
+  override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.itemView) {
     val brewery = cache[position]
-    holder?.render(brewery)
+    name.text = brewery.name
+    description.text = brewery.description
+    setOnClickListener { onBreweryClick(brewery) }
   }
 
-  class ViewHolder(view: View, private val onBreweryClick: (BreweryViewModel) -> Unit): RecyclerView.ViewHolder(view) {
-    val rootView = view.find<View>(R.id.root)
-    val nameView = view.find<AppCompatTextView>(R.id.name)
-    val descriptionView = view.find<AppCompatTextView>(R.id.description)
-
-    fun render(brewery: BreweryViewModel) {
-      nameView.text = brewery.name
-      descriptionView.text = brewery.description
-      rootView.setOnClickListener { onBreweryClick(brewery) }
-    }
-  }
+  class ViewHolder(view: View): RecyclerView.ViewHolder(view)
 }

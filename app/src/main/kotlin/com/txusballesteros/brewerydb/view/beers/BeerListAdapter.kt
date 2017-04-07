@@ -20,16 +20,15 @@
  */
 package com.txusballesteros.brewerydb.view.beers
 
-import android.support.v7.widget.AppCompatImageView
-import android.support.v7.widget.AppCompatTextView
 import android.support.v7.widget.RecyclerView
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
+import com.txusballesteros.brewerydb.extesion.download
+import com.txusballesteros.brewerydb.extesion.inflate
 import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
-import org.jetbrains.anko.find
+import kotlinx.android.synthetic.main.item_beer.view.*
 import java.util.*
 
 class BeerListAdapter(private val onBeerClick: (BeerViewModel, View) -> Unit,
@@ -44,44 +43,23 @@ class BeerListAdapter(private val onBeerClick: (BeerViewModel, View) -> Unit,
     cache.addAll(beers)
   }
 
-  override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-    val beer = cache[position]
-    holder?.render(beer, onBeerClick)
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder
+      = ViewHolder(parent.inflate(R.layout.item_beer))
+
+  override fun onBindViewHolder(holder: ViewHolder, position: Int) = with(holder.itemView) {
+    val beer =  cache[position]
+    displayName.text = beer.displayName
+    description.visibility = beer.description?.let {
+      description.text = beer.description
+      View.VISIBLE
+    } ?: View.GONE
+    label.download(imageDownloader =  imageDownloader, imageUrl =  beer.label?.medium)
+    setOnClickListener { onBeerClick(beer, label) }
   }
 
   override fun getItemCount(): Int {
     return cache.size
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-    val holderView = LayoutInflater.from(parent!!.context).inflate(R.layout.item_beer, parent, false)
-    return ViewHolder(holderView, imageDownloader)
-  }
-
-  class ViewHolder(view: View, private val imageDownloader: ImageDownloader) : RecyclerView.ViewHolder(view) {
-    private val labelView = view.find<AppCompatImageView>(R.id.label)
-    private val displayNameView = view.find<AppCompatTextView>(R.id.displayName)
-    private val descriptionView = view.find<AppCompatTextView>(R.id.description)
-
-    fun render(beer: BeerViewModel, onBeerClick: (BeerViewModel, View) -> Unit) {
-      displayNameView.text = beer.displayName
-      if (beer.description != null) {
-        descriptionView.visibility = View.VISIBLE
-        descriptionView.text = beer.description
-      } else {
-        descriptionView.visibility = View.GONE
-      }
-      itemView.setOnClickListener { onBeerClick(beer, labelView) }
-      renderLabel(beer)
-    }
-
-    fun renderLabel(beer: BeerViewModel) {
-      if (beer.label != null && beer.label.medium != null) {
-        labelView.visibility = View.VISIBLE
-        imageDownloader.download(imageUrl = beer.label.medium, view = labelView)
-      } else {
-        labelView.visibility = View.GONE
-      }
-    }
-  }
+  class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 }
