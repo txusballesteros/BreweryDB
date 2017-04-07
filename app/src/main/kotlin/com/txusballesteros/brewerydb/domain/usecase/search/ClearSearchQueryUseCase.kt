@@ -21,5 +21,5 @@
 package com.txusballesteros.brewerydb.domain.usecase.search
 
 interface ClearSearchQueryUseCase {
-  fun execute(onSuccess: () -> Unit)
+  fun execute(onSuccess: () -> Unit = { })
 }

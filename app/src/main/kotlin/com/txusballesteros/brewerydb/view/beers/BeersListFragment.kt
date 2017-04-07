@@ -82,7 +82,12 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
 
   override fun onViewReady(savedInstanceState: Bundle?) {
     initializeList()
+    initializeListeners()
     requestBeers()
+  }
+
+  private fun initializeListeners() {
+    resetFilters.setOnClickListener { presenter.onResetFilters() }
   }
 
   private fun requestBeers() {
