@@ -29,4 +29,20 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent" />
 
+  <LinearLayout
+      android:id="@+id/emptyView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:gravity="center"
+      android:visibility="gone">
+
+    <android.support.v7.widget.AppCompatTextView
+        style="@style/Text.Thin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/padding_x_big"
+        android:text="Sorry!! We have can't found any beers for that search."/>
+
+  </LinearLayout>
 </FrameLayout>
