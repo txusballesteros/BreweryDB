@@ -41,8 +41,16 @@
         style="@style/Text.Thin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_medium"
         android:layout_margin="@dimen/padding_x_big"
-        android:text="Sorry!! We have can't found any beers for that search."/>
+        android:gravity="center"
+        android:text="@string/sorry_we_have_can_t_found_any_beers_for_that_search" />
+
+    <android.support.v7.widget.AppCompatButton
+        style="@style/Button.Rounded"
+        android:id="@+id/clearFilters"
+        android:text="@string/clear_filters"
+        android:layout_marginTop="32dp" />
 
   </LinearLayout>
 </FrameLayout>
