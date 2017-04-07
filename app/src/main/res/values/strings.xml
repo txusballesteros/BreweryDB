@@ -79,5 +79,5 @@
   <string name="field_separator">-</string>
   <string name="is_organic_search">Is Organic:</string>
   <string name="simbol_percent">%</string>
-  <string name="sorry_we_have_can_t_found_any_beers_for_that_search">Sorry!! We have can\'t found any beers for that search.</string>
+  <string name="beer_list_empty_message">Sorry!! We didn\'t found any beers for those filters.</string>
 </resources>
