@@ -22,19 +22,16 @@ package com.txusballesteros.brewerydb.extesion
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 
 fun RecyclerView.setEmptyView(view: View) {
   val recyclerView = this
   adapter?.apply {
     val observer = object: RecyclerView.AdapterDataObserver() {
       override fun onChanged() {
-        if (adapter.itemCount == 0) {
-          view.visibility = View.VISIBLE
-          recyclerView.visibility = View.GONE
-        } else {
-          view.visibility = View.GONE
-          recyclerView.visibility = View.VISIBLE
-        }
+        view.visibility = if (adapter.itemCount == 0) VISIBLE else GONE
+        recyclerView.visibility = if (adapter.itemCount == 0) GONE else VISIBLE
       }
     }
     adapter.registerAdapterDataObserver(observer)
