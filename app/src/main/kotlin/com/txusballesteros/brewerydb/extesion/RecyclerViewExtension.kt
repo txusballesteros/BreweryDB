@@ -26,13 +26,12 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 
 fun RecyclerView.setEmptyView(view: View) {
-  val recyclerView = this
   adapter?.apply {
     val observer = object: RecyclerView.AdapterDataObserver() {
       override fun onChanged() {
         val itemCount = adapter.itemCount
         view.visibility = if (itemCount == 0) VISIBLE else GONE
-        recyclerView.visibility = if (itemCount == 0) GONE else VISIBLE
+        this@setEmptyView.visibility = if (itemCount == 0) GONE else VISIBLE
       }
     }
     adapter.registerAdapterDataObserver(observer)
