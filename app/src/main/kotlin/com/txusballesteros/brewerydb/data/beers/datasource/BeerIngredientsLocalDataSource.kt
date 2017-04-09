@@ -23,6 +23,6 @@ package com.txusballesteros.brewerydb.data.beers.datasource
 import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModel
 
 interface BeerIngredientsLocalDataSource {
-  fun get(beerId: String): List<BeerIngredientDataModel>
+  fun get(beerId: String): List<BeerIngredientDataModel>?
   fun store(beerId: String, ingredients: List<BeerIngredientDataModel>)
 }

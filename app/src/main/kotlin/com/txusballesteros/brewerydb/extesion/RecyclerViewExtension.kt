@@ -29,12 +29,13 @@ fun RecyclerView.setEmptyView(view: View) {
   adapter?.apply {
     val observer = object: RecyclerView.AdapterDataObserver() {
       override fun onChanged() {
-        val itemCount = adapter.itemCount
-        view.visibility = if (itemCount == 0) VISIBLE else GONE
-        this@setEmptyView.visibility = if (itemCount == 0) GONE else VISIBLE
+        view.visibility = if (isEmpty()) VISIBLE else GONE
+        this@setEmptyView.visibility = if (isEmpty()) GONE else VISIBLE
       }
     }
-    adapter.registerAdapterDataObserver(observer)
+    registerAdapterDataObserver(observer)
     observer.onChanged()
   }
 }
+
+fun <A: RecyclerView.ViewHolder> RecyclerView.Adapter<A>.isEmpty() = itemCount == 0
