@@ -23,6 +23,6 @@ package com.txusballesteros.brewerydb.data.glassware.datasource
 import com.txusballesteros.brewerydb.data.model.GlassDataModel
 
 interface GlasswareLocalDataSource {
-  fun getGlassById(id: Int): GlassDataModel?
+  fun get(id: Int): GlassDataModel?
   fun store(glassware: List<GlassDataModel>)
 }

@@ -31,6 +31,9 @@ class GetBeersStrategy private constructor(private val queryLocalDataSource: Sea
                                            private val localDataSource: BeersLocalDataSource,
                                            private val cloudDataSource: BeersCloudDataSource):
                        LocalOrCloudStrategy<Void, List<BeerDataModel>>() {
+  companion object {
+    val FIRST_PAGE: Int = 1
+  }
 
   override fun onRequestCallToLocal(params: Void?): List<BeerDataModel>? {
     return localDataSource.getList()
@@ -38,8 +41,8 @@ class GetBeersStrategy private constructor(private val queryLocalDataSource: Sea
 
   override fun onRequestCallToCloud(params: Void?): List<BeerDataModel>? {
     val query = queryLocalDataSource.get()
-    val response = cloudDataSource.getBeers(query)
-    localDataSource.store(response)
+    val response = cloudDataSource.getList(query, FIRST_PAGE)
+    localDataSource.store(response, FIRST_PAGE)
     return response.sortedBy { it.name }
   }
 

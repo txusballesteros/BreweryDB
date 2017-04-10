@@ -47,20 +47,20 @@ class GetGlassByIdStrategyTest: UnitTest() {
   @Test
   fun shouldGetFromLocal() {
     val glass = GlassDataModel(GLASS_ID, GLASS_NAME)
-    whenever(localDataSource.getGlassById(any())).thenReturn(glass)
+    whenever(localDataSource.get(any())).thenReturn(glass)
 
     strategy.execute(GLASS_ID, onResult = {
       assertNotNull(it)
-      verify(cloudDataSource, never()).getGlassware()
+      verify(cloudDataSource, never()).getList()
     })
   }
 
   @Test
   fun shouldGetFromCloud() {
-    whenever(localDataSource.getGlassById(any())).thenReturn(null)
+    whenever(localDataSource.get(any())).thenReturn(null)
 
     strategy.execute(GLASS_ID, onResult = {
-      verify(cloudDataSource).getGlassware()
+      verify(cloudDataSource).getList()
     })
   }
 }

@@ -34,7 +34,6 @@ class ClearSearchQueryStrategy private constructor(private val localDataSource: 
   override fun onRequestCallToLocal(params: Void?): SearchQueryDataModel? {
     localDataSource.clear()
     beersLocalDataSource.flush()
-    beersCloudDataSource.flush()
     return localDataSource.get()
   }
 

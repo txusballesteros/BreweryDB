@@ -36,7 +36,7 @@ class GetStyleByIdStrategy private constructor(private val localDataSource: Styl
   }
 
   override fun onRequestCallToCloud(params: Int?): StyleDataModel? {
-    val response = cloudDataSource.getStyles()
+    val response = cloudDataSource.getList()
     localDataSource.store(response)
     return localDataSource.get(params!!)
   }

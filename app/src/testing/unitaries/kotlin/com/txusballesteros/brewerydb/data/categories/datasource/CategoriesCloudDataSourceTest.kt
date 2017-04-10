@@ -47,7 +47,7 @@ class CategoriesCloudDataSourceTest: UnitTest() {
     val apiResponse = CategoryApiResponse(categories, "Request Successful", "success")
     whenever(api.getCategories()).thenReturn(apiResponse)
 
-    val result = dataSource.getCategories()
+    val result = dataSource.getList()
 
     Assert.assertFalse(result.isEmpty())
     Assert.assertEquals(2, result.first().id)

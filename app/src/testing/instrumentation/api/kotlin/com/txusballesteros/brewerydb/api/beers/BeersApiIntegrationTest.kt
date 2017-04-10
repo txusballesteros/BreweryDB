@@ -40,7 +40,7 @@ class BeersApiIntegrationTest: ApiIntegrationTest() {
 
   @Test
   fun shouldGetBeerById() {
-    val response = api.getBeerById(BEER_ID)
+    val response = api.get(BEER_ID)
 
     Assert.assertEquals(STATUS_SUCCESS, response.status)
     Assert.assertEquals(BEER_ID, response.beer.id)

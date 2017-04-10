@@ -29,7 +29,7 @@ class StylesRestCloudDataSource @Inject constructor(private val api: StylesApi,
                                                     private val mapper: StyleApiModelMapper):
                                 StylesCloudDataSource {
 
-  override fun getStyles(): List<StyleDataModel> {
+  override fun getList(): List<StyleDataModel> {
     val response = api.getStyles()
     val result = response.styles.orEmpty().map { style -> mapper.map(style) }
     return result.sortedBy(StyleDataModel::shortName)

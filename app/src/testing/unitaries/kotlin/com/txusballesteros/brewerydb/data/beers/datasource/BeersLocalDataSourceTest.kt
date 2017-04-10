@@ -28,6 +28,7 @@ import java.util.*
 
 class BeersLocalDataSourceTest: UnitTest() {
   companion object {
+    private val PAGE = 1
     private val BEER_ID = "L76Lnq"
     private val BEER_NAME = "Burton India Pale Ale"
     private val BEER_DISPLAY_NAME = "Burton India Pale Ale Display"
@@ -66,7 +67,7 @@ class BeersLocalDataSourceTest: UnitTest() {
                             BEER_SERVING_TEMP,
                             BEER_SERVING_TEMP_DISPLAY))
 
-    dataSource.store(beers)
+    dataSource.store(beers, PAGE)
     val result = dataSource.getList()
 
     Assert.assertFalse(result.isEmpty())
@@ -102,7 +103,7 @@ class BeersLocalDataSourceTest: UnitTest() {
                             BEER_SERVING_TEMP,
                             BEER_SERVING_TEMP_DISPLAY))
 
-    dataSource.store(beers)
+    dataSource.store(beers, PAGE)
     val result = dataSource.getList()
 
     Assert.assertFalse(result.isEmpty())
@@ -126,7 +127,7 @@ class BeersLocalDataSourceTest: UnitTest() {
                             BEER_SERVING_TEMP,
                             BEER_SERVING_TEMP_DISPLAY))
 
-    dataSource.store(beers)
+    dataSource.store(beers, PAGE)
     val result = dataSource.get(BEER_ID)
 
     Assert.assertNotNull(result)

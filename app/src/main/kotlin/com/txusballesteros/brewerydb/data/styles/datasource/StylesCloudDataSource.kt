@@ -23,5 +23,5 @@ package com.txusballesteros.brewerydb.data.styles.datasource
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
 
 interface StylesCloudDataSource {
-  fun getStyles() : List<StyleDataModel>
+  fun getList() : List<StyleDataModel>
 }

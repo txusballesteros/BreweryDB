@@ -27,13 +27,7 @@ import com.txusballesteros.brewerydb.exception.NetworkException
 import javax.inject.Inject
 
 class BeersRetrofitApi @Inject constructor(private val service: BeersRetrofitService): BeersApi {
-  var currentPage = 1
-
-  override fun flush() {
-    currentPage = 1
-  }
-
-  override fun getBeerById(beerId: String): BeerApiResponse {
+  override fun get(beerId: String): BeerApiResponse {
     try {
       val call = service.getBeer(beerId)
       val response = call.execute()
@@ -43,27 +37,17 @@ class BeersRetrofitApi @Inject constructor(private val service: BeersRetrofitSer
     }
   }
 
-  override fun getBeers(query: SearchQueryApiModel): BeersListApiResponse {
-    currentPage = 1
-    return getBeers(query, currentPage)
-  }
-
-  override fun getNextPageBeers(query: SearchQueryApiModel): BeersListApiResponse {
-    currentPage += 1
-    return getBeers(query, currentPage)
-  }
-
-  private fun getBeers(query: SearchQueryApiModel, page: Int): BeersListApiResponse {
+  override fun getList(query: SearchQueryApiModel, page: Int): BeersListApiResponse {
     try {
       val call = service.getBeers(query.keyword,
-                                  query.abv,
-                                  query.ibu,
-                                  query.isOrganic,
-                                  query.breweryId,
-                                  query.styleId,
-                                  query.withLabels,
-                                  query.status,
-                                  page)
+          query.abv,
+          query.ibu,
+          query.isOrganic,
+          query.breweryId,
+          query.styleId,
+          query.withLabels,
+          query.status,
+          page)
       val response = call.execute()
       return response.body()
     } catch (error: Exception) {

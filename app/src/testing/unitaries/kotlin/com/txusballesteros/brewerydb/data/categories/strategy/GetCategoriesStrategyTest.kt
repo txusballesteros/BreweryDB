@@ -49,13 +49,13 @@ class GetCategoriesStrategyTest: UnitTest() {
   @Test
   fun shouldGetFromCloud() {
     whenever(localDataSource.getList()).thenReturn(null)
-    whenever(cloudDataSource.getCategories()).thenReturn(categoriesList)
+    whenever(cloudDataSource.getList()).thenReturn(categoriesList)
 
     strategy.execute(onResult =  {
         Assert.assertNotNull(it)
         Assert.assertEquals(categoriesList.size, it?.size)
         Assert.assertEquals(1, it?.first()?.id)
-        verify(cloudDataSource).getCategories()
+        verify(cloudDataSource).getList()
     })
   }
 
@@ -67,7 +67,7 @@ class GetCategoriesStrategyTest: UnitTest() {
         Assert.assertNotNull(it)
         Assert.assertEquals(categoriesList.size, it?.size)
         Assert.assertEquals(1, it?.first()?.id)
-        verify(cloudDataSource, never()).getCategories()
+        verify(cloudDataSource, never()).getList()
     })
   }
 }

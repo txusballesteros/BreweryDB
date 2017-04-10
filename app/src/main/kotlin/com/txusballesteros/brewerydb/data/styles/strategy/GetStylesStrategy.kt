@@ -35,7 +35,7 @@ class GetStylesStrategy constructor(val localDataSource: StylesLocalDataSource,
   }
 
   override fun onRequestCallToCloud(params: Void?): List<StyleDataModel>? {
-    val response = cloudDataSource.getStyles()
+    val response = cloudDataSource.getList()
     localDataSource.store(response)
     return localDataSource.getList()
   }

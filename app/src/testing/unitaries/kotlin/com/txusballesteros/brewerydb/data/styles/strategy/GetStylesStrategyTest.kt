@@ -58,26 +58,26 @@ class GetStylesStrategyTest : UnitTest() {
     whenever(localDataSource.getList())
         .thenReturn(null)
         .thenReturn(stylesList)
-    whenever(cloudDataSource.getStyles()).thenReturn(stylesList)
+    whenever(cloudDataSource.getList()).thenReturn(stylesList)
 
     strategy.execute(onResult =  {
       Assert.assertNotNull(it)
       Assert.assertEquals(stylesList.size, it?.size)
       Assert.assertEquals(STYLE_ID, it?.first()?.id)
-      verify(cloudDataSource).getStyles()
+      verify(cloudDataSource).getList()
     })
   }
 
   @Test
   fun shouldGetStylesFromLocal() {
     whenever(localDataSource.getList()).thenReturn(stylesList)
-    whenever(cloudDataSource.getStyles()).thenReturn(null)
+    whenever(cloudDataSource.getList()).thenReturn(null)
 
     strategy.execute(onResult =  {
       Assert.assertNotNull(it)
       Assert.assertEquals(stylesList.size, it?.size)
       Assert.assertEquals(STYLE_ID, it?.first()?.id)
-      verify(cloudDataSource, never()).getStyles()
+      verify(cloudDataSource, never()).getList()
     })
   }
 }

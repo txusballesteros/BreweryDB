@@ -58,7 +58,7 @@ class StylesCloudDataSourceTest : UnitTest() {
     val apiResponse = StyleApiResponse(styles, "Request Successful", "success")
     doReturn(apiResponse).`when`(stylesApiMock).getStyles()
 
-    val result = dataSource.getStyles()
+    val result = dataSource.getList()
 
     assertFalse(result.isEmpty())
     assertEquals(CATEGORY_ID, result.first().categoryId)

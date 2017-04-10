@@ -75,9 +75,9 @@ class BeersCloudDataSourceTest: UnitTest() {
         BEER_SERVING_TEMP,
         BEER_SERVING_TEMP_DISPLAY)
     val apiResponse = BeerApiResponse(beer, "Request Successful", "success")
-    whenever(api.getBeerById(eq(BEER_ID))).thenReturn(apiResponse)
+    whenever(api.get(eq(BEER_ID))).thenReturn(apiResponse)
 
-    val response = dataSource.getBeerById(BEER_ID)
+    val response = dataSource.get(BEER_ID)
 
     Assert.assertEquals(BEER_ID, response.id)
   }
@@ -99,9 +99,9 @@ class BeersCloudDataSourceTest: UnitTest() {
                            BEER_SERVING_TEMP,
                            BEER_SERVING_TEMP_DISPLAY))
     val apiResponse = BeersListApiResponse(beers, "Request Successful", "success", CURRENT_PAGE, CURRENT_PAGE, CURRENT_PAGE)
-    whenever(api.getBeers(any())).thenReturn(apiResponse)
+    whenever(api.getList(any(), any())).thenReturn(apiResponse)
 
-    val response = dataSource.getBeers(QUERY)
+    val response = dataSource.getList(QUERY, 1)
 
     Assert.assertFalse(response.isEmpty())
     Assert.assertEquals(BEER_ID, response.first().id)
