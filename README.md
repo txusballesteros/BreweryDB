@@ -17,9 +17,9 @@ Yes, I learm many many thing with this project and I want to win some money with
 If do you think that you can improve anything of the repo, please feel free to create a Pull Request.
 
 ## Acknowledgments
-To everyone who with his comments, tweets or criticisms have do possible this repository, and I will like to do a special mention to the Spanish community, they are always there are to give me a hand.
+To everyone who with his comments, tweets or criticisms have do possible this repository, and I will like to do a mention to the Spanish community, they are always there are to give me a hand.
 
-An interesting mention to [Antonio Leiva] (https://antonioleiva.com/), who with his book "Kotlin for Android Developer" let me to discover this awesome language and a new programming paradigm.
+A special mention to [Antonio Leiva](https://antonioleiva.com/), who with his book "Kotlin for Android Developer" let me to discover this awesome language and a new programming paradigm.
 
 ## License
 
