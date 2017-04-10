@@ -29,4 +29,4 @@ data class SearchQueryDataModel(val keyword: String? = null,
                                 val breweryId: String? = null,
                                 val styleId: Int? = null,
                                 val styleName: String? = null,
-                                val withLabels: Boolean? = null)
+                                val withLabels: Boolean? = true)

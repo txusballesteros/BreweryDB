@@ -19,14 +19,14 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
 -->
-<resources>
-  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
-  </style>
-
-  <style name="AppTheme.Main">
-    <item name="android:windowBackground">@drawable/main_splash</item>
-  </style>
-</resources>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+  <item>
+    <color android:color="@color/colorPrimaryDark" />
+  </item>
+  <item>
+    <bitmap
+        android:src="@drawable/main_splash_logo"
+        android:dither="false"
+        android:gravity="center"/>
+  </item>
+</layer-list>
