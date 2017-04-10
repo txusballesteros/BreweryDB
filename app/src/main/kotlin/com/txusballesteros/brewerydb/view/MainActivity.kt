@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+/*
  * Copyright Txus Ballesteros 2017 (@txusballesteros)
  *
  * This file is part of Foobar.
@@ -18,15 +17,23 @@
  * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
--->
-<resources>
-  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
-  </style>
+ */
+package com.txusballesteros.brewerydb.view
 
-  <style name="AppTheme.Main">
-    <item name="android:windowBackground">@drawable/main_splash</item>
-  </style>
-</resources>
+import android.app.Activity
+import android.os.Bundle
+import com.txusballesteros.brewerydb.view.beers.BeersListActivity
+import org.jetbrains.anko.intentFor
+
+class MainActivity: Activity() {
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    navigateToMainView()
+  }
+
+  fun navigateToMainView() {
+    val intent = intentFor<BeersListActivity>()
+    startActivity(intent)
+    finish()
+  }
+}
