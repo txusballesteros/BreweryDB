@@ -22,8 +22,8 @@ package com.txusballesteros.brewerydb.data.beers.strategy
 
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
-import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
+import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.strategy.CloudStrategy
 import javax.inject.Inject
 
@@ -33,9 +33,10 @@ class GetNextPageBeersStrategy private constructor(private val queryLocalDataSou
                                 CloudStrategy<Void, List<BeerDataModel>>() {
 
   override fun onRequestCallToCloud(params: Void?): List<BeerDataModel>? {
+    val currentPage = localDataSource.getCurrentPage().inc()
     val query = queryLocalDataSource.get()
-    val response = cloudDataSource.getNextPageBeers(query)
-    localDataSource.store(response)
+    val response = cloudDataSource.getList(query, currentPage)
+    localDataSource.store(response, currentPage)
     return response
   }
 

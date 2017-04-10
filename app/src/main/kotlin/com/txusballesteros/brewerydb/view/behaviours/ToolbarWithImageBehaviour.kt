@@ -32,7 +32,7 @@ import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 import org.jetbrains.anko.find
 import javax.inject.Inject
 
-class ToolbarWithImageBehaviour @Inject constructor(private val imageDowloader: ImageDownloader) : Behaviour() {
+class ToolbarWithImageBehaviour @Inject constructor(private val imageDownloader: ImageDownloader) : Behaviour() {
   private lateinit var activity : AppCompatActivity
   private var enableBack: Boolean = false
 
@@ -67,7 +67,7 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDowloader: 
 
   fun setImage(thumbnail: String? = null, image: String) {
     val imageView = getView().find<AppCompatImageView>(R.id.headerImage)
-    imageDowloader.download(thumbnail, image, imageView)
+    imageDownloader.download(thumbnail, image, imageView)
   }
 
   override fun onBehaviorReady(view: View) {

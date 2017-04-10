@@ -26,13 +26,15 @@ import javax.inject.Inject
 
 class BeersInMemoryLocalDataSource @Inject constructor(): BeersLocalDataSource {
   val cache: MutableMap<String, BeerDataModel> = HashMap()
+  var page: Int = 1
 
   override fun flush() {
     cache.clear()
   }
 
-  override fun store(beers: List<BeerDataModel>) {
+  override fun store(beers: List<BeerDataModel>, page: Int) {
     if (!beers.isEmpty()) {
+
       beers.forEach { beer -> cache.put(beer.id, beer) }
     }
   }
@@ -48,4 +50,6 @@ class BeersInMemoryLocalDataSource @Inject constructor(): BeersLocalDataSource {
   override fun get(beerId: String): BeerDataModel? {
     return cache[beerId]
   }
+
+  override fun getCurrentPage(): Int = page
 }

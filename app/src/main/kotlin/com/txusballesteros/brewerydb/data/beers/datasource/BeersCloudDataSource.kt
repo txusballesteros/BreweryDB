@@ -24,8 +24,6 @@ import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 
 interface BeersCloudDataSource {
-  fun flush()
-  fun getBeerById(beerId: String): BeerDataModel
-  fun getBeers(query: SearchQueryDataModel): List<BeerDataModel>
-  fun getNextPageBeers(query: SearchQueryDataModel): List<BeerDataModel>
+  fun get(beerId: String): BeerDataModel
+  fun getList(query: SearchQueryDataModel, page: Int): List<BeerDataModel>
 }

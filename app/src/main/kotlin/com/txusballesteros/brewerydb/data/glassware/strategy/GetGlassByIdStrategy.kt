@@ -31,13 +31,13 @@ class GetGlassByIdStrategy private constructor(private val localDataSource: Glas
                            LocalOrCloudStrategy<Int, GlassDataModel>() {
 
   override fun onRequestCallToLocal(params: Int?): GlassDataModel? {
-    return localDataSource.getGlassById(params!!)
+    return localDataSource.get(params!!)
   }
 
   override fun onRequestCallToCloud(params: Int?): GlassDataModel? {
-    val response = cloudDataSource.getGlassware()
+    val response = cloudDataSource.getList()
     localDataSource.store(response)
-    return localDataSource.getGlassById(params!!)
+    return localDataSource.get(params!!)
   }
 
   class Builder @Inject constructor(private val localDataSource: GlasswareLocalDataSource,

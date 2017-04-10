@@ -22,8 +22,8 @@ package com.txusballesteros.brewerydb.data.search.strategy
 
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
 import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
-import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
+import com.txusballesteros.brewerydb.data.search.datasource.SearchQueryLocalDataSource
 import com.txusballesteros.brewerydb.data.strategy.LocalStrategy
 import javax.inject.Inject
 
@@ -35,7 +35,6 @@ class StoreSearchQueryStrategy private constructor(private val localDataSource: 
   override fun onRequestCallToLocal(params: SearchQueryDataModel?): Void? {
     localDataSource.store(params!!)
     beersLocalDataSource.flush()
-    beersCloudDataSource.flush()
     return null
   }
 

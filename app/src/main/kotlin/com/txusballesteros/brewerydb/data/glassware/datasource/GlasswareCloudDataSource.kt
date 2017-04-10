@@ -23,5 +23,5 @@ package com.txusballesteros.brewerydb.data.glassware.datasource
 import com.txusballesteros.brewerydb.data.model.GlassDataModel
 
 interface GlasswareCloudDataSource {
-  fun getGlassware(): List<GlassDataModel>
+  fun getList(): List<GlassDataModel>
 }

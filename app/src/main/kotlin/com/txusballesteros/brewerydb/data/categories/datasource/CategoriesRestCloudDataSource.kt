@@ -28,7 +28,7 @@ import javax.inject.Inject
 class CategoriesRestCloudDataSource @Inject constructor(private val api: CategoriesApi,
                                                         private val mapper: CategoryApiModelMapper):
                                     CategoriesCloudDataSource {
-  override fun getCategories(): List<CategoryDataModel> {
+  override fun getList(): List<CategoryDataModel> {
     val response = api.getCategories()
     val result = response.categories.orEmpty().map { category -> mapper.map(category) }
     return result.sortedBy(CategoryDataModel::name)

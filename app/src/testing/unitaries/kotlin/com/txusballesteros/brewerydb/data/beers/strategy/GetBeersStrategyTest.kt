@@ -79,12 +79,12 @@ class GetBeersStrategyTest: UnitTest() {
                             BEER_SERVING_TEMP,
                             BEER_SERVING_TEMP_DISPLAY))
     whenever(localDataSource.getList()).thenReturn(beers)
-    whenever(cloudDataSource.getBeers(any())).thenReturn(null)
+    whenever(cloudDataSource.getList(any(), any())).thenReturn(null)
 
     strategy.execute(onResult =  {
         Assert.assertFalse(it!!.isEmpty())
         verify(localDataSource).getList()
-        verify(cloudDataSource, never()).getBeers(any())
+        verify(cloudDataSource, never()).getList(any(), any())
     })
   }
 }

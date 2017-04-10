@@ -24,7 +24,8 @@ import com.txusballesteros.brewerydb.data.model.BeerDataModel
 
 interface BeersLocalDataSource {
   fun flush()
-  fun store(beers: List<BeerDataModel>)
+  fun getCurrentPage(): Int
+  fun store(beers: List<BeerDataModel>, page: Int)
   fun store(beer: BeerDataModel)
   fun getList(): List<BeerDataModel>
   fun get(beerId: String): BeerDataModel?

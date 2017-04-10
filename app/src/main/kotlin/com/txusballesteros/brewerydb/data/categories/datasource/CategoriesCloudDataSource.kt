@@ -23,5 +23,5 @@ package com.txusballesteros.brewerydb.data.categories.datasource
 import com.txusballesteros.brewerydb.data.model.CategoryDataModel
 
 interface CategoriesCloudDataSource {
-  fun getCategories() : List<CategoryDataModel>
+  fun getList() : List<CategoryDataModel>
 }

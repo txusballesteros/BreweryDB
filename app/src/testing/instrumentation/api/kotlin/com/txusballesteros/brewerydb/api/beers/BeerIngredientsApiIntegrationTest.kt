@@ -21,7 +21,7 @@
 package com.txusballesteros.brewerydb.api.beers
 
 import com.txusballesteros.brewerydb.api.ApiIntegrationTest
-import junit.framework.Assert.assertEquals
+import org.junit.Assert.assertEquals
 import org.junit.Test
 import retrofit2.Retrofit
 

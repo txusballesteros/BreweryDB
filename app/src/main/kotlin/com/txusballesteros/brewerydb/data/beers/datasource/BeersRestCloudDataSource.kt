@@ -30,24 +30,15 @@ import javax.inject.Inject
 class BeersRestCloudDataSource @Inject constructor(private val api: BeersApi,
                                                    private val mapper: BeerApiModelMapper,
                                                    private val queryMapper: SearchQueryApiModelMapper) : BeersCloudDataSource {
-  override fun flush() {
-    api.flush()
-  }
 
-  override fun getBeerById(beerId: String): BeerDataModel {
-    val response = api.getBeerById(beerId)
+  override fun get(beerId: String): BeerDataModel {
+    val response = api.get(beerId)
     return mapper.map(response.beer)
   }
 
-  override fun getBeers(query: SearchQueryDataModel): List<BeerDataModel> {
+  override fun getList(query: SearchQueryDataModel, page: Int): List<BeerDataModel> {
     val apiQuery = queryMapper.map(query)
-    val response = api.getBeers(apiQuery)
-    return response.beers.orEmpty().map { beer -> mapper.map(beer) }
-  }
-
-  override fun getNextPageBeers(query: SearchQueryDataModel): List<BeerDataModel> {
-    val apiQuery = queryMapper.map(query)
-    val response = api.getNextPageBeers(apiQuery)
+    val response = api.getList(apiQuery, page)
     return response.beers.orEmpty().map { beer -> mapper.map(beer) }
   }
 }

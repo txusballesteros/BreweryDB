@@ -32,7 +32,7 @@ class GlasswareInMemoryLocalDataSource @Inject constructor(): GlasswareLocalData
     glassware.forEach { glass -> cache.put(glass.id, glass) }
   }
 
-  override fun getGlassById(id: Int): GlassDataModel? {
+  override fun get(id: Int): GlassDataModel? {
     return cache[id]
   }
 }

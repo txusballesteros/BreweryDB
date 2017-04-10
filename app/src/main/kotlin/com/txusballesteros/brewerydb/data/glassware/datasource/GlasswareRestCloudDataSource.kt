@@ -27,7 +27,7 @@ import javax.inject.Inject
 
 class GlasswareRestCloudDataSource @Inject constructor(private val api: GlasswareApi,
                                                        private val mapper: GlassApiModelMapper): GlasswareCloudDataSource {
-  override fun getGlassware(): List<GlassDataModel> {
+  override fun getList(): List<GlassDataModel> {
     val response = api.getGlasses()
     return response.glasses.orEmpty().map { glass -> mapper.map(glass) }
   }

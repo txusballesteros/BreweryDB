@@ -20,11 +20,11 @@
  */
 package com.txusballesteros.brewerydb.api.model
 
-data class SearchQueryApiModel constructor(val keyword: String?,
-                                           val abv: String?,
-                                           val ibu: String?,
-                                           val isOrganic: String?,
-                                           val breweryId: String?,
-                                           val styleId: Int?,
-                                           val withLabels: String = "Y",
-                                           val status: String = "verified")
+data class SearchQueryApiModel(val keyword: String?,
+                               val abv: String?,
+                               val ibu: String?,
+                               val isOrganic: String?,
+                               val breweryId: String?,
+                               val styleId: Int?,
+                               val withLabels: String? = null,
+                               val status: String = "verified")
