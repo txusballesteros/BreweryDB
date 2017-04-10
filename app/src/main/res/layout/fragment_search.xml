@@ -80,6 +80,13 @@
 
     <include layout="@layout/include_line_decorator" />
 
+    <FrameLayout
+        android:id="@+id/withLabelSearchHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include layout="@layout/include_line_decorator" />
+
     <android.support.v7.widget.AppCompatButton
         style="@style/Button.Rounded"
         android:id="@+id/search"

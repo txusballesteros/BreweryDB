@@ -28,4 +28,5 @@ data class SearchQuery(val keyword: String? = null,
                        val isOrganic: Boolean? = null,
                        val breweryId: String? = null,
                        val styleId: Int? = null,
-                       val styleName: String? = null)
+                       val styleName: String? = null,
+                       val withLabels: Boolean? = null)
