@@ -23,10 +23,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignParentTop="true"
     android:background="@color/white"
     android:overScrollMode="never"
-    android:paddingTop="@dimen/padding_normal">
+    android:paddingTop="@dimen/padding_normal"
+    android:paddingBottom="50dp">
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -35,6 +35,20 @@
 
     <FrameLayout
         android:id="@+id/keywordSearchHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include layout="@layout/include_line_decorator" />
+
+    <FrameLayout
+        android:id="@+id/abvSearchHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include layout="@layout/include_line_decorator" />
+
+    <FrameLayout
+        android:id="@+id/ibuSearchHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -60,21 +74,14 @@
         android:layout_height="0.5dp" />
 
     <FrameLayout
-        android:id="@+id/abvSearchHolder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <include layout="@layout/include_line_decorator" />
-
-    <FrameLayout
-        android:id="@+id/ibuSearchHolder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <include layout="@layout/include_line_decorator" />
-
-    <FrameLayout
         android:id="@+id/isOrganicSearchHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include layout="@layout/include_line_decorator" />
+
+    <FrameLayout
+        android:id="@+id/withLabelSearchHolder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

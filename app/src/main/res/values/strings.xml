@@ -81,4 +81,7 @@
   <string name="simbol_percent">%</string>
   <string name="beer_list_empty_message">Sorry!! We didn\'t found any beers for those filters.</string>
   <string name="beer_ingredients_empty_message">We don\'t have information about ingredients for this beer.</string>
+  <string name="with_label">With Label:</string>
+  <string name="with_label_explain">Show only beers with an image or a label.</string>
+  <string name="is_organic_explain">Show only organic beers.</string>
 </resources>

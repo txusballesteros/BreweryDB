@@ -53,4 +53,10 @@ class SearchSectionFragmentFactory @Inject constructor() {
     val fragment = fragmentManager.findFragmentByTag(tag) ?: IsOrganicSearchSectionFragment.newInstance()
     return fragment as SearchSectionFragment
   }
+
+  fun getWithLabelSection(fragmentManager: FragmentManager): SearchSectionFragment {
+    val tag = WithLabelsSearchSectionFragment::class.java.name
+    val fragment = fragmentManager.findFragmentByTag(tag) ?: WithLabelsSearchSectionFragment.newInstance()
+    return fragment as SearchSectionFragment
+  }
 }

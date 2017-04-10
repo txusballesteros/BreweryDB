@@ -30,7 +30,8 @@ class SearchQueryApiModelMapper @Inject constructor() {
                             mapRange(source.ibuMin, source.ibuMax),
                             mapBoolean(source.isOrganic),
                             source.breweryId,
-                            source.styleId)
+                            source.styleId,
+                            mapBoolean(source.withLabels))
 
   private fun mapRange(sourceMin: Int?, sourceMax: Int?): String? {
     var result: String? = null

@@ -38,18 +38,18 @@
         style="@style/Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/is_organic_search"/>
+        android:text="@string/with_label"/>
 
     <android.support.v7.widget.AppCompatTextView
         style="@style/Text.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/is_organic_explain"/>
+        android:text="@string/with_label_explain"/>
 
   </LinearLayout>
 
   <android.support.v7.widget.SwitchCompat
-      android:id="@+id/isOrganic"
+      android:id="@+id/withLabel"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" />
 

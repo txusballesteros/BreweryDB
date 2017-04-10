@@ -33,7 +33,8 @@ class SearchQueryDataModelMapper @Inject constructor() {
                   source.isOrganic,
                   source.breweryId,
                   source.styleId,
-                  source.styleName)
+                  source.styleName,
+                  source.withLabels)
 
   fun map(source: SearchQuery): SearchQueryDataModel
     = SearchQueryDataModel(source.keyword,
@@ -44,5 +45,6 @@ class SearchQueryDataModelMapper @Inject constructor() {
                            source.isOrganic,
                            source.breweryId,
                            source.styleId,
-                           source.styleName)
+                           source.styleName,
+                           source.withLabels)
 }
