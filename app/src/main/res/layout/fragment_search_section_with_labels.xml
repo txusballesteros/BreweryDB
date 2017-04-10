@@ -44,7 +44,7 @@
         style="@style/Text.Light"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/show_only_beers_with_a_picture_or_label"/>
+        android:text="@string/with_label_explain"/>
 
   </LinearLayout>
 
