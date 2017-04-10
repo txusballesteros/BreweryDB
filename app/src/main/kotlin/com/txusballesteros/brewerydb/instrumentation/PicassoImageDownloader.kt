@@ -28,6 +28,7 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.LruCache
 import com.squareup.picasso.Picasso
 import com.txusballesteros.brewerydb.BuildConfig
+import com.txusballesteros.brewerydb.R
 import javax.inject.Inject
 
 class PicassoImageDownloader @Inject constructor(application: Application): ImageDownloader {
@@ -49,22 +50,27 @@ class PicassoImageDownloader @Inject constructor(application: Application): Imag
 
   override fun download(thumbnail: String?, imageUrl: String, view: ImageView) {
     if (thumbnail != null) {
-      picasso
-          .load(thumbnail)
-          .into(view, object: Callback {
-            override fun onSuccess() {
-              downloadWithPlaceholder(view.drawable, imageUrl, view)
-            }
-
-            override fun onError() { }
-          })
+      downloadWithThumbnail(thumbnail, imageUrl, view)
     } else {
       download(imageUrl, view)
     }
   }
 
+  private fun downloadWithThumbnail(thumbnail: String?, imageUrl: String, view: ImageView) {
+    picasso
+        .load(thumbnail)
+        .into(view, object: Callback {
+          override fun onSuccess() {
+            downloadWithPlaceholder(view.drawable, imageUrl, view)
+          }
+
+          override fun onError() { }
+        })
+  }
+
   private fun download(imageUrl: String, view: ImageView) {
     picasso.load(imageUrl)
+           .placeholder(R.drawable.beer_place_holder)
            .into(view)
   }
 

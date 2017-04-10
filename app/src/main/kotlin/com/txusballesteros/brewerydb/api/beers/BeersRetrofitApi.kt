@@ -45,7 +45,6 @@ class BeersRetrofitApi @Inject constructor(private val service: BeersRetrofitSer
           query.isOrganic,
           query.breweryId,
           query.styleId,
-          query.withLabels,
           query.status,
           page)
       val response = call.execute()

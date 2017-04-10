@@ -35,7 +35,6 @@ interface BeersRetrofitService {
                @Query("isOrganic") isOrganic: String?,
                @Query("breweryId") breweryId: String?,
                @Query("styleId") styleId: Int?,
-               @Query("hasLabels") withLabels: String,
                @Query("status") status: String,
                @Query("p") page: Int): Call<BeersListApiResponse>
 
