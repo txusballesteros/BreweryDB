@@ -79,4 +79,6 @@
   <string name="field_separator">-</string>
   <string name="is_organic_search">Is Organic:</string>
   <string name="simbol_percent">%</string>
+  <string name="beer_list_empty_message">Sorry!! We didn\'t found any beers for those filters.</string>
+  <string name="beer_ingredients_empty_message">We don\'t have information about ingredients for this beer.</string>
 </resources>

@@ -29,6 +29,7 @@ interface BeersListPresenter: Presenter<BeersListPresenter.View> {
   fun onRequestNextPage()
   fun onSearchClick()
   fun onAboutClick()
+  fun onResetFilters()
 
   interface View : Presenter.View {
     fun showLoading()

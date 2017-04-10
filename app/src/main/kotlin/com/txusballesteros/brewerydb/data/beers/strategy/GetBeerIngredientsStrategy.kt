@@ -40,10 +40,6 @@ class GetBeerIngredientsStrategy private constructor(private val localDataSource
     return response
   }
 
-  override fun isValid(result: List<BeerIngredientDataModel>?): Boolean {
-    return result != null && !result.isEmpty()
-  }
-
   class Builder @Inject constructor(private val localDataSource: BeerIngredientsLocalDataSource,
                                     private val cloudDataSource: BeerIngredientsCloudDataSource) {
     fun build(): GetBeerIngredientsStrategy

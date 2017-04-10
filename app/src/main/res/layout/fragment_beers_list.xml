@@ -21,6 +21,8 @@
 -->
 <FrameLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
@@ -29,4 +31,36 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent" />
 
+  <LinearLayout
+      android:id="@+id/emptyView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:gravity="center"
+      android:visibility="gone"
+      tools:visibility="visible">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:tint="@color/gray_4"
+        app:srcCompat="@drawable/ic_search_100dp"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        style="@style/Text.Thin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_medium"
+        android:layout_margin="@dimen/padding_x_big"
+        android:gravity="center"
+        android:text="@string/beer_list_empty_message" />
+
+    <android.support.v7.widget.AppCompatButton
+        style="@style/Button.Rounded"
+        android:id="@+id/resetFilters"
+        android:text="@string/clear_filters"
+        android:layout_marginTop="32dp" />
+
+  </LinearLayout>
 </FrameLayout>

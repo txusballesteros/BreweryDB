@@ -30,7 +30,7 @@ class BeerIngredientsInMemoryLocalDataSource @Inject constructor(): BeerIngredie
     cache.put(beerId, ingredients)
   }
 
-  override fun get(beerId: String): List<BeerIngredientDataModel> {
-    return cache[beerId] ?: ArrayList<BeerIngredientDataModel>()
+  override fun get(beerId: String): List<BeerIngredientDataModel>? {
+    return cache[beerId]
   }
 }

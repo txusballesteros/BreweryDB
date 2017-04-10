@@ -25,6 +25,7 @@ import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.domain.reactive.Observer
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetNextPageBeersUseCase
+import com.txusballesteros.brewerydb.domain.usecase.search.ClearSearchQueryUseCase
 import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryStreamUseCase
 import com.txusballesteros.brewerydb.navigation.NavigationContext
 import com.txusballesteros.brewerydb.navigation.Navigator
@@ -34,10 +35,10 @@ import javax.inject.Inject
 class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: GetBeersUseCase,
                                                  private val getNextPageBeersUseCase: GetNextPageBeersUseCase,
                                                  private val getSearchQueryStreamUseCase: GetSearchQueryStreamUseCase,
+                                                 private val clearSearchQueryUseCase: ClearSearchQueryUseCase,
                                                  private val mapper: BeerViewModelMapper,
                                                  private val navigator: Navigator):
                               AbsPresenter<BeersListPresenter.View>(), BeersListPresenter {
-
   private lateinit var searchQueryObserver: Observer
 
   override fun onAttachView(view: BeersListPresenter.View) {
@@ -73,6 +74,10 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
       val beersList = it.map { beer -> mapper.map(beer) }
       getView()?.renderBeers(beersList)
     })
+  }
+
+  override fun onResetFilters() {
+    clearSearchQueryUseCase.execute()
   }
 
   override fun onBeerClick(beer: BeerViewModel, view: android.view.View) {

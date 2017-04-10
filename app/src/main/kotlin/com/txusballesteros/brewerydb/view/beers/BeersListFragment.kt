@@ -26,9 +26,9 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
+import com.txusballesteros.brewerydb.extesion.setEmptyView
 import com.txusballesteros.brewerydb.instrumentation.EndlessRecyclerViewScrollListener
 import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 import com.txusballesteros.brewerydb.presentation.beers.BeersListPresenter
@@ -38,8 +38,6 @@ import com.txusballesteros.brewerydb.view.behaviours.LoadingBehaviour
 import com.txusballesteros.brewerydb.view.behaviours.ToolbarBehaviour
 import com.txusballesteros.brewerydb.view.di.ViewComponent
 import kotlinx.android.synthetic.main.fragment_beers_list.*
-import org.jetbrains.anko.runOnUiThread
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class BeersListFragment: AbsFragment(), BeersListPresenter.View {
@@ -84,7 +82,12 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
 
   override fun onViewReady(savedInstanceState: Bundle?) {
     initializeList()
+    initializeListeners()
     requestBeers()
+  }
+
+  private fun initializeListeners() {
+    resetFilters.setOnClickListener { presenter.onResetFilters() }
   }
 
   private fun requestBeers() {
@@ -120,6 +123,7 @@ class BeersListFragment: AbsFragment(), BeersListPresenter.View {
     list.layoutManager = layoutManager
     list.adapter = adapter
     list.setHasFixedSize(true)
+    list.setEmptyView(emptyView)
   }
 
   override fun clearList() {
