@@ -42,14 +42,9 @@ class ErrorBehaviour @Inject constructor(): Behaviour() {
     super.inject(activity)
   }
 
-  override fun onRequestPlaceHolderId(): Int
-      = R.id.error_place_holder
+  override fun onRequestPlaceHolderId(): Int = R.id.error_place_holder
 
-  override fun onRequestBehaviourRootViewId(): Int
-      = R.id.errorHolder
-
-  override fun onRequestLayoutResourceId(): Int
-    = R.layout.behaviour_error
+  override fun onRequestLayoutResourceId(): Int = R.layout.behaviour_error
 
   fun showError() {
     contentHolder.visibility = View.GONE
@@ -61,7 +56,7 @@ class ErrorBehaviour @Inject constructor(): Behaviour() {
     errorHolder.visibility = View.GONE
   }
 
-  override fun onBehaviorReady(view: View) {
+  override fun onBehaviourReady(holder: View, view: View) {
     this.errorHolder = activity.find<View>(R.id.errorHolder)
     this.contentHolder = activity.find<View>(R.id.content_place_holder)
     view.find<AppCompatButton>(R.id.retry).setOnClickListener { onRetry() }

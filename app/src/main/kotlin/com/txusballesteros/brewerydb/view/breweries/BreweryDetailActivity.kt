@@ -32,13 +32,6 @@ class BreweryDetailActivity: AbsActivity() {
     val EXTRA_BREWERY_ID = "extra:breweryId"
   }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-      window.statusBarColor = ResourcesCompat.getColor(resources, R.color.gray_1_50, null)
-    }
-  }
-
   override fun onRequestFragment(): AbsFragment {
     val breweryId = getBreweryId()
     return BreweryDetailFragment.newInstance(breweryId)

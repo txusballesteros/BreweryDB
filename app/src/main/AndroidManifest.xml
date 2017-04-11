@@ -39,9 +39,11 @@
     </activity>
     <activity android:name=".view.beers.BeersListActivity" />
     <activity android:name=".view.about.AboutActivity" />
-    <activity android:name=".view.beers.BeerDetailActivity" />
+    <activity android:name=".view.beers.BeerDetailActivity"
+              android:theme="@style/AppTheme.TranslucentStatusBar" />
     <activity android:name=".view.ingredients.IngredientDetailActivity" />
-    <activity android:name=".view.breweries.BreweryDetailActivity" />
+    <activity android:name=".view.breweries.BreweryDetailActivity"
+              android:theme="@style/AppTheme.TranslucentStatusBar" />
     <activity android:name=".view.search.SearchActivity"
               android:windowSoftInputMode="adjustResize|stateAlwaysVisible"/>
     <activity android:name=".view.search.StyleSelectorActivity" />

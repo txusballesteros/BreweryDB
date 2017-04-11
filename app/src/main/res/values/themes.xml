@@ -29,4 +29,6 @@
   <style name="AppTheme.Main">
     <item name="android:windowBackground">@drawable/main_splash</item>
   </style>
+
+  <style name="AppTheme.TranslucentStatusBar" />
 </resources>

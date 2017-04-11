@@ -21,7 +21,6 @@
 package com.txusballesteros.brewerydb.view.behaviours
 
 import android.app.Activity
-import android.support.design.widget.AppBarLayout
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatImageView
@@ -48,38 +47,25 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDownloader:
     super.inject(activity)
   }
 
-  override fun onRequestPlaceHolderId(): Int {
-    return R.id.toolbar_place_holder
+  override fun onRequestPlaceHolderId(): Int = R.id.toolbar_place_holder
+
+  override fun onRequestLayoutResourceId(): Int = R.layout.behaviour_toolbar_with_image
+
+  fun setTitle(title: String) = with(view.find<CollapsingToolbarLayout>(R.id.collapsing_toolbar)) {
+    this.title = title
   }
 
-  override fun onRequestBehaviourRootViewId(): Int {
-    return R.id.collapsing_toolbar
+  fun setImage(thumbnail: String? = null, image: String) = with(view.find<AppCompatImageView>(R.id.headerImage)) {
+    imageDownloader.download(thumbnail, image, this)
   }
 
-  override fun onRequestLayoutResourceId(): Int {
-    return R.layout.behaviour_toolbar_with_image
-  }
-
-  fun setTitle(title: String) {
-    val collapsingToolbar = getView().find<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
-    collapsingToolbar.title = title
-  }
-
-  fun setImage(thumbnail: String? = null, image: String) {
-    val imageView = getView().find<AppCompatImageView>(R.id.headerImage)
-    imageDownloader.download(thumbnail, image, imageView)
-  }
-
-  override fun onBehaviorReady(view: View) {
+  override fun onBehaviourReady(holder: View, view: View) {
     val toolbar = view.find<Toolbar>(R.id.toolbar)
-    val appBarLayout = activity.find<AppBarLayout>(R.id.appBarLayout)
-    val params = view.layoutParams as AppBarLayout.LayoutParams
-    params.scrollFlags = AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL or
-                         AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED
-    view.layoutParams = params
-    activity.setSupportActionBar(toolbar)
-    activity.supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
-    activity.supportActionBar?.setHomeButtonEnabled(enableBack)
-    appBarLayout.fitsSystemWindows = true
+    with(activity) {
+      setSupportActionBar(toolbar)
+      supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
+      supportActionBar?.setHomeButtonEnabled(enableBack)
+    }
+    holder.fitsSystemWindows = true
   }
 }
