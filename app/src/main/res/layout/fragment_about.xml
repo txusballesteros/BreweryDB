@@ -67,8 +67,9 @@
 
     </RelativeLayout>
 
-    <RelativeLayout style="@style/aboutSection"
-      android:id="@+id/kotlin">
+    <RelativeLayout
+        style="@style/aboutSection"
+        android:id="@+id/kotlin">
 
       <android.support.v7.widget.AppCompatImageView
           android:id="@+id/kotlinLogo"
