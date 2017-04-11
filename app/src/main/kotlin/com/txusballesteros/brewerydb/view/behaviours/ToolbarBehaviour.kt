@@ -46,24 +46,20 @@ class ToolbarBehaviour @Inject constructor() : Behaviour() {
     super.inject(activity)
   }
 
-  override fun onRequestPlaceHolderId(): Int {
-    return R.id.toolbar_place_holder
-  }
+  override fun onRequestPlaceHolderId(): Int = R.id.toolbar_place_holder
 
-  override fun onRequestBehaviourRootViewId(): Int {
-    return R.id.toolbar
-  }
+  override fun onRequestLayoutResourceId(): Int = R.layout.behaviour_toolbar_simple
 
-  override fun onRequestLayoutResourceId(): Int {
-    return R.layout.behaviour_toolbar_simple
-  }
-
-  override fun onBehaviorReady(view: View) {
+  override fun onBehaviourReady(holder: View, view: View) {
     val toolbar = view.find<Toolbar>(R.id.toolbar)
-    toolbar.title = title
-    toolbar.subtitle = subtitle
-    activity.setSupportActionBar(toolbar)
-    activity.supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
-    activity.supportActionBar?.setHomeButtonEnabled(enableBack)
+    with(toolbar){
+      this.title = title
+      this.subtitle = subtitle
+    }
+    with(activity) {
+      setSupportActionBar(toolbar)
+      supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
+      supportActionBar?.setHomeButtonEnabled(enableBack)
+    }
   }
 }

@@ -22,52 +22,36 @@ package com.txusballesteros.brewerydb.view.behaviours
 
 import android.app.Activity
 import android.view.View
-import android.view.ViewStub
-import org.jetbrains.anko.find
+import android.view.ViewGroup
+import com.txusballesteros.brewerydb.extesion.inflate
 
 abstract class Behaviour {
-  private lateinit var view: View
+  lateinit var view: View
+    private set
 
   open fun inject(activity: Activity) {
     inject(activity.window.decorView.rootView)
   }
 
-  open fun inject(rootView: View) {
-    val placeHolderView = findPlaceHolderView(rootView)
-    if (placeHolderView != null) {
-      attachBehaviorLayout(placeHolderView)
-    } else {
-      val behaviourView = rootView.find<View>(onRequestBehaviourRootViewId())
-      onBehaviorReady(behaviourView)
-    }
+  open fun inject(rootView: View) = findPlaceHolderView(rootView)?.apply {
+    attachBehaviorLayout(this)
   }
 
-  fun findPlaceHolderView(rootView: View) : ViewStub? {
+  fun findPlaceHolderView(rootView: View) : ViewGroup? {
     val placeHolderId = onRequestPlaceHolderId()
-    val result = rootView.findViewById(placeHolderId) as? ViewStub
-    return result
+    return rootView.findViewById(placeHolderId) as? ViewGroup
   }
 
-  fun attachBehaviorLayout(placeHolderView: ViewStub) {
+  fun attachBehaviorLayout(placeHolderView: ViewGroup) {
     val layoutResourceId = onRequestLayoutResourceId()
-    placeHolderView.layoutResource = layoutResourceId
-    placeHolderView.setOnInflateListener { viewStub, view ->
-      this.view = view
-      viewStub.visibility = View.VISIBLE
-      onBehaviorReady(view)
-    }
-    placeHolderView.inflate()
-  }
-
-  protected fun getView(): View {
-    return view
+    view = placeHolderView.inflate(layoutResourceId)
+    placeHolderView.addView(view)
+    onBehaviourReady(placeHolderView, view)
   }
 
   abstract fun onRequestPlaceHolderId() : Int
 
-  abstract fun onRequestBehaviourRootViewId() : Int
-
   abstract fun onRequestLayoutResourceId() : Int
 
-  abstract fun onBehaviorReady(view: View)
+  abstract fun onBehaviourReady(holder: View, view: View)
 }

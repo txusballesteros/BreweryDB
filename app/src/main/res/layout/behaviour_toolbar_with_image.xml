@@ -24,7 +24,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/collapsing_toolbar"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     app:layout_scrollFlags="scroll|exitUntilCollapsed"
     app:contentScrim="?attr/colorPrimary"
     app:expandedTitleMarginStart="48dp"
@@ -38,8 +38,8 @@
       android:layout_width="match_parent"
       android:layout_height="@dimen/toolbar_image_height"
       android:scaleType="centerCrop"
-      app:layout_collapseMode="parallax"
       android:fitsSystemWindows="true"
+      app:layout_collapseMode="parallax"
       app:srcCompat="@drawable/beer_place_holder_filled"
       android:transitionName="@string/MainImageTransition" />
 

@@ -24,8 +24,13 @@
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:windowBackground">@color/white</item>
     <item name="android:windowContentTransitions">true</item>
     <item name="android:windowSharedElementEnterTransition">@transition/change_image_transform</item>
     <item name="android:windowSharedElementExitTransition">@transition/change_image_transform</item>
+  </style>
+
+  <style name="AppTheme.TranslucentStatusBar">
+    <item name="android:statusBarColor">@color/gray_1_50</item>
   </style>
 </resources>

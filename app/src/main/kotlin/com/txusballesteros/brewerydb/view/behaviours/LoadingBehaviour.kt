@@ -39,17 +39,11 @@ class LoadingBehaviour @Inject constructor(): Behaviour() {
     super.inject(activity)
   }
 
-  override fun onRequestPlaceHolderId(): Int {
-    return R.id.loading_place_holder
-  }
+  override fun onRequestPlaceHolderId(): Int
+    = R.id.loading_place_holder
 
-  override fun onRequestBehaviourRootViewId(): Int {
-    return R.id.loadingHolder
-  }
-
-  override fun onRequestLayoutResourceId(): Int {
-    return R.layout.behaviour_loading
-  }
+  override fun onRequestLayoutResourceId(): Int
+    = R.layout.behaviour_loading
 
   fun showLoading() {
     contentHolder.visibility = View.GONE
@@ -61,7 +55,7 @@ class LoadingBehaviour @Inject constructor(): Behaviour() {
     loadingHolder.visibility = View.GONE
   }
 
-  override fun onBehaviorReady(view: View) {
+  override fun onBehaviourReady(holder: View, view: View) {
     this.loadingHolder = activity.find<View>(R.id.loadingHolder)
     this.contentHolder = activity.find<View>(R.id.content_place_holder)
   }

@@ -30,28 +30,23 @@ import org.jetbrains.anko.find
 import javax.inject.Inject
 
 class BottomNavigationBehaviour @Inject constructor(): Behaviour() {
-  var menuResourceId: Int = 0
-  lateinit var onItemSelected: (MenuItem) -> Boolean
+  private var menuResourceId: Int = 0
+  private lateinit var onItemSelected: (MenuItem) -> Boolean
+
   fun inject(activity: Activity, @MenuRes menuResourceId: Int, onItemSelected: (MenuItem) -> Boolean) {
     this.menuResourceId = menuResourceId
     this.onItemSelected = onItemSelected
     super.inject(activity)
   }
 
-  override fun onRequestPlaceHolderId(): Int
-      = R.id.bottom_navigation_place_holder
+  override fun onRequestPlaceHolderId(): Int = R.id.bottom_navigation_place_holder
 
-  override fun onRequestBehaviourRootViewId(): Int
-    = R.id.bottomNavigationHolder
+  override fun onRequestLayoutResourceId(): Int = R.layout.behaviour_bottom_navigation
 
-  override fun onRequestLayoutResourceId(): Int
-    = R.layout.behaviour_bottom_navigation
-
-  override fun onBehaviorReady(view: View) {
-    val bottomNavigationView = view.find<BottomNavigationView>(R.id.bottomNavigationMenu)
-    bottomNavigationView.inflateMenu(menuResourceId)
-    bottomNavigationView.setOnNavigationItemSelectedListener {
-      menuItem -> onItemSelected(menuItem)
+  override fun onBehaviourReady(holder: View, view: View) {
+    with(view.find<BottomNavigationView>(R.id.bottomNavigationMenu)) {
+      inflateMenu(menuResourceId)
+      setOnNavigationItemSelectedListener { menuItem -> onItemSelected(menuItem) }
     }
   }
 }
