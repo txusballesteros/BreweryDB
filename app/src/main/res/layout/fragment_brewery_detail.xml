@@ -49,9 +49,10 @@
         android:layout_marginTop="@dimen/padding_normal"
         android:layout_marginLeft="@dimen/padding_normal"
         android:layout_marginRight="@dimen/padding_normal"
+        android:layout_marginBottom="@dimen/padding_big"
         tools:text="Description..."/>
 
-    <include layout="@layout/include_line_decorator" />
+    <include layout="@layout/include_item_line_decorator" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -69,7 +70,7 @@
           android:text="@string/since"/>
 
       <android.support.v7.widget.AppCompatTextView
-          style="@style/Text.Light"
+          style="@style/Text.Branded"
           android:id="@+id/established"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
@@ -86,6 +87,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="60dp"
+        android:layout_marginTop="@dimen/padding_normal"
         android:paddingLeft="@dimen/padding_normal"
         android:paddingRight="@dimen/padding_normal"
         android:foreground="?attr/selectableItemBackground"
