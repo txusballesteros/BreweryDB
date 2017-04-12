@@ -24,8 +24,8 @@ import android.os.Bundle
 import android.view.View
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.extesion.add
-import com.txusballesteros.brewerydb.extesion.find
+import com.txusballesteros.brewerydb.extension.add
+import com.txusballesteros.brewerydb.extension.find
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
