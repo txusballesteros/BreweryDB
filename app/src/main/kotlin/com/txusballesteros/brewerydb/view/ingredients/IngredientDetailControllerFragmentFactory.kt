@@ -21,40 +21,17 @@
 package com.txusballesteros.brewerydb.view.ingredients
 
 import android.support.v4.app.FragmentManager
+import com.txusballesteros.brewerydb.extesion.find
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import javax.inject.Inject
 
 class IngredientDetailControllerFragmentFactory @Inject constructor() {
-
-  fun getFragment(fragmentManager: FragmentManager,
-                                  ingredientId: Int,
-                                  ingredientType: IngredientTypeViewModel): AbsFragment? {
-    var result: AbsFragment?
-    when(ingredientType) {
-      IngredientTypeViewModel.HOP -> result = getHopDetailFragment(fragmentManager, ingredientId)
-      IngredientTypeViewModel.FERMENTABLE -> result = getFermentableDetailFragment(fragmentManager, ingredientId)
-      IngredientTypeViewModel.YEAST -> result = getYeastDetailFragment(fragmentManager, ingredientId)
-      else -> result = null
+  fun getFragment(fragmentManager: FragmentManager, ingredientId: Int, ingredientType: IngredientTypeViewModel): AbsFragment?
+    = when(ingredientType) {
+      IngredientTypeViewModel.HOP -> fragmentManager.find<HopDetailFragment>() ?: HopDetailFragment.newInstance(ingredientId)
+      IngredientTypeViewModel.FERMENTABLE -> fragmentManager.find<FermentableDetailFragment>() ?: FermentableDetailFragment.newInstance(ingredientId)
+      IngredientTypeViewModel.YEAST -> fragmentManager.find<YeastDetailFragment>() ?: YeastDetailFragment.newInstance(ingredientId)
+      else -> null
     }
-    return result
-  }
-
-  private fun getHopDetailFragment(fragmentManager: FragmentManager, ingredientId: Int): AbsFragment {
-    val tag = HopDetailFragment::class.java.name
-    val fragment = fragmentManager.findFragmentByTag(tag) ?: HopDetailFragment.newInstance(ingredientId)
-    return fragment as AbsFragment
-  }
-
-  private fun getFermentableDetailFragment(fragmentManager: FragmentManager, ingredientId: Int): AbsFragment {
-    val tag = FermentableDetailFragment::class.java.name
-    val fragment = fragmentManager.findFragmentByTag(tag) ?: FermentableDetailFragment.newInstance(ingredientId)
-    return fragment as AbsFragment
-  }
-
-  private fun getYeastDetailFragment(fragmentManager: FragmentManager, ingredientId: Int): AbsFragment {
-    val tag = YeastDetailFragment::class.java.name
-    val fragment = fragmentManager.findFragmentByTag(tag) ?: YeastDetailFragment.newInstance(ingredientId)
-    return fragment as AbsFragment
-  }
 }

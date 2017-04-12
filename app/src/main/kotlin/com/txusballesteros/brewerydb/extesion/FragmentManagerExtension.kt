@@ -18,21 +18,20 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.view.beers
+package com.txusballesteros.brewerydb.extesion
 
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.view.AbsFragment
 
-class BeerDetailFragmentFactory @Inject constructor() {
-  fun getAbvFragment(fragmentManager: FragmentManager, beerId: String ): BeerAbvFragment {
-    val tag = BeerAbvFragment::class.java.name
-    val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerAbvFragment.newInstance(beerId)
-    return fragment as BeerAbvFragment
-  }
+inline fun <reified T: Fragment>FragmentManager.find(): T? {
+  val tag = T::class.java.name
+  return findFragmentByTag(tag) as? T
+}
 
-  fun getIbuFragment(fragmentManager: FragmentManager, beerId: String ): BeerIbuFragment {
-    val tag = BeerIbuFragment::class.java.name
-    val fragment = fragmentManager.findFragmentByTag(tag) ?: BeerIbuFragment.newInstance(beerId)
-    return fragment as BeerIbuFragment
-  }
+fun FragmentManager.add(holder: Int, builder: () -> AbsFragment) {
+  val fragment = builder()
+  this.beginTransaction()
+      .replace(holder, fragment, fragment::class.java.simpleName)
+      .commitAllowingStateLoss()
 }

@@ -45,6 +45,7 @@ abstract class AbsFragment : Fragment() {
   }
 
   override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
     onRequestInjection()
     onRequestViewBehaviours()
     onPresenterShouldBeAttached()

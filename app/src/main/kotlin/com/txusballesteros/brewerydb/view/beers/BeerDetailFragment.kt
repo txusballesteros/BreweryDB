@@ -24,6 +24,8 @@ import android.os.Bundle
 import android.view.View
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
+import com.txusballesteros.brewerydb.extesion.add
+import com.txusballesteros.brewerydb.extesion.find
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour
@@ -46,7 +48,6 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
   }
 
   @Inject lateinit var presenter: BeerDetailPresenter
-  @Inject lateinit var fragmentFactory: BeerDetailFragmentFactory
   @Inject lateinit var loadingBehaviour: LoadingBehaviour
   @Inject lateinit var errorBehaviour: ErrorBehaviour
 
@@ -75,18 +76,12 @@ class BeerDetailFragment: AbsFragment(), BeerDetailPresenter.View {
 
   override fun onComposeView() {
     val beerId =  getBeerId()
-    val abvFragment = fragmentFactory.getAbvFragment(childFragmentManager, beerId)
-    val ibuFragment = fragmentFactory.getIbuFragment(childFragmentManager, beerId)
-    addFragment(R.id.abvPlaceHolder, abvFragment)
-    addFragment(R.id.ibuPlaceHolder, ibuFragment)
+    addFragment({ childFragmentManager.find<BeerAbvFragment>() ?: BeerAbvFragment.newInstance(beerId) }, R.id.abvPlaceHolder)
+    addFragment({ childFragmentManager.find<BeerIbuFragment>() ?: BeerIbuFragment.newInstance(beerId) }, R.id.ibuPlaceHolder)
   }
 
-  private fun addFragment(containerView: Int, fragment: AbsFragment) {
-    val tag = fragment.javaClass.name
-    childFragmentManager
-        .beginTransaction()
-        .replace(containerView, fragment, tag)
-        .commitAllowingStateLoss()
+  private fun addFragment(builder: () -> AbsFragment, holder: Int) {
+     childFragmentManager.add(holder, builder)
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
