@@ -25,6 +25,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
+import com.txusballesteros.brewerydb.extesion.add
+import com.txusballesteros.brewerydb.extesion.find
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailControllerPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.BottomNavigationBehaviour
@@ -44,13 +46,12 @@ class BeerTabsComposerFragment : AbsFragment(), BeerDetailControllerPresenter.Vi
     }
   }
 
-  @Inject lateinit var fragmentFragmentFactory: BeerTabsComposerFragmentFactory
   @Inject lateinit var toolbarBehaviour : ToolbarWithImageBehaviour
   @Inject lateinit var bottomNavigationBehaviour: BottomNavigationBehaviour
   @Inject lateinit var presenter: BeerDetailControllerPresenter
 
   override fun onRequestLayoutResourceId(): Int {
-    return R.layout.fragment_beer_detail_controller
+    return R.layout.fragment_beer_tabs_composer
   }
 
   override fun onRequestInjection(viewComponent: ViewComponent) {
@@ -98,28 +99,21 @@ class BeerTabsComposerFragment : AbsFragment(), BeerDetailControllerPresenter.Vi
 
   override fun showBeerDetail() {
     val beerId = getBeerId()
-    val fragment = fragmentFragmentFactory.getBeerDetailFragment(childFragmentManager, beerId)
-    addFragment(fragment)
+    addFragment({ childFragmentManager.find<BeerDetailFragment>() ?: BeerDetailFragment.newInstance(beerId) })
   }
 
   override fun showBeerIngredients() {
     val beerId = getBeerId()
-    val fragment = fragmentFragmentFactory.getBeerIngredientsFragment(childFragmentManager, beerId)
-    addFragment(fragment)
+    addFragment({ childFragmentManager.find<BeerIngredientsFragment>() ?: BeerIngredientsFragment.newInstance(beerId) })
   }
 
   override fun showBeerBreweries() {
     val beerId = getBeerId()
-    val fragment = fragmentFragmentFactory.getBeerBreweriesFragment(childFragmentManager, beerId)
-    addFragment(fragment)
+    addFragment({ childFragmentManager.find<BeerBreweriesFragment>() ?: BeerBreweriesFragment.newInstance(beerId) })
   }
 
-  private fun addFragment(fragment: AbsFragment) {
-    val tag = fragment.javaClass.name
-    childFragmentManager
-        .beginTransaction()
-        .replace(R.id.content, fragment, tag)
-        .commitAllowingStateLoss()
+  private fun addFragment(builder: () -> AbsFragment) {
+    childFragmentManager.add(R.id.content, builder)
   }
 
   override fun renderBeer(beer: BeerViewModel) {

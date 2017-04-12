@@ -25,6 +25,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
+import com.txusballesteros.brewerydb.extesion.add
+import com.txusballesteros.brewerydb.extesion.find
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
 import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
@@ -42,7 +44,6 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
 
   @Inject lateinit var toolbarBehaviour: ToolbarBehaviour
   @Inject lateinit var presenter: SearchPresenter
-  @Inject lateinit var sectionsFragmentFactory: SearchSectionFragmentFactory
 
   override fun onRequestLayoutResourceId(): Int
     = R.layout.fragment_search
@@ -65,10 +66,20 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
   }
   
   override fun onViewReady(savedInstanceState: Bundle?) {
-    if (savedInstanceState == null) {
-      composeView()
-    }
     search.setOnClickListener { presenter.onSearch() }
+  }
+
+  override fun onComposeView() {
+    addSection({ childFragmentManager.find<KeywordSearchSectionFragment>() ?: KeywordSearchSectionFragment.newInstance() }, R.id.keywordSearchHolder)
+    addSection({ childFragmentManager.find<StyleSearchSectionFragment>() ?: StyleSearchSectionFragment.newInstance() }, R.id.styleSearchHolder)
+    addSection({ childFragmentManager.find<AbvSearchSectionFragment>() ?: AbvSearchSectionFragment.newInstance() }, R.id.abvSearchHolder)
+    addSection({ childFragmentManager.find<IbuSearchSectionFragment>() ?: IbuSearchSectionFragment.newInstance() }, R.id.ibuSearchHolder)
+    addSection({ childFragmentManager.find<IsOrganicSearchSectionFragment>() ?: IsOrganicSearchSectionFragment.newInstance() }, R.id.isOrganicSearchHolder)
+    addSection({ childFragmentManager.find<WithLabelsSearchSectionFragment>() ?: WithLabelsSearchSectionFragment.newInstance() }, R.id.withLabelSearchHolder)
+  }
+
+  private fun addSection(builder: () -> AbsFragment, holder: Int) {
+    childFragmentManager.add(holder, builder)
   }
 
   override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -83,29 +94,6 @@ class SearchFragment: AbsFragment(), SearchPresenter.View {
       R.id.action_clear -> consume { presenter.onClearFilters() }
       else -> super.onOptionsItemSelected(item)
     }
-  }
-
-  private fun composeView() {
-    val keywordFragment = sectionsFragmentFactory.getKeywordSection(childFragmentManager)
-    val styleFragment = sectionsFragmentFactory.getStyleSection(childFragmentManager)
-    val abvFragment = sectionsFragmentFactory.getAbvSection(childFragmentManager)
-    val ibuFragment = sectionsFragmentFactory.getIbuSection(childFragmentManager)
-    val isOrganicFragment = sectionsFragmentFactory.getIsOrganicSection(childFragmentManager)
-    val withLabelFragment = sectionsFragmentFactory.getWithLabelSection(childFragmentManager)
-    addSection(keywordFragment, R.id.keywordSearchHolder)
-    addSection(styleFragment, R.id.styleSearchHolder)
-    addSection(abvFragment, R.id.abvSearchHolder)
-    addSection(ibuFragment, R.id.ibuSearchHolder)
-    addSection(isOrganicFragment, R.id.isOrganicSearchHolder)
-    addSection(withLabelFragment, R.id.withLabelSearchHolder)
-  }
-
-  private fun addSection(section: SearchSectionFragment, searchHolder: Int) {
-    val tag = section::class.java.name
-    childFragmentManager
-        .beginTransaction()
-        .replace(searchHolder, section, tag)
-        .commitAllowingStateLoss()
   }
 
   override fun getQuery(): SearchQueryViewModel {
