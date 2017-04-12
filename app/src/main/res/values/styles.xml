@@ -30,7 +30,7 @@
   </style>
 
   <style name="toolbar_expanded_title">
-    <item name="android:textColor">#ffffffff</item>
+    <item name="android:textColor">@color/white_alpha_0</item>
   </style>
 
   <style name="toolbar_collapsed_title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">

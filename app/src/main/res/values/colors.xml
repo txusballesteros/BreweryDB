@@ -25,6 +25,7 @@
   <color name="colorPrimaryDark">#F57F17</color>
   <color name="colorAccent">#F57F17</color>
   <color name="white">#FFFFFFFF</color>
+  <color name="white_alpha_0">#00FFFFFF</color>
   <color name="gray_1_50">#80333333</color>
   <color name="gray_1">#333333</color>
   <color name="gray_2">#595959</color>
