@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.view.behaviours
 import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
-import com.txusballesteros.brewerydb.extesion.inflate
+import com.txusballesteros.brewerydb.extension.inflate
 
 abstract class Behaviour {
   lateinit var view: View

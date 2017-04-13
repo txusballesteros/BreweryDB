@@ -25,8 +25,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
-import com.txusballesteros.brewerydb.extesion.add
-import com.txusballesteros.brewerydb.extesion.find
+import com.txusballesteros.brewerydb.extension.add
+import com.txusballesteros.brewerydb.extension.find
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
 import com.txusballesteros.brewerydb.presentation.search.SearchPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment

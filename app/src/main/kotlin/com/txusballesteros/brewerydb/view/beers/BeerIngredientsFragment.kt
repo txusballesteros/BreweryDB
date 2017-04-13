@@ -24,7 +24,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
-import com.txusballesteros.brewerydb.extesion.setEmptyView
+import com.txusballesteros.brewerydb.extension.setEmptyView
 import com.txusballesteros.brewerydb.presentation.beers.BeerIngredientsPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.ErrorBehaviour

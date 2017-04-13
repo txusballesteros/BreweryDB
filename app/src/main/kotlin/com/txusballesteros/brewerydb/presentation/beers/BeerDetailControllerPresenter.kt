@@ -22,15 +22,15 @@ package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.presentation.Presenter
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
 
 interface BeerDetailControllerPresenter: Presenter<BeerDetailControllerPresenter.View> {
-  fun onRequestBeer(beerId: String)
+  fun onRequestBeer()
   fun onBeerDetailSelected()
   fun onBeerIngredientsSelected()
   fun onBeerBreweriesSelected()
 
   interface View: Presenter.View {
+    fun getBeerId(): String
     fun renderBeer(beer: BeerViewModel)
     fun showBeerDetail()
     fun showBeerIngredients()

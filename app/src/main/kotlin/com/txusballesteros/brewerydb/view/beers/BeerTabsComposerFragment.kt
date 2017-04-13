@@ -25,8 +25,8 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.extesion.add
-import com.txusballesteros.brewerydb.extesion.find
+import com.txusballesteros.brewerydb.extension.add
+import com.txusballesteros.brewerydb.extension.find
 import com.txusballesteros.brewerydb.presentation.beers.BeerDetailControllerPresenter
 import com.txusballesteros.brewerydb.view.AbsFragment
 import com.txusballesteros.brewerydb.view.behaviours.BottomNavigationBehaviour
@@ -93,8 +93,9 @@ class BeerTabsComposerFragment : AbsFragment(), BeerDetailControllerPresenter.Vi
   }
 
   override fun onViewReady(savedInstanceState: Bundle?) {
-    val beerId = getBeerId()
-    presenter.onRequestBeer(beerId)
+    if (savedInstanceState == null) {
+      presenter.onRequestBeer()
+    }
   }
 
   override fun showBeerDetail() {
@@ -134,7 +135,7 @@ class BeerTabsComposerFragment : AbsFragment(), BeerDetailControllerPresenter.Vi
     }
   }
 
-  private fun getBeerId(): String {
+  override fun getBeerId(): String {
     return arguments.getString(EXTRA_BEER_ID)
   }
 }
