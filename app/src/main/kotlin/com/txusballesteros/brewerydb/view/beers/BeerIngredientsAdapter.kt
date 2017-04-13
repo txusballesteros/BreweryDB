@@ -25,7 +25,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
-import com.txusballesteros.brewerydb.extesion.inflate
+import com.txusballesteros.brewerydb.extension.inflate
 import kotlinx.android.synthetic.main.item_beer_ingredient.view.*
 import java.util.*
 

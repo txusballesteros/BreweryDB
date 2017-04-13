@@ -18,24 +18,10 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.extesion
+package com.txusballesteros.brewerydb.extension
 
-import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.ViewGroup
 
-fun RecyclerView.setEmptyView(view: View) {
-  adapter?.apply {
-    val observer = object: RecyclerView.AdapterDataObserver() {
-      override fun onChanged() {
-        view.visibility = if (isEmpty()) VISIBLE else GONE
-        this@setEmptyView.visibility = if (isEmpty()) GONE else VISIBLE
-      }
-    }
-    registerAdapterDataObserver(observer)
-    observer.onChanged()
-  }
-}
-
-fun <A: RecyclerView.ViewHolder> RecyclerView.Adapter<A>.isEmpty() = itemCount == 0
+fun ViewGroup.inflate(layoutResourceId: Int): View = LayoutInflater.from(this.context).inflate(layoutResourceId, this, false)

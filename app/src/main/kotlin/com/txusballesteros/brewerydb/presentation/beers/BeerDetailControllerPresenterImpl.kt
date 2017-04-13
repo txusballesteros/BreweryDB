@@ -30,11 +30,14 @@ class BeerDetailControllerPresenterImpl @Inject constructor(private val getBeerB
                                                             private val mapper: BeerViewModelMapper):
                                         AbsPresenter<BeerDetailControllerPresenter.View>(), BeerDetailControllerPresenter {
 
-  override fun onRequestBeer(beerId: String) {
-    getBeerByIdUseCase.execute(beerId, onResult = {
-      renderBeer(it)
-      getView()?.showBeerDetail()
-    })
+  override fun onRequestBeer() {
+    getView()?.let {
+      val beerId = it.getBeerId()
+      getBeerByIdUseCase.execute(beerId, onResult = {
+        renderBeer(it)
+        getView()?.showBeerDetail()
+      })
+    }
   }
 
   private fun renderBeer(beer: Beer) {

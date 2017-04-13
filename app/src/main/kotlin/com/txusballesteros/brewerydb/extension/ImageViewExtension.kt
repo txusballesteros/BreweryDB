@@ -18,20 +18,15 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.extesion
+package com.txusballesteros.brewerydb.extension
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import com.txusballesteros.brewerydb.view.AbsFragment
+import android.widget.ImageView
+import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 
-inline fun <reified T: Fragment>FragmentManager.find(): T? {
-  val tag = T::class.java.name
-  return findFragmentByTag(tag) as? T
+fun ImageView.download(imageDownloader: ImageDownloader, thumbnailUrl: String? = null, imageUrl: String? = null) {
+  val view = this
+  imageUrl?.apply {
+    imageDownloader.download(thumbnailUrl, imageUrl, view)
+  }
 }
 
-fun FragmentManager.add(holder: Int, builder: () -> AbsFragment) {
-  val fragment = builder()
-  this.beginTransaction()
-      .replace(holder, fragment, fragment::class.java.simpleName)
-      .commitAllowingStateLoss()
-}

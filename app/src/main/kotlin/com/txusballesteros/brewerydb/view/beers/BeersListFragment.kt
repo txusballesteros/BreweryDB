@@ -28,7 +28,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import com.txusballesteros.brewerydb.R
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import com.txusballesteros.brewerydb.extesion.setEmptyView
+import com.txusballesteros.brewerydb.extension.setEmptyView
 import com.txusballesteros.brewerydb.instrumentation.EndlessRecyclerViewScrollListener
 import com.txusballesteros.brewerydb.instrumentation.ImageDownloader
 import com.txusballesteros.brewerydb.presentation.beers.BeersListPresenter

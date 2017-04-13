@@ -21,7 +21,7 @@
 package com.txusballesteros.brewerydb.view.ingredients
 
 import android.support.v4.app.FragmentManager
-import com.txusballesteros.brewerydb.extesion.find
+import com.txusballesteros.brewerydb.extension.find
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
 import com.txusballesteros.brewerydb.view.AbsFragment
 import javax.inject.Inject
