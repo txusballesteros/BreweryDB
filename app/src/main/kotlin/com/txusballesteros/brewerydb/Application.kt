@@ -22,6 +22,7 @@ package com.txusballesteros.brewerydb
 
 import android.app.Application
 import com.facebook.stetho.Stetho
+import com.squareup.leakcanary.LeakCanary
 import com.txusballesteros.brewerydb.di.ApplicationComponent
 import com.txusballesteros.brewerydb.di.ApplicationModule
 import com.txusballesteros.brewerydb.di.DaggerApplicationComponent
@@ -34,6 +35,13 @@ class Application : Application() {
     super.onCreate()
     initializeDependencyInjections()
     initializeStetho()
+    initializeLeakCanary()
+  }
+
+  private fun initializeLeakCanary() {
+    if (!LeakCanary.isInAnalyzerProcess(this)) {
+      LeakCanary.install(this)
+    }
   }
 
   fun initializeDependencyInjections() {

@@ -52,7 +52,8 @@ ext {
   mockitoKotlinVervion = "1.2.0"
   loadingBallsVervion = "1.1"
   constraintLayoutVervion = "1.0.2"
-  espressotVervion = "2.2.2"
+  espressoVersion = "2.2.2"
+  leakCanaryVersion = "1.5"
 
   mobileDependencies = [
     AppCompat: "com.android.support:appcompat-v7:${androidSupportVersion}",
@@ -81,6 +82,9 @@ ext {
     MockitoKotlin: "com.nhaarman:mockito-kotlin:${mockitoKotlinVervion}",
     LoadingBalls: "com.github.glomadrian:loadingballs:${loadingBallsVervion}@aar",
     ConstraintLayout: "com.android.support.constraint:constraint-layout:${constraintLayoutVervion}",
-    EspressoCore: "com.android.support.test.espresso:espresso-core:${espressotVervion}"
+    EspressoCore: "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+    LeakCanaryForDebug: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+    LeakCanaryForRelease: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
+    LeakCanaryForTest: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
   ]
 }

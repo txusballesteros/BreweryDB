@@ -88,11 +88,14 @@ dependencies {
   compile dependencies.GsonConverter
   compile dependencies.Picasso
   compile dependencies.Dagger
+  debugCompile dependencies.LeakCanaryForDebug
+  releaseCompile dependencies.LeakCanaryForRelease
   kapt dependencies.DaggerCompiler
 
   testCompile dependencies.JUnit
   testCompile dependencies.Mockito
   testCompile dependencies.MockitoKotlin
+  testCompile dependencies.LeakCanaryForTest
 
   androidTestCompile dependencies.Stetho
   androidTestCompile dependencies.StethoOkHttp
