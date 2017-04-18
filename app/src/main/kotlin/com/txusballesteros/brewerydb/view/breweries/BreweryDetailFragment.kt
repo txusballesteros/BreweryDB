@@ -80,6 +80,15 @@ class BreweryDetailFragment: AbsFragment(), BreweryDetailPresenter.View {
     requestBreweries()
   }
 
+  override fun onSaveInstanceState(outState: Bundle) {
+    toolbarBehaviour.onSaveInstanceState(outState)
+  }
+
+  override fun onViewStateRestored(savedInstanceState: Bundle?) {
+    toolbarBehaviour.onViewStateRestored(savedInstanceState)
+    super.onViewStateRestored(savedInstanceState)
+  }
+
   private fun requestBreweries() {
     val breweryId = getBreweryId()
     presenter.onRequestBrewery(breweryId)

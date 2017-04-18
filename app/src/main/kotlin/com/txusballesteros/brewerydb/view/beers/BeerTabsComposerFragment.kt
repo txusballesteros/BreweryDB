@@ -84,6 +84,15 @@ class BeerTabsComposerFragment : AbsFragment(), BeerDetailControllerPresenter.Vi
     }
   }
 
+  override fun onSaveInstanceState(outState: Bundle) {
+    toolbarBehaviour.onSaveInstanceState(outState)
+  }
+
+  override fun onViewStateRestored(savedInstanceState: Bundle?) {
+    toolbarBehaviour.onViewStateRestored(savedInstanceState)
+    super.onViewStateRestored(savedInstanceState)
+  }
+
   private fun closeView() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
       activity.finishAfterTransition()

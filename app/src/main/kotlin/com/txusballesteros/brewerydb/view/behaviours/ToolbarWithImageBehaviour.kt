@@ -21,6 +21,7 @@
 package com.txusballesteros.brewerydb.view.behaviours
 
 import android.app.Activity
+import android.os.Bundle
 import android.support.design.widget.CollapsingToolbarLayout
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatImageView
@@ -32,8 +33,15 @@ import org.jetbrains.anko.find
 import javax.inject.Inject
 
 class ToolbarWithImageBehaviour @Inject constructor(private val imageDownloader: ImageDownloader) : Behaviour() {
+  companion object {
+    private val EXTRA_THUMBNAIL = "extra:Thumbnail"
+    private val EXTRA_IMAGE = "extra:Image"
+  }
+
   private lateinit var activity : AppCompatActivity
   private var enableBack: Boolean = false
+  private var thumbnail: String? = null
+  private lateinit var image: String
 
   override fun inject(activity: Activity) {
     this.inject(activity, false)
@@ -47,6 +55,17 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDownloader:
     super.inject(activity)
   }
 
+  fun onSaveInstanceState(outState: Bundle)  = outState.apply {
+    putString(EXTRA_THUMBNAIL, thumbnail)
+    putString(EXTRA_IMAGE, image)
+  }
+
+  fun onViewStateRestored(savedInstanceState: Bundle?) = savedInstanceState?.apply {
+    thumbnail = savedInstanceState.getString(EXTRA_THUMBNAIL)
+    image = savedInstanceState.getString(EXTRA_THUMBNAIL)
+    setImage(thumbnail, image)
+  }
+
   override fun onRequestPlaceHolderId(): Int = R.id.toolbar_place_holder
 
   override fun onRequestLayoutResourceId(): Int = R.layout.behaviour_toolbar_with_image
@@ -56,6 +75,8 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDownloader:
   }
 
   fun setImage(thumbnail: String? = null, image: String) = with(view.find<AppCompatImageView>(R.id.headerImage)) {
+    this@ToolbarWithImageBehaviour.thumbnail = thumbnail
+    this@ToolbarWithImageBehaviour.image = image
     imageDownloader.download(thumbnail, image, this)
   }
 
