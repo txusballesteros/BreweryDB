@@ -9,7 +9,7 @@ BreweryDB
 I have created this repository to learn #Kotlin, and to try to replicate a clean architecture with that language.
 
 ## Usage of the Code
-Here you are a fully functional application, you can use it to learn how I have solved many problems or to take a look to how you could do the architecture your App. So, plese, Don't use it to publish your self App.
+Here you have a fully functional application, you can use it to learn how I have solved some problems or to take a look to how you could build the architecture your App. So, don't use this code to publish your self App.
 
 ## Contributions
 If you think that you can improve anything of the repo, please feel free to create a pull-request.
