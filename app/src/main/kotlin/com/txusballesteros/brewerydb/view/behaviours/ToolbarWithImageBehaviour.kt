@@ -41,7 +41,7 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDownloader:
   private lateinit var activity : AppCompatActivity
   private var enableBack: Boolean = false
   private var thumbnail: String? = null
-  private lateinit var image: String
+  private var image: String? = null
 
   override fun inject(activity: Activity) {
     this.inject(activity, false)
@@ -56,14 +56,20 @@ class ToolbarWithImageBehaviour @Inject constructor(private val imageDownloader:
   }
 
   fun onSaveInstanceState(outState: Bundle)  = outState.apply {
-    putString(EXTRA_THUMBNAIL, thumbnail)
-    putString(EXTRA_IMAGE, image)
+    thumbnail?.apply {
+      putString(EXTRA_THUMBNAIL, this)
+    }
+    image?.apply {
+      putString(EXTRA_IMAGE, image)
+    }
   }
 
   fun onViewStateRestored(savedInstanceState: Bundle?) = savedInstanceState?.apply {
     thumbnail = savedInstanceState.getString(EXTRA_THUMBNAIL)
     image = savedInstanceState.getString(EXTRA_THUMBNAIL)
-    setImage(thumbnail, image)
+    image?.let {
+      setImage(thumbnail, image!!)
+    }
   }
 
   override fun onRequestPlaceHolderId(): Int = R.id.toolbar_place_holder
