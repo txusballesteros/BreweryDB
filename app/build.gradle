@@ -25,6 +25,8 @@ apply plugin: 'kotlin-android-extensions'
 def globalConfiguration = rootProject.extensions.getByName("ext")
 
 android {
+  Properties localProperties = new Properties()
+  localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
   compileSdkVersion globalConfiguration.getAt("androidCompileSdkVersion")
   buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
 
@@ -37,6 +39,7 @@ android {
 
     vectorDrawables.useSupportLibrary true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    buildConfigField 'String', 'API_KEY', localProperties.getProperty('API_KEY')
   }
 
   sourceSets {

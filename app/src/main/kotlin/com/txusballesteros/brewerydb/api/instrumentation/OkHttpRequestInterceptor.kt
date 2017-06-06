@@ -20,13 +20,14 @@
  */
 package com.txusballesteros.brewerydb.api.instrumentation
 
+import com.txusballesteros.brewerydb.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
 class OkHttpRequestInterceptor : Interceptor {
   companion object {
     private var API_KEY_QUERY_PARAM = "key"
-    private var API_KEY = "9741e805409497a470490a9e9a3908d8"
+    private var API_KEY = BuildConfig.API_KEY
   }
 
   override fun intercept(chain: Interceptor.Chain?): Response {
