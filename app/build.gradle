@@ -24,6 +24,12 @@ apply plugin: 'kotlin-android-extensions'
 
 def globalConfiguration = rootProject.extensions.getByName("ext")
 
+kotlin {
+  experimental {
+    coroutines 'enable'
+  }
+}
+
 android {
   Properties localProperties = new Properties()
   localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
