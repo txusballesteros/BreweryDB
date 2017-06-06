@@ -21,26 +21,17 @@
 package com.txusballesteros.brewerydb.presentation.model
 
 import com.txusballesteros.brewerydb.domain.model.IngredientType
-import javax.inject.Inject
 
-class IngredientTypeViewModelMapper @Inject constructor() {
-  fun map(source: IngredientType): IngredientTypeViewModel
-    = source.let {
-        when(it) {
-          IngredientType.HOP -> IngredientTypeViewModel.HOP
-          IngredientType.YEAST ->  IngredientTypeViewModel.YEAST
-          IngredientType.FERMENTABLE ->  IngredientTypeViewModel.FERMENTABLE
-          IngredientType.UNKNOWN ->  IngredientTypeViewModel.UNKNOWN
-        }
-      }
+fun mapToViewModel(source: IngredientType) = when(source) {
+  IngredientType.HOP -> IngredientTypeViewModel.HOP
+  IngredientType.YEAST ->  IngredientTypeViewModel.YEAST
+  IngredientType.FERMENTABLE ->  IngredientTypeViewModel.FERMENTABLE
+  IngredientType.UNKNOWN ->  IngredientTypeViewModel.UNKNOWN
+}
 
-  fun map(source: IngredientTypeViewModel): IngredientType
-      = source.let {
-          when(it) {
-            IngredientTypeViewModel.HOP -> IngredientType.HOP
-            IngredientTypeViewModel.YEAST ->  IngredientType.YEAST
-            IngredientTypeViewModel.FERMENTABLE ->  IngredientType.FERMENTABLE
-            IngredientTypeViewModel.UNKNOWN ->  IngredientType.UNKNOWN
-          }
-        }
+fun mapToDomain(source: IngredientTypeViewModel) = when(source) {
+  IngredientTypeViewModel.HOP -> IngredientType.HOP
+  IngredientTypeViewModel.YEAST ->  IngredientType.YEAST
+  IngredientTypeViewModel.FERMENTABLE ->  IngredientType.FERMENTABLE
+  IngredientTypeViewModel.UNKNOWN ->  IngredientType.UNKNOWN
 }

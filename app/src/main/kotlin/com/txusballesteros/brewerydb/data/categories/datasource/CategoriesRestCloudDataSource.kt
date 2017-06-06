@@ -21,16 +21,15 @@
 package com.txusballesteros.brewerydb.data.categories.datasource
 
 import com.txusballesteros.brewerydb.api.categories.CategoriesApi
-import com.txusballesteros.brewerydb.api.model.CategoryApiModelMapper
+import com.txusballesteros.brewerydb.api.model.mapToData
 import com.txusballesteros.brewerydb.data.model.CategoryDataModel
 import javax.inject.Inject
 
-class CategoriesRestCloudDataSource @Inject constructor(private val api: CategoriesApi,
-                                                        private val mapper: CategoryApiModelMapper):
+class CategoriesRestCloudDataSource @Inject constructor(private val api: CategoriesApi):
                                     CategoriesCloudDataSource {
   override fun getList(): List<CategoryDataModel> {
     val response = api.getCategories()
-    val result = response.categories.orEmpty().map { category -> mapper.map(category) }
+    val result = response.categories.orEmpty().map { category -> mapToData(category) }
     return result.sortedBy(CategoryDataModel::name)
   }
 }

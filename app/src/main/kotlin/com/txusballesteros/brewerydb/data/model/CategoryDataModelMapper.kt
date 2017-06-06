@@ -21,9 +21,6 @@
 package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.Category
-import javax.inject.Inject
 
-class CategoryDataModelMapper @Inject constructor() {
-  fun map(source: CategoryDataModel): Category
-      = Category(source.id, source.name)
-}
+fun mapToDomain(source: CategoryDataModel) = Category(source.id,
+                                                      source.name)

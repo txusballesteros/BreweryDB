@@ -18,15 +18,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.model
+package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModelMapper
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.data.model.BeerIngredient
+import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
 
-class BeerIngredientViewModelMapper @Inject constructor(private val typeMapper: IngredientTypeViewModelMapper) {
-  fun map(source: BeerIngredient): BeerIngredientViewModel
-    = BeerIngredientViewModel(source.id,
-                              source.name,
-                              typeMapper.map(source.type),
-                              source.categoryDisplay)
-}
+fun mapToViewModel(source: BeerIngredient) = BeerIngredientViewModel(source.id,
+                                                                     source.name,
+                                                                     mapToViewModel(source.type),
+                                                                     source.categoryDisplay)

@@ -20,23 +20,11 @@
  */
 package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.data.model.Yeast
-import com.txusballesteros.brewerydb.domain.model.Fermentable
-import com.txusballesteros.brewerydb.domain.model.Hop
-import com.txusballesteros.brewerydb.domain.model.Ingredient
-import com.txusballesteros.brewerydb.domain.model.IngredientType
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.domain.model.*
 
-class IngredientViewModelMapper @Inject constructor(private val hopMapper: HopViewModelMapper,
-                                                    private val fermentableMapper: FermentableViewModelMapper,
-                                                    private val yeastViewModelMapper: YeastViewModelMapper) {
-  fun map(source: Ingredient): IngredientViewModel?
-    = source.let {
-        when(it.type) {
-          IngredientType.HOP -> hopMapper.map(source as Hop)
-          IngredientType.FERMENTABLE -> fermentableMapper.map(source as Fermentable)
-          IngredientType.YEAST -> yeastViewModelMapper.map(source as Yeast)
-          else -> null
-        }
-      }
+fun mapToViewModel(source: Ingredient) = when(source) {
+  is Fermentable -> mapToViewModel(source)
+  is Yeast -> mapToViewModel(source)
+  is Hop -> mapToViewModel(source)
+  else -> null
 }

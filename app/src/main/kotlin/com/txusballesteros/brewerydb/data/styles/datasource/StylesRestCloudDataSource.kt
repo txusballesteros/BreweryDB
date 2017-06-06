@@ -20,18 +20,17 @@
  */
 package com.txusballesteros.brewerydb.data.styles.datasource
 
-import com.txusballesteros.brewerydb.api.model.StyleApiModelMapper
+import com.txusballesteros.brewerydb.api.model.mapToData
 import com.txusballesteros.brewerydb.api.styles.StylesApi
 import com.txusballesteros.brewerydb.data.model.StyleDataModel
 import javax.inject.Inject
 
-class StylesRestCloudDataSource @Inject constructor(private val api: StylesApi,
-                                                    private val mapper: StyleApiModelMapper):
+class StylesRestCloudDataSource @Inject constructor(private val api: StylesApi):
                                 StylesCloudDataSource {
 
   override fun getList(): List<StyleDataModel> {
     val response = api.getStyles()
-    val result = response.styles.orEmpty().map { style -> mapper.map(style) }
+    val result = response.styles.orEmpty().map { style -> mapToData(style) }
     return result.sortedBy(StyleDataModel::shortName)
   }
 }

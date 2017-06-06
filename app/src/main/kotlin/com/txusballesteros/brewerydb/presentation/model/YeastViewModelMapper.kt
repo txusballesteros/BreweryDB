@@ -20,23 +20,19 @@
  */
 package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.data.model.Yeast
 import com.txusballesteros.brewerydb.data.model.YeastViewModel
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.domain.model.Yeast
 
-class YeastViewModelMapper @Inject constructor() {
-  fun map(source: Yeast): YeastViewModel
-      = YeastViewModel(source.id,
-                       source.name,
-                       source.description,
-                       source.yeastType,
-                       source.attenuationMin,
-                       source.attenuationMax,
-                       source.fermentTempMin,
-                       source.fermentTempMax,
-                       source.alcoholToleranceMin,
-                       source.alcoholToleranceMax,
-                       source.productId,
-                       source.supplier,
-                       source.yeastFormat)
-}
+fun mapToViewModel(source: Yeast) = YeastViewModel(source.id,
+                                                   source.name,
+                                                   source.description,
+                                                   source.yeastType,
+                                                   source.attenuationMin,
+                                                   source.attenuationMax,
+                                                   source.fermentTempMin,
+                                                   source.fermentTempMax,
+                                                   source.alcoholToleranceMin,
+                                                   source.alcoholToleranceMax,
+                                                   source.productId,
+                                                   source.supplier,
+                                                   source.yeastFormat)

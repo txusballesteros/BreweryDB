@@ -21,16 +21,12 @@
 package com.txusballesteros.brewerydb.api.model
 
 import com.txusballesteros.brewerydb.data.model.BreweryDataModel
-import javax.inject.Inject
 
-class BreweryApiModelMapper @Inject constructor(private val imageMapper: ImageApiModelMapper) {
-  fun map(source: BreweryApiModel): BreweryDataModel
-    = BreweryDataModel(source.id,
-                       source.name,
-                       source.description,
-                       source.website,
-                       source.established,
-                       source.mailingListUrl,
-                       source.isOrganic,
-                       imageMapper.map(source.images))
-}
+fun mapToData(source: BreweryApiModel) = BreweryDataModel(source.id,
+                                                          source.name,
+                                                          source.description,
+                                                          source.website,
+                                                          source.established,
+                                                          source.mailingListUrl,
+                                                          source.isOrganic,
+                                                          mapToData(source.images))

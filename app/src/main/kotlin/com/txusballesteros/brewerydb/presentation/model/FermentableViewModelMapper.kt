@@ -21,24 +21,20 @@
 package com.txusballesteros.brewerydb.presentation.model
 
 import com.txusballesteros.brewerydb.domain.model.Fermentable
-import javax.inject.Inject
 
-class FermentableViewModelMapper @Inject constructor(private val countryMapper: CountryViewModelMapper) {
-  fun map(source: Fermentable): FermentableViewModel
-    = FermentableViewModel(source.id,
-                           source.name,
-                           source.description,
-                           countryMapper.map(source.country),
-                           source.countryOfOrigin,
-                           source.srmId,
-                           source.srmPrecise,
-                           source.moistureContent,
-                           source.coarseFineDifference,
-                           source.diastaticPower,
-                           source.dryYield,
-                           source.potential,
-                           source.protein,
-                           source.solubleNitrogenRatio,
-                           source.maxInBatch,
-                           source.requiresMashing)
-}
+fun mapToViewModel(source: Fermentable) = FermentableViewModel(source.id,
+                                                               source.name,
+                                                               source.description,
+                                                               mapToViewModel(source.country),
+                                                               source.countryOfOrigin,
+                                                               source.srmId,
+                                                               source.srmPrecise,
+                                                               source.moistureContent,
+                                                               source.coarseFineDifference,
+                                                               source.diastaticPower,
+                                                               source.dryYield,
+                                                               source.potential,
+                                                               source.protein,
+                                                               source.solubleNitrogenRatio,
+                                                               source.maxInBatch,
+                                                               source.requiresMashing)

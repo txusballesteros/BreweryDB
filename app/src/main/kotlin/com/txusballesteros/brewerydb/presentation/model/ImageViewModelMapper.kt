@@ -21,15 +21,11 @@
 package com.txusballesteros.brewerydb.presentation.model
 
 import com.txusballesteros.brewerydb.domain.model.Image
-import javax.inject.Inject
 
-class ImageViewModelMapper @Inject constructor() {
-  fun map(source: Image?): ImageViewModel?
-    = source?.let {
-        ImageViewModel(it.icon,
-                       it.medium,
-                       it.large,
-                       it.squareMedium,
-                       it.squareLarge)
-      }
+fun mapToViewModel(source: Image?) = source?.let {
+  ImageViewModel(it.icon,
+                 it.medium,
+                 it.large,
+                 it.squareMedium,
+                 it.squareLarge)
 }

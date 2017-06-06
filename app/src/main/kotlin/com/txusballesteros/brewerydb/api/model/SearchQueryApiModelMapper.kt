@@ -21,37 +21,32 @@
 package com.txusballesteros.brewerydb.api.model
 
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
-import javax.inject.Inject
 
-class SearchQueryApiModelMapper @Inject constructor() {
-  fun map(source: SearchQueryDataModel): SearchQueryApiModel
-      = SearchQueryApiModel(mapKeyword(source.keyword),
-                            mapRange(source.abvMin, source.abvMax),
-                            mapRange(source.ibuMin, source.ibuMax),
-                            mapBoolean(source.isOrganic),
-                            source.breweryId,
-                            source.styleId,
-                            mapBoolean(source.withLabels))
+fun mapToApi(source: SearchQueryDataModel): SearchQueryApiModel
+    = SearchQueryApiModel(mapKeyword(source.keyword),
+                          mapRange(source.abvMin, source.abvMax),
+                          mapRange(source.ibuMin, source.ibuMax),
+                          mapBoolean(source.isOrganic),
+                          source.breweryId,
+                          source.styleId,
+                          mapBoolean(source.withLabels))
 
-  private fun mapRange(sourceMin: Int?, sourceMax: Int?): String? {
-    var result: String? = null
-    if (sourceMin != null && sourceMax != null) {
-      result = "$sourceMin,$sourceMax"
-    } else if (sourceMin != null && sourceMax == null) {
-      result = "+$sourceMin"
-    } else if (sourceMin == null && sourceMax != null) {
-      result = "-$sourceMax"
-    }
-    return result
+private fun mapRange(sourceMin: Int?, sourceMax: Int?): String? {
+  var result: String? = null
+  if (sourceMin != null && sourceMax != null) {
+    result = "$sourceMin,$sourceMax"
+  } else if (sourceMin != null && sourceMax == null) {
+    result = "+$sourceMin"
+  } else if (sourceMin == null && sourceMax != null) {
+    result = "-$sourceMax"
   }
+  return result
+}
 
-  private fun mapBoolean(source: Boolean?): String?
-    = source?.let {
-        if (source) "Y" else "N"
-      }
+private fun mapBoolean(source: Boolean?) = source?.let {
+  if (source) "Y" else "N"
+}
 
-  private fun mapKeyword(source: String?): String?
-    = source?.let {
-        "*$source*"
-      }
+private fun mapKeyword(source: String?) = source?.let {
+  "*$source*"
 }

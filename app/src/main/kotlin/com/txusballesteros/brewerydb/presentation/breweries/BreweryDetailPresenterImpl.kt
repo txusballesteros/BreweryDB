@@ -25,11 +25,10 @@ import com.txusballesteros.brewerydb.navigation.NavigationContext
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.BreweryViewModel
-import com.txusballesteros.brewerydb.presentation.model.BreweryViewModelMapper
+import com.txusballesteros.brewerydb.presentation.model.mapToViewModel
 import javax.inject.Inject
 
 class BreweryDetailPresenterImpl @Inject constructor(private val getBreweryUseCase: GetBreweryUseCase,
-                                                     private val mapper: BreweryViewModelMapper,
                                                      private val navigator: Navigator):
                                  AbsPresenter<BreweryDetailPresenter.View>(), BreweryDetailPresenter {
   lateinit var brewery: BreweryViewModel
@@ -37,7 +36,7 @@ class BreweryDetailPresenterImpl @Inject constructor(private val getBreweryUseCa
   override fun onRequestBrewery(breweryId: String) {
     getView()?.showLoading()
     getBreweryUseCase.execute(breweryId, onResult = {
-      this.brewery = mapper.map(it)
+      this.brewery = mapToViewModel(it)
       getView()?.hideLoading()
       getView()?.renderBrewery(brewery)
     }, onError = {

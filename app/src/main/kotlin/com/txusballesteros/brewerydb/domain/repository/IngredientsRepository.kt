@@ -23,7 +23,7 @@ package com.txusballesteros.brewerydb.domain.repository
 import com.txusballesteros.brewerydb.data.ingredients.strategy.GetFermentableStrategy
 import com.txusballesteros.brewerydb.data.ingredients.strategy.GetHopStrategy
 import com.txusballesteros.brewerydb.data.ingredients.strategy.GetYeastStrategy
-import com.txusballesteros.brewerydb.data.model.IngredientDataModelMapper
+import com.txusballesteros.brewerydb.data.model.mapToDomain
 import com.txusballesteros.brewerydb.domain.model.Ingredient
 import com.txusballesteros.brewerydb.domain.model.IngredientQuery
 import com.txusballesteros.brewerydb.domain.model.IngredientType
@@ -33,8 +33,7 @@ import javax.inject.Singleton
 @Singleton
 class IngredientsRepository @Inject constructor(private val getHopStrategy: GetHopStrategy.Builder,
                                                 private val getFermentableStrategy: GetFermentableStrategy.Builder,
-                                                private val getYeastStrategy: GetYeastStrategy.Builder,
-                                                private val ingredientsMapper: IngredientDataModelMapper) {
+                                                private val getYeastStrategy: GetYeastStrategy.Builder) {
 
   fun get(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
     when(query.type) {
@@ -47,21 +46,21 @@ class IngredientsRepository @Inject constructor(private val getHopStrategy: GetH
 
   private fun getHop(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
     getHopStrategy.build().execute(query.id, onResult = {
-      val ingredient = ingredientsMapper.map(it!!)
+      val ingredient = mapToDomain(it!!)
       onResult(ingredient)
     })
   }
 
   private fun getFermentable(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
     getFermentableStrategy.build().execute(query.id, onResult = {
-      val ingredient = ingredientsMapper.map(it!!)
+      val ingredient = mapToDomain(it!!)
       onResult(ingredient)
     })
   }
 
   private fun getYeast(query: IngredientQuery, onResult: (Ingredient) -> Unit) {
     getYeastStrategy.build().execute(query.id, onResult = {
-      val ingredient = ingredientsMapper.map(it!!)
+      val ingredient = mapToDomain(it!!)
       onResult(ingredient)
     })
   }

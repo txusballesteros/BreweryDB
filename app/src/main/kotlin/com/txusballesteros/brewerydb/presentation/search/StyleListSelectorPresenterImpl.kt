@@ -23,16 +23,15 @@ package com.txusballesteros.brewerydb.presentation.search
 import com.txusballesteros.brewerydb.domain.usecase.styles.GetStylesUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.StyleViewModel
-import com.txusballesteros.brewerydb.presentation.model.StyleViewModelMapper
+import com.txusballesteros.brewerydb.presentation.model.mapToViewModel
 import javax.inject.Inject
 
-class StyleListSelectorPresenterImpl @Inject constructor(private val getStylesUseCase: GetStylesUseCase,
-                                                         private val mapper: StyleViewModelMapper):
+class StyleListSelectorPresenterImpl @Inject constructor(private val getStylesUseCase: GetStylesUseCase):
                                      AbsPresenter<StyleListSelectorPresenter.View>(), StyleListSelectorPresenter {
   override fun onRequestStyles() {
     getView()?.showLoading()
     getStylesUseCase.execute(onResult = {
-      val styles = it.map { style -> mapper.map(style) }
+      val styles = it.map { style -> mapToViewModel(style) }
       getView()?.renderStyles(styles)
       getView()?.hideLoading()
     }, onError = {

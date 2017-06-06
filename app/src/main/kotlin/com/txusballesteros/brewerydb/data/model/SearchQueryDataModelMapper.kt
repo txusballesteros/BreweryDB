@@ -21,30 +21,25 @@
 package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.SearchQuery
-import javax.inject.Inject
 
-class SearchQueryDataModelMapper @Inject constructor() {
-  fun map(source: SearchQueryDataModel): SearchQuery
-    = SearchQuery(source.keyword,
-                  source.abvMin,
-                  source.abvMax,
-                  source.ibuMin,
-                  source.ibuMax,
-                  source.isOrganic,
-                  source.breweryId,
-                  source.styleId,
-                  source.styleName,
-                  source.withLabels)
+fun mapToDomain(source: SearchQueryDataModel) = SearchQuery(source.keyword,
+                                                            source.abvMin,
+                                                            source.abvMax,
+                                                            source.ibuMin,
+                                                            source.ibuMax,
+                                                            source.isOrganic,
+                                                            source.breweryId,
+                                                            source.styleId,
+                                                            source.styleName,
+                                                            source.withLabels)
 
-  fun map(source: SearchQuery): SearchQueryDataModel
-    = SearchQueryDataModel(source.keyword,
-                           source.abvMin,
-                           source.abvMax,
-                           source.ibuMin,
-                           source.ibuMax,
-                           source.isOrganic,
-                           source.breweryId,
-                           source.styleId,
-                           source.styleName,
-                           source.withLabels)
-}
+fun mapToData(source: SearchQuery) = SearchQueryDataModel(source.keyword,
+                                                          source.abvMin,
+                                                          source.abvMax,
+                                                          source.ibuMin,
+                                                          source.ibuMax,
+                                                          source.isOrganic,
+                                                          source.breweryId,
+                                                          source.styleId,
+                                                          source.styleName,
+                                                          source.withLabels)

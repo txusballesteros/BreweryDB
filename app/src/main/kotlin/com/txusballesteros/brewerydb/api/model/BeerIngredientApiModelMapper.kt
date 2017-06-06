@@ -21,13 +21,9 @@
 package com.txusballesteros.brewerydb.api.model
 
 import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModel
-import com.txusballesteros.brewerydb.data.model.IngredientTypeDataModelMapper
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.data.model.mapToData
 
-class BeerIngredientApiModelMapper @Inject constructor(private val typeMapper: IngredientTypeDataModelMapper) {
-  fun map(source: BeerIngredientApiModel): BeerIngredientDataModel
-    = BeerIngredientDataModel(source.id,
-                              source.name,
-                              typeMapper.map(source.category),
-                              source.categoryDisplay)
-}
+fun mapToData(source: BeerIngredientApiModel) = BeerIngredientDataModel(source.id,
+                                                                        source.name,
+                                                                        mapToData(source.category),
+                                                                        source.categoryDisplay)

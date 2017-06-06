@@ -21,14 +21,13 @@
 package com.txusballesteros.brewerydb.data.glassware.datasource
 
 import com.txusballesteros.brewerydb.api.glassware.GlasswareApi
-import com.txusballesteros.brewerydb.api.model.GlassApiModelMapper
+import com.txusballesteros.brewerydb.api.model.mapToData
 import com.txusballesteros.brewerydb.data.model.GlassDataModel
 import javax.inject.Inject
 
-class GlasswareRestCloudDataSource @Inject constructor(private val api: GlasswareApi,
-                                                       private val mapper: GlassApiModelMapper): GlasswareCloudDataSource {
+class GlasswareRestCloudDataSource @Inject constructor(private val api: GlasswareApi): GlasswareCloudDataSource {
   override fun getList(): List<GlassDataModel> {
     val response = api.getGlasses()
-    return response.glasses.orEmpty().map { glass -> mapper.map(glass) }
+    return response.glasses.orEmpty().map { glass -> mapToData(glass) }
   }
 }

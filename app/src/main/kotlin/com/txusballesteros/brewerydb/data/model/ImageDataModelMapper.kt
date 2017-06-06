@@ -21,15 +21,11 @@
 package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.Image
-import javax.inject.Inject
 
-class ImageDataModelMapper @Inject constructor() {
-  fun map(source: ImageDataModel?): Image?
-    = source?.let {
-        Image(it.icon,
-              it.medium,
-              it.large,
-              it.squareMedium,
-              it.squareLarge)
-      }
+fun mapToDomain(source: ImageDataModel?) = source?.let {
+  Image(it.icon,
+        it.medium,
+        it.large,
+        it.squareMedium,
+        it.squareLarge)
 }

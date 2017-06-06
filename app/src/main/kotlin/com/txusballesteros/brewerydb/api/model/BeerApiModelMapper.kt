@@ -21,28 +21,17 @@
 package com.txusballesteros.brewerydb.api.model
 
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
-import javax.inject.Inject
 
-class BeerApiModelMapper @Inject constructor() {
-  fun map(source: BeerApiModel): BeerDataModel
-    = BeerDataModel(source.id,
-                    source.name,
-                    source.displayName,
-                    source.description,
-                    source.styleId,
-                    source.abv,
-                    source.ibu,
-                    source.glasswareId,
-                    source.isOrganic,
-                    source.status,
-                    map(source.labels),
-                    source.servingTemperature,
-                    source.servingTemperatureDisplay)
-
-  fun map(source: LabelApiModel?): BeerDataModel.LabelDataModel?
-    = source?.let {
-      BeerDataModel.LabelDataModel(source.icon,
-                                   source.medium,
-                                   source.large)
-    }
-}
+fun mapToData(source: BeerApiModel) = BeerDataModel(source.id,
+                                                    source.name,
+                                                    source.displayName,
+                                                    source.description,
+                                                    source.styleId,
+                                                    source.abv,
+                                                    source.ibu,
+                                                    source.glasswareId,
+                                                    source.isOrganic,
+                                                    source.status,
+                                                    mapToData(source.labels),
+                                                    source.servingTemperature,
+                                                    source.servingTemperatureDisplay)

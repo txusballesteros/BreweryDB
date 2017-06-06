@@ -28,6 +28,5 @@ import dagger.Provides
 @Module
 class ReactiveModule {
   @Provides
-  fun provideSubject(executor: MainThreadExecutor): Subject
-    = Subject(executor)
+  fun provideSubject(executor: MainThreadExecutor) = Subject(executor)
 }

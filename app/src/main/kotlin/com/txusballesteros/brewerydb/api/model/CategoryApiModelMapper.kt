@@ -21,9 +21,6 @@
 package com.txusballesteros.brewerydb.api.model
 
 import com.txusballesteros.brewerydb.data.model.CategoryDataModel
-import javax.inject.Inject
 
-open class CategoryApiModelMapper @Inject constructor() {
-  fun map(source: CategoryApiResponse.CategoryApiModel)
-        = CategoryDataModel(source.id, source.name)
-}
+fun mapToData(source: CategoryApiResponse.CategoryApiModel) = CategoryDataModel(source.id,
+                                                                                source.name)

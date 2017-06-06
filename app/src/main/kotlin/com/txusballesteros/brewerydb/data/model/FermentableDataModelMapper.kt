@@ -21,24 +21,21 @@
 package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.Fermentable
-import javax.inject.Inject
 
-class FermentableDataModelMapper @Inject constructor(private val countryMapper: CountryDataModelMapper) {
-  fun map(source: FermentableDataModel): Fermentable
-    = Fermentable(source.id,
-                  source.name,
-                  source.description,
-                  countryMapper.map(source.country),
-                  source.countryOfOrigin,
-                  source.srmId,
-                  source.srmPrecise,
-                  source.moistureContent,
-                  source.coarseFineDifference,
-                  source.diastaticPower,
-                  source.dryYield,
-                  source.potential,
-                  source.protein,
-                  source.solubleNitrogenRatio,
-                  source.maxInBatch,
-                  source.requiresMashing)
-}
+fun mapToDomain(source: FermentableDataModel) = Fermentable(source.id,
+                                                            source.name,
+                                                            source.description,
+                                                            mapToDomain(source.country),
+                                                            source.countryOfOrigin,
+                                                            source.srmId,
+                                                            source.srmPrecise,
+                                                            source.moistureContent,
+                                                            source.coarseFineDifference,
+                                                            source.diastaticPower,
+                                                            source.dryYield,
+                                                            source.potential,
+                                                            source.protein,
+                                                            source.solubleNitrogenRatio,
+                                                            source.maxInBatch,
+                                                            source.requiresMashing)
+

@@ -24,17 +24,16 @@ import com.txusballesteros.brewerydb.domain.usecase.search.ClearSearchQueryUseCa
 import com.txusballesteros.brewerydb.domain.usecase.search.StoreSearchQueryUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModel
-import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModelMapper
+import com.txusballesteros.brewerydb.presentation.model.mapToDomain
 import javax.inject.Inject
 
 class SearchPresenterImpl @Inject constructor(private val storeSearchQueryUseCase: StoreSearchQueryUseCase,
-                                              private val clearSearchQueryUseCase: ClearSearchQueryUseCase,
-                                              private val mapper: SearchQueryViewModelMapper):
+                                              private val clearSearchQueryUseCase: ClearSearchQueryUseCase):
                           AbsPresenter<SearchPresenter.View>(), SearchPresenter {
 
   override fun onSearch() {
     val queryViewModel = getView()?.getQuery() ?: SearchQueryViewModel()
-    val query = mapper.map(queryViewModel)
+    val query = mapToDomain(queryViewModel)
     storeSearchQueryUseCase.execute(query, onResult = {
       getView()?.closeView()
     })

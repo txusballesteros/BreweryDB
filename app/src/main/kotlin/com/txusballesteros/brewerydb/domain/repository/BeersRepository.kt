@@ -21,10 +21,8 @@
 package com.txusballesteros.brewerydb.domain.repository
 
 import com.txusballesteros.brewerydb.data.beers.strategy.*
-import com.txusballesteros.brewerydb.data.model.BeerDataModelMapper
 import com.txusballesteros.brewerydb.data.model.BeerIngredient
-import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModelMapper
-import com.txusballesteros.brewerydb.data.model.BreweryDataModelMapper
+import com.txusballesteros.brewerydb.data.model.mapToDomain
 import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.model.Brewery
 import javax.inject.Inject
@@ -35,42 +33,39 @@ class BeersRepository @Inject constructor(private val getBeersStrategy: GetBeers
                                           private val getNextPageBeersStrategy: GetNextPageBeersStrategy.Builder,
                                           private val getBeerByIdStrategy: GetBeerByIdStrategy.Builder,
                                           private val getBeerIngredientsStrategy: GetBeerIngredientsStrategy.Builder,
-                                          private val getBeerBreweriesStrategy: GetBeerBreweriesStrategy.Builder,
-                                          private val beersMapper: BeerDataModelMapper,
-                                          private val ingredientsMapper: BeerIngredientDataModelMapper,
-                                          private val breweryMapper: BreweryDataModelMapper) {
+                                          private val getBeerBreweriesStrategy: GetBeerBreweriesStrategy.Builder) {
 
   fun getBreweries(beerId: String, onResult: (List<Brewery>) -> Unit) {
     getBeerBreweriesStrategy.build().execute(beerId, onResult = {
-      val breweries = it.orEmpty().map { brewery -> breweryMapper.map(brewery) }
+      val breweries = it.orEmpty().map { brewery -> mapToDomain(brewery) }
       onResult(breweries)
     })
   }
 
   fun getIngredients(beerId: String, onResult: (List<BeerIngredient>) -> Unit) {
     getBeerIngredientsStrategy.build().execute(beerId, onResult = {
-      val ingredients = it.orEmpty().map { ingredient -> ingredientsMapper.map(ingredient) }
+      val ingredients = it.orEmpty().map { ingredient -> mapToDomain(ingredient) }
       onResult(ingredients)
     })
   }
 
   fun get(beerId: String, onResult: (Beer) -> Unit) {
     getBeerByIdStrategy.build().execute(beerId, onResult = {
-      val beers = beersMapper.map(it!!)
+      val beers = mapToDomain(it!!)
       onResult(beers)
     })
   }
 
   fun getFirstPage(onResult: (List<Beer>) -> Unit) {
     getBeersStrategy.build().execute(onResult = {
-      val beers = it.orEmpty().map { beer ->  beersMapper.map(beer) }
+      val beers = it.orEmpty().map { beer ->  mapToDomain(beer) }
       onResult(beers)
     })
   }
 
   fun getNextPage(onResult: (List<Beer>) -> Unit) {
     getNextPageBeersStrategy.build().execute(onResult = {
-      val beers = it.orEmpty().map { beer ->  beersMapper.map(beer) }
+      val beers = it.orEmpty().map { beer ->  mapToDomain(beer) }
       onResult(beers)
     })
   }

@@ -21,15 +21,11 @@
 package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.Country
-import javax.inject.Inject
 
-class CountryDataModelMapper @Inject constructor() {
-  fun map(source: CountryDataModel?): Country?
-    = source?.let {
-        Country(it.isoCode,
-                it.displayName,
-                it.name,
-                it.isoThree,
-                it.numberCode)
-      }
+fun mapToDomain(source: CountryDataModel?) = source?.let {
+  Country(it.isoCode,
+          it.displayName,
+          it.name,
+          it.isoThree,
+          it.numberCode)
 }

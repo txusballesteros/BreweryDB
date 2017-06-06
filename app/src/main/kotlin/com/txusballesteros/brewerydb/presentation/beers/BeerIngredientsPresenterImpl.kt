@@ -21,18 +21,15 @@
 package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
-import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModelMapper
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerIngredientsUseCase
 import com.txusballesteros.brewerydb.navigation.NavigationContext
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModel
-import com.txusballesteros.brewerydb.presentation.model.IngredientTypeViewModelMapper
+import com.txusballesteros.brewerydb.presentation.model.mapToViewModel
 import javax.inject.Inject
 
 class BeerIngredientsPresenterImpl @Inject constructor(private val getBeerIngredientsUseCase: GetBeerIngredientsUseCase,
-                                                       private val mapper: BeerIngredientViewModelMapper,
-                                                       private val ingredientTypeMapper: IngredientTypeViewModelMapper,
                                                        private val navigator: Navigator):
                                    AbsPresenter<BeerIngredientsPresenter.View>(), BeerIngredientsPresenter {
 
@@ -40,7 +37,7 @@ class BeerIngredientsPresenterImpl @Inject constructor(private val getBeerIngred
     getView()?.showLoading()
     getBeerIngredientsUseCase.execute(beerId, onResult = {
       getView()?.hideLoading()
-      val ingredients = it.map { ingredient -> mapper.map(ingredient) }
+      val ingredients = it.map { ingredient -> mapToViewModel(ingredient) }
       getView()?.renderIngredients(ingredients)
     }, onError = {
       getView()?.hideLoading()

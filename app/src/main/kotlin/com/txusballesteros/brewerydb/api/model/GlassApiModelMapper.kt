@@ -21,9 +21,6 @@
 package com.txusballesteros.brewerydb.api.model
 
 import com.txusballesteros.brewerydb.data.model.GlassDataModel
-import javax.inject.Inject
 
-class GlassApiModelMapper @Inject constructor() {
-  fun map(source: GlassApiModel): GlassDataModel
-    = GlassDataModel(source.id, source.name)
-}
+fun mapToData(source: GlassApiModel) = GlassDataModel(source.id,
+                                                      source.name)

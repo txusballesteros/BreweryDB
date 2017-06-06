@@ -21,17 +21,16 @@
 package com.txusballesteros.brewerydb.domain.repository
 
 import com.txusballesteros.brewerydb.data.glassware.strategy.GetGlassByIdStrategy
-import com.txusballesteros.brewerydb.data.model.GlassDataModelMapper
+import com.txusballesteros.brewerydb.data.model.mapToDomain
 import com.txusballesteros.brewerydb.domain.model.Glass
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GlasswareRepository @Inject constructor(private val getGlassByIdStrategy: GetGlassByIdStrategy.Builder,
-                                              private val mapper: GlassDataModelMapper) {
+class GlasswareRepository @Inject constructor(private val getGlassByIdStrategy: GetGlassByIdStrategy.Builder) {
   fun get(id: Int, onResult: (Glass) -> Unit) {
     getGlassByIdStrategy.build().execute(id, onResult = {
-      val glass = mapper.map(it!!)
+      val glass = mapToDomain(it!!)
       onResult(glass)
     })
   }

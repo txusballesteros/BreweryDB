@@ -23,14 +23,11 @@ package com.txusballesteros.brewerydb.presentation.model
 import com.txusballesteros.brewerydb.domain.model.Brewery
 import javax.inject.Inject
 
-class BreweryViewModelMapper @Inject constructor(private val imageMapper: ImageViewModelMapper) {
-  fun map(source: Brewery): BreweryViewModel
-      = BreweryViewModel(source.id,
-                         source.name,
-                         source.description ?: "NA",
-                         source.website ?: "NA",
-                         source.established ?: "NA",
-                         source.mailingListUrl,
-                         source.isOrganic,
-                         imageMapper.map(source.images))
-}
+fun mapToViewModel(source: Brewery) = BreweryViewModel(source.id,
+                                                       source.name,
+                                                       source.description ?: "NA",
+                                                       source.website ?: "NA",
+                                                       source.established ?: "NA",
+                                                       source.mailingListUrl,
+                                                       source.isOrganic,
+                                                       mapToViewModel(source.images))

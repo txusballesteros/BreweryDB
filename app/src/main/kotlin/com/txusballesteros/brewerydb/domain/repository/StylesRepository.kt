@@ -20,7 +20,7 @@
  */
 package com.txusballesteros.brewerydb.domain.repository
 
-import com.txusballesteros.brewerydb.data.model.StyleDataModelMapper
+import com.txusballesteros.brewerydb.data.model.mapToDomain
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStyleByIdStrategy
 import com.txusballesteros.brewerydb.data.styles.strategy.GetStylesStrategy
 import com.txusballesteros.brewerydb.domain.model.Style
@@ -29,19 +29,18 @@ import javax.inject.Singleton
 
 @Singleton
 class StylesRepository @Inject constructor(private val getStylesStrategy: GetStylesStrategy.Builder,
-                                           private val getStyleByIdStrategy: GetStyleByIdStrategy.Builder,
-                                           private val mapper: StyleDataModelMapper) {
+                                           private val getStyleByIdStrategy: GetStyleByIdStrategy.Builder) {
 
   fun get(styleId: Int, onResult: (Style) -> Unit) {
     getStyleByIdStrategy.build().execute(styleId, onResult =  {
-      val style = mapper.map(it!!)
+      val style = mapToDomain(it!!)
       onResult(style)
     })
   }
 
   fun getList(onResult: (List<Style>) -> Unit) {
     getStylesStrategy.build().execute(onResult =  {
-      val styles = it.orEmpty().map { style -> mapper.map(style) }
+      val styles = it.orEmpty().map { style -> mapToDomain(style) }
       onResult(styles)
     })
   }

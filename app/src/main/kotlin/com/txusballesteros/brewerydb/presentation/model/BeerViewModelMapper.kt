@@ -18,37 +18,32 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.model
+package com.txusballesteros.brewerydb.presentation.model
 
 import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
-import javax.inject.Inject
 
-class BeerViewModelMapper @Inject constructor() {
-  fun map(source: Beer): BeerViewModel
-      = BeerViewModel(source.id,
-                      source.name,
-                      source.displayName ?: "NA",
-                      source.description,
-                      source.styleId,
-                      source.abv,
-                      source.ibu,
-                      source.glasswareId,
-                      mapIsOrganic(source.isOrganic),
-                      source.status,
-                      map(source.label),
-                      source.servingTemperature,
-                      source.servingTemperatureDisplay ?: "NA")
+fun mapViewModel(source: Beer) = BeerViewModel(source.id,
+                                               source.name,
+                                               source.displayName ?: "NA",
+                                               source.description,
+                                               source.styleId,
+                                               source.abv,
+                                               source.ibu,
+                                               source.glasswareId,
+                                               mapIsOrganic(source.isOrganic),
+                                               source.status,
+                                               mapViewModel(source.label),
+                                               source.servingTemperature,
+                                               source.servingTemperatureDisplay ?: "NA")
 
-  fun map(source: Beer.Label?): BeerViewModel.LabelViewModel?
-    = source?.let {
-      BeerViewModel.LabelViewModel(source.icon,
-                                   source.medium,
-                                   source.large)
-    }
-
-  fun mapIsOrganic(isOrganic: String?): Boolean
-    = isOrganic?.let {
-        isOrganic == "Y"
-      } ?: false
+fun mapViewModel(source: Beer.Label?) = source?.let {
+  BeerViewModel.LabelViewModel(source.icon,
+                               source.medium,
+                               source.large)
 }
+
+private fun mapIsOrganic(isOrganic: String?): Boolean
+  = isOrganic?.let {
+      isOrganic == "Y"
+    } ?: false

@@ -18,28 +18,22 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.model
+package com.txusballesteros.brewerydb.api.model
 
-import com.txusballesteros.brewerydb.api.model.YeastApiModel
-import com.txusballesteros.brewerydb.api.model.YeastApiResponse
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.data.model.YeastDataModel
 
-class YeastApiModelMapper @Inject constructor() {
-  fun map(source: YeastApiResponse): YeastDataModel
-    = map(source.ingredient)
+fun mapToData(source: YeastApiResponse) = mapToData(source.ingredient)
 
-  fun map(source: YeastApiModel): YeastDataModel
-    = YeastDataModel(source.id,
-                     source.name,
-                     source.description,
-                     source.yeastType,
-                     source.attenuationMin,
-                     source.attenuationMax,
-                     source.fermentTempMin,
-                     source.fermentTempMax,
-                     source.alcoholToleranceMin,
-                     source.alcoholToleranceMax,
-                     source.productId,
-                     source.supplier,
-                     source.yeastFormat)
-}
+fun mapToData(source: YeastApiModel) = YeastDataModel(source.id,
+                                                      source.name,
+                                                      source.description,
+                                                      source.yeastType,
+                                                      source.attenuationMin,
+                                                      source.attenuationMax,
+                                                      source.fermentTempMin,
+                                                      source.fermentTempMax,
+                                                      source.alcoholToleranceMin,
+                                                      source.alcoholToleranceMax,
+                                                      source.productId,
+                                                      source.supplier,
+                                                      source.yeastFormat)

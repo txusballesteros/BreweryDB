@@ -20,21 +20,18 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.domain.model.Yeast
 
-class YeastDataModelMapper @Inject constructor() {
-  fun map(source: YeastDataModel): Yeast
-    = Yeast(source.id,
-            source.name,
-            source.description,
-            source.yeastType,
-            source.attenuationMin,
-            source.attenuationMax,
-            source.fermentTempMin,
-            source.fermentTempMax,
-            source.alcoholToleranceMin,
-            source.alcoholToleranceMax,
-            source.productId,
-            source.supplier,
-            source.yeastFormat)
-}
+fun mapToDomain(source: YeastDataModel) = Yeast(source.id,
+                                                source.name,
+                                                source.description,
+                                                source.yeastType,
+                                                source.attenuationMin,
+                                                source.attenuationMax,
+                                                source.fermentTempMin,
+                                                source.fermentTempMax,
+                                                source.alcoholToleranceMin,
+                                                source.alcoholToleranceMax,
+                                                source.productId,
+                                                source.supplier,
+                                                source.yeastFormat)

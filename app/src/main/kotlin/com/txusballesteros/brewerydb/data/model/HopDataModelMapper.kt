@@ -21,27 +21,23 @@
 package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.Hop
-import javax.inject.Inject
 
-class HopDataModelMapper @Inject constructor(private val countryMapper: CountryDataModelMapper) {
-  fun map(source: HopDataModel): Hop
-    = Hop(source.id,
-          source.name,
-          source.description,
-          source.alphaAcidMin,
-          source.alphaAcidMax,
-          source.betaAcidMin,
-          source.betaAcidMax,
-          source.humuleneMin,
-          source.humuleneMax,
-          source.caryophylleneMin,
-          source.caryophylleneMax,
-          source.cohumuloneMin,
-          source.cohumuloneMax,
-          source.myrceneMin,
-          source.myrceneMax,
-          source.farneseneMin,
-          source.farneseneMax,
-          source.countryOfOrigin,
-          countryMapper.map(source.country))
-}
+fun mapToDomain(source: HopDataModel) = Hop(source.id,
+                                            source.name,
+                                            source.description,
+                                            source.alphaAcidMin,
+                                            source.alphaAcidMax,
+                                            source.betaAcidMin,
+                                            source.betaAcidMax,
+                                            source.humuleneMin,
+                                            source.humuleneMax,
+                                            source.caryophylleneMin,
+                                            source.caryophylleneMax,
+                                            source.cohumuloneMin,
+                                            source.cohumuloneMax,
+                                            source.myrceneMin,
+                                            source.myrceneMax,
+                                            source.farneseneMin,
+                                            source.farneseneMax,
+                                            source.countryOfOrigin,
+                                            mapToDomain(source.country))

@@ -21,10 +21,9 @@
 package com.txusballesteros.brewerydb.data.categories.datasource
 
 import com.nhaarman.mockito_kotlin.mock
-import com.nhaarman.mockito_kotlin.whenever;
+import com.nhaarman.mockito_kotlin.whenever
 import com.txusballesteros.brewerydb.UnitTest
 import com.txusballesteros.brewerydb.api.categories.CategoriesApi
-import com.txusballesteros.brewerydb.api.model.CategoryApiModelMapper
 import com.txusballesteros.brewerydb.api.model.CategoryApiResponse
 import org.junit.Assert
 import org.junit.Test
@@ -36,7 +35,7 @@ class CategoriesCloudDataSourceTest: UnitTest() {
 
   override fun onPrepareTest() {
     api = mock()
-    dataSource = CategoriesRestCloudDataSource(api, CategoryApiModelMapper())
+    dataSource = CategoriesRestCloudDataSource(api)
   }
 
   @Test

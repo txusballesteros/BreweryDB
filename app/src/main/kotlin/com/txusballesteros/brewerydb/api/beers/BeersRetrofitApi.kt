@@ -40,14 +40,14 @@ class BeersRetrofitApi @Inject constructor(private val service: BeersRetrofitSer
   override fun getList(query: SearchQueryApiModel, page: Int): BeersListApiResponse {
     try {
       val call = service.getBeers(query.keyword,
-          query.abv,
-          query.ibu,
-          query.isOrganic,
-          query.breweryId,
-          query.styleId,
-          query.withLabels,
-          query.status,
-          page)
+                                  query.abv,
+                                  query.ibu,
+                                  query.isOrganic,
+                                  query.breweryId,
+                                  query.styleId,
+                                  query.withLabels,
+                                  query.status,
+                                  page)
       val response = call.execute()
       return response.body()
     } catch (error: Exception) {

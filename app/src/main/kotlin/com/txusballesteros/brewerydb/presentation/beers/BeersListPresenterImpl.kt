@@ -20,7 +20,6 @@
  */
 package com.txusballesteros.brewerydb.presentation.beers
 
-import com.txusballesteros.brewerydb.data.model.BeerViewModelMapper
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.domain.reactive.Observer
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
@@ -30,13 +29,13 @@ import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryStreamU
 import com.txusballesteros.brewerydb.navigation.NavigationContext
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.mapViewModel
 import javax.inject.Inject
 
 class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: GetBeersUseCase,
                                                  private val getNextPageBeersUseCase: GetNextPageBeersUseCase,
                                                  private val getSearchQueryStreamUseCase: GetSearchQueryStreamUseCase,
                                                  private val clearSearchQueryUseCase: ClearSearchQueryUseCase,
-                                                 private val mapper: BeerViewModelMapper,
                                                  private val navigator: Navigator):
                               AbsPresenter<BeersListPresenter.View>(), BeersListPresenter {
   private lateinit var searchQueryObserver: Observer
@@ -59,7 +58,7 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
   override fun onRequestBeers() {
     getView()?.showLoading()
     getBeersUseCase.execute(onResult = {
-      val beersList = it.map { beer -> mapper.map(beer) }
+      val beersList = it.map { beer -> mapViewModel(beer) }
       getView()?.clearList()
       getView()?.renderBeers(beersList)
       getView()?.hideLoading()
@@ -71,7 +70,7 @@ class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: Ge
 
   override fun onRequestNextPage() {
     getNextPageBeersUseCase.execute(onResult = {
-      val beersList = it.map { beer -> mapper.map(beer) }
+      val beersList = it.map { beer -> mapViewModel(beer) }
       getView()?.renderBeers(beersList)
     })
   }

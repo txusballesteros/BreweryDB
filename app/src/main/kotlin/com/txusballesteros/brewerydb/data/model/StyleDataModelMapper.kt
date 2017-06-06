@@ -21,13 +21,19 @@
 package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.Style
-import javax.inject.Inject
 
-class StyleDataModelMapper @Inject constructor() {
-  fun map(source: StyleDataModel): Style
-      = Style(source.id, source.categoryId,
-              source.name, source.shortName, source.description,
-              source.ibuMin, source.ibuMax, source.abvMin,
-              source.abvMax, source.srmMin, source.srmMax,
-              source.ogMin, source.ogMax, source.fgMin, source.fgMax)
-}
+fun mapToDomain(source: StyleDataModel) = Style(source.id,
+                                                source.categoryId,
+                                                source.name,
+                                                source.shortName,
+                                                source.description,
+                                                source.ibuMin,
+                                                source.ibuMax,
+                                                source.abvMin,
+                                                source.abvMax,
+                                                source.srmMin,
+                                                source.srmMax,
+                                                source.ogMin,
+                                                source.ogMax,
+                                                source.fgMin,
+                                                source.fgMax)
