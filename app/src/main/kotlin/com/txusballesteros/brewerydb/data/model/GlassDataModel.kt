@@ -20,4 +20,5 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-data class GlassDataModel(val id: Int, val name: String)
+data class GlassDataModel(val id: Int,
+                          val name: String)

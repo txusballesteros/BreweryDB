@@ -21,7 +21,7 @@
 package com.txusballesteros.brewerydb.data.model
 
 data class CountryDataModel(val isoCode: String,
-                   val name: String,
-                   val displayName: String,
-                   val isoThree: String,
-                   val numberCode: String)
+                            val name: String,
+                            val displayName: String,
+                            val isoThree: String,
+                            val numberCode: String)

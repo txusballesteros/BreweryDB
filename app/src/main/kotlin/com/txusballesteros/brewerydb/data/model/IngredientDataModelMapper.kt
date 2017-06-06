@@ -20,18 +20,57 @@
  */
 package com.txusballesteros.brewerydb.data.model
 
-import com.txusballesteros.brewerydb.domain.model.Ingredient
-import javax.inject.Inject
+import com.txusballesteros.brewerydb.domain.model.Fermentable
+import com.txusballesteros.brewerydb.domain.model.Hop
+import com.txusballesteros.brewerydb.domain.model.Yeast
 
-class IngredientDataModelMapper @Inject constructor(private val hopMapper: HopDataModelMapper,
-                                                    private val fermentableMapper: FermentableDataModelMapper,
-                                                    private val yeastMapper: YeastDataModelMapper) {
-  fun map(source: YeastDataModel): Ingredient
-      = yeastMapper.map(source)
+fun mapToDomain(source: YeastDataModel) = Yeast(source.id,
+                                                source.name,
+                                                source.description,
+                                                source.yeastType,
+                                                source.attenuationMin,
+                                                source.attenuationMax,
+                                                source.fermentTempMin,
+                                                source.fermentTempMax,
+                                                source.alcoholToleranceMin,
+                                                source.alcoholToleranceMax,
+                                                source.productId,
+                                                source.supplier,
+                                                source.yeastFormat)
 
-  fun map(source: HopDataModel): Ingredient
-      = hopMapper.map(source)
+fun mapToDomain(source: HopDataModel) = Hop(source.id,
+                                            source.name,
+                                            source.description,
+                                            source.alphaAcidMin,
+                                            source.alphaAcidMax,
+                                            source.betaAcidMin,
+                                            source.betaAcidMax,
+                                            source.humuleneMin,
+                                            source.humuleneMax,
+                                            source.caryophylleneMin,
+                                            source.caryophylleneMax,
+                                            source.cohumuloneMin,
+                                            source.cohumuloneMax,
+                                            source.myrceneMin,
+                                            source.myrceneMax,
+                                            source.farneseneMin,
+                                            source.farneseneMax,
+                                            source.countryOfOrigin,
+                                            mapToDomain(source.country))
 
-  fun map(source: FermentableDataModel): Ingredient
-      = fermentableMapper.map(source)
-}
+fun mapToDomain(source: FermentableDataModel) = Fermentable(source.id,
+                                                            source.name,
+                                                            source.description,
+                                                            mapToDomain(source.country),
+                                                            source.countryOfOrigin,
+                                                            source.srmId,
+                                                            source.srmPrecise,
+                                                            source.moistureContent,
+                                                            source.coarseFineDifference,
+                                                            source.diastaticPower,
+                                                            source.dryYield,
+                                                            source.potential,
+                                                            source.protein,
+                                                            source.solubleNitrogenRatio,
+                                                            source.maxInBatch,
+                                                            source.requiresMashing)

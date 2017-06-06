@@ -21,28 +21,23 @@
 package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.Beer
-import javax.inject.Inject
 
-class BeerDataModelMapper @Inject constructor() {
-  fun map(source: BeerDataModel): Beer
-      = Beer(source.id,
-             source.name,
-             source.displayName,
-             source.description,
-             source.styleId,
-             source.abv,
-             source.ibu,
-             source.glasswareId,
-             source.isOrganic,
-             source.status,
-             map(source.label),
-             source.servingTemperature,
-             source.servingTemperatureDisplay)
+fun mapToDomain(source: BeerDataModel) = Beer(source.id,
+                                              source.name,
+                                              source.displayName,
+                                              source.description,
+                                              source.styleId,
+                                              source.abv,
+                                              source.ibu,
+                                              source.glasswareId,
+                                              source.isOrganic,
+                                              source.status,
+                                              mapToDomain(source.label),
+                                              source.servingTemperature,
+                                              source.servingTemperatureDisplay)
 
-  fun map(source: BeerDataModel.LabelDataModel?): Beer.Label?
-    = source?.let {
-      Beer.Label(source.icon,
-                 source.medium,
-                 source.large)
-    }
+fun mapToDomain(source: BeerDataModel.LabelDataModel?) = source?.let {
+  Beer.Label(source.icon,
+             source.medium,
+             source.large)
 }

@@ -18,10 +18,7 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.model
-
-import com.txusballesteros.brewerydb.domain.model.Ingredient
-import com.txusballesteros.brewerydb.domain.model.IngredientType
+package com.txusballesteros.brewerydb.domain.model
 
 data class Yeast(override val id: Int,
                           val name: String,

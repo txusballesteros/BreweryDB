@@ -21,17 +21,16 @@
 package com.txusballesteros.brewerydb.domain.repository
 
 import com.txusballesteros.brewerydb.data.breweries.strategy.GetBreweryStrategy
-import com.txusballesteros.brewerydb.data.model.BreweryDataModelMapper
+import com.txusballesteros.brewerydb.data.model.mapToDomain
 import com.txusballesteros.brewerydb.domain.model.Brewery
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BreweriesRepository @Inject constructor(private val getBreweryStrategy: GetBreweryStrategy.Builder,
-                                              private val mapper: BreweryDataModelMapper) {
+class BreweriesRepository @Inject constructor(private val getBreweryStrategy: GetBreweryStrategy.Builder) {
   fun get(breweryId: String, onResult: (Brewery) -> Unit) {
     getBreweryStrategy.build().execute(breweryId, onResult = {
-      val brewery = mapper.map(it!!)
+      val brewery = mapToDomain(it!!)
       onResult(brewery)
     })
   }

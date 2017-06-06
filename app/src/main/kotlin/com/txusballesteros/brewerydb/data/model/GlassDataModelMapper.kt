@@ -21,9 +21,6 @@
 package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.Glass
-import javax.inject.Inject
 
-class GlassDataModelMapper @Inject constructor() {
-  fun map(source: GlassDataModel): Glass
-      = Glass(source.id, source.name)
-}
+fun mapToDomain(source: GlassDataModel) = Glass(source.id,
+                                                source.name)

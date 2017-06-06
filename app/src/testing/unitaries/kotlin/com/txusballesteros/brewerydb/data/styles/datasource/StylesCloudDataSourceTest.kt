@@ -21,7 +21,6 @@
 package com.txusballesteros.brewerydb.data.styles.datasource
 
 import com.txusballesteros.brewerydb.UnitTest
-import com.txusballesteros.brewerydb.api.model.StyleApiModelMapper
 import com.txusballesteros.brewerydb.api.model.StyleApiResponse
 import com.txusballesteros.brewerydb.api.styles.StylesApi
 import org.junit.Assert.assertEquals
@@ -42,12 +41,9 @@ class StylesCloudDataSourceTest : UnitTest() {
 
   lateinit var dataSource: StylesCloudDataSource
   lateinit var stylesApiMock: StylesApi
-  lateinit var stylesApiDataMapperMock: StyleApiModelMapper
 
   override fun onPrepareTest() {
-    stylesApiMock = Mockito.mock(StylesApi::class.java)
-    stylesApiDataMapperMock = Mockito.mock(StyleApiModelMapper::class.java)
-    dataSource = StylesRestCloudDataSource(stylesApiMock, stylesApiDataMapperMock)
+    dataSource = StylesRestCloudDataSource(stylesApiMock)
   }
 
   @Test

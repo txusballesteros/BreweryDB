@@ -56,7 +56,7 @@ class BeersCloudDataSourceTest: UnitTest() {
 
   override fun onPrepareTest() {
     api = mock()
-    dataSource = BeersRestCloudDataSource(api, BeerApiModelMapper(), SearchQueryApiModelMapper())
+    dataSource = BeersRestCloudDataSource(api)
   }
 
   @Test

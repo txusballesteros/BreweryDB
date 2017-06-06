@@ -22,20 +22,16 @@ package com.txusballesteros.brewerydb.data.model
 
 import com.txusballesteros.brewerydb.domain.model.IngredientType
 
-fun mapToData(source: String) = source.let {
-      when(it) {
-        "hop" -> IngredientTypeDataModel.HOP
-        "yeast" -> IngredientTypeDataModel.YEAST
-        "malt" -> IngredientTypeDataModel.FERMENTABLE
-        else -> IngredientTypeDataModel.UNKNOWN
-      }
-    }
+fun mapToData(source: String) = when(source) {
+  "hop" -> IngredientTypeDataModel.HOP
+  "yeast" -> IngredientTypeDataModel.YEAST
+  "malt" -> IngredientTypeDataModel.FERMENTABLE
+  else -> IngredientTypeDataModel.UNKNOWN
+}
 
-fun mapToDomain(source: IngredientTypeDataModel) = source.let {
-      when(it) {
-        IngredientTypeDataModel.HOP -> IngredientType.HOP
-        IngredientTypeDataModel.YEAST -> IngredientType.YEAST
-        IngredientTypeDataModel.FERMENTABLE -> IngredientType.FERMENTABLE
-        IngredientTypeDataModel.UNKNOWN -> IngredientType.UNKNOWN
-      }
-    }
+fun mapToDomain(source: IngredientTypeDataModel) = when(source) {
+  IngredientTypeDataModel.HOP -> IngredientType.HOP
+  IngredientTypeDataModel.YEAST -> IngredientType.YEAST
+  IngredientTypeDataModel.FERMENTABLE -> IngredientType.FERMENTABLE
+  IngredientTypeDataModel.UNKNOWN -> IngredientType.UNKNOWN
+}

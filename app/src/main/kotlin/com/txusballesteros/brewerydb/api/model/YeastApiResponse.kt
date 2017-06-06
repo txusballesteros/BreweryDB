@@ -23,5 +23,5 @@ package com.txusballesteros.brewerydb.api.model
 import com.google.gson.annotations.SerializedName
 
 data class YeastApiResponse(@SerializedName("data") val ingredient: YeastApiModel,
-                          val message: String,
-                          val status: String)
+                            val message: String,
+                            val status: String)

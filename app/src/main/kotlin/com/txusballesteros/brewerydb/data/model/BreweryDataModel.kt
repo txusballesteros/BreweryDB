@@ -21,10 +21,10 @@
 package com.txusballesteros.brewerydb.data.model
 
 data class BreweryDataModel(val id: String,
-                           val name: String,
-                           val description: String?,
-                           val website: String?,
-                           val established: String?,
-                           val mailingListUrl: String?,
-                           val isOrganic: String?,
-                           val images: ImageDataModel?)
+                            val name: String,
+                            val description: String?,
+                            val website: String?,
+                            val established: String?,
+                            val mailingListUrl: String?,
+                            val isOrganic: String?,
+                            val images: ImageDataModel?)

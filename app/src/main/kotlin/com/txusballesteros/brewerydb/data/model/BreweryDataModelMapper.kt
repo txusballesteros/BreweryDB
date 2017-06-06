@@ -23,14 +23,11 @@ package com.txusballesteros.brewerydb.data.model
 import com.txusballesteros.brewerydb.domain.model.Brewery
 import javax.inject.Inject
 
-class BreweryDataModelMapper @Inject constructor(private val imageMapper: ImageDataModelMapper) {
-  fun map(source: BreweryDataModel): Brewery
-    = Brewery(source.id,
-              source.name,
-              source.description,
-              source.website,
-              source.established,
-              source.mailingListUrl,
-              source.isOrganic,
-              imageMapper.map(source.images))
-}
+fun mapToDomain(source: BreweryDataModel) = Brewery(source.id,
+            source.name,
+            source.description,
+            source.website,
+            source.established,
+            source.mailingListUrl,
+            source.isOrganic,
+            mapToDomain(source.images))

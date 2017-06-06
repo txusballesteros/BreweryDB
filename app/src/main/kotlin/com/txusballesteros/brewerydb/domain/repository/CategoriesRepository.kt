@@ -21,18 +21,17 @@
 package com.txusballesteros.brewerydb.domain.repository
 
 import com.txusballesteros.brewerydb.data.categories.strategy.GetCategoriesStrategy
-import com.txusballesteros.brewerydb.data.model.CategoryDataModelMapper
+import com.txusballesteros.brewerydb.data.model.mapToDomain
 import com.txusballesteros.brewerydb.domain.model.Category
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CategoriesRepository @Inject constructor(private val getCategoriesStrategy: GetCategoriesStrategy.Builder,
-                                                   private val mapper: CategoryDataModelMapper) {
+class CategoriesRepository @Inject constructor(private val getCategoriesStrategy: GetCategoriesStrategy.Builder) {
 
   fun get(onResult: (List<Category>) -> Unit) {
     getCategoriesStrategy.build().execute(onResult = {
-      val categories = it.orEmpty().map { category -> mapper.map(category) }
+      val categories = it.orEmpty().map { category -> mapToDomain(category) }
       onResult(categories)
     })
   }

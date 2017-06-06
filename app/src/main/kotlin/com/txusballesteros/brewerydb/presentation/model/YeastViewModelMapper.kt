@@ -20,8 +20,8 @@
  */
 package com.txusballesteros.brewerydb.presentation.model
 
-import com.txusballesteros.brewerydb.data.model.Yeast
 import com.txusballesteros.brewerydb.data.model.YeastViewModel
+import com.txusballesteros.brewerydb.domain.model.Yeast
 import javax.inject.Inject
 
 class YeastViewModelMapper @Inject constructor() {

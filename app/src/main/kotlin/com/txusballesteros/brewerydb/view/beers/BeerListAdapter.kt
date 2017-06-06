@@ -54,7 +54,7 @@ class BeerListAdapter(private val onBeerClick: (BeerViewModel, View) -> Unit,
       View.VISIBLE
     } ?: View.GONE
     if (beer.label != null) {
-      label.download(imageDownloader =  imageDownloader, imageUrl =  beer.label?.medium)
+      label.download(imageDownloader =  imageDownloader, imageUrl =  beer.label.medium)
     } else {
       label.setImageResource(R.drawable.beer_place_holder)
     }

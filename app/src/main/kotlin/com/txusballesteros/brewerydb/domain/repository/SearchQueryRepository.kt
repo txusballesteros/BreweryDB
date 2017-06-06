@@ -20,7 +20,8 @@
  */
 package com.txusballesteros.brewerydb.domain.repository
 
-import com.txusballesteros.brewerydb.data.model.SearchQueryDataModelMapper
+import com.txusballesteros.brewerydb.data.model.mapToData
+import com.txusballesteros.brewerydb.data.model.mapToDomain
 import com.txusballesteros.brewerydb.data.search.strategy.ClearSearchQueryStrategy
 import com.txusballesteros.brewerydb.data.search.strategy.GetSearchQueryStrategy
 import com.txusballesteros.brewerydb.data.search.strategy.StoreSearchQueryStrategy
@@ -34,13 +35,20 @@ import javax.inject.Singleton
 class SearchQueryRepository @Inject constructor(private val getSearchQueryStrategy: GetSearchQueryStrategy.Builder,
                                                 private val storeSearchQueryStrategy: StoreSearchQueryStrategy.Builder,
                                                 private val clearSearchQueryStrategy: ClearSearchQueryStrategy.Builder,
-                                                private val subject: Subject,
-                                                private val mapper: SearchQueryDataModelMapper) {
+                                                private val subject: Subject) {
 
   fun get(onResult: (SearchQuery) -> Unit) {
     getSearchQueryStrategy.build().execute(onResult = {
-      val query = mapper.map(it!!)
+      val query = mapToDomain(it!!)
       onResult(query)
+    })
+  }
+
+  fun store(query: SearchQuery, onResult: () -> Unit) {
+    val dataQuery = mapToData(query)
+    storeSearchQueryStrategy.build().execute(dataQuery, onResult = {
+      subject.onNext()
+      onResult()
     })
   }
 
@@ -52,14 +60,6 @@ class SearchQueryRepository @Inject constructor(private val getSearchQueryStrate
     clearSearchQueryStrategy.build().execute(onResult = {
       subject.onNext()
       onSuccess()
-    })
-  }
-
-  fun store(query: SearchQuery, onResult: () -> Unit) {
-    val dataQuery = mapper.map(query)
-    storeSearchQueryStrategy.build().execute(dataQuery, onResult = {
-      subject.onNext()
-      onResult()
     })
   }
 }
