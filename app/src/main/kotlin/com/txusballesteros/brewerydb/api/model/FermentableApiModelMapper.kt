@@ -21,27 +21,24 @@
 package com.txusballesteros.brewerydb.api.model
 
 import com.txusballesteros.brewerydb.data.model.FermentableDataModel
-import javax.inject.Inject
 
-class FermentableApiModelMapper @Inject constructor(private val countryMapper: CountryApiModelMapper) {
-  fun map(source: FermentableApiResponse): FermentableDataModel
-    = map(source.ingredient)
+fun mapToData(source: FermentableApiResponse): FermentableDataModel
+  = mapToData(source.ingredient)
 
-  fun map(source: FermentableApiModel): FermentableDataModel
-    = FermentableDataModel(source.id,
-                           source.name,
-                           source.description,
-                           countryMapper.map(source.country),
-                           source.countryOfOrigin,
-                           source.srmId,
-                           source.srmPrecise,
-                           source.moistureContent,
-                           source.coarseFineDifference,
-                           source.diastaticPower,
-                           source.dryYield,
-                           source.potential,
-                           source.protein,
-                           source.solubleNitrogenRatio,
-                           source.maxInBatch,
-                           source.requiresMashing)
-}
+fun mapToData(source: FermentableApiModel): FermentableDataModel
+  = FermentableDataModel(source.id,
+                         source.name,
+                         source.description,
+                         mapToData(source.country),
+                         source.countryOfOrigin,
+                         source.srmId,
+                         source.srmPrecise,
+                         source.moistureContent,
+                         source.coarseFineDifference,
+                         source.diastaticPower,
+                         source.dryYield,
+                         source.potential,
+                         source.protein,
+                         source.solubleNitrogenRatio,
+                         source.maxInBatch,
+                         source.requiresMashing)

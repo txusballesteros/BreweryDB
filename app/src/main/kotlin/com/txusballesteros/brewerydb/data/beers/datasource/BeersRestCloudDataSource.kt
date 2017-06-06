@@ -21,24 +21,21 @@
 package com.txusballesteros.brewerydb.data.beers.datasource
 
 import com.txusballesteros.brewerydb.api.beers.BeersApi
-import com.txusballesteros.brewerydb.api.model.BeerApiModelMapper
-import com.txusballesteros.brewerydb.api.model.SearchQueryApiModelMapper
+import com.txusballesteros.brewerydb.api.model.mapToApi
+import com.txusballesteros.brewerydb.api.model.mapToData
 import com.txusballesteros.brewerydb.data.model.BeerDataModel
 import com.txusballesteros.brewerydb.data.model.SearchQueryDataModel
 import javax.inject.Inject
 
-class BeersRestCloudDataSource @Inject constructor(private val api: BeersApi,
-                                                   private val mapper: BeerApiModelMapper,
-                                                   private val queryMapper: SearchQueryApiModelMapper) : BeersCloudDataSource {
-
+class BeersRestCloudDataSource @Inject constructor(private val api: BeersApi) : BeersCloudDataSource {
   override fun get(beerId: String): BeerDataModel {
     val response = api.get(beerId)
-    return mapper.map(response.beer)
+    return mapToData(response.beer)
   }
 
   override fun getList(query: SearchQueryDataModel, page: Int): List<BeerDataModel> {
-    val apiQuery = queryMapper.map(query)
+    val apiQuery = mapToApi(query)
     val response = api.getList(apiQuery, page)
-    return response.beers.orEmpty().map { beer -> mapper.map(beer) }
+    return response.beers.orEmpty().map { beer -> mapToData(beer) }
   }
 }

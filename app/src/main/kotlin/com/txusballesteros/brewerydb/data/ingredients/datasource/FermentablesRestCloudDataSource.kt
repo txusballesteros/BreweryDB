@@ -21,16 +21,15 @@
 package com.txusballesteros.brewerydb.data.ingredients.datasource
 
 import com.txusballesteros.brewerydb.api.ingredients.IngredientsApi
-import com.txusballesteros.brewerydb.api.model.FermentableApiModelMapper
+import com.txusballesteros.brewerydb.api.model.mapToData
 import com.txusballesteros.brewerydb.data.model.FermentableDataModel
 import javax.inject.Inject
 
-class FermentablesRestCloudDataSource @Inject constructor(private val api: IngredientsApi,
-                                                          private val mapper: FermentableApiModelMapper):
+class FermentablesRestCloudDataSource @Inject constructor(private val api: IngredientsApi):
                                       FermentablesCloudDataSource {
 
   override fun get(ingredientId: Int): FermentableDataModel {
     val response = api.getFermentable(ingredientId)
-    return mapper.map(response)
+    return mapToData(response)
   }
 }

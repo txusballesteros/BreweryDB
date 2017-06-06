@@ -21,30 +21,27 @@
 package com.txusballesteros.brewerydb.api.model
 
 import com.txusballesteros.brewerydb.data.model.HopDataModel
-import javax.inject.Inject
 
-class HopApiModelMapper @Inject constructor(private val countryMapper: CountryApiModelMapper) {
-  fun map(source: HopApiResponse): HopDataModel
-    = map(source.ingredient)
+fun mapToData(source: HopApiResponse): HopDataModel
+  = mapToData(source.ingredient)
 
-  fun map(source: HopApiModel): HopDataModel
-      = HopDataModel(source.id,
-                     source.name,
-                     source.description,
-                     source.alphaAcidMin,
-                     source.alphaAcidMax,
-                     source.betaAcidMin,
-                     source.betaAcidMax,
-                     source.humuleneMin,
-                     source.humuleneMax,
-                     source.caryophylleneMin,
-                     source.caryophylleneMax,
-                     source.cohumuloneMin,
-                     source.cohumuloneMax,
-                     source.myrceneMin,
-                     source.myrceneMax,
-                     source.farneseneMin,
-                     source.farneseneMax,
-                     source.countryOfOrigin,
-                     countryMapper.map(source.country))
-}
+fun mapToData(source: HopApiModel): HopDataModel
+    = HopDataModel(source.id,
+                   source.name,
+                   source.description,
+                   source.alphaAcidMin,
+                   source.alphaAcidMax,
+                   source.betaAcidMin,
+                   source.betaAcidMax,
+                   source.humuleneMin,
+                   source.humuleneMax,
+                   source.caryophylleneMin,
+                   source.caryophylleneMax,
+                   source.cohumuloneMin,
+                   source.cohumuloneMax,
+                   source.myrceneMin,
+                   source.myrceneMax,
+                   source.farneseneMin,
+                   source.farneseneMax,
+                   source.countryOfOrigin,
+                   mapToData(source.country))
