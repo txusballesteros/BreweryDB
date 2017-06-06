@@ -24,6 +24,6 @@ import com.txusballesteros.brewerydb.data.model.BeerIngredientDataModel
 import com.txusballesteros.brewerydb.data.model.mapToData
 
 fun mapToData(source: BeerIngredientApiModel) = BeerIngredientDataModel(source.id,
-                                                                  source.name,
-                                                                  mapToData(source.category),
-                                                                  source.categoryDisplay)
+                                                                        source.name,
+                                                                        mapToData(source.category),
+                                                                        source.categoryDisplay)

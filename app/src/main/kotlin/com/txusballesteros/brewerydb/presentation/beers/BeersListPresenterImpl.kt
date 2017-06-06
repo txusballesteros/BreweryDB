@@ -20,7 +20,6 @@
  */
 package com.txusballesteros.brewerydb.presentation.beers
 
-import com.txusballesteros.brewerydb.data.model.mapViewModel
 import com.txusballesteros.brewerydb.domain.model.BeerViewModel
 import com.txusballesteros.brewerydb.domain.reactive.Observer
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeersUseCase
@@ -30,6 +29,7 @@ import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryStreamU
 import com.txusballesteros.brewerydb.navigation.NavigationContext
 import com.txusballesteros.brewerydb.navigation.Navigator
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.mapViewModel
 import javax.inject.Inject
 
 class BeersListPresenterImpl @Inject constructor(private val getBeersUseCase: GetBeersUseCase,

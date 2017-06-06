@@ -20,17 +20,16 @@
  */
 package com.txusballesteros.brewerydb.presentation.beers
 
-import com.txusballesteros.brewerydb.data.model.BeerViewModelMapper
 import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.model.Glass
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import com.txusballesteros.brewerydb.presentation.model.mapViewModel
 import javax.inject.Inject
 
 class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase,
-                                                  private val getGlassByIdUseCase: GetGlassByIdUseCase,
-                                                  private val mapper: BeerViewModelMapper):
+                                                  private val getGlassByIdUseCase: GetGlassByIdUseCase):
                               AbsPresenter<BeerDetailPresenter.View>(), BeerDetailPresenter {
 
   override fun onRequestBeer(beerId: String) {
@@ -56,7 +55,7 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
   }
 
   private fun renderBeer(beer: Beer) {
-    val beerViewModel = mapper.mapViewModel(beer)
+    val beerViewModel = mapViewModel(beer)
     getView()?.renderBeer(beerViewModel)
   }
 

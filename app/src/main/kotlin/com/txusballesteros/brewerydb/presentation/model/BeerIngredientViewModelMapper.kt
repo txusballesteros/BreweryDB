@@ -18,9 +18,12 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.data.model
+package com.txusballesteros.brewerydb.presentation.model
+
+import com.txusballesteros.brewerydb.data.model.BeerIngredient
+import com.txusballesteros.brewerydb.data.model.BeerIngredientViewModel
 
 fun mapToViewModel(source: BeerIngredient) = BeerIngredientViewModel(source.id,
                                                                      source.name,
-                                                                     com.txusballesteros.brewerydb.presentation.model.mapToViewModel(source.type),
+                                                                     mapToViewModel(source.type),
                                                                      source.categoryDisplay)

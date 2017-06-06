@@ -22,9 +22,9 @@ package com.txusballesteros.brewerydb.presentation.model
 
 import com.txusballesteros.brewerydb.domain.model.*
 
-fun mapToViewModel(source: Ingredient) = when(source.type) {
-  IngredientType.FERMENTABLE -> mapToViewModel(source as Fermentable)
-  IngredientType.YEAST -> mapToViewModel(source as Yeast)
-  IngredientType.HOP -> mapToViewModel(source as Hop)
+fun mapToViewModel(source: Ingredient) = when(source) {
+  is Fermentable -> mapToViewModel(source)
+  is Yeast -> mapToViewModel(source)
+  is Hop -> mapToViewModel(source)
   else -> null
 }
