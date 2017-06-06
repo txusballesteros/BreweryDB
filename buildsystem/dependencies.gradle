@@ -26,8 +26,8 @@ allprojects {
 
 ext {
   //Kotlin
-  kotlinVersion = "1.1.1"
-  ankoVersion = "0.9.1"
+  kotlinVersion = "1.1.2-3"
+  ankoVersion = "0.10.1"
 
   //Android
   androidApplicationId = "com.txusballesteros.brewerydb"
