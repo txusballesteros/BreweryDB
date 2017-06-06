@@ -40,7 +40,7 @@ class BeerIngredientsPresenterImpl @Inject constructor(private val getBeerIngred
     getView()?.showLoading()
     getBeerIngredientsUseCase.execute(beerId, onResult = {
       getView()?.hideLoading()
-      val ingredients = it.map { ingredient -> mapper.map(ingredient) }
+      val ingredients = it.map { ingredient -> mapper.mapToViewModel(ingredient) }
       getView()?.renderIngredients(ingredients)
     }, onError = {
       getView()?.hideLoading()

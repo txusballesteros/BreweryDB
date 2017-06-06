@@ -22,15 +22,14 @@ package com.txusballesteros.brewerydb.presentation.search
 
 import com.txusballesteros.brewerydb.domain.usecase.search.GetSearchQueryUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
-import com.txusballesteros.brewerydb.presentation.model.SearchQueryViewModelMapper
+import com.txusballesteros.brewerydb.presentation.model.mapToViewModel
 import javax.inject.Inject
 
-class SeachSectionPresenterImpl @Inject constructor(private val getSearchQueryUseCase: GetSearchQueryUseCase,
-                                                    private val mapper: SearchQueryViewModelMapper)
+class SeachSectionPresenterImpl @Inject constructor(private val getSearchQueryUseCase: GetSearchQueryUseCase)
                                 : AbsPresenter<SeachSectionPresenter.View>(), SeachSectionPresenter {
   override fun onRequestSearchQuery() {
     getSearchQueryUseCase.execute(onResult = {
-      val query = mapper.map(it)
+      val query = mapToViewModel(it)
       getView()?.renderSearchQuery(query)
     })
   }

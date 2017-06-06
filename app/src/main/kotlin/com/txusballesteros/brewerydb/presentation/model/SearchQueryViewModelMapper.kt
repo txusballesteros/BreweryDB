@@ -21,30 +21,25 @@
 package com.txusballesteros.brewerydb.presentation.model
 
 import com.txusballesteros.brewerydb.domain.model.SearchQuery
-import javax.inject.Inject
 
-class SearchQueryViewModelMapper @Inject constructor() {
-  fun map(source: SearchQueryViewModel): SearchQuery
-      = SearchQuery(source.keyword,
-                    source.abvMin,
-                    source.abvMax,
-                    source.ibuMin,
-                    source.ibuMax,
-                    source.isOrganic,
-                    source.breweryId,
-                    source.styleId,
-                    source.styleName,
-                    source.withLabels)
+fun mapToDomain(source: SearchQueryViewModel) = SearchQuery(source.keyword,
+                                                            source.abvMin,
+                                                            source.abvMax,
+                                                            source.ibuMin,
+                                                            source.ibuMax,
+                                                            source.isOrganic,
+                                                            source.breweryId,
+                                                            source.styleId,
+                                                            source.styleName,
+                                                            source.withLabels)
 
-  fun map(source: SearchQuery): SearchQueryViewModel
-      = SearchQueryViewModel(source.keyword,
-                             source.abvMin,
-                             source.abvMax,
-                             source.ibuMin,
-                             source.ibuMax,
-                             source.isOrganic,
-                             source.breweryId,
-                             source.styleId,
-                             source.styleName,
-                             source.withLabels)
-}
+fun mapToViewModel(source: SearchQuery) = SearchQueryViewModel(source.keyword,
+                                                               source.abvMin,
+                                                               source.abvMax,
+                                                               source.ibuMin,
+                                                               source.ibuMax,
+                                                               source.isOrganic,
+                                                               source.breweryId,
+                                                               source.styleId,
+                                                               source.styleName,
+                                                               source.withLabels)

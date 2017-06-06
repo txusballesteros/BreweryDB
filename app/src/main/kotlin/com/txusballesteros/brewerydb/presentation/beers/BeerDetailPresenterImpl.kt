@@ -56,7 +56,7 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
   }
 
   private fun renderBeer(beer: Beer) {
-    val beerViewModel = mapper.map(beer)
+    val beerViewModel = mapper.mapViewModel(beer)
     getView()?.renderBeer(beerViewModel)
   }
 

@@ -21,15 +21,11 @@
 package com.txusballesteros.brewerydb.presentation.model
 
 import com.txusballesteros.brewerydb.domain.model.Country
-import javax.inject.Inject
 
-class CountryViewModelMapper @Inject constructor() {
-  fun map(source: Country?): CountryViewModel?
-    = source?.let {
-        CountryViewModel(it.isoCode,
-                         it.displayName,
-                         it.name,
-                         it.isoThree,
-                         it.numberCode)
-      }
+fun mapToViewModel(source: Country?) = source?.let {
+  CountryViewModel(it.isoCode,
+                   it.displayName,
+                   it.name,
+                   it.isoThree,
+                   it.numberCode)
 }

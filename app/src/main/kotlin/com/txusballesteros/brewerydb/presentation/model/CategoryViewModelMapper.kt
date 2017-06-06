@@ -21,9 +21,6 @@
 package com.txusballesteros.brewerydb.presentation.model
 
 import com.txusballesteros.brewerydb.domain.model.Category
-import javax.inject.Inject
 
-class CategoryViewModelMapper @Inject constructor() {
-  fun map(source: Category): CategoryViewModel
-      = CategoryViewModel(source.id, source.name)
-}
+fun mapToViewModel(source: Category) = CategoryViewModel(source.id,
+                                                         source.name)

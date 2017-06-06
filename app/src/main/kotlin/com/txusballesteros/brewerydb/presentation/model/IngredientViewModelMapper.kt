@@ -21,15 +21,10 @@
 package com.txusballesteros.brewerydb.presentation.model
 
 import com.txusballesteros.brewerydb.domain.model.*
-import javax.inject.Inject
 
-class IngredientViewModelMapper @Inject constructor(private val hopMapper: HopViewModelMapper,
-                                                    private val fermentableMapper: FermentableViewModelMapper,
-                                                    private val yeastViewModelMapper: YeastViewModelMapper) {
-  fun map(source: Ingredient) = when(source.type) {
-    IngredientType.HOP -> hopMapper.map(source as Hop)
-    IngredientType.FERMENTABLE -> fermentableMapper.map(source as Fermentable)
-    IngredientType.YEAST -> yeastViewModelMapper.map(source as Yeast)
-    else -> null
-  }
+fun mapToViewModel(source: Ingredient) = when(source.type) {
+  IngredientType.FERMENTABLE -> mapToViewModel(source as Fermentable)
+  IngredientType.YEAST -> mapToViewModel(source as Yeast)
+  IngredientType.HOP -> mapToViewModel(source as Hop)
+  else -> null
 }
