@@ -18,23 +18,21 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-package com.txusballesteros.brewerydb.domain.usecase.beers
+package com.txusballesteros.brewerydb.domain.usecase
 
-import com.txusballesteros.brewerydb.domain.model.Beer
-import com.txusballesteros.brewerydb.domain.repository.BeersRepository
-import com.txusballesteros.brewerydb.domain.usecase.EitherUseCase
+import com.txusballesteros.brewerydb.exception.ApplicationException
 import org.funktionale.either.Either
-import javax.inject.Inject
 
-class GetBeerByIdInteractor @Inject constructor(private val repository: BeersRepository):
-      GetBeerByIdUseCase, EitherUseCase<Beer>() {
-
-  private lateinit var beerId: String
-
-  override suspend fun execute(beerId: String): Either<Exception, Beer> {
-    this.beerId = beerId
-    return super.execute()
+abstract class EitherUseCase<out T> {
+  suspend fun execute(): Either<ApplicationException, T> {
+    var result: Either<ApplicationException, T>
+    try {
+      result = Either.right(onExecute())
+    } catch (error: ApplicationException) {
+      result = Either.left(error)
+    }
+    return result
   }
 
-  override fun onExecute(): Beer = repository.get(beerId)
+  abstract fun onExecute() : T
 }

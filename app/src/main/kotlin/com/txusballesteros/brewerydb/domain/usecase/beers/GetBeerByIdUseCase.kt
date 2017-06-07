@@ -21,9 +21,8 @@
 package com.txusballesteros.brewerydb.domain.usecase.beers
 
 import com.txusballesteros.brewerydb.domain.model.Beer
-import com.txusballesteros.brewerydb.domain.usecase.UseCase
-import com.txusballesteros.brewerydb.exception.ApplicationException
+import org.funktionale.either.Either
 
-interface GetBeerByIdUseCase: UseCase<Beer> {
-  fun execute(beerId: String, onResult: (Beer) -> Unit, onError: (ApplicationException) -> Unit = { })
+interface GetBeerByIdUseCase {
+  suspend fun execute(beerId: String): Either<Exception, Beer>
 }

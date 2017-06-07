@@ -20,6 +20,8 @@
  */
 package com.txusballesteros.brewerydb.domain.repository
 
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersCloudDataSource
+import com.txusballesteros.brewerydb.data.beers.datasource.BeersLocalDataSource
 import com.txusballesteros.brewerydb.data.beers.strategy.*
 import com.txusballesteros.brewerydb.data.model.BeerIngredient
 import com.txusballesteros.brewerydb.data.model.mapToDomain
@@ -31,9 +33,10 @@ import javax.inject.Singleton
 @Singleton
 class BeersRepository @Inject constructor(private val getBeersStrategy: GetBeersStrategy.Builder,
                                           private val getNextPageBeersStrategy: GetNextPageBeersStrategy.Builder,
-                                          private val getBeerByIdStrategy: GetBeerByIdStrategy.Builder,
                                           private val getBeerIngredientsStrategy: GetBeerIngredientsStrategy.Builder,
-                                          private val getBeerBreweriesStrategy: GetBeerBreweriesStrategy.Builder) {
+                                          private val getBeerBreweriesStrategy: GetBeerBreweriesStrategy.Builder,
+                                          private val localDataSource: BeersLocalDataSource,
+                                          private val cloudDataSource: BeersCloudDataSource) {
 
   fun getBreweries(beerId: String, onResult: (List<Brewery>) -> Unit) {
     getBeerBreweriesStrategy.build().execute(beerId, onResult = {
@@ -49,11 +52,13 @@ class BeersRepository @Inject constructor(private val getBeersStrategy: GetBeers
     })
   }
 
-  fun get(beerId: String, onResult: (Beer) -> Unit) {
-    getBeerByIdStrategy.build().execute(beerId, onResult = {
-      val beers = mapToDomain(it!!)
-      onResult(beers)
-    })
+  fun get(beerId: String): Beer {
+    var beer = localDataSource.get(beerId)
+    if (beer == null) {
+      beer = cloudDataSource.get(beerId)
+      localDataSource.store(beer)
+    }
+    return mapToDomain(beer)
   }
 
   fun getFirstPage(onResult: (List<Beer>) -> Unit) {
