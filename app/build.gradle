@@ -85,7 +85,7 @@ dependencies {
   compile dependencies.LoadingBalls
   compile dependencies.ConstraintLayout
   compile dependencies.KotlinStd
-  compile dependencies.KotlinCoroutines
+//  compile dependencies.KotlinCoroutines
   compile dependencies.KotlinCoroutinesForAndroid
   compile dependencies.AnkoCommon
   compile dependencies.AnkoAppCompat
