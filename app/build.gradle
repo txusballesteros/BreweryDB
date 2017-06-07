@@ -85,6 +85,8 @@ dependencies {
   compile dependencies.LoadingBalls
   compile dependencies.ConstraintLayout
   compile dependencies.KotlinStd
+  compile dependencies.KotlinCoroutines
+  compile dependencies.KotlinCoroutinesForAndroid
   compile dependencies.AnkoCommon
   compile dependencies.AnkoAppCompat
   compile dependencies.AnkoRecyclerView
@@ -97,7 +99,7 @@ dependencies {
   compile dependencies.GsonConverter
   compile dependencies.Picasso
   compile dependencies.Dagger
-  compile dependencies.funktionaleEither
+  compile dependencies.FunktionaleEither
   debugCompile dependencies.LeakCanaryForDebug
   releaseCompile dependencies.LeakCanaryForRelease
   kapt dependencies.DaggerCompiler

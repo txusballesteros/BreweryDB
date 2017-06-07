@@ -28,6 +28,7 @@ ext {
   //Kotlin
   kotlinVersion = "1.1.2-3"
   ankoVersion = "0.10.1"
+  coroutinesVersion = "0.15"
 
   //Android
   androidApplicationId = "com.txusballesteros.brewerydb"
@@ -62,6 +63,8 @@ ext {
     CardView: "com.android.support:cardview-v7:${androidSupportVersion}",
     Design: "com.android.support:design:${androidSupportVersion}",
     KotlinStd: "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+    KotlinCoroutines: "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutinesVersion}",
+    KotlinCoroutinesForAndroid: "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutinesVersion}",
     AnkoCommon: "org.jetbrains.anko:anko-common:${ankoVersion}",
     AnkoAppCompat: "org.jetbrains.anko:anko-appcompat-v7:${ankoVersion}",
     AnkoRecyclerView: "org.jetbrains.anko:anko-recyclerview-v7:${ankoVersion}",
@@ -87,6 +90,6 @@ ext {
     LeakCanaryForDebug: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
     LeakCanaryForRelease: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
     LeakCanaryForTest: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
-    funktionaleEither: "org.funktionale:funktionale-either:${funktionaleVersion}"
+    FunktionaleEither: "org.funktionale:funktionale-either:${funktionaleVersion}"
   ]
 }

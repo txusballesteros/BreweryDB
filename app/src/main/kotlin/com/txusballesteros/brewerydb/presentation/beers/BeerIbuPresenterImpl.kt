@@ -22,6 +22,8 @@ package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
 class BeerIbuPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase):
@@ -31,10 +33,13 @@ class BeerIbuPresenterImpl @Inject constructor(private val getBeerByIdUseCase: G
   }
 
   override fun onRequestIbu(beerId: String) {
-    getBeerByIdUseCase.execute(beerId, onResult = {
-      val value = string2float(it.ibu)
-      getView()?.renderIbu(value)
-    })
+    launch(UI) {
+      val result = getBeerByIdUseCase.execute(beerId)
+      if (result.isRight()) {
+        val value = string2float(result.right().get().ibu)
+        getView()?.renderIbu(value)
+      }
+    }
   }
 
   private fun string2float(value: String?): Float {

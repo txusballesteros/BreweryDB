@@ -21,17 +21,19 @@
 package com.txusballesteros.brewerydb.domain.usecase
 
 import com.txusballesteros.brewerydb.exception.ApplicationException
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.run
 import org.funktionale.either.Either
 
 abstract class EitherUseCase<out T> {
-  suspend fun execute(): Either<ApplicationException, T> {
+  suspend fun execute(): Either<ApplicationException, T> = run(CommonPool) {
     var result: Either<ApplicationException, T>
     try {
       result = Either.right(onExecute())
     } catch (error: ApplicationException) {
       result = Either.left(error)
     }
-    return result
+    result
   }
 
   abstract fun onExecute() : T
