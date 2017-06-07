@@ -97,6 +97,7 @@ dependencies {
   compile dependencies.GsonConverter
   compile dependencies.Picasso
   compile dependencies.Dagger
+  compile dependencies.funktionaleEither
   debugCompile dependencies.LeakCanaryForDebug
   releaseCompile dependencies.LeakCanaryForRelease
   kapt dependencies.DaggerCompiler
