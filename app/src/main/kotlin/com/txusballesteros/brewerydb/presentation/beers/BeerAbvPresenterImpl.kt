@@ -22,7 +22,9 @@ package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
@@ -33,8 +35,9 @@ class BeerAbvPresenterImpl @Inject constructor(private val getBeerByIdUseCase: G
   }
 
   override fun onRequestAbv(beerId: String) {
+    val getBeerAwait = async(CommonPool) { getBeerByIdUseCase.execute(beerId) }
     launch(UI) {
-      val result = getBeerByIdUseCase.execute(beerId)
+      val result = getBeerAwait.await()
       if (result.isRight()) {
         val value = string2float(result.right().get().abv)
         getView()?.renderAbv(value)

@@ -26,7 +26,9 @@ import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.mapViewModel
+import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
@@ -36,8 +38,9 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
 
   override fun onRequestBeer(beerId: String) {
     getView()?.showLoading()
+    val getBeerAwait = async(CommonPool) { getBeerByIdUseCase.execute(beerId) }
     launch(UI) {
-      val result = getBeerByIdUseCase.execute(beerId)
+      val result = getBeerAwait.await()
       result.fold({
         getView()?.hideLoading()
         getView()?.renderError()
