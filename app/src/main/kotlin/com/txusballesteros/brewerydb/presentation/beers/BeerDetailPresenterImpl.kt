@@ -38,8 +38,8 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
   override fun onRequestBeer(beerId: String) {
     getView()?.showLoading()
     async(UI) {
-      val result = bg { getBeerByIdUseCase.execute(beerId) }.await()
-      result.fold({
+      val beer = bg { getBeerByIdUseCase.execute(beerId) }.await()
+      beer.fold({
         getView()?.hideLoading()
         getView()?.renderError()
       }, {
@@ -50,13 +50,14 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
     }
   }
 
-  private fun requestGlass(beer: Beer) {
-    if (beer.glasswareId != null) {
-      getGlassByIdUseCase.execute(beer.glasswareId, onResult = {
+  private fun requestGlass(beer: Beer) = beer.glasswareId?.apply {
+    async(UI) {
+      val glass = bg { getGlassByIdUseCase.execute(beer.glasswareId) }.await()
+      glass.fold({
+        getView()?.renderEmptyGlass()
+      }, {
         renderGlass(it)
       })
-    } else {
-      getView()?.renderEmptyGlass()
     }
   }
 
