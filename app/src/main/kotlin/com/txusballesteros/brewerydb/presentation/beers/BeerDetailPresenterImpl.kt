@@ -21,7 +21,6 @@
 package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.domain.model.Beer
-import com.txusballesteros.brewerydb.domain.model.Glass
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
@@ -50,23 +49,23 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
     }
   }
 
-  private fun requestGlass(beer: Beer) = beer.glasswareId?.apply {
-    async(UI) {
-      val glass = bg { getGlassByIdUseCase.execute(beer.glasswareId) }.await()
-      glass.fold({
-        getView()?.renderEmptyGlass()
-      }, {
-        renderGlass(it)
-      })
+  private fun requestGlass(beer: Beer) {
+    if (beer.glasswareId != null) {
+      async(UI) {
+        val glass = bg { getGlassByIdUseCase.execute(beer.glasswareId) }.await()
+        glass.fold({
+          getView()?.renderEmptyGlass()
+        }, {
+          getView()?.renderGlass(it.name)
+        })
+      }
+    } else {
+      getView()?.renderEmptyGlass()
     }
   }
 
   private fun renderBeer(beer: Beer) {
     val beerViewModel = mapViewModel(beer)
     getView()?.renderBeer(beerViewModel)
-  }
-
-  private fun renderGlass(glass: Glass) {
-    getView()?.renderGlass(glass.name)
   }
 }
