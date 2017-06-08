@@ -24,10 +24,9 @@ import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.mapViewModel
-import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+import org.jetbrains.anko.coroutines.experimental.bg
 import javax.inject.Inject
 
 class BeerDetailControllerPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase):
@@ -36,9 +35,8 @@ class BeerDetailControllerPresenterImpl @Inject constructor(private val getBeerB
   override fun onRequestBeer() {
     getView()?.let {
       val beerId = it.getBeerId()
-      val getBeerAwait = async(CommonPool) { getBeerByIdUseCase.execute(beerId) }
-      launch(UI) {
-        val result = getBeerAwait.await()
+      async(UI) {
+        val result = bg { getBeerByIdUseCase.execute(beerId) }.await()
         if (result.isRight()) {
           renderBeer(result.right().get())
           getView()?.showBeerDetail()

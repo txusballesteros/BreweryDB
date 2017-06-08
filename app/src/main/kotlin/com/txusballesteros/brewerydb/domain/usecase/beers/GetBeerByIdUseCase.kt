@@ -24,5 +24,5 @@ import com.txusballesteros.brewerydb.domain.model.Beer
 import org.funktionale.either.Either
 
 interface GetBeerByIdUseCase {
-  suspend fun execute(beerId: String): Either<Exception, Beer>
+  fun execute(beerId: String): Either<Exception, Beer>
 }

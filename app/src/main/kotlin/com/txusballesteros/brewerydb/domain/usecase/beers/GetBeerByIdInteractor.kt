@@ -31,7 +31,7 @@ class GetBeerByIdInteractor @Inject constructor(private val repository: BeersRep
 
   private lateinit var beerId: String
 
-  override suspend fun execute(beerId: String): Either<Exception, Beer> {
+  override fun execute(beerId: String): Either<Exception, Beer> {
     this.beerId = beerId
     return super.execute()
   }

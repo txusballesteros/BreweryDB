@@ -85,8 +85,8 @@ dependencies {
   compile dependencies.LoadingBalls
   compile dependencies.ConstraintLayout
   compile dependencies.KotlinStd
-  compile dependencies.KotlinCoroutinesForAndroid
   compile dependencies.AnkoCommon
+  compile dependencies.AnkoCoroutines
   compile dependencies.AnkoAppCompat
   compile dependencies.AnkoRecyclerView
   compile dependencies.AnkoCardView
