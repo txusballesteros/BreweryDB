@@ -20,8 +20,13 @@
  */
 package com.txusballesteros.brewerydb.presentation.beers
 
+import com.txusballesteros.brewerydb.domain.model.Beer
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import org.funktionale.either.Either
+import org.jetbrains.anko.coroutines.experimental.bg
 import javax.inject.Inject
 
 class BeerAbvPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase):
@@ -31,10 +36,17 @@ class BeerAbvPresenterImpl @Inject constructor(private val getBeerByIdUseCase: G
   }
 
   override fun onRequestAbv(beerId: String) {
-    getBeerByIdUseCase.execute(beerId, onResult = {
-      val value = string2float(it.abv)
+    async(UI) {
+      val result = bg { getBeerByIdUseCase.execute(beerId) }.await()
+      renderAbv(result)
+    }
+  }
+
+  private fun renderAbv(result: Either<Exception, Beer>) {
+    if (result.isRight()) {
+      val value = string2float(result.right().get().abv)
       getView()?.renderAbv(value)
-    })
+    }
   }
 
   private fun string2float(value: String?): Float {

@@ -28,6 +28,7 @@ ext {
   //Kotlin
   kotlinVersion = "1.1.2-5"
   ankoVersion = "0.10.1"
+  coroutinesVersion = "0.15"
 
   //Android
   androidApplicationId = "com.txusballesteros.brewerydb"
@@ -63,6 +64,7 @@ ext {
     Design: "com.android.support:design:${androidSupportVersion}",
     KotlinStd: "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
     AnkoCommon: "org.jetbrains.anko:anko-common:${ankoVersion}",
+    AnkoCoroutines: "org.jetbrains.anko:anko-coroutines:${ankoVersion}",
     AnkoAppCompat: "org.jetbrains.anko:anko-appcompat-v7:${ankoVersion}",
     AnkoRecyclerView: "org.jetbrains.anko:anko-recyclerview-v7:${ankoVersion}",
     AnkoCardView: "org.jetbrains.anko:anko-cardview-v7:${ankoVersion}",
@@ -84,9 +86,9 @@ ext {
     LoadingBalls: "com.github.glomadrian:loadingballs:${loadingBallsVervion}@aar",
     ConstraintLayout: "com.android.support.constraint:constraint-layout:${constraintLayoutVervion}",
     EspressoCore: "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-    LeakCanaryForDebug: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+    LeakCanaryForDebug: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
     LeakCanaryForRelease: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
     LeakCanaryForTest: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
-    funktionaleEither: "org.funktionale:funktionale-either:${funktionaleVersion}"
+    FunktionaleEither: "org.funktionale:funktionale-either:${funktionaleVersion}"
   ]
 }

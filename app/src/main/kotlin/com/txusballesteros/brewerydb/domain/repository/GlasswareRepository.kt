@@ -20,18 +20,24 @@
  */
 package com.txusballesteros.brewerydb.domain.repository
 
-import com.txusballesteros.brewerydb.data.glassware.strategy.GetGlassByIdStrategy
+import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareCloudDataSource
+import com.txusballesteros.brewerydb.data.glassware.datasource.GlasswareLocalDataSource
+import com.txusballesteros.brewerydb.data.model.GlassDataModel
 import com.txusballesteros.brewerydb.data.model.mapToDomain
 import com.txusballesteros.brewerydb.domain.model.Glass
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GlasswareRepository @Inject constructor(private val getGlassByIdStrategy: GetGlassByIdStrategy.Builder) {
-  fun get(id: Int, onResult: (Glass) -> Unit) {
-    getGlassByIdStrategy.build().execute(id, onResult = {
-      val glass = mapToDomain(it!!)
-      onResult(glass)
-    })
+class GlasswareRepository @Inject constructor(private val localDataSource: GlasswareLocalDataSource,
+                                              private val cloudDataSource: GlasswareCloudDataSource) {
+  fun get(id: Int): Glass {
+    var glass: GlassDataModel? = localDataSource.get(id)
+    if (glass == null) {
+      val glassware = cloudDataSource.getList()
+      localDataSource.store(glassware)
+      glass = localDataSource.get(id)
+    }
+    return mapToDomain(glass!!)
   }
 }

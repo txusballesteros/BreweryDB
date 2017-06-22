@@ -21,9 +21,8 @@
 package com.txusballesteros.brewerydb.domain.usecase.glassware
 
 import com.txusballesteros.brewerydb.domain.model.Glass
-import com.txusballesteros.brewerydb.domain.usecase.UseCase
-import com.txusballesteros.brewerydb.exception.ApplicationException
+import org.funktionale.either.Either
 
-interface GetGlassByIdUseCase: UseCase<Glass> {
-  fun execute(id: Int, onResult: (Glass) -> Unit, onError: (ApplicationException) -> Unit = { })
+interface GetGlassByIdUseCase {
+  fun execute(glassId: Int): Either<Exception, Glass>
 }

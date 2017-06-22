@@ -22,24 +22,20 @@ package com.txusballesteros.brewerydb.domain.usecase.glassware
 
 import com.txusballesteros.brewerydb.domain.model.Glass
 import com.txusballesteros.brewerydb.domain.repository.GlasswareRepository
-import com.txusballesteros.brewerydb.domain.usecase.AnkoUseCase
-import com.txusballesteros.brewerydb.exception.ApplicationException
-import java.util.concurrent.ExecutorService
+import com.txusballesteros.brewerydb.domain.usecase.EitherUseCase
+import org.funktionale.either.Either
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
-class GetGlassByIdInteractor @Inject constructor(executor: ExecutorService,
-                                                 private val repository: GlasswareRepository):
-                             AnkoUseCase<Glass>(executor), GetGlassByIdUseCase {
-  private var glassId = 0
+class GetGlassByIdInteractor @Inject constructor(private val repository: GlasswareRepository):
+      EitherUseCase<Glass>(), GetGlassByIdUseCase {
 
-  override fun execute(id: Int, onResult: (Glass) -> Unit, onError: (ApplicationException) -> Unit) {
-    glassId = id
-    super.execute(onResult, onError)
+  private var glassId: Int by Delegates.notNull<Int>()
+
+  override fun execute(glassId: Int): Either<Exception, Glass> {
+    this.glassId = glassId
+    return super.execute()
   }
 
-  override fun onExecute(onResult: (Glass) -> Unit) {
-    repository.get(glassId, {
-      onResult(it)
-    })
-  }
+  override fun onExecute() = repository.get(glassId)
 }

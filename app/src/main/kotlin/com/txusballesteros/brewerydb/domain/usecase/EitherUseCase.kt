@@ -24,7 +24,7 @@ import com.txusballesteros.brewerydb.exception.ApplicationException
 import org.funktionale.either.Either
 
 abstract class EitherUseCase<out T> {
-  suspend fun execute(): Either<ApplicationException, T> {
+  fun execute(): Either<ApplicationException, T> {
     var result: Either<ApplicationException, T>
     try {
       result = Either.right(onExecute())

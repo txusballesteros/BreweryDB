@@ -26,6 +26,9 @@ import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdUseCase
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.mapViewModel
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.coroutines.experimental.bg
 import javax.inject.Inject
 
 class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase,
@@ -34,23 +37,27 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
 
   override fun onRequestBeer(beerId: String) {
     getView()?.showLoading()
-    getBeerByIdUseCase.execute(beerId, onResult = {
-      getView()?.hideLoading()
-      requestGlass(it)
-      renderBeer(it)
-    }, onError = {
-      getView()?.hideLoading()
-      getView()?.renderError()
-    })
+    async(UI) {
+      val beer = bg { getBeerByIdUseCase.execute(beerId) }.await()
+      beer.fold({
+        getView()?.hideLoading()
+        getView()?.renderError()
+      }, {
+        getView()?.hideLoading()
+        requestGlass(it)
+        renderBeer(it)
+      })
+    }
   }
 
-  private fun requestGlass(beer: Beer) {
-    if (beer.glasswareId != null) {
-      getGlassByIdUseCase.execute(beer.glasswareId, onResult = {
+  private fun requestGlass(beer: Beer) = beer.glasswareId?.apply {
+    async(UI) {
+      val glass = bg { getGlassByIdUseCase.execute(beer.glasswareId) }.await()
+      glass.fold({
+        getView()?.renderEmptyGlass()
+      }, {
         renderGlass(it)
       })
-    } else {
-      getView()?.renderEmptyGlass()
     }
   }
 
