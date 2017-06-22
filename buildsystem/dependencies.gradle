@@ -26,7 +26,7 @@ allprojects {
 
 ext {
   //Kotlin
-  kotlinVersion = "1.1.2-3"
+  kotlinVersion = "1.1.2-5"
   ankoVersion = "0.10.1"
 
   //Android
