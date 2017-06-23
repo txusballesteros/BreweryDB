@@ -18,36 +18,9 @@
  *
  * Contact: Txus Ballesteros <txus.ballesteros@gmail.com>
  */
-apply from: 'buildsystem/dependencies.gradle'
+package com.txusballesteros.brewerydb.extension
 
-buildscript {
-  repositories {
-    jcenter()
-  }
+import org.funktionale.either.Either
 
-  dependencies {
-    classpath 'com.android.tools.build:gradle:2.3.3'
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.2-5"
-  }
-}
-
-subprojects {
-  configurations.all {
-    resolutionStrategy {
-      forcedModules = [
-          "org.jetbrains.kotlin:kotlin-stdlib:1.1.2-3",
-          "org.jetbrains.kotlin:kotlin-reflect:1.1.2-3"
-      ]
-    }
-  }
-}
-
-allprojects {
-  repositories {
-    jcenter()
-  }
-}
-
-task clean(type: Delete) {
-  delete rootProject.buildDir
-}
+inline fun <L, R1, R2> Either<L, R1>.flatMap(crossinline next: (R1) -> Either<L, R2>): Either<L, R2>
+  = fold({ Either.left(it) }, { next(it) })

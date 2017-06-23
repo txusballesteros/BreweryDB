@@ -21,14 +21,18 @@
 package com.txusballesteros.brewerydb.presentation.beers
 
 import com.txusballesteros.brewerydb.domain.model.Beer
+import com.txusballesteros.brewerydb.domain.model.Glass
 import com.txusballesteros.brewerydb.domain.usecase.beers.GetBeerByIdUseCase
 import com.txusballesteros.brewerydb.domain.usecase.glassware.GetGlassByIdUseCase
+import com.txusballesteros.brewerydb.extension.flatMap
 import com.txusballesteros.brewerydb.presentation.AbsPresenter
 import com.txusballesteros.brewerydb.presentation.model.mapViewModel
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
+import org.funktionale.either.Either
 import org.jetbrains.anko.coroutines.experimental.bg
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase: GetBeerByIdUseCase,
                                                   private val getGlassByIdUseCase: GetGlassByIdUseCase):
@@ -37,35 +41,32 @@ class BeerDetailPresenterImpl @Inject constructor(private val getBeerByIdUseCase
   override fun onRequestBeer(beerId: String) {
     getView()?.showLoading()
     async(UI) {
-      val beer = bg { getBeerByIdUseCase.execute(beerId) }.await()
-      beer.fold({
-        getView()?.hideLoading()
+      var beer: Beer by Delegates.notNull<Beer>()
+      val glass = bg {
+        getBeerByIdUseCase.execute(beerId).flatMap {
+          beer = it
+          it.glasswareId?.let {
+            getGlassByIdUseCase.execute(it)
+          } ?: Either.right(Glass(0, "NA"))
+        }
+      }.await()
+      glass.fold({
         getView()?.renderError()
+        getView()?.hideLoading()
       }, {
         getView()?.hideLoading()
-        requestGlass(it)
-        renderBeer(it)
+        renderBeer(beer)
+        renderGlass(it)
       })
-    }
-  }
-
-  private fun requestGlass(beer: Beer) {
-    if (beer.glasswareId != null) {
-      async(UI) {
-        val glass = bg { getGlassByIdUseCase.execute(beer.glasswareId) }.await()
-        glass.fold({
-          getView()?.renderEmptyGlass()
-        }, {
-          getView()?.renderGlass(it.name)
-        })
-      }
-    } else {
-      getView()?.renderEmptyGlass()
     }
   }
 
   private fun renderBeer(beer: Beer) {
     val beerViewModel = mapViewModel(beer)
     getView()?.renderBeer(beerViewModel)
+  }
+
+  private fun renderGlass(glass: Glass) {
+    getView()?.renderGlass(glass.name)
   }
 }
