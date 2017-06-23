@@ -22,5 +22,5 @@ package com.txusballesteros.brewerydb.extension
 
 import org.funktionale.either.Either
 
-inline fun <L, R1, R2> Either<L, R1>.flatMap(crossinline next: (R1) -> Either<L, R2>): Either<L, R2>
-  = fold({ Either.left(it) }, { next(it) })
+inline fun <L, R1, R2> Either<L, R1>.flatMap(crossinline f: (R1) -> Either<L, R2>): Either<L, R2>
+  = fold({ Either.left(it) }, { f(it) })
