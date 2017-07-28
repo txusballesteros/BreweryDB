@@ -26,7 +26,6 @@ allprojects {
 
 ext {
   //Kotlin
-  kotlinVersion = "1.1.2-3"
   ankoVersion = "0.10.1"
 
   //Android
@@ -60,7 +59,7 @@ ext {
     RecyclerView: "com.android.support:recyclerview-v7:${androidSupportVersion}",
     CardView: "com.android.support:cardview-v7:${androidSupportVersion}",
     Design: "com.android.support:design:${androidSupportVersion}",
-    KotlinStd: "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}",
+    KotlinStd: "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}",
     AnkoCommon: "org.jetbrains.anko:anko-common:${ankoVersion}",
     AnkoAppCompat: "org.jetbrains.anko:anko-appcompat-v7:${ankoVersion}",
     AnkoRecyclerView: "org.jetbrains.anko:anko-recyclerview-v7:${ankoVersion}",
